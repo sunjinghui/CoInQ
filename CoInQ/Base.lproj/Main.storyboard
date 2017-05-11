@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="4WP-cY-Vrq">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="VfU-vU-Rr0">
+            <objects>
+                <navigationController id="4WP-cY-Vrq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oFg-lG-R6p">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JPs-dz-Wn0" kind="relationship" relationship="rootViewController" id="OvU-6b-s9f"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A7A-0P-BmA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-784" y="65"/>
+        </scene>
+        <!--Signin-->
+        <scene sceneID="uhy-RQ-rTN">
+            <objects>
+                <viewController storyboardIdentifier="SignIn" title="Signin" id="JPs-dz-Wn0" customClass="SignInViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="66w-hf-fqp">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" id="6kA-ZP-i3g" customClass="GIDSignInButton">
+                                <rect key="frame" x="264" y="657" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.80415630299999996" blue="0.51296342419999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aRB-23-TGM">
+                                <rect key="frame" x="279" y="419" width="210" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MYC-2j-GTD"/>
+                    <connections>
+                        <outlet property="welcomeLable" destination="aRB-23-TGM" id="bpu-jS-pGH"/>
+                        <segue destination="0r5-V6-xYa" kind="push" identifier="login" id="DUp-yr-5zd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H52-bZ-dFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101" y="65"/>
+        </scene>
+        <!--CSCL-->
+        <scene sceneID="uo2-hY-aKG">
+            <objects>
+                <tabBarController storyboardIdentifier="HomePage" id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="CSCL" prompt="" id="ugl-HK-TaK">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="bFO-XU-bhF">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VKQ-Rq-4PK">
+                                <rect key="frame" x="20" y="37" width="170" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="登出">
+                                    <color key="titleColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOut:" destination="0r5-V6-xYa" eventType="touchUpInside" id="iLm-Ie-ylN"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="799" height="1024"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="0Mh-qx-OTr">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="dn1-9J-WMx"/>
+                        <segue destination="M5Q-Ow-uYa" kind="relationship" relationship="viewControllers" id="VUr-JF-4im"/>
+                        <segue destination="cIw-0c-C2t" kind="relationship" relationship="viewControllers" id="E9g-W0-AFw"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5XL-7m-Bnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="65"/>
+        </scene>
+        <!--invitation-->
+        <scene sceneID="VVS-4t-Pq6">
+            <objects>
+                <viewController title="invitation" id="cIw-0c-C2t" customClass="ViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iCG-rT-SFP">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="受邀請" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q9X-xl-cfB">
+                                <rect key="frame" x="345" y="481" width="79" height="63"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="受邀請" image="Mail-icon.png" selectedImage="Mail-icon.png" id="UV5-EI-7uy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A2j-rr-LOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2165" y="963"/>
+        </scene>
+        <!--project-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController title="project" id="BYZ-38-t0r" customClass="ViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gU1-tU-3mB">
+                                <rect key="frame" x="0.0" y="461" width="768" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                <state key="normal" title="＋"/>
+                                <connections>
+                                    <segue destination="taG-3s-S4J" kind="push" id="2EM-fB-e0k"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="製作中" image="Files-Edit-File-icon.png" selectedImage="Files-Edit-File-icon.png" id="AfY-Ij-9gJ"/>
+                    <navigationItem key="navigationItem" id="jle-Nw-ub3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2165" y="-807"/>
+        </scene>
+        <!--蒐集資料-->
+        <scene sceneID="Jvh-is-3H0">
+            <objects>
+                <viewController id="nKx-F0-iOd" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qKd-Jl-BM7">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="蒐集資料" id="Jd7-Pn-Onl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qgb-U7-RBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4098" y="-921"/>
+        </scene>
+        <!--分享與回饋-->
+        <scene sceneID="dwN-rl-SHP">
+            <objects>
+                <viewController id="jiQ-Ff-bB9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2yU-bf-UTU">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="分享與回饋" id="lEq-6M-fvy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wz2-av-m13" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6088" y="-2031"/>
+        </scene>
+        <!--定義問題-->
+        <scene sceneID="H6J-SY-YZh">
+            <objects>
+                <viewController id="cak-fm-8ax" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8kB-Gw-eFx">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="定義問題" id="Tzv-QQ-wME"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nEm-Y0-m0J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4098" y="-2007"/>
+        </scene>
+        <!--形成解釋-->
+        <scene sceneID="Ys9-vt-b9g">
+            <objects>
+                <viewController id="Zp0-cT-Pqa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z51-rn-rew">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="形成解釋" id="OcL-R6-A1a"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zBU-zb-EtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5172" y="-2007"/>
+        </scene>
+        <!--評估解釋-->
+        <scene sceneID="a3M-t8-zvl">
+            <objects>
+                <viewController id="uB4-Hz-Br3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BVv-S0-3oA">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="評估解釋" id="lI5-gW-13f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6On-Ah-l4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5172" y="-845"/>
+        </scene>
+        <!--探究影片專案-->
+        <scene sceneID="Xkl-xi-azd">
+            <objects>
+                <tabBarController id="taG-3s-S4J" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="探究影片專案" id="uaq-yQ-SbL">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="HWk-oG-fKR">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2rA-Kr-We4">
+                                <rect key="frame" x="20" y="7" width="170" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="返回"/>
+                            </button>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="backBarButtonItem" destination="HWk-oG-fKR" id="mrd-q5-c5o"/>
+                        </connections>
+                    </navigationItem>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Fcj-21-K5r">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="cak-fm-8ax" kind="relationship" relationship="viewControllers" id="nie-Il-uP5"/>
+                        <segue destination="nKx-F0-iOd" kind="relationship" relationship="viewControllers" id="wQg-Q7-cPZ"/>
+                        <segue destination="Zp0-cT-Pqa" kind="relationship" relationship="viewControllers" id="BAJ-6B-caO"/>
+                        <segue destination="uB4-Hz-Br3" kind="relationship" relationship="viewControllers" id="mN1-9r-Pmm"/>
+                        <segue destination="jiQ-Ff-bB9" kind="relationship" relationship="viewControllers" id="KjR-iK-lgB"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1WT-Ev-fji" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3109" y="-1466"/>
+        </scene>
+        <!--complete-->
+        <scene sceneID="woU-3q-heJ">
+            <objects>
+                <viewController title="complete" id="M5Q-Ow-uYa" customClass="ViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dmB-7r-ztH">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="已完成" image="Files-Check-File-icon.png" selectedImage="Files-Check-File-icon.png" id="PZ9-db-qAO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3062" y="166"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Files-Check-File-icon.png" width="32" height="32"/>
+        <image name="Files-Edit-File-icon.png" width="32" height="32"/>
+        <image name="Mail-icon.png" width="32" height="32"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+    <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+</document>

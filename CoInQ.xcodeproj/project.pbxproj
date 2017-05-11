@@ -1,0 +1,662 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 279652B8BA40C87294370D8D /* libPods-CoInQ.a */; };
+		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
+		A51A8E051EB83C0300344F61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51A8E031EB83C0300344F61 /* Main.storyboard */; };
+		A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */; };
+		A5458D291EA3ED8F00B1E26A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5458D281EA3ED8F00B1E26A /* ViewController.swift */; };
+		A5458D2E1EA3ED8F00B1E26A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */; };
+		A5458D311EA3ED8F00B1E26A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5458D2F1EA3ED8F00B1E26A /* LaunchScreen.storyboard */; };
+		A5458D3C1EA3ED8F00B1E26A /* CoInQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5458D3B1EA3ED8F00B1E26A /* CoInQTests.swift */; };
+		A5458D471EA3ED8F00B1E26A /* CoInQUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5458D461EA3ED8F00B1E26A /* CoInQUITests.swift */; };
+		A54EE1601EAF703A0014994C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */; };
+		A54EE1631EAF87E50014994C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A54EE1621EAF87E50014994C /* Podfile */; };
+		A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54EE1641EB1CE760014994C /* SignInViewController.swift */; };
+		A54EE1681EB1F15C0014994C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE1671EB1F15C0014994C /* StoreKit.framework */; };
+		A54EE16A1EB1F16C0014994C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */; };
+		A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE16B1EB1F17A0014994C /* AddressBook.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A5458D381EA3ED8F00B1E26A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5458D1B1EA3ED8E00B1E26A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5458D221EA3ED8E00B1E26A;
+			remoteInfo = CoInQ;
+		};
+		A5458D431EA3ED8F00B1E26A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5458D1B1EA3ED8E00B1E26A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5458D221EA3ED8E00B1E26A;
+			remoteInfo = CoInQ;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		279652B8BA40C87294370D8D /* libPods-CoInQ.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoInQ.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.debug.xcconfig"; sourceTree = "<group>"; };
+		A51A8E011EB82E4400344F61 /* CSCL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCL.swift; sourceTree = "<group>"; };
+		A51A8E041EB83C0300344F61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A5458D231EA3ED8E00B1E26A /* CoInQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoInQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A5458D281EA3ED8F00B1E26A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A5458D301EA3ED8F00B1E26A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A5458D321EA3ED8F00B1E26A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5458D371EA3ED8F00B1E26A /* CoInQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoInQTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5458D3B1EA3ED8F00B1E26A /* CoInQTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoInQTests.swift; sourceTree = "<group>"; };
+		A5458D3D1EA3ED8F00B1E26A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5458D421EA3ED8F00B1E26A /* CoInQUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoInQUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5458D461EA3ED8F00B1E26A /* CoInQUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoInQUITests.swift; sourceTree = "<group>"; };
+		A5458D481EA3ED8F00B1E26A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A54EE1611EAF71740014994C /* CoInQ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoInQ.entitlements; sourceTree = "<group>"; };
+		A54EE1621EAF87E50014994C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		A54EE1641EB1CE760014994C /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		A54EE1671EB1F15C0014994C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A54EE16B1EB1F17A0014994C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoInQ-Bridging-Header.h"; sourceTree = "<group>"; };
+		BD697E120B541D4B03CDA8F0 /* Pods-CoInQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A5458D201EA3ED8E00B1E26A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */,
+				A54EE16A1EB1F16C0014994C /* SystemConfiguration.framework in Frameworks */,
+				A54EE1681EB1F15C0014994C /* StoreKit.framework in Frameworks */,
+				23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5458D341EA3ED8F00B1E26A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5458D3F1EA3ED8F00B1E26A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		20B74D405C443243416D62B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A54EE16B1EB1F17A0014994C /* AddressBook.framework */,
+				A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */,
+				A54EE1671EB1F15C0014994C /* StoreKit.framework */,
+				279652B8BA40C87294370D8D /* libPods-CoInQ.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		90DBDCC543C9C1560EC73CFF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */,
+				BD697E120B541D4B03CDA8F0 /* Pods-CoInQ.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A5458D1A1EA3ED8E00B1E26A = {
+			isa = PBXGroup;
+			children = (
+				A54EE1621EAF87E50014994C /* Podfile */,
+				A5458D251EA3ED8E00B1E26A /* CoInQ */,
+				A5458D3A1EA3ED8F00B1E26A /* CoInQTests */,
+				A5458D451EA3ED8F00B1E26A /* CoInQUITests */,
+				A5458D241EA3ED8E00B1E26A /* Products */,
+				90DBDCC543C9C1560EC73CFF /* Pods */,
+				20B74D405C443243416D62B2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A5458D241EA3ED8E00B1E26A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5458D231EA3ED8E00B1E26A /* CoInQ.app */,
+				A5458D371EA3ED8F00B1E26A /* CoInQTests.xctest */,
+				A5458D421EA3ED8F00B1E26A /* CoInQUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5458D251EA3ED8E00B1E26A /* CoInQ */ = {
+			isa = PBXGroup;
+			children = (
+				A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */,
+				A5458D281EA3ED8F00B1E26A /* ViewController.swift */,
+				A54EE1641EB1CE760014994C /* SignInViewController.swift */,
+				A51A8E011EB82E4400344F61 /* CSCL.swift */,
+				A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */,
+				A51A8E031EB83C0300344F61 /* Main.storyboard */,
+				A5458D2F1EA3ED8F00B1E26A /* LaunchScreen.storyboard */,
+				A5458D321EA3ED8F00B1E26A /* Info.plist */,
+				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
+				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
+				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
+			);
+			path = CoInQ;
+			sourceTree = "<group>";
+		};
+		A5458D3A1EA3ED8F00B1E26A /* CoInQTests */ = {
+			isa = PBXGroup;
+			children = (
+				A5458D3B1EA3ED8F00B1E26A /* CoInQTests.swift */,
+				A5458D3D1EA3ED8F00B1E26A /* Info.plist */,
+			);
+			path = CoInQTests;
+			sourceTree = "<group>";
+		};
+		A5458D451EA3ED8F00B1E26A /* CoInQUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A5458D461EA3ED8F00B1E26A /* CoInQUITests.swift */,
+				A5458D481EA3ED8F00B1E26A /* Info.plist */,
+			);
+			path = CoInQUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A5458D221EA3ED8E00B1E26A /* CoInQ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5458D4B1EA3ED8F00B1E26A /* Build configuration list for PBXNativeTarget "CoInQ" */;
+			buildPhases = (
+				9626061C3BF65C02F00C4638 /* [CP] Check Pods Manifest.lock */,
+				A5458D1F1EA3ED8E00B1E26A /* Sources */,
+				A5458D201EA3ED8E00B1E26A /* Frameworks */,
+				A5458D211EA3ED8E00B1E26A /* Resources */,
+				E6CE9A3FD6C1F5D2E416D473 /* [CP] Embed Pods Frameworks */,
+				18C787C80A3944DA5FADBEF0 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoInQ;
+			productName = CoInQ;
+			productReference = A5458D231EA3ED8E00B1E26A /* CoInQ.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A5458D361EA3ED8F00B1E26A /* CoInQTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5458D4E1EA3ED8F00B1E26A /* Build configuration list for PBXNativeTarget "CoInQTests" */;
+			buildPhases = (
+				A5458D331EA3ED8F00B1E26A /* Sources */,
+				A5458D341EA3ED8F00B1E26A /* Frameworks */,
+				A5458D351EA3ED8F00B1E26A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5458D391EA3ED8F00B1E26A /* PBXTargetDependency */,
+			);
+			name = CoInQTests;
+			productName = CoInQTests;
+			productReference = A5458D371EA3ED8F00B1E26A /* CoInQTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A5458D411EA3ED8F00B1E26A /* CoInQUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5458D511EA3ED8F00B1E26A /* Build configuration list for PBXNativeTarget "CoInQUITests" */;
+			buildPhases = (
+				A5458D3E1EA3ED8F00B1E26A /* Sources */,
+				A5458D3F1EA3ED8F00B1E26A /* Frameworks */,
+				A5458D401EA3ED8F00B1E26A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5458D441EA3ED8F00B1E26A /* PBXTargetDependency */,
+			);
+			name = CoInQUITests;
+			productName = CoInQUITests;
+			productReference = A5458D421EA3ED8F00B1E26A /* CoInQUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A5458D1B1EA3ED8E00B1E26A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = NTNUCSCL;
+				TargetAttributes = {
+					A5458D221EA3ED8E00B1E26A = {
+						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = QLYSAWM3X9;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					A5458D361EA3ED8F00B1E26A = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A5458D221EA3ED8E00B1E26A;
+					};
+					A5458D411EA3ED8F00B1E26A = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A5458D221EA3ED8E00B1E26A;
+					};
+				};
+			};
+			buildConfigurationList = A5458D1E1EA3ED8E00B1E26A /* Build configuration list for PBXProject "CoInQ" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A5458D1A1EA3ED8E00B1E26A;
+			productRefGroup = A5458D241EA3ED8E00B1E26A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A5458D221EA3ED8E00B1E26A /* CoInQ */,
+				A5458D361EA3ED8F00B1E26A /* CoInQTests */,
+				A5458D411EA3ED8F00B1E26A /* CoInQUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A5458D211EA3ED8E00B1E26A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54EE1631EAF87E50014994C /* Podfile in Resources */,
+				A51A8E051EB83C0300344F61 /* Main.storyboard in Resources */,
+				A5458D311EA3ED8F00B1E26A /* LaunchScreen.storyboard in Resources */,
+				A5458D2E1EA3ED8F00B1E26A /* Assets.xcassets in Resources */,
+				A54EE1601EAF703A0014994C /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5458D351EA3ED8F00B1E26A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5458D401EA3ED8F00B1E26A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18C787C80A3944DA5FADBEF0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9626061C3BF65C02F00C4638 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E6CE9A3FD6C1F5D2E416D473 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A5458D1F1EA3ED8E00B1E26A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5458D291EA3ED8F00B1E26A /* ViewController.swift in Sources */,
+				A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */,
+				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
+				A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5458D331EA3ED8F00B1E26A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5458D3C1EA3ED8F00B1E26A /* CoInQTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5458D3E1EA3ED8F00B1E26A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5458D471EA3ED8F00B1E26A /* CoInQUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A5458D391EA3ED8F00B1E26A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5458D221EA3ED8E00B1E26A /* CoInQ */;
+			targetProxy = A5458D381EA3ED8F00B1E26A /* PBXContainerItemProxy */;
+		};
+		A5458D441EA3ED8F00B1E26A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5458D221EA3ED8E00B1E26A /* CoInQ */;
+			targetProxy = A5458D431EA3ED8F00B1E26A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A51A8E031EB83C0300344F61 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A51A8E041EB83C0300344F61 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A5458D2F1EA3ED8F00B1E26A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5458D301EA3ED8F00B1E26A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A5458D491EA3ED8F00B1E26A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		A5458D4A1EA3ED8F00B1E26A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A5458D4C1EA3ED8F00B1E26A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
+				DEVELOPMENT_TEAM = QLYSAWM3X9;
+				INFOPLIST_FILE = CoInQ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoInQ/CoInQ-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		A5458D4D1EA3ED8F00B1E26A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD697E120B541D4B03CDA8F0 /* Pods-CoInQ.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
+				DEVELOPMENT_TEAM = QLYSAWM3X9;
+				INFOPLIST_FILE = CoInQ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoInQ/CoInQ-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		A5458D4F1EA3ED8F00B1E26A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CoInQTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoInQ.app/CoInQ";
+			};
+			name = Debug;
+		};
+		A5458D501EA3ED8F00B1E26A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = CoInQTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoInQ.app/CoInQ";
+			};
+			name = Release;
+		};
+		A5458D521EA3ED8F00B1E26A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = CoInQUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = CoInQ;
+			};
+			name = Debug;
+		};
+		A5458D531EA3ED8F00B1E26A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = CoInQUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = CoInQ;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A5458D1E1EA3ED8E00B1E26A /* Build configuration list for PBXProject "CoInQ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5458D491EA3ED8F00B1E26A /* Debug */,
+				A5458D4A1EA3ED8F00B1E26A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5458D4B1EA3ED8F00B1E26A /* Build configuration list for PBXNativeTarget "CoInQ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5458D4C1EA3ED8F00B1E26A /* Debug */,
+				A5458D4D1EA3ED8F00B1E26A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5458D4E1EA3ED8F00B1E26A /* Build configuration list for PBXNativeTarget "CoInQTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5458D4F1EA3ED8F00B1E26A /* Debug */,
+				A5458D501EA3ED8F00B1E26A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5458D511EA3ED8F00B1E26A /* Build configuration list for PBXNativeTarget "CoInQUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5458D521EA3ED8F00B1E26A /* Debug */,
+				A5458D531EA3ED8F00B1E26A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A5458D1B1EA3ED8E00B1E26A /* Project object */;
+}
