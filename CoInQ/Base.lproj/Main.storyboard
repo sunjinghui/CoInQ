@@ -28,7 +28,6 @@
         <!--Item-->
         <scene sceneID="XDt-nA-sFw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eOx-t7-2ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="AcJ-Vg-Dtb" customClass="SignInViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aHA-w8-PWP">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
@@ -55,6 +54,7 @@
                         <segue destination="0r5-V6-xYa" kind="push" identifier="login" id="XIQ-Lv-tZV"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eOx-t7-2ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="155" y="65"/>
         </scene>
@@ -122,7 +122,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="＋"/>
                                 <connections>
-                                    <segue destination="taG-3s-S4J" kind="push" id="2EM-fB-e0k"/>
+                                    <segue destination="taG-3s-S4J" kind="push" id="vgb-Jo-kH7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -650,18 +650,18 @@
         <!--探究影片專案-->
         <scene sceneID="Xkl-xi-azd">
             <objects>
-                <tabBarController id="taG-3s-S4J" sceneMemberID="viewController">
+                <tabBarController id="taG-3s-S4J" customClass="VideoTask" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="探究影片專案" id="uaq-yQ-SbL">
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="HWk-oG-fKR">
+                        <barButtonItem key="leftBarButtonItem" id="HWk-oG-fKR">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2rA-Kr-We4">
                                 <rect key="frame" x="20" y="7" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="返回"/>
+                                <connections>
+                                    <action selector="GoBack" destination="taG-3s-S4J" eventType="touchUpInside" id="TfK-yr-mHP"/>
+                                </connections>
                             </button>
                         </barButtonItem>
-                        <connections>
-                            <outlet property="backBarButtonItem" destination="HWk-oG-fKR" id="mrd-q5-c5o"/>
-                        </connections>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Fcj-21-K5r">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="49"/>

@@ -10,6 +10,7 @@
 		23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 279652B8BA40C87294370D8D /* libPods-CoInQ.a */; };
 		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
 		A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A537AD0D1EC5A26100B70596 /* Main.storyboard */; };
+		A537AD111EC5B5BF00B70596 /* VideoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD101EC5B5BF00B70596 /* VideoTask.swift */; };
 		A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */; };
 		A5458D291EA3ED8F00B1E26A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5458D281EA3ED8F00B1E26A /* ViewController.swift */; };
 		A5458D2E1EA3ED8F00B1E26A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.debug.xcconfig"; sourceTree = "<group>"; };
 		A51A8E011EB82E4400344F61 /* CSCL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCL.swift; sourceTree = "<group>"; };
 		A537AD0E1EC5A26100B70596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A537AD101EC5B5BF00B70596 /* VideoTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTask.swift; sourceTree = "<group>"; };
 		A5458D231EA3ED8E00B1E26A /* CoInQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoInQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5458D281EA3ED8F00B1E26A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */,
 				A5458D281EA3ED8F00B1E26A /* ViewController.swift */,
 				A54EE1641EB1CE760014994C /* SignInViewController.swift */,
+				A537AD101EC5B5BF00B70596 /* VideoTask.swift */,
 				A51A8E011EB82E4400344F61 /* CSCL.swift */,
 				A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */,
 				A537AD0D1EC5A26100B70596 /* Main.storyboard */,
@@ -371,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A537AD111EC5B5BF00B70596 /* VideoTask.swift in Sources */,
 				A5458D291EA3ED8F00B1E26A /* ViewController.swift in Sources */,
 				A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
