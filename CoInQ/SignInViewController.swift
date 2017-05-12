@@ -10,12 +10,11 @@ import UIKit
 
 class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate
 {
-    @IBOutlet weak var welcomeLable: UILabel!
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
         if error != nil{
-            welcomeLable.text = error as? String
+            print(error)
             return
         }else{
             print(user.userID)
