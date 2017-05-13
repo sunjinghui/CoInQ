@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-703" y="65"/>
         </scene>
-        <!--Item-->
+        <!--GoogleSignIn-->
         <scene sceneID="XDt-nA-sFw">
             <objects>
-                <viewController id="AcJ-Vg-Dtb" customClass="SignInViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AcJ-Vg-Dtb" userLabel="GoogleSignIn" customClass="SignInViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aHA-w8-PWP">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,7 +95,7 @@
         <!--invitation-->
         <scene sceneID="VVS-4t-Pq6">
             <objects>
-                <viewController title="invitation" id="cIw-0c-C2t" customClass="ViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="invitation" id="cIw-0c-C2t" customClass="InvitaionViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iCG-rT-SFP">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -110,7 +110,7 @@
         <!--project-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="project" id="BYZ-38-t0r" customClass="ViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="project" id="BYZ-38-t0r" customClass="ProjectViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -647,10 +647,10 @@
             </objects>
             <point key="canvasLocation" x="5172" y="-845"/>
         </scene>
-        <!--探究影片專案-->
+        <!--VideoTaskViewController-->
         <scene sceneID="Xkl-xi-azd">
             <objects>
-                <tabBarController id="taG-3s-S4J" customClass="VideoTask" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="taG-3s-S4J" userLabel="VideoTaskViewController" customClass="VideoTaskViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="探究影片專案" id="uaq-yQ-SbL">
                         <barButtonItem key="leftBarButtonItem" id="HWk-oG-fKR">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2rA-Kr-We4">
@@ -683,7 +683,7 @@
         <!--complete-->
         <scene sceneID="woU-3q-heJ">
             <objects>
-                <viewController title="complete" id="M5Q-Ow-uYa" customClass="ViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="complete" id="M5Q-Ow-uYa" customClass="CompeleteViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dmB-7r-ztH">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

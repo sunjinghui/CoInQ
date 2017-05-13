@@ -8,7 +8,7 @@
 
 import Foundation
 
-class VideoTask:UITabBarController{
+class VideoTaskViewController:UITabBarController{
 
     @IBAction func GoBack(){
                 _ = self.navigationController?.popViewController(animated: true)
