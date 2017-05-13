@@ -118,7 +118,7 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gU1-tU-3mB">
                                 <rect key="frame" x="0.0" y="461" width="768" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.79978855770000001" blue="0.50010107150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <state key="normal" title="＋"/>
                                 <connections>
@@ -139,7 +139,7 @@
         <!--蒐集資料-->
         <scene sceneID="Jvh-is-3H0">
             <objects>
-                <viewController id="nKx-F0-iOd" sceneMemberID="viewController">
+                <viewController id="nKx-F0-iOd" customClass="SelectVideoUpload_Three_Four" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qKd-Jl-BM7">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -222,7 +222,7 @@
         <!--分享與回饋-->
         <scene sceneID="dwN-rl-SHP">
             <objects>
-                <viewController id="jiQ-Ff-bB9" sceneMemberID="viewController">
+                <viewController id="jiQ-Ff-bB9" customClass="SelectVideoUpload_Nine" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2yU-bf-UTU">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,10 +273,10 @@
             </objects>
             <point key="canvasLocation" x="6088" y="-2031"/>
         </scene>
-        <!--View Controller-->
+        <!--RecordAudio_Merge-->
         <scene sceneID="Bdp-Uh-ioK">
             <objects>
-                <viewController id="erP-y3-2uh" sceneMemberID="viewController">
+                <viewController id="erP-y3-2uh" userLabel="RecordAudio_Merge" customClass="RecordAudio_Merge" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" misplaced="YES" id="3UZ-vF-vgQ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -424,6 +424,17 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="Microphone-Hot-icon"/>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SrV-UY-NJi">
+                                        <rect key="frame" x="243" y="723" width="242" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.79978855770000001" blue="0.50010107150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <state key="normal" title="合併影片及錄音"/>
+                                        <connections>
+                                            <segue destination="M5Q-Ow-uYa" kind="push" identifier="MergeCompelete" id="2ew-t9-iui"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -439,7 +450,7 @@
         <!--定義問題-->
         <scene sceneID="H6J-SY-YZh">
             <objects>
-                <viewController id="cak-fm-8ax" sceneMemberID="viewController">
+                <viewController id="cak-fm-8ax" customClass="SelectVideoUpload_One_Two" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8kB-Gw-eFx">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -509,7 +520,7 @@
         <!--形成解釋-->
         <scene sceneID="Ys9-vt-b9g">
             <objects>
-                <viewController id="Zp0-cT-Pqa" sceneMemberID="viewController">
+                <viewController id="Zp0-cT-Pqa" customClass="SelectVideoUpload_Five_Six" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z51-rn-rew">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -580,7 +591,7 @@
         <!--評估解釋-->
         <scene sceneID="a3M-t8-zvl">
             <objects>
-                <viewController id="uB4-Hz-Br3" sceneMemberID="viewController">
+                <viewController id="uB4-Hz-Br3" customClass="SelectVideoUpload_Seven_Eight" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BVv-S0-3oA">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -685,11 +696,12 @@
             <objects>
                 <viewController title="complete" id="M5Q-Ow-uYa" customClass="CompeleteViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dmB-7r-ztH">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="已完成" image="Files-Check-File-icon.png" selectedImage="Files-Check-File-icon.png" id="PZ9-db-qAO"/>
+                    <navigationItem key="navigationItem" id="sUw-WQ-OQw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -711,5 +723,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="2ew-t9-iui"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
