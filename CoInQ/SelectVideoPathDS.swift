@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 struct SelectVideoPathDS {
-    var firstAsset: AVAsset!
-    var secondAsset: AVAsset!
+    var index: Int!
+
+    var name: String!
+    //var firstAsset: AVAsset!
+    //var secondAsset: AVAsset!
 }

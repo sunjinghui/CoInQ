@@ -435,6 +435,11 @@
                                             <segue destination="M5Q-Ow-uYa" kind="push" identifier="MergeCompelete" id="2ew-t9-iui"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="whiteLarge" id="kVf-Ia-1vv">
+                                        <rect key="frame" x="346" y="622" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -442,6 +447,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="FWf-Hz-fAN"/>
+                    <connections>
+                        <outlet property="activityMonitor" destination="kVf-Ia-1vv" id="alN-6B-Fh3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2s-98-d5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -491,12 +499,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetOne:" destination="cak-fm-8ax" eventType="touchUpInside" id="rxq-hh-Eco"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="csP-1p-vxz">
                                 <rect key="frame" x="428" y="349" width="293" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="fDO-Tu-Kgz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V5L-V6-TE2">
                                 <rect key="frame" x="178" y="596" width="32" height="32"/>

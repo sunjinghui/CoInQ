@@ -21,6 +21,8 @@ class RecordAudio_Merge : UIViewController{
     var audioAsset: AVAsset?
     var loadingAssetOne = false
     
+    @IBOutlet var activityMonitor: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

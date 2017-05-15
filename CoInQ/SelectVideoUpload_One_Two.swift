@@ -13,11 +13,11 @@ import MediaPlayer
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
-    var videopath = SelectVideoPath()
+    var firstAsset: AVAsset?
+    var secondAsset: AVAsset?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,6 +51,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     @IBAction func loadAssetOne(_ sender: AnyObject) {
+        
         if savedPhotosAvailable() {
             loadingAssetOne = true
             _ = startMediaBrowserFromViewController(self, usingDelegate: self)
@@ -68,7 +69,7 @@ class SelectVideoUpload_One_Two : UIViewController{
 
 
 // MARK: - UIImagePickerControllerDelegate
-extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
+extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismiss(animated: true, completion: nil)
@@ -81,7 +82,7 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 firstAsset = avAsset
             } else {
                 message = "故事版2 影片已匯入成功！"
-                videopath.secondAsset = avAsset
+                secondAsset = avAsset
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
