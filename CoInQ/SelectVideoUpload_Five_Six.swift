@@ -92,6 +92,6 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
 }
 
 // MARK: - UINavigationControllerDelegate
-extension SelectVideoUpload_One_Two : UINavigationControllerDelegate {
+extension SelectVideoUpload_Five_Six : UINavigationControllerDelegate {
 }
 

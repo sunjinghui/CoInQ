@@ -49,7 +49,7 @@ class SelectVideoUpload_Nine : UIViewController{
         return true
     }
     
-    @IBAction func loadAssetOne(_ sender: AnyObject) {
+    @IBAction func loadAssetNine(_ sender: AnyObject) {
         
         if savedPhotosAvailable() {
             loadingAssetOne = true
@@ -81,7 +81,7 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
 }
 
 // MARK: - UINavigationControllerDelegate
-extension SelectVideoUpload_One_Two : UINavigationControllerDelegate {
+extension SelectVideoUpload_Nine : UINavigationControllerDelegate {
 }
 
 

@@ -69,7 +69,7 @@ class SelectVideoUpload_One_Two : UIViewController{
 
 
 // MARK: - UIImagePickerControllerDelegate
-extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
+extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismiss(animated: true, completion: nil)
@@ -80,6 +80,7 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
+                print(firstAsset)
             } else {
                 message = "故事版2 影片已匯入成功！"
                 secondAsset = avAsset

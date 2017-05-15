@@ -50,7 +50,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         return true
     }
     
-    @IBAction func loadAssetOne(_ sender: AnyObject) {
+    @IBAction func loadAssetSeven(_ sender: AnyObject) {
         
         if savedPhotosAvailable() {
             loadingAssetOne = true
@@ -59,7 +59,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     }
     
     
-    @IBAction func loadAssetTwo(_ sender: AnyObject) {
+    @IBAction func loadAssetEight(_ sender: AnyObject) {
         if savedPhotosAvailable() {
             loadingAssetOne = false
             _ = startMediaBrowserFromViewController(self, usingDelegate: self)
@@ -92,6 +92,6 @@ extension SelectVideoUpload_Seven_Eight : UIImagePickerControllerDelegate {
 }
 
 // MARK: - UINavigationControllerDelegate
-extension SelectVideoUpload_One_Two : UINavigationControllerDelegate {
+extension SelectVideoUpload_Seven_Eight : UINavigationControllerDelegate {
 }
 

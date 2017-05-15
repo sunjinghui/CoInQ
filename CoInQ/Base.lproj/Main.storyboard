@@ -181,6 +181,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetThree:" destination="nKx-F0-iOd" eventType="touchUpInside" id="x8x-4e-pwO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Etf-Yv-IPN">
                                 <rect key="frame" x="94" y="396" width="203" height="200"/>
@@ -193,6 +196,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetFour:" destination="nKx-F0-iOd" eventType="touchUpInside" id="nUi-pV-gYJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2dB-Kn-WqU">
                                 <rect key="frame" x="472" y="398" width="203" height="197"/>
@@ -247,6 +253,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetNine:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="7AD-0x-M0l"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LMl-dB-a76">
                                 <rect key="frame" x="174" y="813" width="420" height="107"/>
@@ -576,12 +585,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetFive:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="Kgy-K7-JUI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vn7-Z2-Vli">
                                 <rect key="frame" x="428" y="349" width="293" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetSix:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="zMK-FE-x0F"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ojM-Kt-7MZ">
                                 <rect key="frame" x="178" y="596" width="32" height="32"/>
@@ -646,12 +661,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetSeven:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="IhO-HQ-H5p"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="w8o-hs-55B">
                                 <rect key="frame" x="428" y="349" width="293" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
+                                <connections>
+                                    <action selector="loadAssetEight:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="E6D-uK-6cI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pka-LT-PdC">
                                 <rect key="frame" x="178" y="596" width="32" height="32"/>

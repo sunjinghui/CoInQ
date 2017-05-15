@@ -69,7 +69,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
 
 
 // MARK: - UIImagePickerControllerDelegate
-extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
+extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismiss(animated: true, completion: nil)
@@ -92,6 +92,6 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
 }
 
 // MARK: - UINavigationControllerDelegate
-extension SelectVideoUpload_One_Two : UINavigationControllerDelegate {
+extension SelectVideoUpload_Three_Four : UINavigationControllerDelegate {
 }
 
