@@ -11,8 +11,6 @@ import UIKit
 
 struct SelectVideoPathDS {
     var index: Int!
-
-    var name: String!
-    //var firstAsset: AVAsset!
-    //var secondAsset: AVAsset!
+    var AssetOne: URL!
+    var AssetTwo: URL!
 }

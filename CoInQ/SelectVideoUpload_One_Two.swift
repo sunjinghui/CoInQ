@@ -13,8 +13,7 @@ import MediaPlayer
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
-    var firstAsset: AVAsset?
-    var secondAsset: AVAsset?
+    var videoPath = SelectVideoPathDS()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,15 +74,15 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
         dismiss(animated: true, completion: nil)
         
         if mediaType == kUTTypeMovie {
-            let avAsset = AVAsset(url:info[UIImagePickerControllerMediaURL] as! URL)
+            let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
-                firstAsset = avAsset
-                print(firstAsset)
+                videoPath.AssetOne = avAsset
+                print(videoPath.AssetOne)
             } else {
                 message = "故事版2 影片已匯入成功！"
-                secondAsset = avAsset
+                videoPath.AssetTwo = avAsset
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))

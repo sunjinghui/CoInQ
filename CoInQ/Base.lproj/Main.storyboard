@@ -300,164 +300,56 @@
                                     <segment title="評估解釋"/>
                                     <segment title="分享與回饋"/>
                                 </segments>
+                                <connections>
+                                    <action selector="SegmentedControlSelect:" destination="erP-y3-2uh" eventType="valueChanged" id="mQd-q8-Ldj"/>
+                                </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" misplaced="YES" restorationIdentifier="定" id="hKf-v1-giT">
-                                <rect key="frame" x="20" y="156" width="728" height="799"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="Ubl-io-If8">
-                                        <rect key="frame" x="16" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="MdU-3o-c7S">
-                                        <rect key="frame" x="378" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V3y-5D-J24">
-                                        <rect key="frame" x="132" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ilw-eR-mp4">
-                                        <rect key="frame" x="494" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="蒐" id="zxy-uZ-57H">
-                                <rect key="frame" x="20" y="156" width="728" height="799"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="uXd-XS-iNx">
-                                        <rect key="frame" x="16" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="A0U-7g-Aat">
-                                        <rect key="frame" x="378" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="92F-fF-llJ">
-                                        <rect key="frame" x="132" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Scb-Mu-NZt">
-                                        <rect key="frame" x="494" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="形" id="xHT-M2-fFr">
-                                <rect key="frame" x="20" y="156" width="728" height="799"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="OYU-Ib-w3S">
-                                        <rect key="frame" x="16" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="uTR-WJ-QZL">
-                                        <rect key="frame" x="378" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kuL-m5-Uf6">
-                                        <rect key="frame" x="132" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8ZE-pS-Dgh">
-                                        <rect key="frame" x="494" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="評" id="NFt-o3-4fy">
-                                <rect key="frame" x="20" y="156" width="728" height="799"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="1sJ-qB-ZtG">
-                                        <rect key="frame" x="378" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="o0K-z2-drZ">
-                                        <rect key="frame" x="16" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4DR-tz-nEr">
-                                        <rect key="frame" x="132" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6RP-99-bBo">
-                                        <rect key="frame" x="494" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="分" id="0bJ-a8-a8D">
-                                <rect key="frame" x="20" y="156" width="728" height="799"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="fYg-3S-dui">
-                                        <rect key="frame" x="16" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-icon" id="9C7-Bb-a2g">
-                                        <rect key="frame" x="378" y="140" width="333" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n7Z-mU-jTB">
-                                        <rect key="frame" x="132" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YyM-a9-nAw">
-                                        <rect key="frame" x="494" y="565" width="101" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="Microphone-Hot-icon"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SrV-UY-NJi">
-                                        <rect key="frame" x="243" y="723" width="242" height="68"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.79978855770000001" blue="0.50010107150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <state key="normal" title="合併影片及錄音"/>
-                                        <connections>
-                                            <segue destination="M5Q-Ow-uYa" kind="push" identifier="MergeCompelete" id="2ew-t9-iui"/>
-                                        </connections>
-                                    </button>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="whiteLarge" id="kVf-Ia-1vv">
-                                        <rect key="frame" x="346" y="622" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" id="Abd-K5-pjI" userLabel="ViewDefineQuestion">
+                                <rect key="frame" x="0.0" y="147" width="768" height="828"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="LyS-db-ll2" kind="embed" id="CJG-Xa-8BY"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" id="rmy-r2-ZIN" userLabel="ViewCollection">
+                                <rect key="frame" x="0.0" y="147" width="768" height="828"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="BT8-mQ-EU4" kind="embed" id="siM-oN-Eoz"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" id="Rk2-Pg-apZ" userLabel="ViewExplain">
+                                <rect key="frame" x="0.0" y="147" width="768" height="828"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="HMm-jL-zbs" kind="embed" id="2y0-np-Dyw"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" id="Wk1-UQ-XnQ" userLabel="ViewEvaluate">
+                                <rect key="frame" x="0.0" y="147" width="768" height="828"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="nUv-hd-P5W" kind="embed" id="erk-8Z-z7d"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" id="Paz-xt-fGh" userLabel="ViewShare">
+                                <rect key="frame" x="0.0" y="147" width="768" height="828"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="nBd-rU-zDn" kind="embed" id="6j5-dW-kGT"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="FWf-Hz-fAN"/>
                     <connections>
-                        <outlet property="activityMonitor" destination="kVf-Ia-1vv" id="alN-6B-Fh3"/>
+                        <outlet property="SegmentedControl" destination="EWG-Pg-Koj" id="Phr-2Z-kiI"/>
+                        <outlet property="viewCollectData" destination="rmy-r2-ZIN" id="1sL-DO-KBy"/>
+                        <outlet property="viewDefineQuestion" destination="Abd-K5-pjI" id="hhQ-lN-0u1"/>
+                        <outlet property="viewEvaluation" destination="Wk1-UQ-XnQ" id="Ow6-70-mf7"/>
+                        <outlet property="viewExplanation" destination="Rk2-Pg-apZ" id="Hyd-E3-Jmz"/>
+                        <outlet property="viewShare" destination="Paz-xt-fGh" id="wng-J9-dVc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2s-98-d5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -731,7 +623,7 @@
             <objects>
                 <viewController title="complete" id="M5Q-Ow-uYa" customClass="CompeleteViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dmB-7r-ztH">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -741,6 +633,109 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3062" y="166"/>
+        </scene>
+        <!--ViewDefineQuestion-->
+        <scene sceneID="L9R-el-Oza">
+            <objects>
+                <viewController id="LyS-db-ll2" userLabel="ViewDefineQuestion" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ren-sh-YW4">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="828"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="play-icon" id="Ubl-io-If8">
+                                <rect key="frame" x="0.0" y="0.0" width="333" height="333"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="play-icon" id="MdU-3o-c7S">
+                                <rect key="frame" x="364" y="41" width="333" height="333"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V3y-5D-J24">
+                                <rect key="frame" x="70" y="566" width="101" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Microphone-Hot-icon"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ilw-eR-mp4">
+                                <rect key="frame" x="491" y="453" width="101" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Microphone-Hot-icon"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hyr-zG-prf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8182" y="-2963"/>
+        </scene>
+        <!--ViewCollection-->
+        <scene sceneID="XJo-RB-8Lt">
+            <objects>
+                <viewController id="BT8-mQ-EU4" userLabel="ViewCollection" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UnG-zz-jdq">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="828"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L3G-Uh-d5c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8182" y="-2007"/>
+        </scene>
+        <!--ViewExplain-->
+        <scene sceneID="Bbc-re-8tu">
+            <objects>
+                <viewController id="HMm-jL-zbs" userLabel="ViewExplain" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ofp-Jv-jzP">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="828"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8fz-9O-5Uw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8182" y="-886"/>
+        </scene>
+        <!--ViewEvaluate-->
+        <scene sceneID="aeL-b2-tmG">
+            <objects>
+                <viewController id="nUv-hd-P5W" userLabel="ViewEvaluate" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s4N-8e-lf9">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="828"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UB2-Hw-H6S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7235" y="-886"/>
+        </scene>
+        <!--ViewShare-->
+        <scene sceneID="8CH-Z7-Qqw">
+            <objects>
+                <viewController id="nBd-rU-zDn" userLabel="ViewShare" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OX9-0v-LhN">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="828"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qYT-On-jxT">
+                                <rect key="frame" x="288" y="669" width="192" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="合併影片">
+                                    <color key="titleColor" red="0.99199272920000003" green="1" blue="0.99636788710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gTA-Ea-p25" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6382" y="-886"/>
         </scene>
     </scenes>
     <resources>
@@ -758,8 +753,5 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="2ew-t9-iui"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -1,12 +1,11 @@
 //
-//  RecordAudio_Merge.swift
+//  RecordNine_Merge.swift
 //  CoInQ
 //
-//  Created by hui on 2017/5/13.
+//  Created by hui on 2017/5/16.
 //  Copyright © 2017年 NTNUCSCL. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 import MobileCoreServices
 import AssetsLibrary
@@ -14,17 +13,21 @@ import MediaPlayer
 import CoreMedia
 import Photos
 
-class RecordAudio_Merge : UIViewController{
-
+class RecordNine_Merge: UIViewController{
+    
+    var loadingAssetOne = false
+    var audioAsset: AVAsset?
     var firstAsset: AVAsset?
     var secondAsset: AVAsset?
-    var audioAsset: AVAsset?
-    var loadingAssetOne = false
+    var mergevideoURL = SelectVideoPathDS()
+    
     
     @IBOutlet var activityMonitor: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //firstAsset = AVAsset(url:mergevideoURL.AssetOne)
+        //secondAsset = AVAsset(url:mergevideoURL.AssetTwo)
     }
     //匯出並儲存影片至相簿
     func exportDidFinish(_ session: AVAssetExportSession) {
@@ -41,11 +44,11 @@ class RecordAudio_Merge : UIViewController{
         }
         
         activityMonitor.stopAnimating()
-        firstAsset = nil
-        secondAsset = nil
-        audioAsset = nil
+        mergevideoURL.AssetOne = nil
+        mergevideoURL.AssetTwo = nil
+        //audioAsset = nil
     }
-
+    
     func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
         var assetOrientation = UIImageOrientation.up
         var isPortrait = false
@@ -95,6 +98,7 @@ class RecordAudio_Merge : UIViewController{
     
     
     @IBAction func merge(_ sender: AnyObject) {
+        
         if let firstAsset = firstAsset, let secondAsset = secondAsset {
             activityMonitor.startAnimating()
             
@@ -168,5 +172,5 @@ class RecordAudio_Merge : UIViewController{
             }
         }
     }
-    
-} //end of the class
+
+}//end of class
