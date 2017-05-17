@@ -285,7 +285,7 @@
         <!--RecordAudio_Merge-->
         <scene sceneID="Bdp-Uh-ioK">
             <objects>
-                <viewController id="erP-y3-2uh" userLabel="RecordAudio_Merge" customClass="RecordAudio_Merge" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="erP-y3-2uh" userLabel="RecordAudio_Merge" customClass="RecordAudio" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" misplaced="YES" id="3UZ-vF-vgQ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -715,7 +715,7 @@
         <!--ViewShare-->
         <scene sceneID="8CH-Z7-Qqw">
             <objects>
-                <viewController id="nBd-rU-zDn" userLabel="ViewShare" sceneMemberID="viewController">
+                <viewController id="nBd-rU-zDn" userLabel="ViewShare" customClass="RecordNine_Merge" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OX9-0v-LhN">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="828"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -728,10 +728,21 @@
                                 <state key="normal" title="合併影片">
                                     <color key="titleColor" red="0.99199272920000003" green="1" blue="0.99636788710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="merge:" destination="nBd-rU-zDn" eventType="touchUpInside" id="1x1-ze-pAM"/>
+                                </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="whiteLarge" id="qhC-oj-wNv">
+                                <rect key="frame" x="366" y="517" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="activityMonitor" destination="qhC-oj-wNv" id="ZEa-Oi-jMn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTA-Ea-p25" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
