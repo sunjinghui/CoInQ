@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct SelectVideoPathDS {
-    var index: Int!
+    var index: String!
     var AssetOne: URL!
     var AssetTwo: URL!
 }

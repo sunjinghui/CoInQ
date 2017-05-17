@@ -19,16 +19,14 @@ class RecordNine_Merge: UIViewController{
     var audioAsset: AVAsset?
     var firstAsset: AVAsset?
     var secondAsset: AVAsset?
+    var URLfirstAsset: URL!
     var mergevideoURL = SelectVideoPathDS()
+    var test2 : String!
     
     
     @IBOutlet var activityMonitor: UIActivityIndicatorView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //firstAsset = AVAsset(url:mergevideoURL.AssetOne)
-        //secondAsset = AVAsset(url:mergevideoURL.AssetTwo)
-    }
+
     //匯出並儲存影片至相簿
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
@@ -44,8 +42,8 @@ class RecordNine_Merge: UIViewController{
         }
         
         activityMonitor.stopAnimating()
-        mergevideoURL.AssetOne = nil
-        mergevideoURL.AssetTwo = nil
+        firstAsset = nil
+        secondAsset = nil
         //audioAsset = nil
     }
     
@@ -98,7 +96,6 @@ class RecordNine_Merge: UIViewController{
     
     
     @IBAction func merge(_ sender: AnyObject) {
-        
         if let firstAsset = firstAsset, let secondAsset = secondAsset {
             activityMonitor.startAnimating()
             
@@ -172,5 +169,25 @@ class RecordNine_Merge: UIViewController{
             }
         }
     }
+    
+    func loadVideoPath(noti:Notification){
+        mergevideoURL = noti.userInfo!["PASS"] as! SelectVideoPathDS
+        URLfirstAsset = mergevideoURL.AssetOne
+        print("This is ",mergevideoURL.AssetOne)
+    //print(firstAsset)
+    //secondAsset = AVAsset(url:mergevideoURL.AssetTwo)
+    
+    }    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let notificationName = Notification.Name("VideoPath")
+        NotificationCenter.default.addObserver(self, selector: #selector(loadVideoPath(noti:)), name: notificationName, object: nil)
+        URLfirstAsset = mergevideoURL.AssetOne
+        test2 = mergevideoURL.index
+        print("That is ",mergevideoURL.AssetOne)
+        print("Test String ",test2)
+    }
 
 }//end of class
+
+
