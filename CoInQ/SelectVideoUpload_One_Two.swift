@@ -14,10 +14,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
     var firstAsset: URL!
-    var secondAsset: AVAsset?
-    var videoPath = SelectVideoPathDS()
-    var test : String!
-
+    var secondAsset: URL!
     
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
@@ -49,7 +46,10 @@ class SelectVideoUpload_One_Two : UIViewController{
         if savedPhotosAvailable() {
             loadingAssetOne = true
             _ = startMediaBrowserFromViewController(self, usingDelegate: self)
+            print("firstAsset again ",firstAsset)
+
         }
+        print("firstAsset ",firstAsset)
     }
     
     
@@ -58,11 +58,12 @@ class SelectVideoUpload_One_Two : UIViewController{
             loadingAssetOne = false
             _ = startMediaBrowserFromViewController(self, usingDelegate: self)
         }
+
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstAsset = videoPath.AssetOne
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,21 +86,18 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
-                videoPath.AssetOne = firstAsset
-                test = "OMG OMG OMG"
-                videoPath.index = test
             } else {
                 message = "故事版2 影片已匯入成功！"
-                videoPath.AssetTwo = avAsset
+                secondAsset = avAsset
             }
-            //發送通知
-            let notificationName = Notification.Name("VideoPath")
-            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["PASS":videoPath])
-                            print("videopath:",videoPath.AssetOne,videoPath.index)
-            
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
+            
+            //Store videopath in userdefault
+            let userdefault = UserDefaults.standard
+            userdefault.set(firstAsset, forKey: "VideoOne")
+            userdefault.set(secondAsset, forKey: "VideoTwo")
         }
     }
 }

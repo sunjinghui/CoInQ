@@ -18,11 +18,7 @@ class RecordNine_Merge: UIViewController{
     var loadingAssetOne = false
     var audioAsset: AVAsset?
     var firstAsset: AVAsset?
-    var secondAsset: AVAsset?
-    var URLfirstAsset: URL!
-    var mergevideoURL = SelectVideoPathDS()
-    var test2 : String!
-    
+    var secondAsset: AVAsset?    
     
     @IBOutlet var activityMonitor: UIActivityIndicatorView!
     
@@ -82,7 +78,7 @@ class RecordNine_Merge: UIViewController{
             let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
             var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: UIScreen.main.bounds.width / 2))
             if assetInfo.orientation == .down {
-                let fixUpsideDown = CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                let fixUpsideDown = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
                 let windowBounds = UIScreen.main.bounds
                 let yFix = assetTrack.naturalSize.height + windowBounds.height
                 let centerFix = CGAffineTransform(translationX: assetTrack.naturalSize.width, y: yFix)
@@ -169,23 +165,11 @@ class RecordNine_Merge: UIViewController{
             }
         }
     }
-    
-    func loadVideoPath(noti:Notification){
-        mergevideoURL = noti.userInfo!["PASS"] as! SelectVideoPathDS
-        URLfirstAsset = mergevideoURL.AssetOne
-        print("This is ",mergevideoURL.AssetOne)
-    //print(firstAsset)
-    //secondAsset = AVAsset(url:mergevideoURL.AssetTwo)
-    
-    }    
+
     override func viewDidLoad() {
-        super.viewDidLoad()
-        let notificationName = Notification.Name("VideoPath")
-        NotificationCenter.default.addObserver(self, selector: #selector(loadVideoPath(noti:)), name: notificationName, object: nil)
-        URLfirstAsset = mergevideoURL.AssetOne
-        test2 = mergevideoURL.index
-        print("That is ",mergevideoURL.AssetOne)
-        print("Test String ",test2)
+        super.viewDidLoad()        
+        firstAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
+        secondAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)
     }
 
 }//end of class
