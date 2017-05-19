@@ -46,10 +46,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         if savedPhotosAvailable() {
             loadingAssetOne = true
             _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-            print("firstAsset again ",firstAsset)
-
         }
-        print("firstAsset ",firstAsset)
     }
     
     
