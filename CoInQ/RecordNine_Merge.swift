@@ -47,6 +47,7 @@ class RecordNine_Merge: UIViewController{
         activityMonitor.stopAnimating()
         firstAsset = nil
         secondAsset = nil
+        thirdAsset = nil
         //audioAsset = nil
     }
     
