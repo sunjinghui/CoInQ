@@ -277,7 +277,8 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="開始配音"/>
                                 <connections>
-                                    <segue destination="erP-y3-2uh" kind="push" id="erD-9V-oRS"/>
+                                    <action selector="checkALLvideoLoaded:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="ILw-RJ-EL9"/>
+                                    <segue destination="erP-y3-2uh" kind="push" identifier="GoRecord" id="hf0-UM-CL9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4rQ-eN-XNb">

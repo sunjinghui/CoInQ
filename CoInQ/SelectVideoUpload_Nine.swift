@@ -14,6 +14,14 @@ class SelectVideoUpload_Nine : UIViewController{
     
     var loadingAssetOne = false
     var AssetNine: URL!
+    var nullstoryboard: Array<String>!
+    var printArray: String{
+        var str = ""
+        for element in nullstoryboard {
+            str += "\(element)"
+        }
+        return str
+    }
     
     
     @IBOutlet weak var ninecomplete: UIImageView!
@@ -61,6 +69,27 @@ class SelectVideoUpload_Nine : UIViewController{
         }
     }
     
+    func isURLempty(_ key: String) -> Bool {
+        if UserDefaults.standard.object(forKey: key) != nil{
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    
+    @IBAction func checkALLvideoLoaded(_ sender: Any) {
+        if isURLempty("VideoOne") && isURLempty("VideoTwo") && isURLempty("VideoThree"){
+            print("all true")
+            self.performSegue(withIdentifier: "GoRecord", sender: self)
+        }else{
+            print("alert")
+            let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 }
 
 

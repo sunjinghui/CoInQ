@@ -26,6 +26,9 @@ class RecordNine_Merge: UIViewController{
     var seventhAsset: AVAsset?
     var eighthAsset: AVAsset?
     var ninthAsset: AVAsset?
+
+    
+    
     
     @IBOutlet var activityMonitor: UIActivityIndicatorView!
     
@@ -250,22 +253,23 @@ class RecordNine_Merge: UIViewController{
             }
         }
     }
+    
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.url(forKey: "VideoOne") != nil{
-            firstAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
-        }else{
-            print(" 故事版 1,")
-        }
+        firstAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
         secondAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)
         thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
-        fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
-        fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
-        sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
-        seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
-        eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
-        ninthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)
+            /*fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
+            fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
+            sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
+            seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
+            eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
+            ninthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
+        
+        
     }
 
 }//end of class
