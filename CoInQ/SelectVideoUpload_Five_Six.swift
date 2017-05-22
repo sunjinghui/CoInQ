@@ -13,8 +13,8 @@ import MediaPlayer
 class SelectVideoUpload_Five_Six : UIViewController{
     
     var loadingAssetOne = false
-    var AssetFive: AVAsset?
-    var AssetSix: AVAsset?
+    var AssetFive:URL!
+    var AssetSix: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
         dismiss(animated: true, completion: nil)
         
         if mediaType == kUTTypeMovie {
-            let avAsset = AVAsset(url:info[UIImagePickerControllerMediaURL] as! URL)
+            let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
             if loadingAssetOne {
                 message = "故事版5 影片已匯入成功！"
@@ -87,6 +87,11 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
+            
+            //Store videopath in userdefault
+            let userdefault = UserDefaults.standard
+            userdefault.set(AssetFive, forKey: "VideoFive")
+            userdefault.set(AssetSix, forKey: "VideoSix")
         }
     }
 }

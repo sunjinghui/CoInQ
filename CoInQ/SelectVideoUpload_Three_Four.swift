@@ -13,8 +13,8 @@ import MediaPlayer
 class SelectVideoUpload_Three_Four : UIViewController{
     
     var loadingAssetOne = false
-    var AssetThree: AVAsset?
-    var AssetFour: AVAsset?
+    var AssetThree: URL!
+    var AssetFour: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
         dismiss(animated: true, completion: nil)
         
         if mediaType == kUTTypeMovie {
-            let avAsset = AVAsset(url:info[UIImagePickerControllerMediaURL] as! URL)
+            let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
             if loadingAssetOne {
                 message = "故事版3 影片已匯入成功！"
@@ -87,6 +87,11 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
+            
+            //Store videopath in userdefault
+            let userdefault = UserDefaults.standard
+            userdefault.set(AssetThree, forKey: "VideoThree")
+            userdefault.set(AssetFour, forKey: "VideoFour")
         }
     }
 }
