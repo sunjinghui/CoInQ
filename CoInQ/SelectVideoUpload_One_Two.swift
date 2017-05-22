@@ -16,6 +16,9 @@ class SelectVideoUpload_One_Two : UIViewController{
     var firstAsset: URL!
     var secondAsset: URL!
     
+    @IBOutlet weak var firstcomplete: UIImageView!
+    @IBOutlet weak var secondcomplete: UIImageView!
+    
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
             let alert = UIAlertController(title: "Not Available", message: "No Saved Album found", preferredStyle: .alert)
@@ -41,6 +44,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         return true
     }
     
+    
     @IBAction func loadAssetOne(_ sender: AnyObject) {
         
         if savedPhotosAvailable() {
@@ -61,6 +65,8 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstcomplete.isHidden = true
+        secondcomplete.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,9 +89,11 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
+                firstcomplete.isHidden = false
             } else {
                 message = "故事版2 影片已匯入成功！"
                 secondAsset = avAsset
+                secondcomplete.isHidden = false
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))

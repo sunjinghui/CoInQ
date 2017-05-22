@@ -16,8 +16,14 @@ class SelectVideoUpload_Five_Six : UIViewController{
     var AssetFive:URL!
     var AssetSix: URL!
     
+    @IBOutlet weak var fivecomplete: UIImageView!
+    @IBOutlet weak var sixcomplete: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fivecomplete.isHidden = true
+        sixcomplete.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,9 +86,11 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版5 影片已匯入成功！"
                 AssetFive = avAsset
+                fivecomplete.isHidden = false
             } else {
                 message = "故事版6 影片已匯入成功！"
                 AssetSix = avAsset
+                sixcomplete.isHidden = false
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))

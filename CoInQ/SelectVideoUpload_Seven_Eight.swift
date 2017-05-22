@@ -16,6 +16,9 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     var AssetSeven: URL!
     var AssetEight: URL!
     
+    @IBOutlet weak var sevencomplete: UIImageView!
+    @IBOutlet weak var eightcomplete: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -80,9 +83,11 @@ extension SelectVideoUpload_Seven_Eight : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版7 影片已匯入成功！"
                 AssetSeven = avAsset
+                sevencomplete.isHidden = false
             } else {
                 message = "故事版8 影片已匯入成功！"
                 AssetEight = avAsset
+                eightcomplete.isHidden = false
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))

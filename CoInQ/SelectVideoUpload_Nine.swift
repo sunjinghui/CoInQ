@@ -15,8 +15,12 @@ class SelectVideoUpload_Nine : UIViewController{
     var loadingAssetOne = false
     var AssetNine: URL!
     
+    
+    @IBOutlet weak var ninecomplete: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ninecomplete.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,6 +76,7 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版9 影片已匯入成功！"
                 AssetNine = avAsset
+                ninecomplete.isHidden = false
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
