@@ -218,7 +218,7 @@ class RecordNine_Merge: UIViewController{
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
-            if let loadedAudioAsset = audioAsset  {
+/*            if let loadedAudioAsset = audioAsset  {
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
@@ -227,7 +227,17 @@ class RecordNine_Merge: UIViewController{
                 } catch _ {
                     print("Failed to load Audio track")
                 }
+            }*/
+            
+            let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            do {
+                try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, firstAsset.duration),
+                                               of: firstAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                               at: kCMTimeZero)
+            } catch _ {
+                print("Failed to load Audio track")
             }
+            
             
             // 4 - Get path
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
