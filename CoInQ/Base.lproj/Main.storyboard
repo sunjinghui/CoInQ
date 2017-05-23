@@ -216,10 +216,22 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="TYx-fM-WbN">
+                                <rect key="frame" x="178" y="621" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="4gy-sz-405">
+                                <rect key="frame" x="557" y="621" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="蒐集資料" id="Jd7-Pn-Onl"/>
+                    <connections>
+                        <outlet property="fourcomplete" destination="4gy-sz-405" id="F3y-bp-W5D"/>
+                        <outlet property="threecomplete" destination="TYx-fM-WbN" id="wtB-gZ-XWt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgb-U7-RBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -265,7 +277,8 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="開始配音"/>
                                 <connections>
-                                    <segue destination="erP-y3-2uh" kind="push" id="erD-9V-oRS"/>
+                                    <action selector="checkALLvideoLoaded:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="ILw-RJ-EL9"/>
+                                    <segue destination="erP-y3-2uh" kind="push" identifier="GoRecord" id="hf0-UM-CL9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4rQ-eN-XNb">
@@ -273,10 +286,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="7YC-v7-Mn2">
+                                <rect key="frame" x="368" y="398" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="分享與回饋" id="lEq-6M-fvy"/>
+                    <connections>
+                        <outlet property="ninecomplete" destination="7YC-v7-Mn2" id="Beq-G6-sgE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wz2-av-m13" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -423,10 +443,22 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="aXe-QL-0dl">
+                                <rect key="frame" x="181" y="399" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="vB0-7i-f69">
+                                <rect key="frame" x="561" y="398" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="定義問題" id="Tzv-QQ-wME"/>
+                    <connections>
+                        <outlet property="firstcomplete" destination="aXe-QL-0dl" id="ek1-wT-fK8"/>
+                        <outlet property="secondcomplete" destination="vB0-7i-f69" id="uud-Ed-TTK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEm-Y0-m0J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -500,10 +532,22 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="COn-Iq-wdT">
+                                <rect key="frame" x="178" y="398" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="yvU-e8-zoh">
+                                <rect key="frame" x="558" y="398" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="形成解釋" id="OcL-R6-A1a"/>
+                    <connections>
+                        <outlet property="fivecomplete" destination="COn-Iq-wdT" id="gNa-Jh-SdU"/>
+                        <outlet property="sixcomplete" destination="yvU-e8-zoh" id="XhH-Mi-JHf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBU-zb-EtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -576,10 +620,22 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="idq-ZU-dcM">
+                                <rect key="frame" x="178" y="398" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="VeS-iD-10S">
+                                <rect key="frame" x="559" y="398" width="84" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="評估解釋" id="lI5-gW-13f"/>
+                    <connections>
+                        <outlet property="eightcomplete" destination="VeS-iD-10S" id="Rok-Rn-1Z5"/>
+                        <outlet property="sevencomplete" destination="idq-ZU-dcM" id="LF2-Vb-Crb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6On-Ah-l4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -826,6 +882,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="480px-check bule" width="480" height="480"/>
         <image name="File-Upload-icon" width="128" height="128"/>
         <image name="Files-Check-File-icon.png" width="32" height="32"/>
         <image name="Files-Edit-File-icon.png" width="32" height="32"/>
