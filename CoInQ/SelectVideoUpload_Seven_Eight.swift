@@ -21,6 +21,8 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sevencomplete.isHidden = true
+        eightcomplete.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
