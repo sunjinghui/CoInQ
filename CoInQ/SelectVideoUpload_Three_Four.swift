@@ -16,8 +16,14 @@ class SelectVideoUpload_Three_Four : UIViewController{
     var AssetThree: URL!
     var AssetFour: URL!
     
+    @IBOutlet weak var threecomplete: UIImageView!
+    @IBOutlet weak var fourcomplete: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        threecomplete.isHidden = true
+        fourcomplete.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,9 +86,11 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版3 影片已匯入成功！"
                 AssetThree = avAsset
+                threecomplete.isHidden = false
             } else {
                 message = "故事版4 影片已匯入成功！"
                 AssetFour = avAsset
+                fourcomplete.isHidden = false
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))

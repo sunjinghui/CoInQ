@@ -25,7 +25,10 @@ class RecordNine_Merge: UIViewController{
     var sixthAsset: AVAsset?
     var seventhAsset: AVAsset?
     var eighthAsset: AVAsset?
-    var NinthAsset: AVAsset?
+    var ninthAsset: AVAsset?
+
+    
+    
     
     @IBOutlet var activityMonitor: UIActivityIndicatorView!
     
@@ -47,6 +50,7 @@ class RecordNine_Merge: UIViewController{
         activityMonitor.stopAnimating()
         firstAsset = nil
         secondAsset = nil
+        thirdAsset = nil
         //audioAsset = nil
     }
     
@@ -99,8 +103,10 @@ class RecordNine_Merge: UIViewController{
     
     
     @IBAction func merge(_ sender: AnyObject) {
-        if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset{
+        if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninthAsset{
             activityMonitor.startAnimating()
+            
+            let totalTIME = firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration + ninethAsset.duration
             
             // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
             let mixComposition = AVMutableComposition()
@@ -127,28 +133,92 @@ class RecordNine_Merge: UIViewController{
             } catch _ {
                 print("Failed to load third track")
             }
+            // Video Four
+            let fourthTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            do {
+                try fourthTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration), of: fourthAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration)
+            } catch _ {
+                print("Failed to load fourth track")
+            }
+            // Video Five
+            let fifthTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            do {
+                try fifthTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fifthAsset.duration), of: fifthAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration)
+            } catch _ {
+                print("Failed to load fifth track")
+            }
+            // Video Six
+            let sixthTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            do {
+                try sixthTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration), of: sixthAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fifthAsset.duration)
+            } catch _ {
+                print("Failed to load sixth track")
+            }
+            // Video Seven
+            let seventhTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            do {
+                try seventhTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, seventhAsset.duration), of: seventhAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration)
+            } catch _ {
+                print("Failed to load seventh track")
+            }
+            // Video Eight
+            let eighthTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            do {
+                try eighthTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, eighthAsset.duration), of: eighthAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration)
+            } catch _ {
+                print("Failed to load eighth track")
+            }
+            // Video Nine
+            let ninethTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            do {
+                try ninethTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration), of: ninethAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
+            } catch _ {
+                print("Failed to load nineth track")
+            }
+            
             
             // 2.1
             let mainInstruction = AVMutableVideoCompositionInstruction()
-            mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, firstAsset.duration + secondAsset.duration + thirdAsset.duration)
+            mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, totalTIME)
             //(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration,thirdAsset.duration))
             
             // 2.2
             let firstInstruction = videoCompositionInstructionForTrack(firstTrack, asset: firstAsset)
             firstInstruction.setOpacity(0.0, at: firstAsset.duration)
+            
             let secondInstruction = videoCompositionInstructionForTrack(secondTrack, asset: secondAsset)
             secondInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration)
+            
             let thirdInstruction = videoCompositionInstructionForTrack(thirdTrack, asset: thirdAsset)
+            thirdInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration)
+            
+            let fourthInstruction = videoCompositionInstructionForTrack(fourthTrack, asset: fourthAsset)
+            fourthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration)
+            
+            let fifthInstruction = videoCompositionInstructionForTrack(fifthTrack, asset: fifthAsset)
+            fifthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration)
+            
+            let sixthInstruction = videoCompositionInstructionForTrack(sixthTrack, asset: sixthAsset)
+            sixthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration)
+            
+            let seventhInstruction = videoCompositionInstructionForTrack(seventhTrack, asset: seventhAsset)
+            seventhInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration)
+            
+            let eighthInstruction = videoCompositionInstructionForTrack(eighthTrack, asset: eighthAsset)
+            eighthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
+            
+            let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)
+            
             
             // 2.3
-            mainInstruction.layerInstructions = [firstInstruction, secondInstruction, thirdInstruction]
+            mainInstruction.layerInstructions = [firstInstruction, secondInstruction, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction , ninethInstruction]
             let mainComposition = AVMutableVideoComposition()
             mainComposition.instructions = [mainInstruction]
             mainComposition.frameDuration = CMTimeMake(1, 30)
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
-            if let loadedAudioAsset = audioAsset {
+            if let loadedAudioAsset = audioAsset  {
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
@@ -183,18 +253,23 @@ class RecordNine_Merge: UIViewController{
             }
         }
     }
+    
 
+
+    
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         firstAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
         secondAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)
         thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
-/*        fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
-        fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
-        sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
-        seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
-        eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
-        NinthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
+            /*fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
+            fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
+            sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
+            seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
+            eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
+            ninthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
+        
+        
     }
 
 }//end of class
