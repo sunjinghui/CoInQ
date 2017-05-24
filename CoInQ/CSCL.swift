@@ -14,9 +14,16 @@ class CSCL: UITabBarController{
     
     
     @IBAction func signOut(_ sender: UIButton) {
+        
+        if !UserDefaults.standard.dictionaryRepresentation().isEmpty{
+            for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                UserDefaults.standard.removeObject(forKey: key.description)
+            }
+        }
+        
         GIDSignIn.sharedInstance().signOut()
         _ = self.navigationController?.popViewController(animated: true)
-        //refreshedInterface()
+        
     }
     
     override func viewDidLoad() {

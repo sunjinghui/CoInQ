@@ -80,8 +80,7 @@ class SelectVideoUpload_Nine : UIViewController{
     
     @IBAction func checkALLvideoLoaded(_ sender: Any) {
         if isURLempty("VideoOne") && isURLempty("VideoTwo") && isURLempty("VideoThree") && isURLempty("VideoFour") && isURLempty("VideoFive") && isURLempty("VideoSix") && isURLempty("VideoSeven") && isURLempty("VideoEight") && isURLempty("VideoNine") {
-            print("all true")
-            self.performSegue(withIdentifier: "GoRecord", sender: self)
+
         }else{
             print("alert")
             let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳", preferredStyle: .alert)
