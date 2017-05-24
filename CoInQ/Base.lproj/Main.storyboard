@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="4WP-cY-Vrq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="4WP-cY-Vrq">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -397,29 +397,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uVZ-zs-rh6">
-                                <rect key="frame" x="48" y="434" width="293" height="197"/>
+                                <rect key="frame" x="0.0" y="392" width="388" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">請觀察日常生活中的自然現象，
-並將觀察到的事物紀錄下來。
+                                <string key="text">我發現
+日常生活中有這個有趣的「自然現象」...
 
-口我發現...
+我知道
+這個「自然現象」可能與...有關...
 
-口我知道...
-
-口我曾學過...</string>
+我曾學過
+與這個「自然現象」相關的知識有...</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EGe-v5-A4J">
-                                <rect key="frame" x="428" y="434" width="293" height="197"/>
+                                <rect key="frame" x="411" y="434" width="327" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">請針對觀察紀錄提出一個
-「為什麼」或「如何」問題。
+                                <string key="text">對於這個「自然現象」，
+我有一些疑問...
 
-例如：
-天空為什麼會出現彩虹？
-天空中的彩虹是如何形成的？</string>
+試著用「為什麼」或「如何」
+來表示我想提出的問題吧！</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -458,7 +457,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <string key="text">所有科學探究都始於一個問題，
 日常生活中有各式各樣的自然現象，
-你知道這自然現象是如何產生的嗎？
+這些自然現象是如何產生的呢？
 請仔細記錄自然現象發生的過程，
 並提出一個明確的問題
 接著，我們就可以開始進行科學探究囉！</string>
@@ -474,6 +473,23 @@
                                 <rect key="frame" x="558" y="691" width="84" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="圖片與影片是記錄「自然現象」最佳的工具喔！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lGU-0b-GiP">
+                                <rect key="frame" x="12" y="920" width="364" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JRD-XN-yDZ">
+                                <rect key="frame" x="435" y="900" width="278" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">例如：
+天空為什麼會出現彩虹？
+天空中的彩虹是如何形成的？</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
