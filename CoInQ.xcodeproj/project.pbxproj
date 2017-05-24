@@ -10,6 +10,7 @@
 		23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 279652B8BA40C87294370D8D /* libPods-CoInQ.a */; };
 		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
 		A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */; };
+		A521ECF21ED535840074327B /* RecordAudio_OneTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */; };
 		A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A537AD0D1EC5A26100B70596 /* Main.storyboard */; };
 		A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */; };
 		A537AD131EC6EB1300B70596 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD121EC6EB1300B70596 /* ProjectViewController.swift */; };
@@ -57,6 +58,7 @@
 		79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.debug.xcconfig"; sourceTree = "<group>"; };
 		A51A8E011EB82E4400344F61 /* CSCL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCL.swift; sourceTree = "<group>"; };
 		A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordNine_Merge.swift; sourceTree = "<group>"; };
+		A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_OneTwo.swift; sourceTree = "<group>"; };
 		A537AD0E1EC5A26100B70596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTaskViewController.swift; sourceTree = "<group>"; };
 		A537AD121EC6EB1300B70596 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
+				A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */,
 			);
 			path = CoInQ;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				A537AD191EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift in Sources */,
 				A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */,
 				A537AD1B1EC6FA5100B70596 /* SelectVideoUpload_Three_Four.swift in Sources */,
+				A521ECF21ED535840074327B /* RecordAudio_OneTwo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,6 @@
 
 import AVFoundation
 import MobileCoreServices
-import AssetsLibrary
 import MediaPlayer
 import CoreMedia
 import Photos
