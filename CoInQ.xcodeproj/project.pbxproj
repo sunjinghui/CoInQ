@@ -11,6 +11,7 @@
 		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
 		A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */; };
 		A521ECF21ED535840074327B /* RecordAudio_OneTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */; };
+		A521ECF41ED6C96D0074327B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A521ECF31ED6C96D0074327B /* AudioToolbox.framework */; };
 		A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A537AD0D1EC5A26100B70596 /* Main.storyboard */; };
 		A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */; };
 		A537AD131EC6EB1300B70596 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD121EC6EB1300B70596 /* ProjectViewController.swift */; };
@@ -59,6 +60,7 @@
 		A51A8E011EB82E4400344F61 /* CSCL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCL.swift; sourceTree = "<group>"; };
 		A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordNine_Merge.swift; sourceTree = "<group>"; };
 		A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_OneTwo.swift; sourceTree = "<group>"; };
+		A521ECF31ED6C96D0074327B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A537AD0E1EC5A26100B70596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTaskViewController.swift; sourceTree = "<group>"; };
 		A537AD121EC6EB1300B70596 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			files = (
 				A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */,
 				A54EE16A1EB1F16C0014994C /* SystemConfiguration.framework in Frameworks */,
+				A521ECF41ED6C96D0074327B /* AudioToolbox.framework in Frameworks */,
 				A54EE1681EB1F15C0014994C /* StoreKit.framework in Frameworks */,
 				23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */,
 			);
@@ -125,6 +128,7 @@
 		20B74D405C443243416D62B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A521ECF31ED6C96D0074327B /* AudioToolbox.framework */,
 				A54EE16B1EB1F17A0014994C /* AddressBook.framework */,
 				A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */,
 				A54EE1671EB1F15C0014994C /* StoreKit.framework */,
@@ -288,6 +292,9 @@
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.InterAppAudio = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 1;
 							};

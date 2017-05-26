@@ -10,62 +10,141 @@ import UIKit
 import AVFoundation
 
 class RecordAudio_OneTwo: UIViewController , AVAudioRecorderDelegate {
+    //Outlets
+    @IBOutlet weak var recordingTimeLabel: UILabel!
     
-    var audio1: AVAsset?
-    var audio2: AVAsset?
-    
-    var recOne: AVAudioRecorder?
-
-    @IBOutlet weak var storyboard1: UIImageView!
-    @IBOutlet weak var storyboard2: UIImageView!
-    
-    @IBAction func recordOne(_ sender: Any) {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let docsDirect = paths[0]
-        
-        let audioUrl = try docsDirect.appendingPathComponent("audioFileName.m4a")
-        
-        //1. create the session
-        let session = AVAudioSession.sharedInstance()
-        
-        do {
-            // 2. configure the session for recording and playback
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
-            try session.setActive(true)
-            // 3. set up a high-quality recording session
-            let settings = [
-                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                AVSampleRateKey: 44100,
-                AVNumberOfChannelsKey: 2,
-                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-            ]
-            // 4. create the audio recording, and assign ourselves as the delegate
-            recOne = try AVAudioRecorder(url: audioFileURL, settings: settings)
-            recOne?.delegate = self
-            recOne?.record()
-        } 
-        catch let error {
-            print("Failed to record!")
-        }
-        
-    }
-    
-    @IBAction func recordTwo(_ sender: Any) {
-    }
+    //Variables
+    var audioRecorder: AVAudioRecorder!
+    var audioPlayer: AVAudioPlayer!
+    var meterTimer:Timer!
+    var isAudioRecordingGranted: Bool!
+    var audioFilename: URL!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        audioRecorder = nil
+    }
+    
+    @IBAction func playRecord(_ sender: Any) {
+            do {
+                print(audioFilename)
+                try audioPlayer = AVAudioPlayer(contentsOf: audioFilename)
+                audioPlayer.play()
+            } catch {
+                print("Fail to load \(audioFilename)")
+            }
+    }
+    
+    //MARK:- Audio recorder buttons action.
+    @IBAction func audioRecorderAction(_ sender: UIButton) {
+        
+        switch AVAudioSession.sharedInstance().recordPermission() {
+        case AVAudioSessionRecordPermission.granted:
+            isAudioRecordingGranted = true
+            break
+        case AVAudioSessionRecordPermission.denied:
+            isAudioRecordingGranted = false
+            break
+        case AVAudioSessionRecordPermission.undetermined:
+            AVAudioSession.sharedInstance().requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        self.isAudioRecordingGranted = true
+                    } else {
+                        self.isAudioRecordingGranted = false
+                    }
+                }
+            }
+            break
+        default:
+            break
+        }
+        
+        if isAudioRecordingGranted {
+            
+            //Create the session.
+            let session = AVAudioSession.sharedInstance()
+            
+            do {
+                //Configure the session for recording and playback.
+                try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+                try session.setActive(true)
+                //Set up a high-quality recording session.
+                let settings = [
+                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                    AVSampleRateKey: 44100,
+                    AVNumberOfChannelsKey: 2,
+                    AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+                ]
+                //Create audio file name URL
+                audioFilename = getDocumentsDirectory().appendingPathComponent("audioRecording.m4a")
+                //Create the audio recording, and assign ourselves as the delegate
+                audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+                print(audioFilename)
+                audioRecorder.delegate = self
+                audioRecorder.isMeteringEnabled = true
+                audioRecorder.record()
+                meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
+            }
+            catch let error {
+                print("Error for start audio recording: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    @IBAction func stopAudioRecordingAction(_ sender: UIButton) {
+        
+        finishAudioRecording(success: true)
+        
+    }
+    
+    func finishAudioRecording(success: Bool) {
+        
+        audioRecorder.stop()
+        audioRecorder = nil
+        meterTimer.invalidate()
+        
+        if success {
+            print("Recording finished successfully.")
+        } else {
+            print("Recording failed :(")
+        }
+    }
+    
+    func updateAudioMeter(timer: Timer) {
+        
+        if audioRecorder.isRecording {
+            let hr = Int((audioRecorder.currentTime / 60) / 60)
+            let min = Int(audioRecorder.currentTime / 60)
+            let sec = Int(audioRecorder.currentTime.truncatingRemainder(dividingBy: 60))
+            let totalTimeString = String(format: "%02d:%02d:%02d", hr, min, sec)
+            recordingTimeLabel.text = totalTimeString
+            audioRecorder.updateMeters()
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        print(paths)
+        return documentsDirectory
+    }
+    
+    //MARK:- Audio recoder delegate methods
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        
+        if !flag {
+            finishAudioRecording(success: false)
+        }
+    }
     /*
     // MARK: - Navigation
 
