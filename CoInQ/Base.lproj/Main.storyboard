@@ -959,7 +959,8 @@
                                 <rect key="frame" x="33" y="388" width="346" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">若有需要，
-請說明如何將證據分類。</string>
+請說明如何將證據分類，
+以及如何比較證據之間的關係。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -968,7 +969,8 @@
                                 <rect key="frame" x="387" y="388" width="346" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">若有需要，
-請說明如何比較證據之間的關係。</string>
+請說明你覺得造成證據間關係的
+可能原因有哪些。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
