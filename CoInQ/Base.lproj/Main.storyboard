@@ -750,7 +750,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Microphone-Hot-icon"/>
                                 <connections>
-                                    <action selector="audioRecorderAction:" destination="LyS-db-ll2" eventType="touchUpInside" id="XGC-qA-DtZ"/>
+                                    <action selector="RecordeOne:" destination="LyS-db-ll2" eventType="touchUpInside" id="Cbw-yF-iHH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qta-df-vyX">
@@ -758,7 +758,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Microphone-Hot-icon"/>
                                 <connections>
-                                    <action selector="stopAudioRecordingAction:" destination="LyS-db-ll2" eventType="touchUpInside" id="qRC-fT-3sq"/>
+                                    <action selector="RecordeTwo:" destination="LyS-db-ll2" eventType="touchUpInside" id="JJA-0i-yeu"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IQK-29-iCz">
@@ -792,27 +792,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6sQ-GB-XL2">
-                                <rect key="frame" x="342" y="735" width="65" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="play-icon"/>
-                                <connections>
-                                    <action selector="playRecord:" destination="LyS-db-ll2" eventType="touchUpInside" id="KqB-o3-1GR"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2B9-EF-1ur">
-                                <rect key="frame" x="308" y="593" width="133" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="recordingTimeLabel" destination="2B9-EF-1ur" id="nK2-vp-Rba"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hyr-zG-prf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1071,7 +1053,6 @@
         <image name="Mail-icon.png" width="32" height="32"/>
         <image name="Microphone-Hot-icon" width="128" height="128"/>
         <image name="Status-dialog-information-icon" width="32" height="32"/>
-        <image name="play-icon" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
