@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="4WP-cY-Vrq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="4WP-cY-Vrq">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -310,7 +310,7 @@
                                 <state key="normal" title="開始配音"/>
                                 <connections>
                                     <action selector="checkALLvideoLoaded:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="ILw-RJ-EL9"/>
-                                    <segue destination="erP-y3-2uh" kind="push" identifier="" id="hf0-UM-CL9"/>
+                                    <segue destination="gVN-0o-a4M" kind="push" id="Kd5-NP-519"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4rQ-eN-XNb">
@@ -764,8 +764,21 @@
             <objects>
                 <viewController title="complete" id="M5Q-Ow-uYa" customClass="CompeleteViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dmB-7r-ztH">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="tzj-Wz-JyM">
+                                <rect key="frame" x="54" y="233" width="661" height="558"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nqM-xG-9od">
+                                <rect key="frame" x="216" y="114" width="336" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="已完成" image="Files-Check-File-icon.png" selectedImage="Files-Check-File-icon.png" id="PZ9-db-qAO"/>
@@ -1308,10 +1321,10 @@
             </objects>
             <point key="canvasLocation" x="9044" y="222"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Nine Merge-->
         <scene sceneID="rkG-nt-aHP">
             <objects>
-                <viewController id="We8-gb-gcK" sceneMemberID="viewController">
+                <viewController id="We8-gb-gcK" customClass="RecordNine_Merge" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O7i-I0-7aK">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1364,7 +1377,8 @@
                     <navigationItem key="navigationItem" id="WhF-5U-A1P">
                         <barButtonItem key="rightBarButtonItem" title="完成" id="fcA-q3-hPc">
                             <connections>
-                                <segue destination="ph4-pG-OXk" kind="push" id="su0-b5-4qC"/>
+                                <action selector="merge:" destination="We8-gb-gcK" id="ejf-La-DOy"/>
+                                <segue destination="M5Q-Ow-uYa" kind="push" id="KDG-tx-1J8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1372,34 +1386,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AqN-dk-ZkC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9884" y="222"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="FtU-Su-CGl">
-            <objects>
-                <viewController id="ph4-pG-OXk" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XkU-QD-tcK">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yIp-HP-csV">
-                                <rect key="frame" x="216" y="114" width="336" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="tzj-Wz-JyM">
-                                <rect key="frame" x="54" y="199" width="661" height="558"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="eUp-Mh-UlK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ph8-pd-PH0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="10742" y="222"/>
         </scene>
     </scenes>
     <resources>
@@ -1423,5 +1409,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="KDG-tx-1J8"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
