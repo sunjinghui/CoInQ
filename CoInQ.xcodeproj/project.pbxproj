@@ -13,10 +13,8 @@
 		A521ECF21ED535840074327B /* RecordAudio_OneTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */; };
 		A521ECF41ED6C96D0074327B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A521ECF31ED6C96D0074327B /* AudioToolbox.framework */; };
 		A52D1CC51EEFDB8000FAF465 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */; };
-		A52D1CC61EEFDB8000FAF465 /* AudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A52D1CC11EEFDB8000FAF465 /* AudioRecorderViewController.xib */; };
 		A52D1CC71EEFDB8000FAF465 /* StopButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52D1CC21EEFDB8000FAF465 /* StopButton@2x.png */; };
 		A52D1CC81EEFDB8000FAF465 /* PlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52D1CC31EEFDB8000FAF465 /* PlayButton@2x.png */; };
-		A52D1CC91EEFDB8000FAF465 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D1CC41EEFDB8000FAF465 /* ViewController.swift */; };
 		A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A537AD0D1EC5A26100B70596 /* Main.storyboard */; };
 		A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */; };
 		A537AD131EC6EB1300B70596 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD121EC6EB1300B70596 /* ProjectViewController.swift */; };
@@ -67,10 +65,8 @@
 		A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_OneTwo.swift; sourceTree = "<group>"; };
 		A521ECF31ED6C96D0074327B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioRecorderViewController.swift; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/AudioRecorderViewController.swift"; sourceTree = "<group>"; };
-		A52D1CC11EEFDB8000FAF465 /* AudioRecorderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AudioRecorderViewController.xib; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/AudioRecorderViewController.xib"; sourceTree = "<group>"; };
 		A52D1CC21EEFDB8000FAF465 /* StopButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopButton@2x.png"; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/StopButton@2x.png"; sourceTree = "<group>"; };
 		A52D1CC31EEFDB8000FAF465 /* PlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayButton@2x.png"; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/PlayButton@2x.png"; sourceTree = "<group>"; };
-		A52D1CC41EEFDB8000FAF465 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/ViewController.swift"; sourceTree = "<group>"; };
 		A537AD0E1EC5A26100B70596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTaskViewController.swift; sourceTree = "<group>"; };
 		A537AD121EC6EB1300B70596 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
@@ -206,10 +202,8 @@
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
 				A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */,
 				A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */,
-				A52D1CC11EEFDB8000FAF465 /* AudioRecorderViewController.xib */,
 				A52D1CC21EEFDB8000FAF465 /* StopButton@2x.png */,
 				A52D1CC31EEFDB8000FAF465 /* PlayButton@2x.png */,
-				A52D1CC41EEFDB8000FAF465 /* ViewController.swift */,
 			);
 			path = CoInQ;
 			sourceTree = "<group>";
@@ -354,7 +348,6 @@
 			files = (
 				A52D1CC81EEFDB8000FAF465 /* PlayButton@2x.png in Resources */,
 				A54EE1631EAF87E50014994C /* Podfile in Resources */,
-				A52D1CC61EEFDB8000FAF465 /* AudioRecorderViewController.xib in Resources */,
 				A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */,
 				A52D1CC71EEFDB8000FAF465 /* StopButton@2x.png in Resources */,
 				A5458D311EA3ED8F00B1E26A /* LaunchScreen.storyboard in Resources */,
@@ -444,7 +437,6 @@
 				A537AD211EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift in Sources */,
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
 				A52D1CC51EEFDB8000FAF465 /* AudioRecorderViewController.swift in Sources */,
-				A52D1CC91EEFDB8000FAF465 /* ViewController.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
 				A537AD191EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift in Sources */,
 				A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */,
