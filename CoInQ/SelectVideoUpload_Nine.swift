@@ -36,6 +36,13 @@ class SelectVideoUpload_Nine : UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func ExplainNine(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"積極分享是勇氣，願意回饋是美德。",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
             let alert = UIAlertController(title: "Not Available", message: "No Saved Album found", preferredStyle: .alert)
@@ -79,8 +86,12 @@ class SelectVideoUpload_Nine : UIViewController{
     
     
     @IBAction func checkALLvideoLoaded(_ sender: Any) {
+        
         if isURLempty("VideoOne") && isURLempty("VideoTwo") && isURLempty("VideoThree") && isURLempty("VideoFour") && isURLempty("VideoFive") && isURLempty("VideoSix") && isURLempty("VideoSeven") && isURLempty("VideoEight") && isURLempty("VideoNine") {
-
+            
+            let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
+            
+            present(recordNavigationController, animated: true, completion: nil)
         }else{
             print("alert")
             let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳", preferredStyle: .alert)
@@ -88,6 +99,7 @@ class SelectVideoUpload_Nine : UIViewController{
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
         }
+
     }
 }
 

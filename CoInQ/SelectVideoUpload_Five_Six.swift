@@ -19,6 +19,19 @@ class SelectVideoUpload_Five_Six : UIViewController{
     @IBOutlet weak var fivecomplete: UIImageView!
     @IBOutlet weak var sixcomplete: UIImageView!
     
+    @IBAction func ExplainFive(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"便條紙是一個適合用來\n分類與比較證據的小工具喔！",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func ExplainSix(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"文字、聲音、影片都是適合紀錄可能原因的方式。",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

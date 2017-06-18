@@ -30,6 +30,20 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func ExplainSeven(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"仔細觀察和紀錄\n科學家使用的科學方法與研究結果吧！",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func ExplainEight(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"試試看加入科學家提出的科學術語，\n讓我的解釋看起來更專業！",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
             let alert = UIAlertController(title: "Not Available", message: "No Saved Album found", preferredStyle: .alert)

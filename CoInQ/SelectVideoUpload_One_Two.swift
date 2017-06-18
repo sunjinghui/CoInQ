@@ -19,6 +19,20 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBOutlet weak var firstcomplete: UIImageView!
     @IBOutlet weak var secondcomplete: UIImageView!
     
+    @IBAction func ExplainOne(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"圖片與影片是記錄「自然現象」最佳的工具喔！",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func ExplainTwo(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"例如：\n天空為什麼會出現彩虹？\n天空中的彩虹是如何形成的？",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
             let alert = UIAlertController(title: "Not Available", message: "No Saved Album found", preferredStyle: .alert)

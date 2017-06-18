@@ -19,6 +19,19 @@ class SelectVideoUpload_Three_Four : UIViewController{
     @IBOutlet weak var threecomplete: UIImageView!
     @IBOutlet weak var fourcomplete: UIImageView!
     
+    @IBAction func ExplainThree(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"心智圖是一個適合用來制定蒐集計畫的好工具。",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func ExplainFour(_ sender: Any) {
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"團結力量大！\n我們可以邀請共創夥伴加入科學探究。",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        myAlert.addAction(action)
+        self.present(myAlert, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
