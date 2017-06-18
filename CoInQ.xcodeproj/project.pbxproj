@@ -10,6 +10,11 @@
 		23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 279652B8BA40C87294370D8D /* libPods-CoInQ.a */; };
 		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
 		A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */; };
+		A521ECF21ED535840074327B /* RecordAudio_OneTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */; };
+		A521ECF41ED6C96D0074327B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A521ECF31ED6C96D0074327B /* AudioToolbox.framework */; };
+		A52D1CC51EEFDB8000FAF465 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */; };
+		A52D1CC71EEFDB8000FAF465 /* StopButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52D1CC21EEFDB8000FAF465 /* StopButton@2x.png */; };
+		A52D1CC81EEFDB8000FAF465 /* PlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52D1CC31EEFDB8000FAF465 /* PlayButton@2x.png */; };
 		A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A537AD0D1EC5A26100B70596 /* Main.storyboard */; };
 		A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */; };
 		A537AD131EC6EB1300B70596 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD121EC6EB1300B70596 /* ProjectViewController.swift */; };
@@ -57,6 +62,11 @@
 		79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.debug.xcconfig"; sourceTree = "<group>"; };
 		A51A8E011EB82E4400344F61 /* CSCL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCL.swift; sourceTree = "<group>"; };
 		A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordNine_Merge.swift; sourceTree = "<group>"; };
+		A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_OneTwo.swift; sourceTree = "<group>"; };
+		A521ECF31ED6C96D0074327B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioRecorderViewController.swift; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/AudioRecorderViewController.swift"; sourceTree = "<group>"; };
+		A52D1CC21EEFDB8000FAF465 /* StopButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopButton@2x.png"; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/StopButton@2x.png"; sourceTree = "<group>"; };
+		A52D1CC31EEFDB8000FAF465 /* PlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayButton@2x.png"; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/PlayButton@2x.png"; sourceTree = "<group>"; };
 		A537AD0E1EC5A26100B70596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTaskViewController.swift; sourceTree = "<group>"; };
 		A537AD121EC6EB1300B70596 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +108,7 @@
 			files = (
 				A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */,
 				A54EE16A1EB1F16C0014994C /* SystemConfiguration.framework in Frameworks */,
+				A521ECF41ED6C96D0074327B /* AudioToolbox.framework in Frameworks */,
 				A54EE1681EB1F15C0014994C /* StoreKit.framework in Frameworks */,
 				23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */,
 			);
@@ -123,6 +134,7 @@
 		20B74D405C443243416D62B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A521ECF31ED6C96D0074327B /* AudioToolbox.framework */,
 				A54EE16B1EB1F17A0014994C /* AddressBook.framework */,
 				A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */,
 				A54EE1671EB1F15C0014994C /* StoreKit.framework */,
@@ -188,6 +200,10 @@
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
+				A521ECF11ED535830074327B /* RecordAudio_OneTwo.swift */,
+				A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */,
+				A52D1CC21EEFDB8000FAF465 /* StopButton@2x.png */,
+				A52D1CC31EEFDB8000FAF465 /* PlayButton@2x.png */,
 			);
 			path = CoInQ;
 			sourceTree = "<group>";
@@ -285,6 +301,9 @@
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.InterAppAudio = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 1;
 							};
@@ -327,8 +346,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52D1CC81EEFDB8000FAF465 /* PlayButton@2x.png in Resources */,
 				A54EE1631EAF87E50014994C /* Podfile in Resources */,
 				A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */,
+				A52D1CC71EEFDB8000FAF465 /* StopButton@2x.png in Resources */,
 				A5458D311EA3ED8F00B1E26A /* LaunchScreen.storyboard in Resources */,
 				A5458D2E1EA3ED8F00B1E26A /* Assets.xcassets in Resources */,
 				A54EE1601EAF703A0014994C /* GoogleService-Info.plist in Resources */,
@@ -415,10 +436,12 @@
 				A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */,
 				A537AD211EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift in Sources */,
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
+				A52D1CC51EEFDB8000FAF465 /* AudioRecorderViewController.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
 				A537AD191EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift in Sources */,
 				A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */,
 				A537AD1B1EC6FA5100B70596 /* SelectVideoUpload_Three_Four.swift in Sources */,
+				A521ECF21ED535840074327B /* RecordAudio_OneTwo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

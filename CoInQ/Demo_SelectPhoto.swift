@@ -63,7 +63,7 @@ class ViewController: UIViewController,
     }
     
     //MARK: - Delegates
-    func imagePickerController(_ picker: UIImagePickerController,
+    private func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         var  chosenImage = UIImage()

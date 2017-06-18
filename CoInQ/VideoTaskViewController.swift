@@ -18,8 +18,7 @@ class VideoTaskViewController:UITabBarController{
         return UserDefaults.standard.object(forKey: key) != nil
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func clearUD(){
         if isURLempty("VideoOne") || isURLempty("VideoTwo") || isURLempty("VideoThree") || isURLempty("VideoFour") || isURLempty("VideoFive") || isURLempty("VideoSix") || isURLempty("VideoSeven") || isURLempty("VideoEight") || isURLempty("VideoNine") {
             UserDefaults.standard.removeObject(forKey: "VideoOne")
             UserDefaults.standard.removeObject(forKey: "VideoTwo")
@@ -32,7 +31,12 @@ class VideoTaskViewController:UITabBarController{
             UserDefaults.standard.removeObject(forKey: "VideoNine")
 
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
+        //clearUD()
         
     }
 }
