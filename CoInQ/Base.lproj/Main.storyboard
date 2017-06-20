@@ -755,35 +755,14 @@
             </objects>
             <point key="canvasLocation" x="7162" y="-2007"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio One-->
         <scene sceneID="34I-6n-gQw">
             <objects>
-                <viewController id="Lus-hg-Z98" sceneMemberID="viewController">
+                <viewController id="Lus-hg-Z98" customClass="RecordAudio_One" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Ha-xo-I2J">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tIv-9R-xVx">
-                                <rect key="frame" x="54" y="254" width="661" height="558"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wfh-ev-PXz">
-                                <rect key="frame" x="329" y="841" width="111" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Actions-media-record-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cancel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QpO-Mk-cUH">
-                                <rect key="frame" x="176" y="841" width="145" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ydP-E1-odq">
-                                <rect key="frame" x="480" y="836" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="play-icon"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="故事版1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pni-il-GEa">
                                 <rect key="frame" x="278" y="106" width="212" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -805,16 +784,44 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" misplaced="YES" id="ogb-1r-UuR">
+                                <rect key="frame" x="53" y="226" width="681" height="528"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="O4m-mb-Nlv">
+                                <rect key="frame" x="206" y="825" width="120" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <state key="normal" title="cancel">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fom-PC-vt7">
+                                <rect key="frame" x="375" y="825" width="86" height="83"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Record" image="Microphone-Hot-icon"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ydP-E1-odq">
+                                <rect key="frame" x="516" y="828" width="64" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="play-icon"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="uVg-4H-6QU">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="TS7-gZ-ijI"/>
                         <barButtonItem key="rightBarButtonItem" title="下一個" id="tE5-W3-HcV">
                             <connections>
                                 <segue destination="Xq9-hk-AxD" kind="push" id="wSj-Dx-tDe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="videoPreviewLayer" destination="ogb-1r-UuR" id="KN5-re-k4W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e2u-vk-597" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1346,6 +1353,7 @@
         <image name="Files-Edit-File-icon.png" width="32" height="32"/>
         <image name="Healthcare-Groups-icon" width="96" height="96"/>
         <image name="Mail-icon.png" width="32" height="32"/>
+        <image name="Microphone-Hot-icon" width="128" height="128"/>
         <image name="Numbers-1-Black-icon" width="32" height="32"/>
         <image name="Numbers-2-Black-icon" width="32" height="32"/>
         <image name="Numbers-3-Black-icon" width="32" height="32"/>

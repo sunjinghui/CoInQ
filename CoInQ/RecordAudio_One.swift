@@ -9,7 +9,28 @@
 import UIKit
 import AVFoundation
 
-class RecordAudio_OneTwo: UIViewController , AudioRecorderViewControllerDelegate {
+class RecordAudio_One: UIViewController , AudioRecorderViewControllerDelegate {
+    
+    @IBOutlet weak var videoPreviewLayer: UIView!
+    
+    var player: AVPlayer!
+    var avpController = AVPlayerViewController!()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let moviePath = UserDefaults.standard.url(forKey: "VideoOne")
+        if let path = moviePath{
+            let url = URL.fileURLWithPath(path)
+            let item = AVPlayerItem(URL: url)
+            self.player = AVPlayer(playerItem: item)
+            self.avpController = AVPlayerViewController()
+            self.avpController.player = self.player
+            avpController.view.frame = videoPreviewLayer.frame
+            self.addChildViewController(avpController)
+            self.view.addSubview(avpController.view)
+            
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
