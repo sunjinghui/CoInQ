@@ -11,7 +11,7 @@ import Foundation
 class VideoTaskViewController:UITabBarController{
 
     @IBAction func GoBack(){
-                _ = self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.popViewController(animated: true)
     }
     
     func isURLempty(_ key: String) -> Bool{

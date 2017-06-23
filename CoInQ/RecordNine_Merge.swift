@@ -29,9 +29,33 @@ class RecordNine_Merge: UIViewController{
     
     
     
-    @IBOutlet var activityMonitor: UIActivityIndicatorView!
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    func startActivityIndicator() {
+        let screenSize: CGRect = UIScreen.main.bounds
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 50,height: 50))
+        activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        
+        // Change background color and alpha channel here
+        activityIndicator.backgroundColor = UIColor.black
+        activityIndicator.clipsToBounds = true
+        activityIndicator.alpha = 0.5
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
 
+    
     //匯出並儲存影片至相簿
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
@@ -46,7 +70,7 @@ class RecordNine_Merge: UIViewController{
             }
         }
         
-        activityMonitor.stopAnimating()
+        stopActivityIndicator()
         firstAsset = nil
         secondAsset = nil
         thirdAsset = nil
@@ -109,8 +133,7 @@ class RecordNine_Merge: UIViewController{
     
     @IBAction func merge(_ sender: AnyObject) {
         if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninthAsset{
-            activityMonitor.isHidden = false
-            activityMonitor.startAnimating()
+            startActivityIndicator()
             
             let totalTIME = firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration + ninethAsset.duration
             
@@ -346,6 +369,14 @@ class RecordNine_Merge: UIViewController{
                 }
             }
         }
+        
+        let CompeleteVC = storyboard?.instantiateViewController(withIdentifier: "VideoTaskViewController") as! VideoTaskViewController
+        
+        present(CompeleteVC, animated: true, completion: nil)
+        
+        self.tabBarController?.selectedIndex = 1
+
+        
     }
     
 
@@ -353,7 +384,6 @@ class RecordNine_Merge: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityMonitor.isHidden = true
         
         firstAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
         secondAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)

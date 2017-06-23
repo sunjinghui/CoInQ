@@ -13,23 +13,12 @@ class RecordAudio_One: UIViewController , AudioRecorderViewControllerDelegate {
     
     @IBOutlet weak var videoPreviewLayer: UIView!
     
-    var player: AVPlayer!
-    var avpController = AVPlayerViewController!()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let moviePath = UserDefaults.standard.url(forKey: "VideoOne")
-        if let path = moviePath{
-            let url = URL.fileURLWithPath(path)
-            let item = AVPlayerItem(URL: url)
-            self.player = AVPlayer(playerItem: item)
-            self.avpController = AVPlayerViewController()
-            self.avpController.player = self.player
-            avpController.view.frame = videoPreviewLayer.frame
-            self.addChildViewController(avpController)
-            self.view.addSubview(avpController.view)
-            
-        }
+    @IBAction func BackToSelectVideoNine(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        /*let SelectVideoVC = storyboard?.instantiateViewController(withIdentifier: "VideoTaskViewController") as! VideoTaskViewController
+        
+        present(SelectVideoVC, animated: true, completion: nil)*/
     }
     
     override func didReceiveMemoryWarning() {

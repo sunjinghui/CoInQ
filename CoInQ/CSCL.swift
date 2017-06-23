@@ -8,10 +8,7 @@
 
 import UIKit
 
-class CSCL: UITabBarController{
-
-    @IBOutlet weak var signoutButton: UIButton!
-    
+class CSCL: UITabBarController{    
     
     @IBAction func signOut(_ sender: UIButton) {
         

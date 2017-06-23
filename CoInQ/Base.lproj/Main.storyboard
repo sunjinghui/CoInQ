@@ -61,7 +61,7 @@
         <!--CSCL-->
         <scene sceneID="uo2-hY-aKG">
             <objects>
-                <tabBarController id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="CSCL" id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="CSCL" prompt="" id="ugl-HK-TaK">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="bFO-XU-bhF">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VKQ-Rq-4PK">
@@ -257,7 +257,7 @@
         <!--分享與回饋-->
         <scene sceneID="dwN-rl-SHP">
             <objects>
-                <viewController id="jiQ-Ff-bB9" customClass="SelectVideoUpload_Nine" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectVideoUpload_Nine" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jiQ-Ff-bB9" customClass="SelectVideoUpload_Nine" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2yU-bf-UTU">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,6 +329,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="分享與回饋" selectedImage="Numbers-5-Black-icon" id="lEq-6M-fvy"/>
+                    <navigationItem key="navigationItem" id="AiB-QT-JAj"/>
                     <connections>
                         <outlet property="ninecomplete" destination="7YC-v7-Mn2" id="Beq-G6-sgE"/>
                     </connections>
@@ -679,7 +680,7 @@
         <!--VideoTaskViewController-->
         <scene sceneID="Xkl-xi-azd">
             <objects>
-                <tabBarController id="taG-3s-S4J" userLabel="VideoTaskViewController" customClass="VideoTaskViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="VideoTaskViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="taG-3s-S4J" userLabel="VideoTaskViewController" customClass="VideoTaskViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="探究影片專案" id="uaq-yQ-SbL">
                         <barButtonItem key="leftBarButtonItem" id="HWk-oG-fKR">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2rA-Kr-We4">
@@ -712,7 +713,7 @@
         <!--complete-->
         <scene sceneID="woU-3q-heJ">
             <objects>
-                <viewController title="complete" id="M5Q-Ow-uYa" customClass="CompeleteViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CompeleteViewController" title="complete" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M5Q-Ow-uYa" customClass="CompeleteViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dmB-7r-ztH">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -812,7 +813,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="uVg-4H-6QU">
-                        <barButtonItem key="leftBarButtonItem" title="返回" id="TS7-gZ-ijI"/>
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="TS7-gZ-ijI">
+                            <connections>
+                                <action selector="BackToSelectVideoNine:" destination="Lus-hg-Z98" id="EOm-fp-0a1"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="下一個" id="tE5-W3-HcV">
                             <connections>
                                 <segue destination="Xq9-hk-AxD" kind="push" id="wSj-Dx-tDe"/>
@@ -1286,10 +1291,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="g2d-gY-jhT">
-                                <rect key="frame" x="54" y="254" width="661" height="558"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ALW-oD-SUh">
                                 <rect key="frame" x="329" y="841" width="111" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1328,14 +1329,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="g2d-gY-jhT">
+                                <rect key="frame" x="54" y="254" width="661" height="558"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="WhF-5U-A1P">
                         <barButtonItem key="rightBarButtonItem" title="完成" id="fcA-q3-hPc">
                             <connections>
-                                <action selector="merge:" destination="We8-gb-gcK" id="ejf-La-DOy"/>
-                                <segue destination="M5Q-Ow-uYa" kind="push" id="KDG-tx-1J8"/>
+                                <action selector="merge:" destination="We8-gb-gcK" id="Lag-el-g26"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1367,8 +1371,5 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="VUr-JF-4im"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
