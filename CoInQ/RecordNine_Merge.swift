@@ -63,7 +63,7 @@ class RecordNine_Merge: UIViewController{
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
                     let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: self.switchPage)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
                 }
@@ -81,6 +81,14 @@ class RecordNine_Merge: UIViewController{
         eighthAsset = nil
         ninthAsset = nil
         //audioAsset = nil
+    }
+    
+    func switchPage(action: UIAlertAction){
+        //7 - Page switch to CompleteVC
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "CSCL") as! UITabBarController
+        self.present(vc, animated: true, completion: nil)
+        self.tabBarController?.selectedIndex = 3
     }
     
     func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
@@ -368,14 +376,14 @@ class RecordNine_Merge: UIViewController{
                     self.exportDidFinish(exporter)
                 }
             }
+            
         }
         
-        let CompeleteVC = storyboard?.instantiateViewController(withIdentifier: "VideoTaskViewController") as! VideoTaskViewController
+        /*let CompeleteVC = storyboard?.instantiateViewController(withIdentifier: "VideoTaskViewController") as! VideoTaskViewController
         
-        present(CompeleteVC, animated: true, completion: nil)
+        present(CompeleteVC, animated: true, completion: nil)*/
         
-        self.tabBarController?.selectedIndex = 1
-
+        
         
     }
     

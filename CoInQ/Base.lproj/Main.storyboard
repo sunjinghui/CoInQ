@@ -61,7 +61,7 @@
         <!--CSCL-->
         <scene sceneID="uo2-hY-aKG">
             <objects>
-                <tabBarController storyboardIdentifier="CSCL" id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="CSCL" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="CSCL" prompt="" id="ugl-HK-TaK">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="bFO-XU-bhF">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VKQ-Rq-4PK">
@@ -130,11 +130,10 @@
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="製作中" image="Files-Edit-File-icon.png" selectedImage="Files-Edit-File-icon.png" id="AfY-Ij-9gJ"/>
-                    <navigationItem key="navigationItem" id="jle-Nw-ub3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2165" y="-807"/>
+            <point key="canvasLocation" x="2091" y="-1466"/>
         </scene>
         <!--蒐集資料-->
         <scene sceneID="Jvh-is-3H0">
@@ -733,7 +732,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="已完成" image="Files-Check-File-icon.png" selectedImage="Files-Check-File-icon.png" id="PZ9-db-qAO"/>
-                    <navigationItem key="navigationItem" id="sUw-WQ-OQw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
