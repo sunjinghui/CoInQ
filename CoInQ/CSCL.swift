@@ -40,14 +40,14 @@ class CSCL: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "CSCL"
+        /*self.title = "CSCL"
         
         let navigationBar = navigationController!.navigationBar
         navigationBar.tintColor = UIColor.blue
         
         let leftButton =  UIBarButtonItem(title: "登出", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CSCL.signout))
         
-        navigationItem.leftBarButtonItem = leftButton
+        navigationItem.leftBarButtonItem = leftButton*/
 
         //GIDSignIn.sharedInstance().uiDelegate = self
     }

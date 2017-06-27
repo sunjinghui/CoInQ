@@ -88,7 +88,7 @@ class RecordNine_Merge: UIViewController{
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CSCL") as! UITabBarController
         self.present(vc, animated: true, completion: nil)
-        self.tabBarController?.selectedIndex = 3
+        //self.tabBarController?.selectedIndex = 3
     }
     
     func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
@@ -378,11 +378,6 @@ class RecordNine_Merge: UIViewController{
             }
             
         }
-        
-        /*let CompeleteVC = storyboard?.instantiateViewController(withIdentifier: "VideoTaskViewController") as! VideoTaskViewController
-        
-        present(CompeleteVC, animated: true, completion: nil)*/
-        
         
         
     }
