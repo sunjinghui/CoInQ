@@ -896,27 +896,35 @@
                                     <action selector="Explain:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Fwg-X9-A8f"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fom-PC-vt7">
-                                <rect key="frame" x="343" y="765" width="86" height="83"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MLi-Ib-UrA">
+                                <rect key="frame" x="337" y="779" width="95" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Record" image="Microphone-Hot-icon"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="錄音"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="wTX-m7-0JK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ydP-E1-odq">
-                                <rect key="frame" x="484" y="768" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="play-icon"/>
-                                <connections>
-                                    <action selector="Play:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Hhh-em-jUD"/>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="G9V-YH-iKv"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="eLT-lH-fMp"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="Y7g-ni-tpy">
                                 <rect key="frame" x="44" y="262" width="681" height="462"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FEG-dn-Qyb">
+                                <rect key="frame" x="494" y="779" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="sDG-or-dtz"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tFE-IV-yy9">
+                                <rect key="frame" x="130" y="779" width="153" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -933,6 +941,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ButtonPlay" destination="FEG-dn-Qyb" id="KmO-Jh-jMt"/>
+                        <outlet property="ButttonRecord" destination="MLi-Ib-UrA" id="Oy1-AG-ldc"/>
+                        <outlet property="timeLabel" destination="tFE-IV-yy9" id="NL9-O1-jNO"/>
                         <outlet property="videoPreviewLayer" destination="Y7g-ni-tpy" id="FMP-Lp-jez"/>
                     </connections>
                 </viewController>
@@ -1465,7 +1476,6 @@
         <image name="Files-Edit-File-icon.png" width="32" height="32"/>
         <image name="Healthcare-Groups-icon" width="96" height="96"/>
         <image name="Mail-icon.png" width="32" height="32"/>
-        <image name="Microphone-Hot-icon" width="128" height="128"/>
         <image name="Numbers-1-Black-icon" width="32" height="32"/>
         <image name="Numbers-2-Black-icon" width="32" height="32"/>
         <image name="Numbers-3-Black-icon" width="32" height="32"/>
