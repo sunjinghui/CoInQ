@@ -36,7 +36,7 @@ class VideoTaskViewController:UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        clearUD()
+        //clearUD()
         
     }
 }
