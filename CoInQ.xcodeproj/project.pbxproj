@@ -37,6 +37,7 @@
 		A54EE1681EB1F15C0014994C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE1671EB1F15C0014994C /* StoreKit.framework */; };
 		A54EE16A1EB1F16C0014994C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */; };
 		A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE16B1EB1F17A0014994C /* AddressBook.framework */; };
+		A56FF5DE1F11398F00B072D5 /* RecordAudio_Two.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A54EE16B1EB1F17A0014994C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoInQ-Bridging-Header.h"; sourceTree = "<group>"; };
+		A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Two.swift; sourceTree = "<group>"; };
 		BD697E120B541D4B03CDA8F0 /* Pods-CoInQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,6 +197,7 @@
 				A52D1CCA1EF6E6A900FAF465 /* RecordNavigationController.swift */,
 				A537AD221EC6FC1300B70596 /* RecordAudio.swift */,
 				A521ECF11ED535830074327B /* RecordAudio_One.swift */,
+				A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */,
 				A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */,
 				A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */,
 				A537AD0D1EC5A26100B70596 /* Main.storyboard */,
@@ -437,6 +440,7 @@
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
 				A537AD191EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift in Sources */,
+				A56FF5DE1F11398F00B072D5 /* RecordAudio_Two.swift in Sources */,
 				A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */,
 				A537AD1B1EC6FA5100B70596 /* SelectVideoUpload_Three_Four.swift in Sources */,
 				A521ECF21ED535840074327B /* RecordAudio_One.swift in Sources */,

@@ -1,8 +1,8 @@
 //
-//  RecordAudio_OneTwo.swift
+//  RecordAudio_Two.swift
 //  CoInQ
 //
-//  Created by hui on 2017/5/24.
+//  Created by hui on 2017/7/9.
 //  Copyright © 2017年 NTNUCSCL. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
+class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
     @IBOutlet weak var videoPreviewLayer: UIImageView!
     @IBOutlet weak var ButttonRecord: UIButton!
@@ -29,9 +29,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var progressViewTimer: Timer?
     var milliseconds: Int = 0
     
-    var AudioFileName = "sound.m4a"
+    var AudioFileName = "sound2.m4a"
     
-    var firstAsset: AVAsset? = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
+    var Asset: AVAsset? = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -46,15 +46,11 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             StoreRecordPathInUserdefault()
         }else{
             switchOutput.text = "不使用此配音"
-            UserDefaults.standard.set(false, forKey: "UseRecordOne")
+            UserDefaults.standard.set(false, forKey: "UseRecordTwo")
         }
-        print(UserDefaults.standard.bool(forKey: "UseRecordOne"))
+        print(UserDefaults.standard.bool(forKey: "UseRecordTwo"))
     }
     
-    @IBAction func BackToSelectVideoNine(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -64,9 +60,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     override func viewDidLoad() {
         
         setupRecorder()
-
+        
         //影片縮圖
-        let asset = AVURLAsset(url: UserDefaults.standard.url(forKey: "VideoOne")!, options: nil)
+        let asset = AVURLAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = false
         
@@ -82,29 +78,30 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        ButtonPlay.isHidden = true
-        switchOutput.isHidden = true
+            ButtonPlay.isHidden = true
+            switchOutput.isHidden = true
         UseRecordSwitch.isHidden = true
+        
     }
     
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n這個自然現象中特別值得注意的重點。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n為什麼會提出這樣的問題。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         self.present(myAlert, animated: true, completion: nil)
     }
     
     func play(){
-            Player = AVPlayer(url: UserDefaults.standard.url(forKey: "VideoOne")!)
-            let controller = AVPlayerViewController()
-            controller.player = Player
-            controller.showsPlaybackControls = false
-            self.addChildViewController(controller)
-            let videoFrame = CGRect(x: 44, y: 231, width: 681, height: 534)
-            controller.view.frame = videoFrame
-            self.view.addSubview(controller.view)
-            Player?.volume = 0.0
-            Player?.play()
+        Player = AVPlayer(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
+        let controller = AVPlayerViewController()
+        controller.player = Player
+        controller.showsPlaybackControls = false
+        self.addChildViewController(controller)
+        let videoFrame = CGRect(x: 44, y: 231, width: 681, height: 534)
+        controller.view.frame = videoFrame
+        self.view.addSubview(controller.view)
+        Player?.volume = 0.0
+        Player?.play()
         
     }
     
@@ -112,7 +109,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         if let playy = Player {
             playy.pause()
             Player = nil
-        
+            
         } else {
             print("已經清空")
         }
@@ -134,25 +131,25 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 progressViewTimer?.invalidate()
             }
             //showTimeLabel()
-
+            
         }else{
             //取影片長度並轉為秒數
-            let durationtime = CMTimeGetSeconds((firstAsset?.duration)!)
+            let durationtime = CMTimeGetSeconds((Asset?.duration)!)
             soundRecorder.record(forDuration: durationtime)
             
             showTimeLabel()
-            timeTimer = Timer.scheduledTimer(timeInterval: 0.0167, target: self, selector: #selector(RecordAudio_One.updateTimeLabel(_:)), userInfo: nil, repeats: true)
+            timeTimer = Timer.scheduledTimer(timeInterval: 0.0167, target: self, selector: #selector(RecordAudio_Two.updateTimeLabel(_:)), userInfo: nil, repeats: true)
             progressCounter = 0.0
             if progressViewTimer != nil {
                 progressViewTimer?.invalidate()
             }
-            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
+            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_Two.updateProgressView(_:)), userInfo: nil, repeats: true)
             sender.setTitle("Stop", for: UIControlState())
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
         }
-
+        
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
@@ -163,7 +160,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             print("stop")
             sender.setTitle("Play", for: UIControlState())
             ButttonRecord.isEnabled = true
-
+            
         }else{
             preparePlayer()
             play()
@@ -174,7 +171,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                                                    name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player?.currentItem)
             
         }
- 
+        
     }
     
     //HELPERS
@@ -228,7 +225,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound.m4a")
+        let soundURL = documentDirectory.appendingPathComponent("sound2.m4a")
         return soundURL
     }
     
@@ -237,9 +234,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     /*func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        ButttonRecord.isEnabled = true
-        ButtonPlay.setTitle("Play", for: UIControlState())
-    }*/
+     ButttonRecord.isEnabled = true
+     ButtonPlay.setTitle("Play", for: UIControlState())
+     }*/
     
     // MARK: Time Label
     
@@ -264,16 +261,16 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func updateProgressView(_ timer: Timer) {
         if timeLabel.text != "00:00.00"{
-        let progressportion = Float(1/CMTimeGetSeconds((firstAsset?.duration)!))
-        progressCounter += progressportion/10
-        progressView.progress = progressCounter
- 
-        if progressCounter == 1.0 {
-            progressViewTimer?.invalidate()
-        }
- 
-        /*** DEBUG STATEMENT ***/
-        //print("Progress: \(progressCounter)")
+            let progressportion = Float(1/CMTimeGetSeconds((Asset?.duration)!))
+            progressCounter += progressportion/10
+            progressView.progress = progressCounter
+            
+            if progressCounter == 1.0 {
+                progressViewTimer?.invalidate()
+            }
+            
+            /*** DEBUG STATEMENT ***/
+            //print("Progress: \(progressCounter)")
         }else{
             progressView.progress = 0.0
         }
@@ -281,7 +278,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func showTimeLabel(){
         //顯示影片秒數
-        let durationtime = CMTimeGetSeconds((firstAsset?.duration)!)
+        let durationtime = CMTimeGetSeconds((Asset?.duration)!)
         milliseconds = Int(durationtime) * 60
         let milli = (milliseconds % 60) + 39
         let sec = (milliseconds / 60) % 60
@@ -297,8 +294,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func StoreRecordPathInUserdefault() {
         let userdefault = UserDefaults.standard
-        userdefault.set(directoryURL(), forKey: "RecordOne")
-        userdefault.set(true, forKey: "UseRecordOne")
+        userdefault.set(directoryURL(), forKey: "RecordTwo")
+        userdefault.set(true, forKey: "UseRecordTwo")
     }
     
     deinit {
@@ -306,13 +303,13 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
