@@ -124,7 +124,7 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Gp-Wt-9Ko" id="F4U-TB-hoq">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="129.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nye-wh-hun">
