@@ -48,7 +48,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             switchOutput.text = "不使用此配音"
             UserDefaults.standard.set(false, forKey: "UseRecordTwo")
         }
-        print(UserDefaults.standard.bool(forKey: "UseRecordTwo"))
     }
     
     
@@ -78,10 +77,13 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
+        print(UserDefaults.standard.object(forKey: "RecordTwo"))
+        print(directoryURL())
+        if UserDefaults.standard.object(forKey: "RecordTwo") == nil {
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
-        UseRecordSwitch.isHidden = true
-        
+            UseRecordSwitch.isHidden = true
+        }
     }
     
     @IBAction func Explain(_ sender: Any) {
@@ -149,6 +151,8 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             play()
             showTimeLabel()
         }
+        
+        StoreRecordPathInUserdefault()
         
     }
     
@@ -255,7 +259,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isHidden = false
             ButttonRecord.setTitle("錄音", for: UIControlState())
             showSwitch()
-            StoreRecordPathInUserdefault()
         }
     }
     

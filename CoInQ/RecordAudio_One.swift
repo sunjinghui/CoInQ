@@ -82,9 +82,12 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        ButtonPlay.isHidden = true
-        switchOutput.isHidden = true
-        UseRecordSwitch.isHidden = true
+        print(UserDefaults.standard.object(forKey: "RecordOne"))
+        if UserDefaults.standard.object(forKey: "RecordOne") == nil {
+            ButtonPlay.isHidden = true
+            switchOutput.isHidden = true
+            UseRecordSwitch.isHidden = true
+        }
     }
     
     @IBAction func Explain(_ sender: Any) {
@@ -152,6 +155,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             play()
             showTimeLabel()
         }
+        
+        StoreRecordPathInUserdefault()
 
     }
     
@@ -258,7 +263,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isHidden = false
             ButttonRecord.setTitle("錄音", for: UIControlState())
             showSwitch()
-            StoreRecordPathInUserdefault()
         }
     }
     

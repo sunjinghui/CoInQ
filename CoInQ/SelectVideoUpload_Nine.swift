@@ -100,6 +100,11 @@ class SelectVideoUpload_Nine : UIViewController{
             self.present(alertController, animated: true, completion: nil)
         }
 
+        if isURLempty("RecordOne") || isURLempty("RecordTwo") {
+            UserDefaults.standard.removeObject(forKey: "RecordOne")
+            UserDefaults.standard.removeObject(forKey: "RecordTwo")
+        }
+        
     }
 }
 
