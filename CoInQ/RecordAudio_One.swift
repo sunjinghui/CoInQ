@@ -173,6 +173,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             preparePlayer()
             play()
             SoundPlayer.play()
+            if progressViewTimer != nil {
+                progressViewTimer?.invalidate()
+            }
+            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
             sender.setTitle("Stop", for: UIControlState())
             ButttonRecord.isEnabled = false
             NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying(note:)),
