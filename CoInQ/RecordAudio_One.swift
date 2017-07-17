@@ -82,7 +82,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        print(UserDefaults.standard.object(forKey: "RecordOne"))
         if UserDefaults.standard.object(forKey: "RecordOne") == nil {
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
@@ -173,6 +172,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             preparePlayer()
             play()
             SoundPlayer.play()
+            progressCounter = 0.0
             if progressViewTimer != nil {
                 progressViewTimer?.invalidate()
             }

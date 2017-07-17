@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Numbers-1-Black-icon.png",
+      "filename" : "Numbers-1-Black-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Numbers-1-Black-icon.png",
       "scale" : "2x"
     },
     {

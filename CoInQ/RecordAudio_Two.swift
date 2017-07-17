@@ -77,8 +77,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        print(UserDefaults.standard.object(forKey: "RecordTwo"))
-        print(directoryURL())
         if UserDefaults.standard.object(forKey: "RecordTwo") == nil {
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
@@ -192,6 +190,8 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
+            print("setACAudioPlayer")
+
         } catch {
             print("Error playing")
         }
@@ -258,6 +258,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = true
             ButtonPlay.isHidden = false
             ButttonRecord.setTitle("錄音", for: UIControlState())
+            showTimeLabel()
             showSwitch()
         }
     }

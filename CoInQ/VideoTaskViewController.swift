@@ -10,6 +10,9 @@ import Foundation
 
 class VideoTaskViewController:UITabBarController{
 
+    var videoname = VideoTaskInfo()
+    var VideoNameArray = [VideoTaskInfo]()
+    
     @IBAction func GoBack(){
             _ = self.navigationController?.popViewController(animated: true)
     }
@@ -35,8 +38,19 @@ class VideoTaskViewController:UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("array \(VideoNameArray)")
+        print(videoname)
+        if VideoNameArray.endIndex == 0 {
+            print("Userdefault\(Index)")
+            self.title = UserDefaults.standard.string(forKey: "VideoTaskName")
+        }else{
+            print("Got in Index \(Index)")
+            let videotaskarray = VideoNameArray[Index]
+            self.title = videotaskarray.VideoName
+        }
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 20)], for: .normal)
         //clearUD()
         
     }
+
 }

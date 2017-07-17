@@ -34,7 +34,7 @@ class RecordNine_Merge: UIViewController{
     func startActivityIndicator() {
         let screenSize: CGRect = UIScreen.main.bounds
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 50,height: 50))
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
         activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -85,10 +85,11 @@ class RecordNine_Merge: UIViewController{
     
     func switchPage(action: UIAlertAction){
         //7 - Page switch to CompleteVC
-        let sb = UIStoryboard(name: "Main", bundle: nil)
+        /*let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CSCL") as! UITabBarController
-        self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)*/
         //self.tabBarController?.selectedIndex = 3
+        self.performSegue(withIdentifier: "completevideotask", sender: self)
     }
     
     func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
