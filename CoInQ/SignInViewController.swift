@@ -20,6 +20,7 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             print(user.userID)
             print(user.profile.email)
             print(user.profile.imageURL(withDimension: 400))
+            
             self.performSegue(withIdentifier: "login", sender: self)
         }
     }

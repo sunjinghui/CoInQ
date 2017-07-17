@@ -19,7 +19,7 @@ class CSCL: UITabBarController{
         }
         
         GIDSignIn.sharedInstance().signOut()
-        _ = self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -40,6 +40,7 @@ class CSCL: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12)], for: .normal)
         /*self.title = "CSCL"
         
         let navigationBar = navigationController!.navigationBar

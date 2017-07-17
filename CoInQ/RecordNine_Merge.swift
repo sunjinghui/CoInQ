@@ -34,7 +34,7 @@ class RecordNine_Merge: UIViewController{
     func startActivityIndicator() {
         let screenSize: CGRect = UIScreen.main.bounds
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 50,height: 50))
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
         activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -85,10 +85,11 @@ class RecordNine_Merge: UIViewController{
     
     func switchPage(action: UIAlertAction){
         //7 - Page switch to CompleteVC
-        let sb = UIStoryboard(name: "Main", bundle: nil)
+        /*let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CSCL") as! UITabBarController
-        self.present(vc, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)*/
         //self.tabBarController?.selectedIndex = 3
+        self.performSegue(withIdentifier: "completevideotask", sender: self)
     }
     
     func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
@@ -140,6 +141,7 @@ class RecordNine_Merge: UIViewController{
     
     
     @IBAction func merge(_ sender: AnyObject) {
+        
         if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninthAsset{
             startActivityIndicator()
             
@@ -187,7 +189,7 @@ class RecordNine_Merge: UIViewController{
             // Video Six
             let sixthTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             do {
-                try sixthTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration), of: sixthAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fifthAsset.duration)
+                try sixthTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration), of: sixthAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration)
             } catch _ {
                 print("Failed to load sixth track")
             }
@@ -255,19 +257,22 @@ class RecordNine_Merge: UIViewController{
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
-/*          //if let loadedAudioAsset = audioAsset  {
-            if audioAssetOne != nil {
-             
+          if UserDefaults.standard.bool(forKey: "UseRecordOne")  {
+            
+            audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordOne")!)
+            print(UserDefaults.standard.bool(forKey: "UseRecordOne"))
+            
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
-                                                   of: loadedAudioAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
                                                    at: kCMTimeZero)
                 } catch _ {
                     print("Failed to load Audio track")
                 }
              
             }else{
+            print("false")
              
                 let v1audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -278,24 +283,39 @@ class RecordNine_Merge: UIViewController{
                     print("Failed to load 故事版 1 Audio track")
                 }
              
-            }*/
+            }
             
-            let v1audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v1audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, firstAsset.duration),
-                                                 of: firstAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: kCMTimeZero)
-            } catch _ {
-                print("Failed to load 故事版 1 Audio track")
+            // Record Auido Two
+            if UserDefaults.standard.bool(forKey: "UseRecordTwo")  {
+                
+                audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
+                print(UserDefaults.standard.bool(forKey: "UseRecordTwo"))
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v2audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v2audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
+                                                     of: secondAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 2 Audio track")
+                }
+                
             }
-            let v2audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v2audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
-                                                 of: secondAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 2 Audio track")
-            }
+            
+            
+
             let v3audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
                 try v3audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
