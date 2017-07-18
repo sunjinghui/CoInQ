@@ -184,7 +184,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="製作中" image="Files-Edit-File-icon.png" selectedImage="Files-Edit-File-icon.png" id="AfY-Ij-9gJ">
+                    <tabBarItem key="tabBarItem" title="製作中" image="Files-Edit-File-icon.png" id="AfY-Ij-9gJ">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <connections>
@@ -305,7 +305,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="蒐集資料" selectedImage="Numbers-2-Black-icon" id="Jd7-Pn-Onl"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="蒐集資料" image="Numbers-2-Black-icon" id="Jd7-Pn-Onl"/>
                     <connections>
                         <outlet property="fourcomplete" destination="4gy-sz-405" id="F3y-bp-W5D"/>
                         <outlet property="threecomplete" destination="TYx-fM-WbN" id="wtB-gZ-XWt"/>
@@ -389,7 +389,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="分享與回饋" selectedImage="Numbers-5-Black-icon" id="lEq-6M-fvy"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="分享與回饋" image="Numbers-5-Black-icon" id="lEq-6M-fvy"/>
                     <navigationItem key="navigationItem" id="AiB-QT-JAj"/>
                     <connections>
                         <outlet property="ninecomplete" destination="7YC-v7-Mn2" id="Beq-G6-sgE"/>
@@ -503,7 +503,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="定義問題" selectedImage="Numbers-1-Black-icon" id="Tzv-QQ-wME"/>
+                    <tabBarItem key="tabBarItem" title="定義問題" image="Numbers-1-Black-icon" id="Tzv-QQ-wME"/>
                     <connections>
                         <outlet property="firstcomplete" destination="aXe-QL-0dl" id="ek1-wT-fK8"/>
                         <outlet property="secondcomplete" destination="vB0-7i-f69" id="uud-Ed-TTK"/>
@@ -616,7 +616,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="形成解釋" selectedImage="Numbers-3-Black-icon" id="OcL-R6-A1a"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="形成解釋" image="Numbers-3-Black-icon" id="OcL-R6-A1a"/>
                     <connections>
                         <outlet property="fivecomplete" destination="COn-Iq-wdT" id="gNa-Jh-SdU"/>
                         <outlet property="sixcomplete" destination="yvU-e8-zoh" id="XhH-Mi-JHf"/>
@@ -728,7 +728,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="評估解釋" selectedImage="Numbers-4-Black-icon" id="lI5-gW-13f"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="評估解釋" image="Numbers-4-Black-icon" id="lI5-gW-13f"/>
                     <connections>
                         <outlet property="eightcomplete" destination="VeS-iD-10S" id="Rok-Rn-1Z5"/>
                         <outlet property="sevencomplete" destination="idq-ZU-dcM" id="LF2-Vb-Crb"/>

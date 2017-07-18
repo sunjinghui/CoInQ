@@ -67,7 +67,6 @@
 		A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordNine_Merge.swift; sourceTree = "<group>"; };
 		A521ECF11ED535830074327B /* RecordAudio_One.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_One.swift; sourceTree = "<group>"; };
 		A521ECF31ED6C96D0074327B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioRecorderViewController.swift; path = "../../../Downloads/AudioRecorderViewController-Swift-master/AudioRecorderViewControllerExample/AudioRecorderViewControllerExample/AudioRecorderViewController.swift"; sourceTree = "<group>"; };
 		A52D1CCA1EF6E6A900FAF465 /* RecordNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordNavigationController.swift; path = ../RecordNavigationController.swift; sourceTree = "<group>"; };
 		A537AD0E1EC5A26100B70596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTaskViewController.swift; sourceTree = "<group>"; };
@@ -211,7 +210,6 @@
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
-				A52D1CC01EEFDB8000FAF465 /* AudioRecorderViewController.swift */,
 				A56FF5E31F1BBEC500B072D5 /* VideoTaskInfo.swift */,
 			);
 			path = CoInQ;
