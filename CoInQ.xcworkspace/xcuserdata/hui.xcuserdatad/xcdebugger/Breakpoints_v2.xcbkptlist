@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/ProjectViewController.swift"
-            timestampString = "521990897.80892"
+            timestampString = "522064763.716484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "AddVideoTask(_:)"
             landmarkType = "7">
          </BreakpointContent>
