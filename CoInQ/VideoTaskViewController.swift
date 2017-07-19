@@ -39,9 +39,6 @@ class VideoTaskViewController:UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Got in Index \(Index)")
-        //let videotaskarray = VideoNameArray[Index]
-        //self.title = videotaskarray.videoname
         
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 20)], for: .normal)
         //clearUD()
@@ -54,6 +51,7 @@ class VideoTaskViewController:UITabBarController{
     func loadData() {
         let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
         do {
+            print("array count in task \(VideoNameArray.count)")
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
             self.title = VideoNameArray[Index].videoname
         }catch {
