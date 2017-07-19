@@ -97,7 +97,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         controller.player = Player
         controller.showsPlaybackControls = false
         self.addChildViewController(controller)
-        let videoFrame = CGRect(x: 44, y: 231, width: 681, height: 534)
+        let videoFrame = CGRect(x: 44, y: 176, width: 681, height: 534)
         controller.view.frame = videoFrame
         self.view.addSubview(controller.view)
         Player?.volume = 0.0
@@ -122,6 +122,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         if soundRecorder.isRecording{
             soundRecorder.stop()
             sender.setTitle("錄音", for: UIControlState())
+            sender.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
             ButtonPlay.isHidden = false
             ButtonPlay.isEnabled = true
             showSwitch()
@@ -145,6 +146,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             }
             progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_Two.updateProgressView(_:)), userInfo: nil, repeats: true)
             sender.setTitle("Stop", for: UIControlState())
+            sender.setImage(#imageLiteral(resourceName: "stop"), for: UIControlState())
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
@@ -161,6 +163,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             stopPlayer()
             print("stop")
             sender.setTitle("Play", for: UIControlState())
+            sender.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
             ButttonRecord.isEnabled = true
             
         }else{
@@ -174,6 +177,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_Two.updateProgressView(_:)), userInfo: nil, repeats: true)
 
             sender.setTitle("Stop", for: UIControlState())
+            sender.setImage(#imageLiteral(resourceName: "stop"), for: UIControlState())
             ButttonRecord.isEnabled = false
             NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying(note:)),
                                                    name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: Player?.currentItem)
@@ -187,6 +191,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func playerDidFinishPlaying(note: NSNotification){
         ButttonRecord.isEnabled = true
         ButtonPlay.setTitle("Play", for: UIControlState())
+        ButtonPlay.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
     }
     
     func preparePlayer(){
@@ -262,7 +267,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = true
             ButtonPlay.isHidden = false
             ButttonRecord.setTitle("錄音", for: UIControlState())
-            showTimeLabel()
+            ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
             showSwitch()
         }
     }

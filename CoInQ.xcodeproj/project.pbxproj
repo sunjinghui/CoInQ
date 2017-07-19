@@ -39,6 +39,7 @@
 		A56FF5DE1F11398F00B072D5 /* RecordAudio_Two.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */; };
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
 		A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */; };
+		A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Two.swift; sourceTree = "<group>"; };
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
 		A5E263101F1F473B00D1783D /* CoInQDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoInQDataModel.xcdatamodel; sourceTree = "<group>"; };
+		A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellcompletevideo.swift; sourceTree = "<group>"; };
 		BD697E120B541D4B03CDA8F0 /* Pods-CoInQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +210,7 @@
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
+				A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */,
 			);
 			path = CoInQ;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			files = (
 				A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */,
 				A537AD231EC6FC1300B70596 /* RecordAudio.swift in Sources */,
+				A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */,
 				A537AD1F1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift in Sources */,
 				A537AD131EC6EB1300B70596 /* ProjectViewController.swift in Sources */,
 				A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */,

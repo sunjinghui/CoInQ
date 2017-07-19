@@ -12,6 +12,7 @@ import MediaPlayer
 
 class SelectVideoUpload_Nine : UIViewController{
     
+    @IBOutlet weak var RecordButton: UIButton!
     var loadingAssetOne = false
     var AssetNine: URL!
     var nullstoryboard: Array<String>!
@@ -29,6 +30,7 @@ class SelectVideoUpload_Nine : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         ninecomplete.isHidden = true
+        RecordButton.layer.cornerRadius = 8
     }
     
     override func didReceiveMemoryWarning() {
