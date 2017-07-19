@@ -167,6 +167,12 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             preparePlayer()
             play()
             SoundPlayer.play()
+            progressCounter = 0.0
+            if progressViewTimer != nil {
+                progressViewTimer?.invalidate()
+            }
+            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_Two.updateProgressView(_:)), userInfo: nil, repeats: true)
+
             sender.setTitle("Stop", for: UIControlState())
             ButttonRecord.isEnabled = false
             NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying(note:)),
@@ -190,8 +196,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
-            print("setACAudioPlayer")
-
         } catch {
             print("Error playing")
         }

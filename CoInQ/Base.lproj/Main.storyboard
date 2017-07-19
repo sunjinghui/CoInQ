@@ -124,6 +124,20 @@
                                     <action selector="AddVideoTask:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s2U-NF-SOT"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" id="ylv-aW-JJa">
+                                <rect key="frame" x="0.0" y="20" width="768" height="782"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="尚未有影片任務 請按 + 新增" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ijS-Y7-VlV">
+                                        <rect key="frame" x="129" y="326" width="511" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="28" sectionFooterHeight="28" id="8PA-OZ-YnE">
                                 <rect key="frame" x="0.0" y="98" width="768" height="704"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -189,6 +203,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="AddButton" destination="gU1-tU-3mB" id="0wc-iI-jhS"/>
+                        <outlet property="TableEmpty" destination="ylv-aW-JJa" id="E8v-EI-7tf"/>
                         <outlet property="VideoNameTableView" destination="8PA-OZ-YnE" id="WA4-vG-Gzt"/>
                         <segue destination="taG-3s-S4J" kind="push" identifier="startvideotask" id="Qp8-te-tmj"/>
                     </connections>

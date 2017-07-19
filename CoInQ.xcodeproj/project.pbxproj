@@ -183,8 +183,9 @@
 				A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */,
 				A54EE1641EB1CE760014994C /* SignInViewController.swift */,
 				A51A8E011EB82E4400344F61 /* CSCL.swift */,
-				A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */,
 				A537AD121EC6EB1300B70596 /* ProjectViewController.swift */,
+				A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */,
+				A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */,
 				A537AD141EC6EB6700B70596 /* InvitaionViewController.swift */,
 				A537AD161EC6EC2200B70596 /* CompeleteViewController.swift */,
 				A537AD181EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift */,
@@ -196,10 +197,10 @@
 				A537AD221EC6FC1300B70596 /* RecordAudio.swift */,
 				A521ECF11ED535830074327B /* RecordAudio_One.swift */,
 				A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */,
+				A5E262CD1F1D0C6600D1783D /* RecordAudio_Three.swift */,
 				A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */,
 				A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */,
 				A537AD0D1EC5A26100B70596 /* Main.storyboard */,
-				A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */,
 				A5458D2F1EA3ED8F00B1E26A /* LaunchScreen.storyboard */,
 				A5458D321EA3ED8F00B1E26A /* Info.plist */,
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
@@ -424,6 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E262D11F1DFA4E00D1783D /* CoInQDataModel.xcdatamodeld in Sources */,
 				A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */,
 				A537AD231EC6FC1300B70596 /* RecordAudio.swift in Sources */,
 				A537AD1F1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift in Sources */,
@@ -724,6 +726,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A5E262CF1F1DFA4E00D1783D /* CoInQDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A5E262D01F1DFA4E00D1783D /* CoInQDataModel.xcdatamodel */,
+			);
+			currentVersion = A5E262D01F1DFA4E00D1783D /* CoInQDataModel.xcdatamodel */;
+			path = CoInQDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A5458D1B1EA3ED8E00B1E26A /* Project object */;
 }
