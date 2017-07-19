@@ -38,6 +38,7 @@
 		A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE16B1EB1F17A0014994C /* AddressBook.framework */; };
 		A56FF5DE1F11398F00B072D5 /* RecordAudio_Two.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */; };
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
+		A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoInQ-Bridging-Header.h"; sourceTree = "<group>"; };
 		A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Two.swift; sourceTree = "<group>"; };
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
+		A5E263101F1F473B00D1783D /* CoInQDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoInQDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BD697E120B541D4B03CDA8F0 /* Pods-CoInQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,11 +199,11 @@
 				A537AD221EC6FC1300B70596 /* RecordAudio.swift */,
 				A521ECF11ED535830074327B /* RecordAudio_One.swift */,
 				A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */,
-				A5E262CD1F1D0C6600D1783D /* RecordAudio_Three.swift */,
 				A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */,
 				A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */,
 				A537AD0D1EC5A26100B70596 /* Main.storyboard */,
 				A5458D2F1EA3ED8F00B1E26A /* LaunchScreen.storyboard */,
+				A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */,
 				A5458D321EA3ED8F00B1E26A /* Info.plist */,
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
@@ -425,7 +427,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5E262D11F1DFA4E00D1783D /* CoInQDataModel.xcdatamodeld in Sources */,
 				A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */,
 				A537AD231EC6FC1300B70596 /* RecordAudio.swift in Sources */,
 				A537AD1F1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift in Sources */,
@@ -436,6 +437,7 @@
 				A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */,
 				A537AD211EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift in Sources */,
 				A52D1CCB1EF6E6A900FAF465 /* RecordNavigationController.swift in Sources */,
+				A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */,
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
 				A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
@@ -728,12 +730,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		A5E262CF1F1DFA4E00D1783D /* CoInQDataModel.xcdatamodeld */ = {
+		A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				A5E262D01F1DFA4E00D1783D /* CoInQDataModel.xcdatamodel */,
+				A5E263101F1F473B00D1783D /* CoInQDataModel.xcdatamodel */,
 			);
-			currentVersion = A5E262D01F1DFA4E00D1783D /* CoInQDataModel.xcdatamodel */;
+			currentVersion = A5E263101F1F473B00D1783D /* CoInQDataModel.xcdatamodel */;
 			path = CoInQDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
