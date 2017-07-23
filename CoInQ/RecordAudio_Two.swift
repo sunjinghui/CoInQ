@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import CoreData
 
 class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
@@ -23,6 +24,9 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
     
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext!
+    
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
     var videolength: Double = 0
@@ -30,8 +34,9 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var milliseconds: Int = 0
     
     var AudioFileName = "sound2.m4a"
+    var AudioURL: URL?
     
-    var Asset: AVAsset? = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)
+    var Asset: AVAsset?
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -46,7 +51,8 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             StoreRecordPathInUserdefault()
         }else{
             switchOutput.text = "不使用此配音"
-            UserDefaults.standard.set(false, forKey: "UseRecordTwo")
+            VideoNameArray[Index].useRecordtwo = false
+            //UserDefaults.standard.set(false, forKey: "UseRecordTwo")
         }
     }
     
@@ -60,8 +66,9 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         setupRecorder()
         
+        Asset = AVAsset(url: URL(string: VideoNameArray[Index].videotwo!)!)
         //影片縮圖
-        let asset = AVURLAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!, options: nil)
+        let asset = AVURLAsset(url: URL(string: VideoNameArray[Index].videotwo!)!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = false
         
@@ -77,11 +84,33 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        if UserDefaults.standard.object(forKey: "RecordTwo") == nil {
+        if (VideoNameArray[Index].audiotwo?.isEmpty)! {
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
         }
+        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        loadData()
+    }
+    
+    func loadData() {
+        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            if !((VideoNameArray[Index].audiotwo?.isEmpty)!) {
+                ButtonPlay.isHidden = false
+                switchOutput.isHidden = false
+                UseRecordSwitch.isHidden = false
+                AudioURL = URL(string: VideoNameArray[Index].audiotwo!)
+            }
+            
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+        
+        print(self.VideoNameArray)
+        
     }
     
     @IBAction func Explain(_ sender: Any) {
@@ -92,7 +121,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func play(){
-        Player = AVPlayer(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
+        Player = AVPlayer(url: URL(string: VideoNameArray[Index].videotwo!)!)
         let controller = AVPlayerViewController()
         controller.player = Player
         controller.showsPlaybackControls = false
@@ -197,7 +226,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func preparePlayer(){
         
         do {
-            try SoundPlayer = AVAudioPlayer(contentsOf: directoryURL()!)
+            try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
@@ -306,9 +335,11 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func StoreRecordPathInUserdefault() {
-        let userdefault = UserDefaults.standard
-        userdefault.set(directoryURL(), forKey: "RecordTwo")
-        userdefault.set(true, forKey: "UseRecordTwo")
+        VideoNameArray[Index].audiotwo = directoryURL()?.absoluteString
+        VideoNameArray[Index].useRecordtwo = true
+        //let userdefault = UserDefaults.standard
+        //userdefault.set(directoryURL(), forKey: "RecordTwo")
+        //userdefault.set(true, forKey: "UseRecordTwo")
     }
     
     deinit {

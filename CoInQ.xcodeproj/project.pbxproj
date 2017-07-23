@@ -192,6 +192,7 @@
 				A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */,
 				A537AD141EC6EB6700B70596 /* InvitaionViewController.swift */,
 				A537AD161EC6EC2200B70596 /* CompeleteViewController.swift */,
+				A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */,
 				A537AD181EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift */,
 				A537AD1A1EC6FA5000B70596 /* SelectVideoUpload_Three_Four.swift */,
 				A537AD1C1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift */,
@@ -210,7 +211,6 @@
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
-				A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */,
 			);
 			path = CoInQ;
 			sourceTree = "<group>";

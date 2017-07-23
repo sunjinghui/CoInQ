@@ -9,12 +9,15 @@
 import Foundation
 import MobileCoreServices
 import MediaPlayer
+import CoreData
 
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
-    var firstAsset: URL!
-    var secondAsset: URL!
+    var firstAsset: URL?
+    var secondAsset: URL?
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext!
     
     @IBOutlet weak var firstcomplete: UIImageView!
     @IBOutlet weak var secondcomplete: UIImageView!
@@ -81,7 +84,36 @@ class SelectVideoUpload_One_Two : UIViewController{
         super.viewDidLoad()
         firstcomplete.isHidden = true
         secondcomplete.isHidden = true
+        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        loadData()
     }
+    
+    func loadData() {
+        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            
+            //
+            //
+            
+            //
+            //ERROR
+            if !((VideoNameArray[Index].videoone?.isEmpty)!) {
+                self.firstAsset = URL(string: VideoNameArray[Index].videoone!)
+                firstcomplete.isHidden = false
+            }else if !((VideoNameArray[Index].videotwo?.isEmpty)!){
+                self.secondAsset = URL(string: VideoNameArray[Index].videotwo!)
+                secondcomplete.isHidden = false
+            }
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+
+        print(self.VideoNameArray)
+        
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -114,9 +146,12 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             present(alert, animated: true, completion: nil)
             
             //Store videopath in userdefault
-            let userdefault = UserDefaults.standard
-            userdefault.set(firstAsset, forKey: "VideoOne")
-            userdefault.set(secondAsset, forKey: "VideoTwo")
+            VideoNameArray[Index].videoone = firstAsset?.absoluteString
+            VideoNameArray[Index].videotwo = secondAsset?.absoluteString
+
+//            let userdefault = UserDefaults.standard
+//            userdefault.set(firstAsset, forKey: "VideoOne")
+//            userdefault.set(secondAsset, forKey: "VideoTwo")
         }
     }
 }

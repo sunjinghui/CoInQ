@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import CoreData
 
 class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
@@ -23,6 +24,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
     
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext!
+    
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
     var videolength: Double = 0
@@ -30,8 +34,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var milliseconds: Int = 0
     
     var AudioFileName = "sound.m4a"
+    var AudioURL: URL?
     
-    var firstAsset: AVAsset? = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
+    var firstAsset: AVAsset?
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -46,9 +51,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             StoreRecordPathInUserdefault()
         }else{
             switchOutput.text = "不使用此配音"
-            UserDefaults.standard.set(false, forKey: "UseRecordOne")
+            VideoNameArray[Index].useRecordone = false
+            //UserDefaults.standard.set(false, forKey: "UseRecordOne")
         }
-        print(UserDefaults.standard.bool(forKey: "UseRecordOne"))
     }
     
     @IBAction func BackToSelectVideoNine(_ sender: Any) {
@@ -65,8 +70,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         setupRecorder()
 
+        firstAsset = AVAsset(url: URL(string: VideoNameArray[Index].videoone!)!)
+        
         //影片縮圖
-        let asset = AVURLAsset(url: UserDefaults.standard.url(forKey: "VideoOne")!, options: nil)
+        let asset = AVURLAsset(url: URL(string: VideoNameArray[Index].videoone!)!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = false
         
@@ -82,12 +89,35 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        if UserDefaults.standard.object(forKey: "RecordOne") == nil {
+        if (VideoNameArray[Index].audioone?.isEmpty)! {
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
         }
+        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        loadData()
     }
+    
+    func loadData() {
+        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            if !((VideoNameArray[Index].audioone?.isEmpty)!) {
+                ButtonPlay.isHidden = false
+                switchOutput.isHidden = false
+                UseRecordSwitch.isHidden = false
+                AudioURL = URL(string: VideoNameArray[Index].audioone!)
+            }
+            
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+        
+        print(self.VideoNameArray)
+        
+    }
+
     
     @IBAction func Explain(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n這個自然現象中特別值得注意的重點。",preferredStyle: .alert)
@@ -97,7 +127,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func play(){
-            Player = AVPlayer(url: UserDefaults.standard.url(forKey: "VideoOne")!)
+            Player = AVPlayer(url: URL(string: VideoNameArray[Index].videoone!)!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false
@@ -201,7 +231,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func preparePlayer(){
         
         do {
-            try SoundPlayer = AVAudioPlayer(contentsOf: directoryURL()!)
+            try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
@@ -310,9 +340,11 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func StoreRecordPathInUserdefault() {
-        let userdefault = UserDefaults.standard
-        userdefault.set(directoryURL(), forKey: "RecordOne")
-        userdefault.set(true, forKey: "UseRecordOne")
+        VideoNameArray[Index].audioone = directoryURL()?.absoluteString
+        VideoNameArray[Index].useRecordone = true
+//        let userdefault = UserDefaults.standard
+//        userdefault.set(directoryURL(), forKey: "RecordOne")
+//        userdefault.set(true, forKey: "UseRecordOne")
     }
     
     deinit {

@@ -11,6 +11,7 @@ import MobileCoreServices
 import MediaPlayer
 import CoreMedia
 import Photos
+import CoreData
 
 class RecordNine_Merge: UIViewController{
     
@@ -26,8 +27,8 @@ class RecordNine_Merge: UIViewController{
     var eighthAsset: AVAsset?
     var ninthAsset: AVAsset?
 
-    
-    
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -166,7 +167,7 @@ class RecordNine_Merge: UIViewController{
                 print("Failed to load second track")
             }
             // Video Three
-            let thirdTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            /*let thirdTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             do {
                 try thirdTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration), of: thirdAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration)
             } catch _ {
@@ -213,7 +214,7 @@ class RecordNine_Merge: UIViewController{
                 try ninethTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration), of: ninethAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
             } catch _ {
                 print("Failed to load nineth track")
-            }
+            }*/
             
             
             // 2.1
@@ -228,7 +229,7 @@ class RecordNine_Merge: UIViewController{
             let secondInstruction = videoCompositionInstructionForTrack(secondTrack, asset: secondAsset)
             secondInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration)
             
-            let thirdInstruction = videoCompositionInstructionForTrack(thirdTrack, asset: thirdAsset)
+           /* let thirdInstruction = videoCompositionInstructionForTrack(thirdTrack, asset: thirdAsset)
             thirdInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration)
             
             let fourthInstruction = videoCompositionInstructionForTrack(fourthTrack, asset: fourthAsset)
@@ -246,21 +247,21 @@ class RecordNine_Merge: UIViewController{
             let eighthInstruction = videoCompositionInstructionForTrack(eighthTrack, asset: eighthAsset)
             eighthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
             
-            let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)
+            let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)*/
             
             
             // 2.3
-            mainInstruction.layerInstructions = [firstInstruction, secondInstruction, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction , ninethInstruction]
+            mainInstruction.layerInstructions = [firstInstruction, secondInstruction]//, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction , ninethInstruction]
             let mainComposition = AVMutableVideoComposition()
             mainComposition.instructions = [mainInstruction]
             mainComposition.frameDuration = CMTimeMake(1, 30)
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
-          if UserDefaults.standard.bool(forKey: "UseRecordOne")  {
+          if VideoNameArray[Index].useRecordone {
             
             audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordOne")!)
-            print(UserDefaults.standard.bool(forKey: "UseRecordOne"))
+            print(VideoNameArray[Index].useRecordone)
             
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -286,10 +287,10 @@ class RecordNine_Merge: UIViewController{
             }
             
             // Record Auido Two
-            if UserDefaults.standard.bool(forKey: "UseRecordTwo")  {
+            if VideoNameArray[Index].useRecordtwo  {
                 
                 audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                print(UserDefaults.standard.bool(forKey: "UseRecordTwo"))
+                print(VideoNameArray[Index].useRecordtwo)
                 
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -315,7 +316,7 @@ class RecordNine_Merge: UIViewController{
             }
             
             
-
+            /*
             let v3audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
                 try v3audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
@@ -371,7 +372,7 @@ class RecordNine_Merge: UIViewController{
                                                  at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
             } catch _ {
                 print("Failed to load 故事版 9 Audio track")
-            }
+            }*/
             
             
             // 4 - Get path
@@ -408,15 +409,33 @@ class RecordNine_Merge: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firstAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoOne")!)
-        secondAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)
-        thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
-        fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
-        fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
-        sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
-        seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
-        eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
-        ninthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)
+
+        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        loadData()
+    }
+    
+    func loadData() {
+        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+
+            firstAsset   = AVAsset(url:URL(string: VideoNameArray[Index].videoone!)!)
+            secondAsset  = AVAsset(url:URL(string: VideoNameArray[Index].videotwo!)!)
+            /*thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
+            fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
+            fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
+            sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
+            seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
+            eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
+            ninthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
+            
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+        
+        print(self.VideoNameArray)
+        
     }
 
 }//end of class
