@@ -143,10 +143,10 @@ class RecordNine_Merge: UIViewController{
     
     @IBAction func merge(_ sender: AnyObject) {
         
-        if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninthAsset{
+        if let firstAsset = firstAsset, let secondAsset = secondAsset /*,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninthAsset*/{
             startActivityIndicator()
             
-            let totalTIME = firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration + ninethAsset.duration
+            let totalTIME = firstAsset.duration + secondAsset.duration //+ thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration + ninethAsset.duration
             
             // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
             let mixComposition = AVMutableComposition()
@@ -260,7 +260,8 @@ class RecordNine_Merge: UIViewController{
             // 3 - Audio track
           if VideoNameArray[Index].useRecordone {
             
-            audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordOne")!)
+            let audioURLone = URL(string: VideoNameArray[Index].audioone!)
+            audioAssetOne = AVAsset(url:audioURLone!)
             print(VideoNameArray[Index].useRecordone)
             
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -289,7 +290,9 @@ class RecordNine_Merge: UIViewController{
             // Record Auido Two
             if VideoNameArray[Index].useRecordtwo  {
                 
-                audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
+                //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
+                let audioURLtwo = URL(string: VideoNameArray[Index].audiotwo!)
+                audioAssetOne = AVAsset(url:audioURLtwo!)
                 print(VideoNameArray[Index].useRecordtwo)
                 
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -420,8 +423,11 @@ class RecordNine_Merge: UIViewController{
         do {
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
 
-            firstAsset   = AVAsset(url:URL(string: VideoNameArray[Index].videoone!)!)
-            secondAsset  = AVAsset(url:URL(string: VideoNameArray[Index].videotwo!)!)
+            let videoURLone = URL(string: VideoNameArray[Index].videoone!)
+            let videoURLtwo = URL(string: VideoNameArray[Index].videotwo!)
+
+            firstAsset   = AVAsset(url:videoURLone!)
+            secondAsset  = AVAsset(url:videoURLtwo!)
             /*thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
             fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
             fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)

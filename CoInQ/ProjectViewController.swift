@@ -23,6 +23,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("array count in cscl \(VideoNameArray.count)")
         return VideoNameArray.count
     }
     
@@ -92,7 +93,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         }else{
             VideoNameTableView.backgroundView = nil
         }
-        print(self.VideoNameArray)
 
     }
     

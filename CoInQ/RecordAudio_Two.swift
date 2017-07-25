@@ -25,7 +25,8 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var SoundPlayer : AVAudioPlayer!
     
     var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext!
+    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
@@ -36,7 +37,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var AudioFileName = "sound2.m4a"
     var AudioURL: URL?
     
-    var Asset: AVAsset?
+    var Asset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -63,12 +64,14 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     override func viewDidLoad() {
-        
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
         setupRecorder()
         
-        Asset = AVAsset(url: URL(string: VideoNameArray[Index].videotwo!)!)
+            let videoURL = URL(string: VideoNameArray[Index].videotwo!)
+            Asset = AVAsset(url:videoURL!)
         //影片縮圖
-        let asset = AVURLAsset(url: URL(string: VideoNameArray[Index].videotwo!)!, options: nil)
+        let asset = AVURLAsset(url: videoURL!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = false
         
@@ -84,32 +87,23 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        if (VideoNameArray[Index].audiotwo?.isEmpty)! {
-            ButtonPlay.isHidden = true
-            switchOutput.isHidden = true
-            UseRecordSwitch.isHidden = true
-        }
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        loadData()
-    }
-    
-    func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            if !((VideoNameArray[Index].audiotwo?.isEmpty)!) {
+
+            if (VideoNameArray[Index].audiotwo) != nil {
                 ButtonPlay.isHidden = false
                 switchOutput.isHidden = false
                 UseRecordSwitch.isHidden = false
                 AudioURL = URL(string: VideoNameArray[Index].audiotwo!)
+            }else{
+                ButtonPlay.isHidden = true
+                switchOutput.isHidden = true
+                UseRecordSwitch.isHidden = true
             }
             
         }catch {
             print("Could not load data from coredb \(error.localizedDescription)")
         }
         
-        print(self.VideoNameArray)
+        print(self.VideoNameArray[Index])
         
     }
     
@@ -121,19 +115,25 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func play(){
-        Player = AVPlayer(url: URL(string: VideoNameArray[Index].videotwo!)!)
-        let controller = AVPlayerViewController()
-        controller.player = Player
-        controller.showsPlaybackControls = false
-        self.addChildViewController(controller)
-        let videoFrame = CGRect(x: 44, y: 176, width: 681, height: 534)
-        controller.view.frame = videoFrame
-        self.view.addSubview(controller.view)
-        Player?.volume = 0.0
-        Player?.play()
-        
+        do{
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            
+            let videoURL = URL(string: VideoNameArray[Index].videotwo!)
+            Player = AVPlayer(url: videoURL!)
+            let controller = AVPlayerViewController()
+            controller.player = Player
+            controller.showsPlaybackControls = false
+            self.addChildViewController(controller)
+            let videoFrame = CGRect(x: 44, y: 176, width: 681, height: 534)
+            controller.view.frame = videoFrame
+            self.view.addSubview(controller.view)
+            Player?.volume = 0.0
+            Player?.play()
+        }catch {
+        print("Could not load data from coredb \(error.localizedDescription)")
+        }
     }
-    
+
     func stopPlayer() {
         if let playy = Player {
             playy.pause()
@@ -336,6 +336,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func StoreRecordPathInUserdefault() {
         VideoNameArray[Index].audiotwo = directoryURL()?.absoluteString
+        AudioURL = directoryURL()
         VideoNameArray[Index].useRecordtwo = true
         //let userdefault = UserDefaults.standard
         //userdefault.set(directoryURL(), forKey: "RecordTwo")

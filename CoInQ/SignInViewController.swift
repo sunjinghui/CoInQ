@@ -17,10 +17,10 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             print(error)
             return
         }else{
-            print(user.userID)
-            print(user.profile.email)
-            print(user.profile.imageURL(withDimension: 400))
-            
+            //print(user.userID)
+            //print(user.profile.email)
+            //print(user.profile.imageURL(withDimension: 400))
+            print("google sign in")
             self.performSegue(withIdentifier: "login", sender: self)
         }
     }

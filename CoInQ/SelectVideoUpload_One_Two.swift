@@ -94,15 +94,14 @@ class SelectVideoUpload_One_Two : UIViewController{
         do {
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
             
-            //
-            //
-            
-            //
-            //ERROR
-            if !((VideoNameArray[Index].videoone?.isEmpty)!) {
+            if (VideoNameArray[Index].videoone) != nil {
+                print("videoone is not empty")
                 self.firstAsset = URL(string: VideoNameArray[Index].videoone!)
                 firstcomplete.isHidden = false
-            }else if !((VideoNameArray[Index].videotwo?.isEmpty)!){
+            }
+            
+            if (VideoNameArray[Index].videotwo) != nil{
+                print("videotwo is not empty")
                 self.secondAsset = URL(string: VideoNameArray[Index].videotwo!)
                 secondcomplete.isHidden = false
             }
@@ -110,7 +109,7 @@ class SelectVideoUpload_One_Two : UIViewController{
             print("Could not load data from coredb \(error.localizedDescription)")
         }
 
-        print(self.VideoNameArray)
+        print(self.VideoNameArray[Index])
         
     }
 
@@ -136,22 +135,23 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
                 firstcomplete.isHidden = false
+                VideoNameArray[Index].videoone = firstAsset?.absoluteString
+
             } else {
                 message = "故事版2 影片已匯入成功！"
                 secondAsset = avAsset
                 secondcomplete.isHidden = false
+                VideoNameArray[Index].videotwo = secondAsset?.absoluteString
+
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             
-            //Store videopath in userdefault
-            VideoNameArray[Index].videoone = firstAsset?.absoluteString
-            VideoNameArray[Index].videotwo = secondAsset?.absoluteString
 
-//            let userdefault = UserDefaults.standard
-//            userdefault.set(firstAsset, forKey: "VideoOne")
-//            userdefault.set(secondAsset, forKey: "VideoTwo")
+            let userdefault = UserDefaults.standard
+            userdefault.set(firstAsset, forKey: "VideoOne")
+            userdefault.set(secondAsset, forKey: "VideoTwo")
         }
     }
 }

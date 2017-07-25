@@ -51,9 +51,9 @@ class VideoTaskViewController:UITabBarController{
     func loadData() {
         let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
         do {
-            print("array count in task \(VideoNameArray.count)")
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
             self.title = VideoNameArray[Index].videoname
+
         }catch {
             print("Could not load data from coredb \(error.localizedDescription)")
         }

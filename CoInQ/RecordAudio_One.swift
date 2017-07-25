@@ -25,7 +25,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var SoundPlayer : AVAudioPlayer!
     
     var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext!
+    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
@@ -36,7 +37,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var AudioFileName = "sound.m4a"
     var AudioURL: URL?
     
-    var firstAsset: AVAsset?
+    var firstAsset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoOne")!)
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -67,54 +68,48 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     override func viewDidLoad() {
-        
-        setupRecorder()
-
-        firstAsset = AVAsset(url: URL(string: VideoNameArray[Index].videoone!)!)
-        
-        //影片縮圖
-        let asset = AVURLAsset(url: URL(string: VideoNameArray[Index].videoone!)!, options: nil)
-        let imgGenerator = AVAssetImageGenerator(asset: asset)
-        imgGenerator.appliesPreferredTrackTransform = false
-        
-        do {
-            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-            let thumbnail = UIImage(cgImage: cgImage)
-            
-            videoPreviewLayer.image = thumbnail
-            
-        } catch let error {
-            print("*** Error generating thumbnail: \(error)")
-        }
-        
-        showTimeLabel()
-        progressView.progress = progressCounter
-        if (VideoNameArray[Index].audioone?.isEmpty)! {
-            ButtonPlay.isHidden = true
-            switchOutput.isHidden = true
-            UseRecordSwitch.isHidden = true
-        }
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        loadData()
-    }
-    
-    func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        print("Index = \(Index)")
         do {
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            if !((VideoNameArray[Index].audioone?.isEmpty)!) {
-                ButtonPlay.isHidden = false
-                switchOutput.isHidden = false
-                UseRecordSwitch.isHidden = false
-                AudioURL = URL(string: VideoNameArray[Index].audioone!)
+            setupRecorder()
+            progressView.progress = progressCounter
+            let videoURL = URL(string: VideoNameArray[Index].videoone!)
+
+            firstAsset = AVAsset(url: videoURL!)
+            //影片縮圖
+            let asset = AVURLAsset(url: videoURL!, options: nil)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            imgGenerator.appliesPreferredTrackTransform = false
+            
+            do {
+                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+                
+                videoPreviewLayer.image = thumbnail
+                
+            } catch let error {
+                print("*** Error generating thumbnail: \(error)")
             }
+            
+            showTimeLabel()
+
+                if (VideoNameArray[Index].audioone) != nil {
+                    print("audioone is not empty")
+                    ButtonPlay.isHidden = false
+                    switchOutput.isHidden = false
+                    UseRecordSwitch.isHidden = false
+                    AudioURL = URL(string: VideoNameArray[Index].audioone!)
+                }else{
+                    ButtonPlay.isHidden = true
+                    switchOutput.isHidden = true
+                    UseRecordSwitch.isHidden = true
+                }
             
         }catch {
             print("Could not load data from coredb \(error.localizedDescription)")
         }
         
-        print(self.VideoNameArray)
+        print(self.VideoNameArray[Index])
         
     }
 
@@ -127,7 +122,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func play(){
-            Player = AVPlayer(url: URL(string: VideoNameArray[Index].videoone!)!)
+        do{
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            let videoURL = URL(string: VideoNameArray[Index].videoone!)
+            Player = AVPlayer(url: videoURL!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false
@@ -137,6 +135,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             self.view.addSubview(controller.view)
             Player?.volume = 0.0
             Player?.play()
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
         
     }
     
@@ -231,7 +232,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func preparePlayer(){
         
         do {
-            try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
+            try SoundPlayer = AVAudioPlayer(contentsOf: directoryURL()!)
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0

@@ -89,12 +89,12 @@ class SelectVideoUpload_Nine : UIViewController{
     
     @IBAction func checkALLvideoLoaded(_ sender: Any) {
         
-        if isURLempty("VideoOne") && isURLempty("VideoTwo") && isURLempty("VideoThree") && isURLempty("VideoFour") && isURLempty("VideoFive") && isURLempty("VideoSix") && isURLempty("VideoSeven") && isURLempty("VideoEight") && isURLempty("VideoNine") {
+        /*if isURLempty("VideoOne") && isURLempty("VideoTwo") && isURLempty("VideoThree") && isURLempty("VideoFour") && isURLempty("VideoFive") && isURLempty("VideoSix") && isURLempty("VideoSeven") && isURLempty("VideoEight") && isURLempty("VideoNine") {*/
             
             let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
             
             present(recordNavigationController, animated: true, completion: nil)
-        }else{
+        /*}else{
             print("alert")
             let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -105,7 +105,7 @@ class SelectVideoUpload_Nine : UIViewController{
         if isURLempty("RecordOne") || isURLempty("RecordTwo") {
             UserDefaults.standard.removeObject(forKey: "RecordOne")
             UserDefaults.standard.removeObject(forKey: "RecordTwo")
-        }
+        }*/
         
     }
 }
