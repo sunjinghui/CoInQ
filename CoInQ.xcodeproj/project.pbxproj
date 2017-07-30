@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 279652B8BA40C87294370D8D /* libPods-CoInQ.a */; };
 		A504D1D81F0E8DD000C88D32 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A504D1D71F0E8DD000C88D32 /* libsqlite3.tbd */; };
+		A505AFDE1F2E594900199A80 /* RAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505AFDD1F2E594900199A80 /* RAM.swift */; };
 		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
 		A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */; };
 		A521ECF21ED535840074327B /* RecordAudio_One.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECF11ED535830074327B /* RecordAudio_One.swift */; };
@@ -40,6 +41,12 @@
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
 		A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */; };
 		A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */; };
+		A5E263151F2CF28900D1783D /* RecordAudio_Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263141F2CF28700D1783D /* RecordAudio_Four.swift */; };
+		A5E263171F2CF3A900D1783D /* RecordAudio_Three.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263161F2CF3A900D1783D /* RecordAudio_Three.swift */; };
+		A5E263191F2CFB6F00D1783D /* RecordAudio_Five.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263181F2CFB6E00D1783D /* RecordAudio_Five.swift */; };
+		A5E2631B1F2CFB9400D1783D /* RecordAudio_Six.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2631A1F2CFB9400D1783D /* RecordAudio_Six.swift */; };
+		A5E2631D1F2CFBBD00D1783D /* RecordAudio_Seven.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2631C1F2CFBBC00D1783D /* RecordAudio_Seven.swift */; };
+		A5E2631F1F2CFBE200D1783D /* RecordAudio_Eight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E2631E1F2CFBE200D1783D /* RecordAudio_Eight.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +70,7 @@
 		279652B8BA40C87294370D8D /* libPods-CoInQ.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoInQ.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.debug.xcconfig"; sourceTree = "<group>"; };
 		A504D1D71F0E8DD000C88D32 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A505AFDD1F2E594900199A80 /* RAM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAM.swift; sourceTree = "<group>"; };
 		A51A8E011EB82E4400344F61 /* CSCL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCL.swift; sourceTree = "<group>"; };
 		A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordNine_Merge.swift; sourceTree = "<group>"; };
 		A521ECF11ED535830074327B /* RecordAudio_One.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_One.swift; sourceTree = "<group>"; };
@@ -102,6 +110,12 @@
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
 		A5E263101F1F473B00D1783D /* CoInQDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoInQDataModel.xcdatamodel; sourceTree = "<group>"; };
 		A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellcompletevideo.swift; sourceTree = "<group>"; };
+		A5E263141F2CF28700D1783D /* RecordAudio_Four.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Four.swift; sourceTree = "<group>"; };
+		A5E263161F2CF3A900D1783D /* RecordAudio_Three.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Three.swift; sourceTree = "<group>"; };
+		A5E263181F2CFB6E00D1783D /* RecordAudio_Five.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Five.swift; sourceTree = "<group>"; };
+		A5E2631A1F2CFB9400D1783D /* RecordAudio_Six.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Six.swift; sourceTree = "<group>"; };
+		A5E2631C1F2CFBBC00D1783D /* RecordAudio_Seven.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Seven.swift; sourceTree = "<group>"; };
+		A5E2631E1F2CFBE200D1783D /* RecordAudio_Eight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Eight.swift; sourceTree = "<group>"; };
 		BD697E120B541D4B03CDA8F0 /* Pods-CoInQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +216,12 @@
 				A537AD221EC6FC1300B70596 /* RecordAudio.swift */,
 				A521ECF11ED535830074327B /* RecordAudio_One.swift */,
 				A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */,
+				A5E263161F2CF3A900D1783D /* RecordAudio_Three.swift */,
+				A5E263141F2CF28700D1783D /* RecordAudio_Four.swift */,
+				A5E263181F2CFB6E00D1783D /* RecordAudio_Five.swift */,
+				A5E2631A1F2CFB9400D1783D /* RecordAudio_Six.swift */,
+				A5E2631C1F2CFBBC00D1783D /* RecordAudio_Seven.swift */,
+				A5E2631E1F2CFBE200D1783D /* RecordAudio_Eight.swift */,
 				A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */,
 				A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */,
 				A537AD0D1EC5A26100B70596 /* Main.storyboard */,
@@ -211,6 +231,7 @@
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
+				A505AFDD1F2E594900199A80 /* RAM.swift */,
 			);
 			path = CoInQ;
 			sourceTree = "<group>";
@@ -431,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */,
+				A5E2631D1F2CFBBD00D1783D /* RecordAudio_Seven.swift in Sources */,
 				A537AD231EC6FC1300B70596 /* RecordAudio.swift in Sources */,
 				A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */,
 				A537AD1F1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift in Sources */,
@@ -438,17 +460,23 @@
 				A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */,
 				A537AD151EC6EB6700B70596 /* InvitaionViewController.swift in Sources */,
 				A537AD171EC6EC2200B70596 /* CompeleteViewController.swift in Sources */,
+				A5E263191F2CFB6F00D1783D /* RecordAudio_Five.swift in Sources */,
 				A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */,
 				A537AD211EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift in Sources */,
 				A52D1CCB1EF6E6A900FAF465 /* RecordNavigationController.swift in Sources */,
 				A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */,
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
+				A505AFDE1F2E594900199A80 /* RAM.swift in Sources */,
 				A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
 				A537AD191EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift in Sources */,
 				A56FF5DE1F11398F00B072D5 /* RecordAudio_Two.swift in Sources */,
 				A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */,
 				A537AD1B1EC6FA5100B70596 /* SelectVideoUpload_Three_Four.swift in Sources */,
+				A5E2631F1F2CFBE200D1783D /* RecordAudio_Eight.swift in Sources */,
+				A5E2631B1F2CFB9400D1783D /* RecordAudio_Six.swift in Sources */,
+				A5E263151F2CF28900D1783D /* RecordAudio_Four.swift in Sources */,
+				A5E263171F2CF3A900D1783D /* RecordAudio_Three.swift in Sources */,
 				A521ECF21ED535840074327B /* RecordAudio_One.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

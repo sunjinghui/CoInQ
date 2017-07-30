@@ -13,7 +13,7 @@ import CoreMedia
 import Photos
 import CoreData
 
-class RecordNine_Merge: UIViewController{
+class RecordNine_Merge: UIViewController {
     
     var loadingAssetOne = false
     var audioAssetOne: AVAsset?

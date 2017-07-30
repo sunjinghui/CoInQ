@@ -64,6 +64,8 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         do {
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
         setupRecorder()

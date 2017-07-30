@@ -9,6 +9,7 @@
 import Foundation
 import MobileCoreServices
 import MediaPlayer
+import CoreData
 
 class SelectVideoUpload_Nine : UIViewController{
     
@@ -16,6 +17,8 @@ class SelectVideoUpload_Nine : UIViewController{
     var loadingAssetOne = false
     var AssetNine: URL!
     var nullstoryboard: Array<String>!
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext!
     var printArray: String{
         var str = ""
         for element in nullstoryboard {
@@ -31,6 +34,28 @@ class SelectVideoUpload_Nine : UIViewController{
         super.viewDidLoad()
         ninecomplete.isHidden = true
         RecordButton.layer.cornerRadius = 8
+        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        loadData()
+    }
+    
+    func loadData() {
+        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            
+            if (VideoNameArray[Index].videonine) != nil {
+                print("video9 is not empty")
+                self.AssetNine = URL(string: VideoNameArray[Index].videonine!)
+                ninecomplete.isHidden = false
+            }
+
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+        
+        print(self.VideoNameArray[Index])
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -124,14 +149,16 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
                 message = "故事版9 影片已匯入成功！"
                 AssetNine = avAsset
                 ninecomplete.isHidden = false
+                VideoNameArray[Index].videonine = AssetNine?.absoluteString
+
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             
             //Store videopath in userdefault
-            let userdefault = UserDefaults.standard
-            userdefault.set(AssetNine, forKey: "VideoNine")
+            //let userdefault = UserDefaults.standard
+            //userdefault.set(AssetNine, forKey: "VideoNine")
         }
     }
 }

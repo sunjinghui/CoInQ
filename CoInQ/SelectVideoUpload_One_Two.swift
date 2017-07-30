@@ -131,6 +131,7 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
         if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
+            
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
@@ -149,9 +150,9 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             present(alert, animated: true, completion: nil)
             
 
-            let userdefault = UserDefaults.standard
-            userdefault.set(firstAsset, forKey: "VideoOne")
-            userdefault.set(secondAsset, forKey: "VideoTwo")
+            //let userdefault = UserDefaults.standard
+            //userdefault.set(firstAsset, forKey: "VideoOne")
+            //userdefault.set(secondAsset, forKey: "VideoTwo")
         }
     }
 }

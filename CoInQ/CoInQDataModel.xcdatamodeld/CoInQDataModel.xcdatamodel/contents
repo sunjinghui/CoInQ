@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="VideoTaskInfo" representedClassName="VideoTaskInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="audioeight" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audiofive" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audiofour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audionine" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="audioone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audioseven" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audiosix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audiothree" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="audiotwo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creatdate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="useRecordeight" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="useRecordfive" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="useRecordfour" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="useRecordnine" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="useRecordone" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="useRecordseven" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="useRecordsix" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="useRecordthree" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="useRecordtwo" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="videoeight" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videofive" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videofour" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videonine" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoseven" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videosix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videothree" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videotwo" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="VideoTaskInfo" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="VideoTaskInfo" positionX="-63" positionY="-18" width="128" height="478"/>
     </elements>
 </model>

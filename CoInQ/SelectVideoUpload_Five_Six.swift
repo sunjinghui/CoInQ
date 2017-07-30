@@ -9,12 +9,15 @@
 import Foundation
 import MobileCoreServices
 import MediaPlayer
+import CoreData
 
 class SelectVideoUpload_Five_Six : UIViewController{
     
     var loadingAssetOne = false
     var AssetFive:URL!
     var AssetSix: URL!
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext!
     
     @IBOutlet weak var fivecomplete: UIImageView!
     @IBOutlet weak var sixcomplete: UIImageView!
@@ -37,6 +40,33 @@ class SelectVideoUpload_Five_Six : UIViewController{
         super.viewDidLoad()
         fivecomplete.isHidden = true
         sixcomplete.isHidden = true
+        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        loadData()
+    }
+    
+    func loadData() {
+        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            
+            if (VideoNameArray[Index].videofive) != nil {
+                print("video5 is not empty")
+                self.AssetFive = URL(string: VideoNameArray[Index].videofive!)
+                fivecomplete.isHidden = false
+            }
+            
+            if (VideoNameArray[Index].videosix) != nil{
+                print("video6 is not empty")
+                self.AssetSix = URL(string: VideoNameArray[Index].videosix!)
+                sixcomplete.isHidden = false
+            }
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+        
+        print(self.VideoNameArray[Index])
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,19 +130,23 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
                 message = "故事版5 影片已匯入成功！"
                 AssetFive = avAsset
                 fivecomplete.isHidden = false
+                VideoNameArray[Index].videofive = AssetFive?.absoluteString
+
             } else {
                 message = "故事版6 影片已匯入成功！"
                 AssetSix = avAsset
                 sixcomplete.isHidden = false
+                VideoNameArray[Index].videosix = AssetSix?.absoluteString
+
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             
             //Store videopath in userdefault
-            let userdefault = UserDefaults.standard
-            userdefault.set(AssetFive, forKey: "VideoFive")
-            userdefault.set(AssetSix, forKey: "VideoSix")
+            //let userdefault = UserDefaults.standard
+            //userdefault.set(AssetFive, forKey: "VideoFive")
+            //userdefault.set(AssetSix, forKey: "VideoSix")
         }
     }
 }

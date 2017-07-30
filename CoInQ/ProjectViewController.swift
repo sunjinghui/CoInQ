@@ -48,8 +48,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
         if editingStyle == .delete {
 
-            let deleteAlert = UIAlertController(title:"請注意",message: "不能沒有探究影片名稱", preferredStyle: .alert)
-            deleteAlert.addAction(UIAlertAction(title:"OK",style: .default, handler:{ (action) -> Void in
+            let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片任務後無法復原！", preferredStyle: .alert)
+            deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
                 self.managedObjextContext.delete(self.VideoNameArray[indexPath.row])
                 self.VideoNameArray.remove(at: indexPath.row)
                 self.loadData()
