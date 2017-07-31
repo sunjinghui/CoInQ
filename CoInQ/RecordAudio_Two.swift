@@ -95,10 +95,13 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 switchOutput.isHidden = false
                 UseRecordSwitch.isHidden = false
                 AudioURL = URL(string: VideoNameArray[Index].audiotwo!)
+                switchOutput.isEnabled = VideoNameArray[Index].useRecordtwo
+
             }else{
                 ButtonPlay.isHidden = true
                 switchOutput.isHidden = true
                 UseRecordSwitch.isHidden = true
+                VideoNameArray[Index].useRecordtwo = false
             }
             
         }catch {

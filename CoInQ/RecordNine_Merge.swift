@@ -15,7 +15,6 @@ import CoreData
 
 class RecordNine_Merge: UIViewController {
     
-    var loadingAssetOne = false
     var audioAssetOne: AVAsset?
     var firstAsset: AVAsset?
     var secondAsset: AVAsset?
@@ -25,12 +24,54 @@ class RecordNine_Merge: UIViewController {
     var sixthAsset: AVAsset?
     var seventhAsset: AVAsset?
     var eighthAsset: AVAsset?
-    var ninthAsset: AVAsset?
+    var ninethAsset: AVAsset?
 
     var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext!
+    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            
+            let videoURLone   = URL(string: VideoNameArray[Index].videoone!)
+            let videoURLtwo   = URL(string: VideoNameArray[Index].videotwo!)
+            let videoURLthree = URL(string: VideoNameArray[Index].videothree!)
+            let videoURLfour  = URL(string: VideoNameArray[Index].videofour!)
+            let videoURLfive  = URL(string: VideoNameArray[Index].videofive!)
+            let videoURLsix   = URL(string: VideoNameArray[Index].videosix!)
+            let videoURLseven = URL(string: VideoNameArray[Index].videoseven!)
+            let videoURLeight = URL(string: VideoNameArray[Index].videoeight!)
+            let videoURLnine  = URL(string: VideoNameArray[Index].videonine!)
+            firstAsset   = AVAsset(url: videoURLone!)
+            secondAsset  = AVAsset(url: videoURLtwo!)
+            thirdAsset   = AVAsset(url: videoURLthree!)
+            fourthAsset  = AVAsset(url: videoURLfour!)
+            fifthAsset   = AVAsset(url: videoURLfive!)
+            sixthAsset   = AVAsset(url: videoURLsix!)
+            seventhAsset = AVAsset(url: videoURLseven!)
+            eighthAsset  = AVAsset(url: videoURLeight!)
+            ninethAsset  = AVAsset(url: videoURLnine!)
+            /*thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
+             fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
+             fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
+             sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
+             seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
+             eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
+             ninethAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
+            
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+        
+        print(self.VideoNameArray)
+        
+    }
     
     func startActivityIndicator() {
         let screenSize: CGRect = UIScreen.main.bounds
@@ -63,8 +104,8 @@ class RecordNine_Merge: UIViewController {
             let outputURL = session.outputURL
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
-                    let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: self.switchPage)
+                    let alertController = UIAlertController(title: "你的探究影片已經製作完成嘍！\n請至“已完成”頁面觀看影片作品吧！", message: nil, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
                 }
@@ -72,23 +113,21 @@ class RecordNine_Merge: UIViewController {
         }
         
         stopActivityIndicator()
-        firstAsset = nil
-        secondAsset = nil
-        thirdAsset = nil
-        fourthAsset = nil
-        fifthAsset = nil
-        sixthAsset = nil
-        seventhAsset = nil
-        eighthAsset = nil
-        ninthAsset = nil
+        //firstAsset = nil
+        //secondAsset = nil
+        //thirdAsset = nil
+        //fourthAsset = nil
+        //fifthAsset = nil
+        //sixthAsset = nil
+        //seventhAsset = nil
+        //eighthAsset = nil
+        //ninethAsset = nil
         //audioAsset = nil
     }
     
     func switchPage(action: UIAlertAction){
         //7 - Page switch to CompleteVC
-        /*let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "CSCL") as! UITabBarController
-        self.present(vc, animated: true, completion: nil)*/
+
         //self.tabBarController?.selectedIndex = 3
         self.performSegue(withIdentifier: "completevideotask", sender: self)
     }
@@ -143,10 +182,10 @@ class RecordNine_Merge: UIViewController {
     
     @IBAction func merge(_ sender: AnyObject) {
         
-        if let firstAsset = firstAsset, let secondAsset = secondAsset /*,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninthAsset*/{
+        if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset /*,let ninethAsset = ninethAsset*/{
             startActivityIndicator()
             
-            let totalTIME = firstAsset.duration + secondAsset.duration //+ thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration + ninethAsset.duration
+            let totalTIME = firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration //+ ninethAsset.duration
             
             // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
             let mixComposition = AVMutableComposition()
@@ -167,7 +206,7 @@ class RecordNine_Merge: UIViewController {
                 print("Failed to load second track")
             }
             // Video Three
-            /*let thirdTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            let thirdTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             do {
                 try thirdTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration), of: thirdAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration)
             } catch _ {
@@ -209,12 +248,12 @@ class RecordNine_Merge: UIViewController {
                 print("Failed to load eighth track")
             }
             // Video Nine
-            let ninethTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-            do {
-                try ninethTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration), of: ninethAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
-            } catch _ {
-                print("Failed to load nineth track")
-            }*/
+//            let ninethTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+//            do {
+//                try ninethTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration), of: ninethAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
+//            } catch _ {
+//                print("Failed to load nineth track")
+//            }
             
             
             // 2.1
@@ -229,7 +268,7 @@ class RecordNine_Merge: UIViewController {
             let secondInstruction = videoCompositionInstructionForTrack(secondTrack, asset: secondAsset)
             secondInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration)
             
-           /* let thirdInstruction = videoCompositionInstructionForTrack(thirdTrack, asset: thirdAsset)
+            let thirdInstruction = videoCompositionInstructionForTrack(thirdTrack, asset: thirdAsset)
             thirdInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration)
             
             let fourthInstruction = videoCompositionInstructionForTrack(fourthTrack, asset: fourthAsset)
@@ -247,11 +286,12 @@ class RecordNine_Merge: UIViewController {
             let eighthInstruction = videoCompositionInstructionForTrack(eighthTrack, asset: eighthAsset)
             eighthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
             
-            let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)*/
+            //let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)
+            //ninethInstruction.setOpacity(0.0, at: totalTIME)
             
             
             // 2.3
-            mainInstruction.layerInstructions = [firstInstruction, secondInstruction]//, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction , ninethInstruction]
+            mainInstruction.layerInstructions = [firstInstruction, secondInstruction, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction]// , ninethInstruction]
             let mainComposition = AVMutableVideoComposition()
             mainComposition.instructions = [mainInstruction]
             mainComposition.frameDuration = CMTimeMake(1, 30)
@@ -318,17 +358,206 @@ class RecordNine_Merge: UIViewController {
                 
             }
             
-            
-            /*
-            let v3audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v3audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
-                                                 of: thirdAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration + secondAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 3 Audio track")
+            // Record Auido Three
+            if VideoNameArray[Index].useRecordthree  {
+                
+                //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
+                let audioURLthree = URL(string: VideoNameArray[Index].audiothree!)
+                audioAssetOne = AVAsset(url:audioURLthree!)
+                print(VideoNameArray[Index].useRecordthree)
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v3audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v3audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
+                                                     of: thirdAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration + secondAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 3 Audio track")
+                }
+                
             }
-            let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            // Record Auido Four
+            if VideoNameArray[Index].useRecordfour  {
+                
+                let audioURL = URL(string: VideoNameArray[Index].audiofour!)
+                audioAssetOne = AVAsset(url:audioURL!)
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration + thirdAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v4audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration),
+                                                     of: fourthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration + secondAsset.duration + thirdAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 4 Audio track")
+                }
+                
+            }
+            
+            // Record Auido Five
+            if VideoNameArray[Index].useRecordfive  {
+                
+                let audioURL = URL(string: VideoNameArray[Index].audiofive!)
+                audioAssetOne = AVAsset(url:audioURL!)
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fifthAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v5audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v5audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fifthAsset.duration),
+                                                     of: fifthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 5 Audio track")
+                }
+                
+            }
+            // Record Auido Six
+            if VideoNameArray[Index].useRecordsix  {
+                
+                let audioURL = URL(string: VideoNameArray[Index].audiosix!)
+                audioAssetOne = AVAsset(url:audioURL!)
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v6audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v6audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration),
+                                                     of: sixthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 6 Audio track")
+                }
+                
+            }
+            // Record Auido Seven
+            if VideoNameArray[Index].useRecordseven  {
+                
+                let audioURL = URL(string: VideoNameArray[Index].audioseven!)
+                audioAssetOne = AVAsset(url:audioURL!)
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, seventhAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v7audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v7audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, seventhAsset.duration),
+                                                     of: seventhAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 7 Audio track")
+                }
+                
+            }
+            // Record Auido Eight
+            if VideoNameArray[Index].useRecordeight  {
+                
+                let audioURL = URL(string: VideoNameArray[Index].audioeight!)
+                audioAssetOne = AVAsset(url:audioURL!)
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, eighthAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v8audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v8audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, eighthAsset.duration),
+                                                     of: eighthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 8 Audio track")
+                }
+                
+            }
+
+            // Record Auido Nine
+            /*if useRecordnine!  {
+                
+                let audioURL = AudioURL
+                audioAssetOne = AVAsset(url:audioURL!)
+                
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration),
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
+                }
+                
+            }else{
+                print("false")
+                
+                let v9audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try v9audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration),
+                                                     of: ninethAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
+                                                     at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
+                } catch _ {
+                    print("Failed to load 故事版 9 Audio track")
+                }
+            
+                        let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
                 try v4audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration),
                                                  of: fourthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
@@ -406,43 +635,6 @@ class RecordNine_Merge: UIViewController {
         
     }
     
-
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        loadData()
-    }
-    
-    func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-
-            let videoURLone = URL(string: VideoNameArray[Index].videoone!)
-            let videoURLtwo = URL(string: VideoNameArray[Index].videotwo!)
-
-            firstAsset   = AVAsset(url:videoURLone!)
-            secondAsset  = AVAsset(url:videoURLtwo!)
-            /*thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
-            fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
-            fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
-            sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
-            seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
-            eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
-            ninthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
-            
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
-        
-        print(self.VideoNameArray)
-        
-    }
 
 }//end of class
 

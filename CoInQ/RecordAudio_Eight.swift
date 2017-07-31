@@ -95,10 +95,12 @@ class RecordAudio_Eight: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
                 switchOutput.isHidden = false
                 UseRecordSwitch.isHidden = false
                 AudioURL = URL(string: VideoNameArray[Index].audioeight!)
+                switchOutput.isEnabled = VideoNameArray[Index].useRecordeight
             }else{
                 ButtonPlay.isHidden = true
                 switchOutput.isHidden = true
                 UseRecordSwitch.isHidden = true
+                VideoNameArray[Index].useRecordeight = false
             }
             
         }catch {

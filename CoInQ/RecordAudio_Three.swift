@@ -95,10 +95,12 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
                 switchOutput.isHidden = false
                 UseRecordSwitch.isHidden = false
                 AudioURL = URL(string: VideoNameArray[Index].audiothree!)
+                switchOutput.isEnabled = VideoNameArray[Index].useRecordthree
             }else{
                 ButtonPlay.isHidden = true
                 switchOutput.isHidden = true
                 UseRecordSwitch.isHidden = true
+                VideoNameArray[Index].useRecordthree = false
             }
             
         }catch {

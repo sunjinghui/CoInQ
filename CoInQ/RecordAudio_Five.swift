@@ -95,10 +95,12 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 switchOutput.isHidden = false
                 UseRecordSwitch.isHidden = false
                 AudioURL = URL(string: VideoNameArray[Index].audiofive!)
+                switchOutput.isEnabled = VideoNameArray[Index].useRecordfive
             }else{
                 ButtonPlay.isHidden = true
                 switchOutput.isHidden = true
                 UseRecordSwitch.isHidden = true
+                VideoNameArray[Index].useRecordfive = false
             }
             
         }catch {

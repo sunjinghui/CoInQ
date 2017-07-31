@@ -95,10 +95,12 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
                 switchOutput.isHidden = false
                 UseRecordSwitch.isHidden = false
                 AudioURL = URL(string: VideoNameArray[Index].audioseven!)
+                switchOutput.isEnabled = VideoNameArray[Index].useRecordseven
             }else{
                 ButtonPlay.isHidden = true
                 switchOutput.isHidden = true
                 UseRecordSwitch.isHidden = true
+                VideoNameArray[Index].useRecordseven = false
             }
             
         }catch {

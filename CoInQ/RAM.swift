@@ -15,7 +15,7 @@ import CoreMedia
 import Photos
 import CoreData
 
-class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
+class RAM: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
     @IBOutlet weak var videoPreviewLayer: UIImageView!
     @IBOutlet weak var ButttonRecord: UIButton!

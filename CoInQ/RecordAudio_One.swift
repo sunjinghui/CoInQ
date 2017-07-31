@@ -76,7 +76,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
 
         do {
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            print(VideoNameArray[Index].videoone)
             let videoURL = URL(string: VideoNameArray[Index].videoone!)
 
             firstAsset = AVAsset(url: videoURL!)
@@ -103,10 +102,14 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                     switchOutput.isHidden = false
                     UseRecordSwitch.isHidden = false
                     AudioURL = URL(string: VideoNameArray[Index].audioone!)
+                    switchOutput.isEnabled = VideoNameArray[Index].useRecordone
+
                 }else{
                     ButtonPlay.isHidden = true
                     switchOutput.isHidden = true
                     UseRecordSwitch.isHidden = true
+                    VideoNameArray[Index].useRecordone = false
+
                 }
             
         }catch {

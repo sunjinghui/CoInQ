@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
-            timestampString = "523120156.522283"
+            timestampString = "523200874.822554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "videoCompositionInstructionForTrack(_:asset:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordAudio_One.swift"
-            timestampString = "523060237.316857"
+            timestampString = "523202060.827991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "record(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordAudio_Six.swift"
-            timestampString = "523060237.316857"
+            timestampString = "523202060.827991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "playvideo(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -182,7 +182,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
@@ -193,6 +193,83 @@
             endingLineNumber = "16"
             landmarkName = "RecordNine_Merge"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoInQ.RecordNine_Merge.__deallocating_deinit"
+                  moduleName = "CoInQ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hui/Desktop/CoInQ/CoInQ/RecordNine_Merge.swift"
+                  timestampString = "523163289.501183"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoInQ.RecordNine_Merge.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; CoInQ.RecordNine_Merge"
+                  moduleName = "CoInQ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hui/Desktop/CoInQ/CoInQ/RecordNine_Merge.swift"
+                  timestampString = "523163289.512639"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoInQ.RecordNine_Merge.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; CoInQ.RecordNine_Merge"
+                  moduleName = "CoInQ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hui/Desktop/CoInQ/CoInQ/RecordNine_Merge.swift"
+                  timestampString = "523163289.519714"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoInQ.RecordNine_Merge.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;CoInQ.RecordNine_Merge&gt;"
+                  moduleName = "CoInQ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hui/Desktop/CoInQ/CoInQ/RecordNine_Merge.swift"
+                  timestampString = "523163289.531358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoInQ.RecordNine_Merge.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;CoInQ.RecordNine_Merge&gt;"
+                  moduleName = "CoInQ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hui/Desktop/CoInQ/CoInQ/RecordNine_Merge.swift"
+                  timestampString = "523163289.537674"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
