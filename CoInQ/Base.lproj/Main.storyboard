@@ -1743,6 +1743,7 @@
                                 <connections>
                                     <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="TWQ-xC-nX2"/>
                                     <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="kNo-hQ-4Wl"/>
+                                    <action selector="UseRecordSwitch:" destination="We8-gb-gcK" eventType="valueChanged" id="y9T-Dy-lKR"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Df-Rg-I6I">
@@ -1757,6 +1758,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Play" image="play"/>
                                 <connections>
+                                    <action selector="playvideo:" destination="We8-gb-gcK" eventType="touchUpInside" id="MNd-G2-In5"/>
                                     <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="qz4-Vo-HBq"/>
                                     <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="st7-h9-jaa"/>
                                 </connections>
@@ -1768,6 +1770,7 @@
                                 <connections>
                                     <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="GLy-ag-w8F"/>
                                     <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="P4k-cb-dQx"/>
+                                    <action selector="record:" destination="We8-gb-gcK" eventType="touchUpInside" id="Svv-qi-d5V"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hmp-nI-q7D">
@@ -1787,6 +1790,7 @@
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
                                     <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Cj0-3Z-GvN"/>
+                                    <action selector="Explain:" destination="We8-gb-gcK" eventType="touchUpInside" id="uH5-bc-Pv9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1800,6 +1804,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ButtonPlay" destination="kzy-NV-Xx2" id="AWQ-69-UEc"/>
+                        <outlet property="ButttonRecord" destination="5fS-bo-L9E" id="RLO-SS-9b9"/>
+                        <outlet property="UseRecordSwitch" destination="Xe3-DG-7IS" id="3gC-Hp-tDE"/>
+                        <outlet property="progressView" destination="gLB-NT-25U" id="UwB-Uc-95p"/>
+                        <outlet property="switchOutput" destination="0Df-Rg-I6I" id="txO-JG-9TS"/>
+                        <outlet property="timeLabel" destination="hmp-nI-q7D" id="RvB-mL-Aco"/>
+                        <outlet property="videoPreviewLayer" destination="6W1-0i-zb1" id="0Q5-B6-glt"/>
                         <segue destination="0r5-V6-xYa" kind="push" identifier="completevideotask" id="fBs-gA-cfd"/>
                     </connections>
                 </viewController>
