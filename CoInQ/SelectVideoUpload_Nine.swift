@@ -103,23 +103,27 @@ class SelectVideoUpload_Nine : UIViewController{
         }
     }
     
-    func isURLempty(_ key: String) -> Bool {
-        if UserDefaults.standard.object(forKey: key) != nil{
-            return true
-        }else{
-            return false
-        }
-    }
+//    func isURLempty(_ key: String) -> Bool {
+//
+//        if videourl.value(forKey: key) != nil{
+//            return true
+//        }else{
+//            return false
+//        }
+//    }
     
     
     @IBAction func checkALLvideoLoaded(_ sender: Any) {
-        
+        let videourl =  VideoNameArray[Index]
+
         /*if isURLempty("VideoOne") && isURLempty("VideoTwo") && isURLempty("VideoThree") && isURLempty("VideoFour") && isURLempty("VideoFive") && isURLempty("VideoSix") && isURLempty("VideoSeven") && isURLempty("VideoEight") && isURLempty("VideoNine") {*/
+        if videourl.videoone != nil && videourl.videotwo != nil && videourl.videothree != nil && videourl.videofour != nil && videourl.videofive != nil && videourl.videosix != nil && videourl.videoseven != nil && videourl.videoeight != nil && videourl.videonine != nil {
             
             let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
             
             present(recordNavigationController, animated: true, completion: nil)
-        /*}else{
+            
+        }else{
             print("alert")
             let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -127,7 +131,7 @@ class SelectVideoUpload_Nine : UIViewController{
             self.present(alertController, animated: true, completion: nil)
         }
 
-        if isURLempty("RecordOne") || isURLempty("RecordTwo") {
+        /*if isURLempty("RecordOne") || isURLempty("RecordTwo") {
             UserDefaults.standard.removeObject(forKey: "RecordOne")
             UserDefaults.standard.removeObject(forKey: "RecordTwo")
         }*/
@@ -148,8 +152,9 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版9 影片已匯入成功！"
                 AssetNine = avAsset
-                ninecomplete.isHidden = false
+                //ninecomplete.isHidden = false
                 VideoNameArray[Index].videonine = AssetNine?.absoluteString
+                self.loadData()
 
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)

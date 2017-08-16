@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="VideoInfo" representedClassName="VideoInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="videolength" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videourl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="videotaskinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VideoTaskInfo" inverseName="videoinfo" inverseEntity="VideoTaskInfo" syncable="YES"/>
+    </entity>
     <entity name="VideoTaskInfo" representedClassName="VideoTaskInfo" syncable="YES" codeGenerationType="class">
         <attribute name="audioeight" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="audiofive" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,8 +36,10 @@
         <attribute name="videosix" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videothree" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videotwo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="videoinfo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VideoInfo" inverseName="videotaskinfo" inverseEntity="VideoInfo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="VideoTaskInfo" positionX="-63" positionY="-18" width="128" height="478"/>
+        <element name="VideoTaskInfo" positionX="-63" positionY="-18" width="128" height="493"/>
+        <element name="VideoInfo" positionX="126" positionY="11" width="117" height="103"/>
     </elements>
 </model>

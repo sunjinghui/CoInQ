@@ -129,14 +129,16 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版5 影片已匯入成功！"
                 AssetFive = avAsset
-                fivecomplete.isHidden = false
+                //fivecomplete.isHidden = false
                 VideoNameArray[Index].videofive = AssetFive?.absoluteString
+                self.loadData()
 
             } else {
                 message = "故事版6 影片已匯入成功！"
                 AssetSix = avAsset
-                sixcomplete.isHidden = false
+                //sixcomplete.isHidden = false
                 VideoNameArray[Index].videosix = AssetSix?.absoluteString
+                self.loadData()
 
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)

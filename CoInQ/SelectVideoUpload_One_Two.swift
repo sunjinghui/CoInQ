@@ -135,15 +135,15 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
-                firstcomplete.isHidden = false
+                //firstcomplete.isHidden = false
                 VideoNameArray[Index].videoone = firstAsset?.absoluteString
-
+                self.loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"
                 secondAsset = avAsset
-                secondcomplete.isHidden = false
+                //secondcomplete.isHidden = false
                 VideoNameArray[Index].videotwo = secondAsset?.absoluteString
-
+                self.loadData()
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))

@@ -6,35 +6,46 @@
 //  Copyright © 2017年 NTNUCSCL. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 import CoreData
 
-class CompeleteViewController : UIViewController{//, UITableViewDelegate, UITableViewDataSource{
+class CompeleteViewController : UIViewController , UITableViewDelegate, UITableViewDataSource{
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    @IBOutlet weak var VideoNameTableView: UITableView!
+    @IBOutlet weak var VideoTableView: UITableView!
     @IBOutlet weak var TableEmpty: UIView!
     
     
-/*    var VideoNameArray = [VideoTaskInfo]()
+    var Video = [VideoInfo]()
     var managedObjextContext: NSManagedObjectContext!
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return VideoNameArray.count
+        return Video.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: TableView_cellvideotask
+        var cell: TableView_cellcompletevideo
         
-        cell = tableView.dequeueReusableCell(withIdentifier: "cellvideotask", for: indexPath) as! TableView_cellvideotask
-        let VideoNamearray = VideoNameArray[indexPath.row]
-        cell.VideoName.text = VideoNamearray.videoname
-        cell.Date.text = VideoNamearray.creatdate
+        cell = tableView.dequeueReusableCell(withIdentifier: "cellvideocomplete", for: indexPath) as! TableView_cellcompletevideo
+        let Videoarray = Video[indexPath.row]
+        cell.videoname.text = Videoarray.videoname
+        
+        //影片縮圖
+        let videoURL = URL(string: Videoarray.videourl!)
+        let asset = AVURLAsset(url: videoURL!, options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        imgGenerator.appliesPreferredTrackTransform = false
+        
+        do {
+            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
+            
+            cell.imageView?.image = thumbnail
+            
+        } catch let error {
+            print("*** Error generating thumbnail: \(error)")
+        }
         
         
         return cell
@@ -48,10 +59,10 @@ class CompeleteViewController : UIViewController{//, UITableViewDelegate, UITabl
         
         if editingStyle == .delete {
             
-            let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片任務後無法復原！", preferredStyle: .alert)
+            let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-                self.managedObjextContext.delete(self.VideoNameArray[indexPath.row])
-                self.VideoNameArray.remove(at: indexPath.row)
+                self.managedObjextContext.delete(self.Video[indexPath.row])
+                self.Video.remove(at: indexPath.row)
                 self.loadData()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
@@ -72,8 +83,7 @@ class CompeleteViewController : UIViewController{//, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        AddButton.layer.cornerRadius = 8
-        VideoNameTableView.tableFooterView = UIView(frame: .zero)
+        VideoTableView.tableFooterView = UIView(frame: .zero)
         
         managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
@@ -81,19 +91,23 @@ class CompeleteViewController : UIViewController{//, UITableViewDelegate, UITabl
     }
     
     func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        //let videoRequest: NSFetchRequest<VideoInfo> = VideoInfo.fetchRequest()
+
         do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            self.VideoNameTableView.reloadData()
+            Video = try managedObjextContext.fetch(VideoInfo.fetchRequest())
+            
+            self.VideoTableView.reloadData()
+            print("Video complete \(Video)")
+            print("video count \(Video.count)")
         }catch {
             print("Could not load data from coredb \(error.localizedDescription)")
         }
-        if VideoNameArray.count == 0 {
-            VideoNameTableView.backgroundView = TableEmpty
+        if Video.count == 0 {
+            VideoTableView.backgroundView = TableEmpty
         }else{
-            VideoNameTableView.backgroundView = nil
+            VideoTableView.backgroundView = nil
         }
         
-    }*/
+    }
 
 }

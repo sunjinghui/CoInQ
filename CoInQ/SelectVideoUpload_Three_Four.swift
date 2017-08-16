@@ -130,14 +130,16 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
             if loadingAssetOne {
                 message = "故事版3 影片已匯入成功！"
                 AssetThree = avAsset
-                threecomplete.isHidden = false
+                //threecomplete.isHidden = false
                 VideoNameArray[Index].videothree = AssetThree?.absoluteString
+                self.loadData()
 
             } else {
                 message = "故事版4 影片已匯入成功！"
                 AssetFour = avAsset
-                fourcomplete.isHidden = false
+                //fourcomplete.isHidden = false
                 VideoNameArray[Index].videofour = AssetFour?.absoluteString
+                self.loadData()
 
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)

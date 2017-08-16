@@ -98,6 +98,22 @@
                     <view key="view" contentMode="scaleToFill" id="iCG-rT-SFP">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" id="2FK-P8-2E6">
+                                <rect key="frame" x="0.0" y="36" width="768" height="934"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="敬請期待" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QgF-1e-2ep" userLabel="尚未有任何影片">
+                                        <rect key="frame" x="129" y="369" width="511" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="受邀請" image="Mail-icon.png" selectedImage="Mail-icon.png" id="UV5-EI-7uy"/>
@@ -783,7 +799,7 @@
                                 <rect key="frame" x="0.0" y="121" width="768" height="782"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未有影片任務 請按 + 新增" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UKk-FN-1Ef" userLabel="尚未有任何影片">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未有任何影片作品" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UKk-FN-1Ef" userLabel="尚未有任何影片">
                                         <rect key="frame" x="129" y="326" width="511" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -793,63 +809,55 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="209" sectionHeaderHeight="28" sectionFooterHeight="28" id="iXv-ad-fdR">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="327" sectionHeaderHeight="28" sectionFooterHeight="28" id="iXv-ad-fdR" userLabel="Video Table View">
                                 <rect key="frame" x="0.0" y="70" width="768" height="903"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" rowHeight="250" id="7Rw-we-Dsg" customClass="TableView_cellcompletevideo" customModule="CoInQ" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="250"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellvideocomplete" rowHeight="327" id="7Rw-we-Dsg" customClass="TableView_cellcompletevideo" customModule="CoInQ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="768" height="327"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Rw-we-Dsg" id="5OR-AV-DNh">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="326.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qIt-4F-X2C">
-                                                    <rect key="frame" x="314" y="56" width="159" height="45"/>
+                                                    <rect key="frame" x="314" y="61" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片長度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KpJ-br-Jbt">
-                                                    <rect key="frame" x="314" y="120" width="159" height="45"/>
+                                                    <rect key="frame" x="314" y="125" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="OtE-cu-rfP">
-                                                    <rect key="frame" x="45" y="56" width="240" height="151"/>
+                                                    <rect key="frame" x="45" y="61" width="240" height="151"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NSQ-Dv-m3U" userLabel="Deletebt">
-                                                    <rect key="frame" x="667" y="178" width="42" height="45"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="delete"/>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MGE-dZ-WLK" userLabel="Downloadbt">
-                                                    <rect key="frame" x="550" y="177" width="48" height="48"/>
+                                                    <rect key="frame" x="550" y="182" width="48" height="48"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="download"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KI6-dK-0v4">
-                                                    <rect key="frame" x="434" y="177" width="48" height="48"/>
+                                                    <rect key="frame" x="434" y="182" width="48" height="48"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="playvideo"/>
-                                                    <connections>
-                                                        <segue destination="QIn-ch-ngE" kind="push" id="0Lq-IB-GCX"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AQf-s7-pXg">
-                                                    <rect key="frame" x="457" y="38" width="267" height="82"/>
+                                                    <rect key="frame" x="457" y="43" width="267" height="82"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="88:88.88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YWu-QA-lBr">
-                                                    <rect key="frame" x="457" y="120" width="159" height="45"/>
+                                                    <rect key="frame" x="457" y="125" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
@@ -858,12 +866,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="delete" destination="NSQ-Dv-m3U" id="JJ5-6J-5rP"/>
-                                            <outlet property="deletebt" destination="NSQ-Dv-m3U" id="zqz-m1-p9f"/>
-                                            <outlet property="download" destination="MGE-dZ-WLK" id="BIU-dw-rQk"/>
-                                            <outlet property="downloadbt" destination="MGE-dZ-WLK" id="Qyo-rs-8Qg"/>
-                                            <outlet property="playbt" destination="KI6-dK-0v4" id="zEy-Mv-ecg"/>
-                                            <outlet property="thumbnail" destination="OtE-cu-rfP" id="7lE-JN-2fU"/>
                                             <outlet property="videolength" destination="YWu-QA-lBr" id="ey0-Jj-Rg8"/>
                                             <outlet property="videoname" destination="AQf-s7-pXg" id="xu1-Dg-V6C"/>
                                         </connections>
@@ -880,40 +882,12 @@
                     <tabBarItem key="tabBarItem" title="已完成" image="Files-Check-File-icon.png" selectedImage="Files-Check-File-icon.png" id="PZ9-db-qAO"/>
                     <connections>
                         <outlet property="TableEmpty" destination="47L-zR-2Mz" id="2bZ-SZ-uFz"/>
-                        <outlet property="VideoNameTableView" destination="iXv-ad-fdR" id="aCV-Lv-Xem"/>
+                        <outlet property="VideoTableView" destination="iXv-ad-fdR" id="rUG-31-pMk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3062" y="166"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="zRs-rp-H1h">
-            <objects>
-                <viewController id="QIn-ch-ngE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dLl-mT-hlu">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：xxxxxxxx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nqM-xG-9od">
-                                <rect key="frame" x="204" y="68" width="360" height="67"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="tzj-Wz-JyM">
-                                <rect key="frame" x="54" y="179" width="661" height="558"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Tne-v8-rTI"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vim-6E-Gp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3964" y="526"/>
         </scene>
         <!--Record Navigation Controller-->
         <scene sceneID="Drg-kV-i9R">
@@ -1832,7 +1806,6 @@
         <image name="Numbers-4-Black-icon" width="16" height="16"/>
         <image name="Numbers-5-Black-icon" width="16" height="16"/>
         <image name="Status-dialog-information-icon" width="32" height="32"/>
-        <image name="delete" width="512" height="512"/>
         <image name="download" width="512" height="512"/>
         <image name="logout" width="512" height="512"/>
         <image name="play" width="512" height="512"/>

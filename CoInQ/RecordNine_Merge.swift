@@ -56,6 +56,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var ninethAsset: AVAsset?
 
     var VideoNameArray = [VideoTaskInfo]()
+    var VideoComplete = [VideoInfo]()
+    
     var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
@@ -64,10 +66,11 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let videorequest = NSFetchRequest<NSFetchRequestResult>(entityName: "VideoInfo")
+        videorequest.returnsObjectsAsFaults = false
         do {
             VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            
+            videotaskRequest.returnsObjectsAsFaults = false
             ///load video URL from core data
             let videoURLone   = URL(string: VideoNameArray[Index].videoone!)
             let videoURLtwo   = URL(string: VideoNameArray[Index].videotwo!)
@@ -137,6 +140,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         }
         
         print(self.VideoNameArray)
+        print(self.VideoComplete)
+
         
     }
     
@@ -164,13 +169,38 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         UIApplication.shared.endIgnoringInteractionEvents()
     }
 
+    //    func storevideocompleteURL(){
+    //        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //        let videourlitem = VideoInfo(context: managedObjextContext)
+    //        videourlitem.videourl = videocompleteurl?.absoluteString
+    //        videourlitem.videoname = VideoNameArray[Index].videoname
+    //
+    //        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    //
+    //        print(VideoInfo.self)
+    //    }
     
+
     //匯出並儲存影片至相簿
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
             let outputURL = session.outputURL
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
+                    
+                    
+                    
+                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                    let videourl = VideoInfo(context: context) // Link Task & Context
+                    
+                    videourl.videourl = outputURL?.absoluteString
+                    videourl.videoname = self.VideoNameArray[Index].videoname
+                    
+                    // Save the data to coredata
+                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                    
+                    print(self.VideoComplete)
+
                     let alertController = UIAlertController(title: "你的探究影片已經製作完成嘍！\n請至“已完成”頁面觀看影片作品吧！", message: nil, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
                     alertController.addAction(defaultAction)
@@ -683,11 +713,29 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             let savePath = (documentDirectory as NSString).appendingPathComponent("mergeVideo-\(date).mov")
             let url = URL(fileURLWithPath: savePath)
             
+            // 4.5 - store complete video url to core data
+//            let videourlitem = VideoInfo(context: managedObjextContext)
+//            videourlitem.videourl = url.absoluteString
+//            videourlitem.videoname = VideoNameArray[Index].videoname
+//
+//            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+//            
+//            print(VideoInfo.self)
+            
+//            //  Delete the data in the VideoInfo
+//            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "VideoInfo")
+//            let request = NSBatchDeleteRequest(fetchRequest: fetch)
+//            do{
+//                try managedObjextContext.execute(request)
+//            }catch{
+//            
+//            }
+            
             // 5 - Create Exporter
             guard let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
             exporter.outputURL = url
             exporter.outputFileType = AVFileTypeQuickTimeMovie
-            exporter.shouldOptimizeForNetworkUse = true
+            exporter.shouldOptimizeForNetworkUse = true 
             exporter.videoComposition = mainComposition
             
             // 6 - Perform the Export
@@ -696,7 +744,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                     self.exportDidFinish(exporter)
                 }
             }
-            
+            //storevideocompleteURL()
+
         }
         
     }// end of merge

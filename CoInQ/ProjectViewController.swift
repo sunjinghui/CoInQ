@@ -98,6 +98,15 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     
     
     @IBAction func AddVideoTask(_ sender: Any) {
+        //  Delete the data in the VideoInfo
+//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "VideoInfo")
+//        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+//        do{
+//            try managedObjextContext.execute(request)
+//        }catch{
+//            
+//        }
+//        print(VideoInfo())
         
         let videotaskitem = VideoTaskInfo(context: managedObjextContext)
         

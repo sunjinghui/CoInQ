@@ -106,9 +106,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
         }catch {
             print("Could not load data from coredb \(error.localizedDescription)")
         }
-        
-        print(self.VideoNameArray[Index])
-        
+                
     }
     
     @IBAction func Explain(_ sender: Any) {
