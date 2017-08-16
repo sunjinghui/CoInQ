@@ -822,14 +822,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qIt-4F-X2C">
-                                                    <rect key="frame" x="314" y="61" width="159" height="45"/>
+                                                    <rect key="frame" x="323" y="73" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片長度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KpJ-br-Jbt">
-                                                    <rect key="frame" x="314" y="125" width="159" height="45"/>
+                                                    <rect key="frame" x="323" y="140" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
@@ -839,30 +839,28 @@
                                                     <rect key="frame" x="45" y="61" width="240" height="151"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MGE-dZ-WLK" userLabel="Downloadbt">
-                                                    <rect key="frame" x="550" y="182" width="48" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="download"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KI6-dK-0v4">
-                                                    <rect key="frame" x="434" y="182" width="48" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="playvideo"/>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AQf-s7-pXg">
-                                                    <rect key="frame" x="457" y="43" width="267" height="82"/>
+                                                    <rect key="frame" x="473" y="55" width="267" height="82"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="88:88.88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YWu-QA-lBr">
-                                                    <rect key="frame" x="457" y="125" width="159" height="45"/>
+                                                    <rect key="frame" x="473" y="140" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="Image" id="nze-DP-rQm">
+                                                    <rect key="frame" x="602" y="213" width="64" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="play-icon" id="WuB-ic-r15">
+                                                    <rect key="frame" x="492" y="213" width="64" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1799,6 +1797,7 @@
         <image name="Files-Check-File-icon.png" width="32" height="32"/>
         <image name="Files-Edit-File-icon.png" width="32" height="32"/>
         <image name="Healthcare-Groups-icon" width="96" height="96"/>
+        <image name="Image" width="48" height="48"/>
         <image name="Mail-icon.png" width="32" height="32"/>
         <image name="Numbers-1-Black-icon" width="16" height="16"/>
         <image name="Numbers-2-Black-icon" width="16" height="16"/>
@@ -1806,10 +1805,9 @@
         <image name="Numbers-4-Black-icon" width="16" height="16"/>
         <image name="Numbers-5-Black-icon" width="16" height="16"/>
         <image name="Status-dialog-information-icon" width="32" height="32"/>
-        <image name="download" width="512" height="512"/>
         <image name="logout" width="512" height="512"/>
         <image name="play" width="512" height="512"/>
-        <image name="playvideo" width="512" height="512"/>
+        <image name="play-icon" width="64" height="64"/>
         <image name="record" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

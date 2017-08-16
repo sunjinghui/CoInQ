@@ -32,6 +32,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var videolength: Double = 0
     var progressViewTimer: Timer?
     var milliseconds: Int = 0
+    var videoseconds: Double?
     
     var AudioFileName = "sound8.m4a"
     var AudioURL: URL?
@@ -188,13 +189,17 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
                     
-                    
-                    
                     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                     let videourl = VideoInfo(context: context) // Link Task & Context
                     
+                    let vmilliseconds = Int(self.videoseconds!) * 60
+                    let vmilli = (vmilliseconds % 60) + 39
+                    let vsec = (vmilliseconds / 60) % 60
+                    let vmin = vmilliseconds / 3600
+                    
                     videourl.videourl = outputURL?.absoluteString
                     videourl.videoname = self.VideoNameArray[Index].videoname
+                    videourl.videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
                     
                     // Save the data to coredata
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -283,7 +288,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             startActivityIndicator()
             
             let totalTIME = firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration //+ ninethAsset.duration
-            
+            videoseconds = totalTIME.seconds
+
             // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
             let mixComposition = AVMutableComposition()
             

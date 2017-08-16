@@ -30,6 +30,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         cell = tableView.dequeueReusableCell(withIdentifier: "cellvideocomplete", for: indexPath) as! TableView_cellcompletevideo
         let Videoarray = Video[indexPath.row]
         cell.videoname.text = Videoarray.videoname
+        cell.videolength.text = Videoarray.videolength
         
         //影片縮圖
         let videoURL = URL(string: Videoarray.videourl!)
@@ -97,8 +98,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             Video = try managedObjextContext.fetch(VideoInfo.fetchRequest())
             
             self.VideoTableView.reloadData()
-            print("Video complete \(Video)")
-            print("video count \(Video.count)")
+
         }catch {
             print("Could not load data from coredb \(error.localizedDescription)")
         }
