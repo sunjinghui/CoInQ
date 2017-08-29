@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import AVKit
 import CoreData
 
 class CompeleteViewController : UIViewController , UITableViewDelegate, UITableViewDataSource{
@@ -79,7 +80,13 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Index = indexPath.row
-        self.performSegue(withIdentifier: "startvideotask", sender: self)
+        let Player = AVPlayer(url: URL(string:Video[indexPath.row].videourl!)!)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = Player
+        self.present(playerViewController,animated: true){
+            playerViewController.player!.play()
+        }
+
     }
     
     override func viewDidLoad() {

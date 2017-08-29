@@ -11,9 +11,7 @@ import UIKit
 class TableView_cellcompletevideo: UITableViewCell {
 
     @IBOutlet weak var thumbnail: UIImageView!
-    @IBOutlet weak var deletebt: UIButton!
     @IBOutlet weak var downloadbt: UIButton!
-    @IBOutlet weak var playbt: UIButton!
     @IBOutlet weak var videoname: UILabel!
     @IBOutlet weak var videolength: UILabel!
     

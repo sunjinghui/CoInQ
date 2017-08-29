@@ -26,7 +26,7 @@ class VideoTaskViewController:UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 20)], for: .normal)
+        //UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 20)], for: .normal)
         
         managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
