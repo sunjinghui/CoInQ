@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 
 class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate
 {
+    
+    let URL_USER_REGISTER = "http://140.122.76.201/CoInQ/v1/register.php"
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
@@ -17,10 +20,36 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             print(error)
             return
         }else{
-            //print(user.userID)
-            //print(user.profile.email)
+            print(user.userID)
+            print(user.profile.name)
+            print(user.profile.email)
             //print(user.profile.imageURL(withDimension: 400))
             print("google sign in")
+            
+            let parameters: Parameters=[
+                "username": user.profile.name,
+                "email":    user.profile.email
+            ]
+            
+            //Sending http post request
+            Alamofire.request(URL_USER_REGISTER, method: .post, parameters: parameters).responseJSON
+                {
+                    response in
+                    //printing response
+                    print(response)
+                    
+                    //getting the json value from the server
+                    if let result = response.result.value {
+                        
+                        //converting it as NSDictionary
+                        let jsonData = result as! NSDictionary
+                        
+                        //displaying the message in label
+                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
+                        print(jsonData.value(forKey: "message"))
+                    }
+            }
+            
             self.performSegue(withIdentifier: "login", sender: self)
         }
     }

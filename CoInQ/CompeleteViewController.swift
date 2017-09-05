@@ -42,8 +42,9 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         do {
             let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
             let thumbnail = UIImage(cgImage: cgImage)
-            
-            cell.imageView?.image = thumbnail
+
+            let resized = self.resizeImage(image: thumbnail, targetSize: CGSize.init(width: 200, height: 300))
+            cell.thumbnail.image = resized
             
         } catch let error {
             print("*** Error generating thumbnail: \(error)")
@@ -71,9 +72,6 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             deleteAlert.addAction(cancelAction)
             self.present(deleteAlert, animated: true, completion: nil)
             
-            /*tableView.beginUpdates()
-             tableView.deleteRows(at: [indexPath], with: .automatic)
-             tableView.endUpdates()*/
             
         }
     }
@@ -87,6 +85,32 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             playerViewController.player!.play()
         }
 
+    }
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, UIScreen.main.scale)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
     override func viewDidLoad() {

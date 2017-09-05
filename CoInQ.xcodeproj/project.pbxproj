@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 279652B8BA40C87294370D8D /* libPods-CoInQ.a */; };
+		07C9EB21E4E4CD15774D2C45 /* Pods_CoInQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E544807D9724A13524E43A /* Pods_CoInQ.framework */; };
 		A504D1D81F0E8DD000C88D32 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A504D1D71F0E8DD000C88D32 /* libsqlite3.tbd */; };
 		A505AFDE1F2E594900199A80 /* RAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505AFDD1F2E594900199A80 /* RAM.swift */; };
 		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
@@ -69,7 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		279652B8BA40C87294370D8D /* libPods-CoInQ.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoInQ.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		66E544807D9724A13524E43A /* Pods_CoInQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoInQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.debug.xcconfig"; sourceTree = "<group>"; };
 		A504D1D71F0E8DD000C88D32 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A505AFDD1F2E594900199A80 /* RAM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAM.swift; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 				A54EE16A1EB1F16C0014994C /* SystemConfiguration.framework in Frameworks */,
 				A521ECF41ED6C96D0074327B /* AudioToolbox.framework in Frameworks */,
 				A54EE1681EB1F15C0014994C /* StoreKit.framework in Frameworks */,
-				23F9E281D89092E3E73C5D7E /* libPods-CoInQ.a in Frameworks */,
+				07C9EB21E4E4CD15774D2C45 /* Pods_CoInQ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +162,7 @@
 				A54EE16B1EB1F17A0014994C /* AddressBook.framework */,
 				A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */,
 				A54EE1671EB1F15C0014994C /* StoreKit.framework */,
-				279652B8BA40C87294370D8D /* libPods-CoInQ.a */,
+				66E544807D9724A13524E43A /* Pods_CoInQ.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
