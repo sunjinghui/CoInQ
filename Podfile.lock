@@ -37,7 +37,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.9)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.3)
+  - Alamofire (~> 4.4)
   - Google/SignIn
 
 SPEC CHECKSUMS:
@@ -51,6 +51,6 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
 
-PODFILE CHECKSUM: 2a8c546fc9c3479cb630b3e34ddbf16bd3ee4eb4
+PODFILE CHECKSUM: b6057fe49921e1b598e6ed9d786946b0c5170ca5
 
 COCOAPODS: 1.2.1
