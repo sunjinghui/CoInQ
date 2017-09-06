@@ -46,7 +46,7 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                         
                         //displaying the message in label
                         //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
-                        print(jsonData.value(forKey: "message"))
+                        print(jsonData.value(forKey: "message") as Any)
                     }
             }
             
