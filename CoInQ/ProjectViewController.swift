@@ -23,6 +23,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("array count in cscl \(VideoNameArray.count)")
         return VideoNameArray.count
     }
     
@@ -47,8 +48,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
         if editingStyle == .delete {
 
-            let deleteAlert = UIAlertController(title:"請注意",message: "不能沒有探究影片名稱", preferredStyle: .alert)
-            deleteAlert.addAction(UIAlertAction(title:"OK",style: .default, handler:{ (action) -> Void in
+            let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片任務後無法復原！", preferredStyle: .alert)
+            deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
                 self.managedObjextContext.delete(self.VideoNameArray[indexPath.row])
                 self.VideoNameArray.remove(at: indexPath.row)
                 self.loadData()
@@ -92,12 +93,20 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         }else{
             VideoNameTableView.backgroundView = nil
         }
-        print(self.VideoNameArray)
 
     }
     
     
     @IBAction func AddVideoTask(_ sender: Any) {
+        //  Delete the data in the VideoInfo
+//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "VideoInfo")
+//        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+//        do{
+//            try managedObjextContext.execute(request)
+//        }catch{
+//            
+//        }
+//        print(VideoInfo())
         
         let videotaskitem = VideoTaskInfo(context: managedObjextContext)
         

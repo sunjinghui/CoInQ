@@ -40,8 +40,8 @@ class CSCL: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12)], for: .normal)
-        /*self.title = "CSCL"
+        /*UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12)], for: .normal)
+        self.title = "CSCL"
         
         let navigationBar = navigationController!.navigationBar
         navigationBar.tintColor = UIColor.blue

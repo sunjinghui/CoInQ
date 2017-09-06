@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import CoreData
 
 class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
@@ -23,6 +24,10 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
     
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+    
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
     var videolength: Double = 0
@@ -30,8 +35,9 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var milliseconds: Int = 0
     
     var AudioFileName = "sound2.m4a"
+    var AudioURL: URL?
     
-    var Asset: AVAsset? = AVAsset(url:UserDefaults.standard.url(forKey: "VideoTwo")!)
+    var Asset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -46,7 +52,8 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             StoreRecordPathInUserdefault()
         }else{
             switchOutput.text = "不使用此配音"
-            UserDefaults.standard.set(false, forKey: "UseRecordTwo")
+            VideoNameArray[Index].useRecordtwo = false
+            //UserDefaults.standard.set(false, forKey: "UseRecordTwo")
         }
     }
     
@@ -57,11 +64,16 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
+
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
         setupRecorder()
         
+            let videoURL = URL(string: VideoNameArray[Index].videotwo!)
+            Asset = AVAsset(url:videoURL!)
         //影片縮圖
-        let asset = AVURLAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!, options: nil)
+        let asset = AVURLAsset(url: videoURL!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = false
         
@@ -77,11 +89,25 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         showTimeLabel()
         progressView.progress = progressCounter
-        if UserDefaults.standard.object(forKey: "RecordTwo") == nil {
-            ButtonPlay.isHidden = true
-            switchOutput.isHidden = true
-            UseRecordSwitch.isHidden = true
+
+            if (VideoNameArray[Index].audiotwo) != nil {
+                ButtonPlay.isHidden = false
+                switchOutput.isHidden = false
+                UseRecordSwitch.isHidden = false
+                AudioURL = URL(string: VideoNameArray[Index].audiotwo!)
+                switchOutput.isEnabled = VideoNameArray[Index].useRecordtwo
+
+            }else{
+                ButtonPlay.isHidden = true
+                switchOutput.isHidden = true
+                UseRecordSwitch.isHidden = true
+                VideoNameArray[Index].useRecordtwo = false
+            }
+            
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
         }
+                
     }
     
     @IBAction func Explain(_ sender: Any) {
@@ -92,19 +118,25 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func play(){
-        Player = AVPlayer(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
-        let controller = AVPlayerViewController()
-        controller.player = Player
-        controller.showsPlaybackControls = false
-        self.addChildViewController(controller)
-        let videoFrame = CGRect(x: 44, y: 176, width: 681, height: 534)
-        controller.view.frame = videoFrame
-        self.view.addSubview(controller.view)
-        Player?.volume = 0.0
-        Player?.play()
-        
+        do{
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            
+            let videoURL = URL(string: VideoNameArray[Index].videotwo!)
+            Player = AVPlayer(url: videoURL!)
+            let controller = AVPlayerViewController()
+            controller.player = Player
+            controller.showsPlaybackControls = false
+            self.addChildViewController(controller)
+            let videoFrame = CGRect(x: 44, y: 176, width: 681, height: 534)
+            controller.view.frame = videoFrame
+            self.view.addSubview(controller.view)
+            Player?.volume = 0.0
+            Player?.play()
+        }catch {
+        print("Could not load data from coredb \(error.localizedDescription)")
+        }
     }
-    
+
     func stopPlayer() {
         if let playy = Player {
             playy.pause()
@@ -197,7 +229,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func preparePlayer(){
         
         do {
-            try SoundPlayer = AVAudioPlayer(contentsOf: directoryURL()!)
+            try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
@@ -306,9 +338,12 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func StoreRecordPathInUserdefault() {
-        let userdefault = UserDefaults.standard
-        userdefault.set(directoryURL(), forKey: "RecordTwo")
-        userdefault.set(true, forKey: "UseRecordTwo")
+        VideoNameArray[Index].audiotwo = directoryURL()?.absoluteString
+        AudioURL = directoryURL()
+        VideoNameArray[Index].useRecordtwo = true
+        //let userdefault = UserDefaults.standard
+        //userdefault.set(directoryURL(), forKey: "RecordTwo")
+        //userdefault.set(true, forKey: "UseRecordTwo")
     }
     
     deinit {

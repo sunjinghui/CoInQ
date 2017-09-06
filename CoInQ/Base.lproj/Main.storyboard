@@ -58,12 +58,12 @@
             </objects>
             <point key="canvasLocation" x="155" y="65"/>
         </scene>
-        <!--CSCL-->
+        <!--首頁-->
         <scene sceneID="uo2-hY-aKG">
             <objects>
-                <tabBarController storyboardIdentifier="CSCL" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="CSCL" title="首頁" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="CSCL" prompt="" id="ugl-HK-TaK">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="P9l-3u-g9e">
+                        <barButtonItem key="leftBarButtonItem" id="P9l-3u-g9e">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PXd-0D-W1f">
                                 <rect key="frame" x="20" y="30" width="43" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -73,6 +73,11 @@
                                     <action selector="signOut:" destination="0r5-V6-xYa" eventType="touchUpInside" id="H31-Ur-78f"/>
                                 </connections>
                             </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="引導" style="plain" id="T63-4e-Gpe">
+                            <connections>
+                                <segue destination="CRk-hs-n4k" kind="push" id="odV-14-fDP"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="799" height="1024"/>
@@ -98,6 +103,22 @@
                     <view key="view" contentMode="scaleToFill" id="iCG-rT-SFP">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" id="2FK-P8-2E6">
+                                <rect key="frame" x="0.0" y="36" width="768" height="934"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="敬請期待" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QgF-1e-2ep" userLabel="尚未有任何影片">
+                                        <rect key="frame" x="129" y="369" width="511" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="受邀請" image="Mail-icon.png" selectedImage="Mail-icon.png" id="UV5-EI-7uy"/>
@@ -105,6 +126,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2j-rr-LOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2165" y="963"/>
+        </scene>
+        <!--Helper page-->
+        <scene sceneID="Nu3-o5-yjn">
+            <objects>
+                <viewController id="CRk-hs-n4k" customClass="Helper_page" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zgB-gt-6WI">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" id="NiE-7u-EJ3">
+                                <rect key="frame" x="20" y="20" width="728" height="813"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="c5j-uM-cCu" kind="embed" id="Vnt-Fg-cJr"/>
+                                </connections>
+                            </containerView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="GAP-F3-nXM">
+                                <rect key="frame" x="313" y="862" width="143" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="pageIndicatorTintColor" red="1" green="0.81690987464431464" blue="0.27250104366514094" alpha="0.50240796232876717" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="1" green="0.79978855770000001" blue="0.50010107150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gah-vb-1Zj"/>
+                    <connections>
+                        <outlet property="pageControl" destination="GAP-F3-nXM" id="A8X-TM-rmi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lIN-BX-c2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="177" y="-1466"/>
+        </scene>
+        <!--Helper pageVC-->
+        <scene sceneID="xXf-yx-WHF">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="c5j-uM-cCu" customClass="Helper_pageVC" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7jk-1A-J7o"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PsU-dE-cym" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="-1466"/>
         </scene>
         <!--project-->
         <scene sceneID="tne-QT-ifu">
@@ -143,11 +207,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellvideotask" rowHeight="130" id="1Gp-Wt-9Ko" customClass="TableView_cellvideotask" customModule="CoInQ" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellvideotask" rowHeight="130" id="1Gp-Wt-9Ko" customClass="TableView_cellvideotask" customModule="CoInQ" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="768" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Gp-Wt-9Ko" id="F4U-TB-hoq">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="702" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nye-wh-hun">
@@ -392,6 +456,7 @@
                     <connections>
                         <outlet property="RecordButton" destination="LMl-dB-a76" id="Hel-s5-elL"/>
                         <outlet property="ninecomplete" destination="7YC-v7-Mn2" id="Beq-G6-sgE"/>
+                        <segue destination="gVN-0o-a4M" kind="modal" identifier="StartRecord" id="qrv-re-Ypy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wz2-av-m13" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -407,19 +472,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qqx-au-nks">
-                                <rect key="frame" x="73" y="321" width="243" height="92"/>
+                                <rect key="frame" x="73" y="117" width="243" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ok1-wP-IU9">
-                                <rect key="frame" x="453" y="321" width="243" height="92"/>
+                                <rect key="frame" x="453" y="117" width="243" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uVZ-zs-rh6">
-                                <rect key="frame" x="0.0" y="434" width="388" height="197"/>
+                                <rect key="frame" x="0.0" y="230" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">我發現
 日常生活中有這個有趣的「自然現象」...
@@ -432,7 +497,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yyw-nz-16W">
-                                <rect key="frame" x="48" y="639" width="293" height="239"/>
+                                <rect key="frame" x="48" y="435" width="293" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
@@ -441,7 +506,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="csP-1p-vxz">
-                                <rect key="frame" x="453" y="639" width="293" height="239"/>
+                                <rect key="frame" x="453" y="435" width="293" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
@@ -450,37 +515,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MSj-zm-NDu">
-                                <rect key="frame" x="583" y="886" width="32" height="32"/>
+                                <rect key="frame" x="583" y="682" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
                                     <action selector="ExplainTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="18g-cg-fVg"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vZY-TR-MTb">
-                                <rect key="frame" x="17" y="76" width="734" height="237"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <string key="text">所有科學探究都始於一個問題。
-日常生活中有各式各樣的自然現象，
-這些自然現象是如何產生的呢？
-請仔細記錄自然現象發生的過程，
-並提出一個明確的問題
-接著，我們就可以開始進行科學探究囉！</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="aXe-QL-0dl">
-                                <rect key="frame" x="207" y="691" width="84" height="75"/>
+                                <rect key="frame" x="207" y="487" width="84" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="vB0-7i-f69">
-                                <rect key="frame" x="612" y="691" width="84" height="75"/>
+                                <rect key="frame" x="612" y="487" width="84" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="agc-4j-FI3">
-                                <rect key="frame" x="178" y="886" width="32" height="32"/>
+                                <rect key="frame" x="178" y="682" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
@@ -488,7 +539,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EGe-v5-A4J">
-                                <rect key="frame" x="380" y="434" width="388" height="197"/>
+                                <rect key="frame" x="380" y="230" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">對於這個「自然現象」，
 我有一些疑問...
@@ -735,12 +786,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6On-Ah-l4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5172" y="-845"/>
+            <point key="canvasLocation" x="5095" y="-643"/>
         </scene>
         <!--VideoTaskViewController-->
         <scene sceneID="Xkl-xi-azd">
             <objects>
-                <tabBarController storyboardIdentifier="VideoTaskViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="taG-3s-S4J" userLabel="VideoTaskViewController" customClass="VideoTaskViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="VideoTaskViewController" title="編輯探究影片" useStoryboardIdentifierAsRestorationIdentifier="YES" id="taG-3s-S4J" userLabel="VideoTaskViewController" customClass="VideoTaskViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="探究影片專案" id="uaq-yQ-SbL">
                         <barButtonItem key="leftBarButtonItem" id="HWk-oG-fKR">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2rA-Kr-We4">
@@ -751,6 +802,11 @@
                                     <action selector="GoBack" destination="taG-3s-S4J" eventType="touchUpInside" id="TfK-yr-mHP"/>
                                 </connections>
                             </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="引導" id="fHS-VS-EhS">
+                            <connections>
+                                <segue destination="CRk-hs-n4k" kind="push" id="iAf-5R-EcU"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="fill" id="Fcj-21-K5r">
@@ -778,119 +834,166 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="209" sectionHeaderHeight="28" sectionFooterHeight="28" id="iXv-ad-fdR">
+                            <view contentMode="scaleToFill" id="47L-zR-2Mz">
+                                <rect key="frame" x="0.0" y="121" width="768" height="782"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未有任何影片作品" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UKk-FN-1Ef" userLabel="尚未有任何影片">
+                                        <rect key="frame" x="129" y="326" width="511" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="368" sectionHeaderHeight="28" sectionFooterHeight="28" id="iXv-ad-fdR" userLabel="Video Table View">
                                 <rect key="frame" x="0.0" y="70" width="768" height="903"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" rowHeight="250" id="7Rw-we-Dsg" customClass="TableView_cellcompletevideo" customModule="CoInQ" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="250"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellvideocomplete" rowHeight="368" id="7Rw-we-Dsg" customClass="TableView_cellcompletevideo" customModule="CoInQ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="768" height="368"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Rw-we-Dsg" id="5OR-AV-DNh">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="702" height="367.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qIt-4F-X2C">
-                                                    <rect key="frame" x="314" y="56" width="159" height="45"/>
+                                                    <rect key="frame" x="318" y="83" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片長度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KpJ-br-Jbt">
-                                                    <rect key="frame" x="314" y="120" width="159" height="45"/>
+                                                    <rect key="frame" x="318" y="185" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="OtE-cu-rfP">
-                                                    <rect key="frame" x="45" y="56" width="240" height="151"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NSQ-Dv-m3U" userLabel="Deletebt">
-                                                    <rect key="frame" x="667" y="178" width="42" height="45"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="delete"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MGE-dZ-WLK" userLabel="Downloadbt">
-                                                    <rect key="frame" x="550" y="177" width="48" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="download"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KI6-dK-0v4">
-                                                    <rect key="frame" x="434" y="177" width="48" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="playvideo"/>
-                                                    <connections>
-                                                        <segue destination="QIn-ch-ngE" kind="push" id="0Lq-IB-GCX"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AQf-s7-pXg">
-                                                    <rect key="frame" x="457" y="38" width="267" height="82"/>
+                                                    <rect key="frame" x="478" y="65" width="249" height="82"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="88:88.88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YWu-QA-lBr">
-                                                    <rect key="frame" x="457" y="120" width="159" height="45"/>
+                                                    <rect key="frame" x="478" y="185" width="159" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="Image" id="nze-DP-rQm">
+                                                    <rect key="frame" x="638" y="266" width="64" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="OtE-cu-rfP">
+                                                    <rect key="frame" x="60" y="33" width="212" height="300"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="delete" destination="NSQ-Dv-m3U" id="JJ5-6J-5rP"/>
-                                            <outlet property="deletebt" destination="NSQ-Dv-m3U" id="zqz-m1-p9f"/>
-                                            <outlet property="download" destination="MGE-dZ-WLK" id="BIU-dw-rQk"/>
-                                            <outlet property="downloadbt" destination="MGE-dZ-WLK" id="Qyo-rs-8Qg"/>
-                                            <outlet property="playbt" destination="KI6-dK-0v4" id="zEy-Mv-ecg"/>
-                                            <outlet property="thumbnail" destination="OtE-cu-rfP" id="7lE-JN-2fU"/>
+                                            <outlet property="thumbnail" destination="OtE-cu-rfP" id="Mnp-A4-8j5"/>
                                             <outlet property="videolength" destination="YWu-QA-lBr" id="ey0-Jj-Rg8"/>
                                             <outlet property="videoname" destination="AQf-s7-pXg" id="xu1-Dg-V6C"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="M5Q-Ow-uYa" id="8q2-Af-1HM"/>
+                                    <outlet property="delegate" destination="M5Q-Ow-uYa" id="dNf-Nn-9D8"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="已完成" image="Files-Check-File-icon.png" selectedImage="Files-Check-File-icon.png" id="PZ9-db-qAO"/>
+                    <connections>
+                        <outlet property="TableEmpty" destination="47L-zR-2Mz" id="2bZ-SZ-uFz"/>
+                        <outlet property="VideoTableView" destination="iXv-ad-fdR" id="rUG-31-pMk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3062" y="166"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="zRs-rp-H1h">
+        <scene sceneID="WPl-v6-dAO">
             <objects>
-                <viewController id="QIn-ch-ngE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dLl-mT-hlu">
+                <viewController storyboardIdentifier="firstVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LMx-co-PgB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xNU-uT-58x">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：xxxxxxxx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nqM-xG-9od">
-                                <rect key="frame" x="204" y="68" width="360" height="67"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vnr-oE-cQl">
+                                <rect key="frame" x="59" y="162" width="650" height="495"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <string key="text">第一階段   所有科學探究都始於一個問題。
+日常生活中有各式各樣的自然現象，
+這些自然現象是如何產生的呢？
+請仔細記錄自然現象發生的過程，
+並提出一個明確的問題
+接著，我們就可以開始進行科學探究囉！</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="tzj-Wz-JyM">
-                                <rect key="frame" x="54" y="179" width="661" height="558"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Tne-v8-rTI"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vim-6E-Gp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RJp-2k-ZBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3964" y="526"/>
+            <point key="canvasLocation" x="4098" y="840"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ZIb-wN-pHR">
+            <objects>
+                <viewController storyboardIdentifier="secondVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="clL-ns-IVc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="29a-H0-wCb">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aTR-aD-eYB">
+                                <rect key="frame" x="59" y="168" width="650" height="495"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <string key="text">第二階段   在科學探究的過程中
+可以使用觀察、實驗、測量等 多樣化的研究方法，
+這些方法都能有效地蒐集到 我們需要的「資料」，
+而這些「資料」 正是我們用來回答問題的重要關鍵。</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wfu-hc-IS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5095" y="840"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="SJ5-nv-QWM">
+            <objects>
+                <viewController storyboardIdentifier="thirdVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rdI-mP-OgR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CfV-Dg-PZz">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LJU-HS-ebQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6083" y="840"/>
         </scene>
         <!--Record Navigation Controller-->
         <scene sceneID="Drg-kV-i9R">
@@ -1101,78 +1204,79 @@
             </objects>
             <point key="canvasLocation" x="9044" y="-2007"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio Three-->
         <scene sceneID="PI7-sz-LnF">
             <objects>
-                <viewController id="pNr-hM-XdX" sceneMemberID="viewController">
+                <viewController id="pNr-hM-XdX" customClass="RecordAudio_Three" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0KB-cf-Pl6">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="故事版3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pEA-03-Etw">
-                                <rect key="frame" x="278" y="106" width="212" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pEA-03-Etw">
+                                <rect key="frame" x="278" y="109" width="212" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vvv-b3-Ml8">
-                                <rect key="frame" x="368" y="166" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我可以分享蒐集資料的過程。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gvw-fY-PeV">
-                                <rect key="frame" x="402" y="49" width="346" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="b50-8v-y5f">
-                                <rect key="frame" x="44" y="229" width="681" height="534"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="HGb-tO-grA">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kER-zG-6Hm">
-                                <rect key="frame" x="630" y="782" width="95" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="PzW-nq-AzU">
-                                <rect key="frame" x="44" y="804" width="584" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Oqb-76-G4f">
-                                <rect key="frame" x="653" y="938" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="zyY-4G-Osf">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="OU6-Yb-aB6"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="Cdy-EG-P67"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="EcZ-Xi-9iE"/>
+                                    <action selector="UseRecordSwitch:" destination="pNr-hM-XdX" eventType="valueChanged" id="q8s-dc-rQe"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0yj-mp-eCV">
-                                <rect key="frame" x="267" y="938" width="349" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kcv-uf-wOc">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L4j-Vs-s9W">
-                                <rect key="frame" x="630" y="851" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gCN-9a-PeQ">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="錄音"/>
+                                <state key="normal" title="Play" image="play"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="XAp-BL-vml"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="XsV-JO-rhG"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Zr0-XC-Lbx"/>
+                                    <action selector="playvideo:" destination="pNr-hM-XdX" eventType="touchUpInside" id="s5Y-QF-3pM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WNC-8K-434">
-                                <rect key="frame" x="466" y="851" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gdN-ZX-ZSG">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="錄音" image="record"/>
                                 <connections>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="z4H-ei-QBh"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="1g2-Hh-mhs"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="K6z-qk-aG4"/>
+                                    <action selector="record:" destination="pNr-hM-XdX" eventType="touchUpInside" id="XEK-nJ-Hxb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zqN-TU-Zig">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="XLZ-oD-bef">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5b5-ge-i96">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="pNr-hM-XdX" eventType="touchUpInside" id="Nd7-cG-3YW"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="fjA-MW-9AH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1185,15 +1289,24 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="gCN-9a-PeQ" id="Suy-hx-aqZ"/>
+                        <outlet property="ButttonRecord" destination="gdN-ZX-ZSG" id="fpQ-5w-Snd"/>
+                        <outlet property="UseRecordSwitch" destination="zyY-4G-Osf" id="TDn-s4-ePW"/>
+                        <outlet property="progressView" destination="XLZ-oD-bef" id="NEz-SU-aUh"/>
+                        <outlet property="switchOutput" destination="kcv-uf-wOc" id="6vv-GK-Obr"/>
+                        <outlet property="timeLabel" destination="zqN-TU-Zig" id="9iZ-mA-cnr"/>
+                        <outlet property="videoPreviewLayer" destination="HGb-tO-grA" id="jI9-vV-kGp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wz0-au-RBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9884" y="-2007"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio Six-->
         <scene sceneID="iYL-ha-K7z">
             <objects>
-                <viewController id="iuh-KL-b2k" sceneMemberID="viewController">
+                <viewController id="iuh-KL-b2k" customClass="RecordAudio_Six" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N8d-EX-iDN">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1205,67 +1318,66 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7fH-LY-rN3">
-                                <rect key="frame" x="368" y="166" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="gAM-NW-Upk">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lkg-FE-yE8">
-                                <rect key="frame" x="402" y="49" width="346" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我可以說明
-造成證據間關係的可能原因有哪些。</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KYF-Qt-MHr">
-                                <rect key="frame" x="630" y="784" width="95" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="wLA-oN-Wun">
-                                <rect key="frame" x="44" y="806" width="584" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="ZIQ-dD-zGk">
-                                <rect key="frame" x="653" y="940" width="51" height="31"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Hc9-d5-vRu">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="C6T-i5-sPU"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="633-Xx-CVZ"/>
+                                    <action selector="UseRecordSwitch:" destination="iuh-KL-b2k" eventType="valueChanged" id="En9-H2-an7"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="Lzm-Lw-kc3"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pJs-WZ-ei3">
-                                <rect key="frame" x="267" y="940" width="349" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zEX-MC-MBL">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ERz-ge-NqW">
-                                <rect key="frame" x="630" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="f5W-gd-lzv">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="錄音"/>
+                                <state key="normal" title="Play" image="play"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Hnq-Nd-Hod"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="BVu-UY-yMX"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="eLE-GV-viQ"/>
+                                    <action selector="playvideo:" destination="iuh-KL-b2k" eventType="touchUpInside" id="pJh-Ah-tvd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l86-6C-i8k">
-                                <rect key="frame" x="466" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TFs-ad-wob">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="錄音" image="record"/>
                                 <connections>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="mZa-UM-duJ"/>
+                                    <action selector="record:" destination="iuh-KL-b2k" eventType="touchUpInside" id="9NK-II-yXZ"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Uju-s8-LbX"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="ags-RA-P9A"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="mhx-3B-uka">
-                                <rect key="frame" x="44" y="231" width="681" height="534"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g4b-ei-deT">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="VJ2-xy-Gjb">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cpg-kd-fxD">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="3Ab-Aj-7Rr"/>
+                                    <action selector="Explain:" destination="iuh-KL-b2k" eventType="touchUpInside" id="I3r-Cn-iFg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1276,87 +1388,95 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="f5W-gd-lzv" id="igR-fT-Yyd"/>
+                        <outlet property="ButttonRecord" destination="TFs-ad-wob" id="QSy-Mh-Kf2"/>
+                        <outlet property="UseRecordSwitch" destination="Hc9-d5-vRu" id="IPq-Qg-H51"/>
+                        <outlet property="progressView" destination="VJ2-xy-Gjb" id="aUj-3I-Onm"/>
+                        <outlet property="switchOutput" destination="zEX-MC-MBL" id="Q2A-f7-EfD"/>
+                        <outlet property="timeLabel" destination="g4b-ei-deT" id="tUF-Wt-Oc2"/>
+                        <outlet property="videoPreviewLayer" destination="gAM-NW-Upk" id="iqA-yL-T7a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nkq-ru-Hy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8224" y="-880"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio Five-->
         <scene sceneID="83e-UC-nTP">
             <objects>
-                <viewController id="H33-gb-r4Z" sceneMemberID="viewController">
+                <viewController id="H33-gb-r4Z" customClass="RecordAudio_Five" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1He-rC-Mq6">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="故事版5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GPg-ip-28M">
-                                <rect key="frame" x="278" y="106" width="212" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GPg-ip-28M">
+                                <rect key="frame" x="278" y="109" width="212" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OQi-ka-Arz">
-                                <rect key="frame" x="368" y="166" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="eTm-ZN-pTZ">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hRN-OL-lGh">
-                                <rect key="frame" x="402" y="49" width="346" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我可以說明如何將證據分類，
-以及如何比較證據之間的關係。</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8yp-fQ-XbX">
-                                <rect key="frame" x="630" y="784" width="95" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="7T6-q7-jvH">
-                                <rect key="frame" x="44" y="806" width="584" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="zgJ-kg-HVQ">
-                                <rect key="frame" x="653" y="940" width="51" height="31"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="lUd-rt-NQR">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="4y7-wz-g03"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="6YZ-Er-Hmi"/>
+                                    <action selector="UseRecordSwitch:" destination="H33-gb-r4Z" eventType="valueChanged" id="DCy-Ju-6Bv"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="r7T-PK-300"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="75o-tc-VQ7">
-                                <rect key="frame" x="267" y="940" width="349" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Olf-0A-nxC">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sBI-cV-2Vi">
-                                <rect key="frame" x="630" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5CZ-BT-e7y">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="錄音"/>
+                                <state key="normal" title="Play" image="play"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="gFk-JF-zKk"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Od8-zs-A1k"/>
+                                    <action selector="playvideo:" destination="H33-gb-r4Z" eventType="touchUpInside" id="RfO-t7-4ZO"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="XfS-76-B16"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="drU-tm-rBR">
-                                <rect key="frame" x="466" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vhj-Te-Fjj">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="錄音" image="record"/>
                                 <connections>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="3Ib-Ap-h7R"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="VOx-eu-QgF"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="YCN-Ja-aJI"/>
+                                    <action selector="record:" destination="H33-gb-r4Z" eventType="touchUpInside" id="kNk-z8-af2"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="vsj-F0-kwy">
-                                <rect key="frame" x="44" y="231" width="681" height="534"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ClS-om-3dE">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="eSr-pq-G7X">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="591-re-XKc">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="H33-gb-r4Z" eventType="touchUpInside" id="MUW-NS-oXP"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="eIS-cG-yoG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1367,87 +1487,95 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="5CZ-BT-e7y" id="eyd-zO-BWp"/>
+                        <outlet property="ButttonRecord" destination="vhj-Te-Fjj" id="rnD-Qa-Qfe"/>
+                        <outlet property="UseRecordSwitch" destination="lUd-rt-NQR" id="ccq-Lu-VWK"/>
+                        <outlet property="progressView" destination="eSr-pq-G7X" id="XkH-On-xR4"/>
+                        <outlet property="switchOutput" destination="Olf-0A-nxC" id="pcb-W5-Q7D"/>
+                        <outlet property="timeLabel" destination="ClS-om-3dE" id="oOx-ew-HPz"/>
+                        <outlet property="videoPreviewLayer" destination="eTm-ZN-pTZ" id="bPf-hl-DZ3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ck2-ET-sXq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9044" y="-880"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio Four-->
         <scene sceneID="HfF-na-vYM">
             <objects>
-                <viewController id="Zih-Zr-AVC" sceneMemberID="viewController">
+                <viewController id="Zih-Zr-AVC" customClass="RecordAudio_Four" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gSz-sP-Ie5">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="故事版4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Atx-KP-bHt">
-                                <rect key="frame" x="278" y="106" width="212" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Atx-KP-bHt">
+                                <rect key="frame" x="278" y="111" width="212" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cWN-cY-4iT">
-                                <rect key="frame" x="368" y="166" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="XLo-Hu-U8n">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IgZ-aA-4sN">
-                                <rect key="frame" x="402" y="49" width="346" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我可以說明
-如何分辨資料是否為有效證據。</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Tq-vT-1gG">
-                                <rect key="frame" x="630" y="784" width="95" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="wRD-BY-CqQ">
-                                <rect key="frame" x="44" y="806" width="584" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="97e-YY-EiP">
-                                <rect key="frame" x="653" y="940" width="51" height="31"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="gB9-qZ-JPl">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="v2W-lS-Vcv"/>
+                                    <action selector="UseRecordSwitch:" destination="Zih-Zr-AVC" eventType="valueChanged" id="Tce-hi-3Li"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="jHE-gF-kM1"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="zoj-iX-eyb"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YQr-HS-7k9">
-                                <rect key="frame" x="267" y="940" width="349" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H0j-LS-3FM">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4vq-eZ-vVL">
-                                <rect key="frame" x="630" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OWH-pV-mI0">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="錄音"/>
+                                <state key="normal" title="Play" image="play"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="q7l-3P-Gsn"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="V2X-PG-cre"/>
+                                    <action selector="playvideo:" destination="Zih-Zr-AVC" eventType="touchUpInside" id="vSw-pH-EBE"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="vYN-Tn-PDo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hJE-CV-lsV">
-                                <rect key="frame" x="466" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HdG-06-dv9">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="錄音" image="record"/>
                                 <connections>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="bmG-9c-2QS"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="4tC-IV-tTe"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="ZLU-Uw-biI"/>
+                                    <action selector="record:" destination="Zih-Zr-AVC" eventType="touchUpInside" id="cmt-d2-5ht"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="fn2-C0-MS3">
-                                <rect key="frame" x="44" y="231" width="681" height="534"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KT5-Lq-Git">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="Lyf-4t-coM">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EKn-dh-emJ">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="2xZ-So-WOc"/>
+                                    <action selector="Explain:" destination="Zih-Zr-AVC" eventType="touchUpInside" id="ryb-Po-7H3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1458,15 +1586,24 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="OWH-pV-mI0" id="dbh-Vv-kgx"/>
+                        <outlet property="ButttonRecord" destination="HdG-06-dv9" id="gSw-Zo-UhV"/>
+                        <outlet property="UseRecordSwitch" destination="gB9-qZ-JPl" id="s1P-um-tOV"/>
+                        <outlet property="progressView" destination="Lyf-4t-coM" id="hhJ-nJ-Dqi"/>
+                        <outlet property="switchOutput" destination="H0j-LS-3FM" id="hSd-fK-5n2"/>
+                        <outlet property="timeLabel" destination="KT5-Lq-Git" id="PKJ-9z-dO2"/>
+                        <outlet property="videoPreviewLayer" destination="XLo-Hu-U8n" id="sRk-TD-9n9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Pg-Lg-WoG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9884" y="-880"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio Seven-->
         <scene sceneID="oU4-jQ-QSO">
             <objects>
-                <viewController id="FP0-wd-HkN" sceneMemberID="viewController">
+                <viewController id="FP0-wd-HkN" customClass="RecordAudio_Seven" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n9i-5O-f1e">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1478,67 +1615,66 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NBh-Si-dpJ">
-                                <rect key="frame" x="368" y="166" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="nmz-jm-kn2">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vnC-9m-Gm5">
-                                <rect key="frame" x="402" y="49" width="346" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我可以說明我觀察到的
-科學家使用的科學方法與研究結果。</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lOs-PI-e6h">
-                                <rect key="frame" x="630" y="784" width="95" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="V2U-fb-Wpn">
-                                <rect key="frame" x="44" y="806" width="584" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="IK5-OA-Uaa">
-                                <rect key="frame" x="653" y="940" width="51" height="31"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="3He-1t-3DB">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="lUz-yG-mco"/>
+                                    <action selector="UseRecordSwitch:" destination="FP0-wd-HkN" eventType="valueChanged" id="61P-yK-Fka"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="OlA-6f-cIZ"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="nQg-TA-9p6"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p2B-38-fS3">
-                                <rect key="frame" x="267" y="940" width="349" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h7n-lB-a3I">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FYs-BY-T9e">
-                                <rect key="frame" x="630" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Vr-YQ-fes">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="錄音"/>
+                                <state key="normal" title="Play" image="play"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="ORF-HX-Po6"/>
+                                    <action selector="playvideo:" destination="FP0-wd-HkN" eventType="touchUpInside" id="BBm-jX-1Og"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="SaD-bc-gwE"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="jlz-lf-6vk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9f6-DM-qQc">
-                                <rect key="frame" x="466" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D1y-sS-gfn">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="錄音" image="record"/>
                                 <connections>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="KYJ-hp-t4e"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Ng7-mK-qry"/>
+                                    <action selector="record:" destination="FP0-wd-HkN" eventType="touchUpInside" id="umH-F2-kwL"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="yTY-s2-oeT"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="9q5-fq-86t">
-                                <rect key="frame" x="44" y="231" width="681" height="534"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="duD-jC-2vz">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="Wc0-LU-cET">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4qF-5r-WXh">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="FP0-wd-HkN" eventType="touchUpInside" id="9ti-nz-oTM"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="BkO-cf-ij0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1549,85 +1685,95 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="4Vr-YQ-fes" id="YJo-ye-m1b"/>
+                        <outlet property="ButttonRecord" destination="D1y-sS-gfn" id="IV9-76-GSm"/>
+                        <outlet property="UseRecordSwitch" destination="3He-1t-3DB" id="VeY-Ka-x3q"/>
+                        <outlet property="progressView" destination="Wc0-LU-cET" id="Lja-0Z-VVF"/>
+                        <outlet property="switchOutput" destination="h7n-lB-a3I" id="0O0-kD-Syn"/>
+                        <outlet property="timeLabel" destination="duD-jC-2vz" id="zJZ-AW-1PC"/>
+                        <outlet property="videoPreviewLayer" destination="nmz-jm-kn2" id="9NI-W6-KR5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwq-uS-gXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8224" y="222"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Audio Eight-->
         <scene sceneID="lj2-uf-tfL">
             <objects>
-                <viewController id="4rp-ma-cIM" sceneMemberID="viewController">
+                <viewController id="4rp-ma-cIM" customClass="RecordAudio_Eight" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QEj-b5-hQU">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="故事版8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E4D-jd-Lvr">
-                                <rect key="frame" x="278" y="106" width="212" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E4D-jd-Lvr">
+                                <rect key="frame" x="278" y="109" width="212" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kxp-01-Jsa">
-                                <rect key="frame" x="368" y="166" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="0UT-03-yUu">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我可以說明如何修改解釋的過程。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dpm-dk-rqr">
-                                <rect key="frame" x="422" y="49" width="346" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oFZ-NK-dIK">
-                                <rect key="frame" x="630" y="784" width="95" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="mhK-e9-RF6">
-                                <rect key="frame" x="44" y="806" width="584" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="mFM-37-2un">
-                                <rect key="frame" x="653" y="940" width="51" height="31"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="fms-Yw-NNb">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="54a-mg-wMf"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="0sy-kS-Bnf"/>
+                                    <action selector="UseRecordSwitch:" destination="4rp-ma-cIM" eventType="valueChanged" id="12Z-vv-P7Y"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="O1p-wy-51n"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dDn-Le-JyH">
-                                <rect key="frame" x="267" y="940" width="349" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z34-rb-MkT">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ddu-9p-IeQ">
-                                <rect key="frame" x="630" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R2s-UU-6cX">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="錄音"/>
+                                <state key="normal" title="Play" image="play"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="zUL-2d-qRZ"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="AtY-dc-ADh"/>
+                                    <action selector="playvideo:" destination="4rp-ma-cIM" eventType="touchUpInside" id="j4u-gE-Xcv"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="teQ-K8-qOI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oKL-qP-od3">
-                                <rect key="frame" x="466" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Bp-ol-MSn">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="錄音" image="record"/>
                                 <connections>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="w1x-y2-5uB"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Inv-Et-lYN"/>
+                                    <action selector="record:" destination="4rp-ma-cIM" eventType="touchUpInside" id="To3-u7-yyo"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="kIs-ir-14J"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="YHL-p4-8i7">
-                                <rect key="frame" x="44" y="231" width="681" height="534"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8gd-8a-96j">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="I98-q5-fW4">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J7s-vh-RDv">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="4rp-ma-cIM" eventType="touchUpInside" id="05D-zG-LnW"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="C6F-S1-5Qh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1638,6 +1784,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="R2s-UU-6cX" id="Nag-Yt-RAJ"/>
+                        <outlet property="ButttonRecord" destination="8Bp-ol-MSn" id="o5c-qC-Jn5"/>
+                        <outlet property="UseRecordSwitch" destination="fms-Yw-NNb" id="9QI-FQ-z9d"/>
+                        <outlet property="progressView" destination="I98-q5-fW4" id="3bQ-wK-eB7"/>
+                        <outlet property="switchOutput" destination="z34-rb-MkT" id="hzS-4y-TjV"/>
+                        <outlet property="timeLabel" destination="8gd-8a-96j" id="9Xd-Xq-dLu"/>
+                        <outlet property="videoPreviewLayer" destination="0UT-03-yUu" id="dmM-pE-37w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oVG-x6-bIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1658,67 +1813,66 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PsD-bK-OoN">
-                                <rect key="frame" x="368" y="166" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="6W1-0i-zb1">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tae-9H-QCV">
-                                <rect key="frame" x="399" y="49" width="349" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我可以分享
-我的科學探究歷程與這不科學探究影片想要傳達給觀眾的話。</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0aR-e6-Ceb">
-                                <rect key="frame" x="630" y="784" width="95" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="F95-E1-Gg1">
-                                <rect key="frame" x="44" y="806" width="584" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="2AA-HL-v1q">
-                                <rect key="frame" x="653" y="940" width="51" height="31"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Xe3-DG-7IS">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="Jm0-FB-jKz"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="TWQ-xC-nX2"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="kNo-hQ-4Wl"/>
+                                    <action selector="UseRecordSwitch:" destination="We8-gb-gcK" eventType="valueChanged" id="y9T-Dy-lKR"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fHf-sr-Nmb">
-                                <rect key="frame" x="267" y="940" width="349" height="31"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Df-Rg-I6I">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QNR-vw-0m6">
-                                <rect key="frame" x="630" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kzy-NV-Xx2">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="錄音"/>
+                                <state key="normal" title="Play" image="play"/>
                                 <connections>
-                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="PvK-M3-6hP"/>
+                                    <action selector="playvideo:" destination="We8-gb-gcK" eventType="touchUpInside" id="MNd-G2-In5"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="qz4-Vo-HBq"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="st7-h9-jaa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pxE-3I-f1n">
-                                <rect key="frame" x="466" y="853" width="95" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5fS-bo-L9E">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="錄音" image="record"/>
                                 <connections>
-                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="0FU-I8-nxZ"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="GLy-ag-w8F"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="P4k-cb-dQx"/>
+                                    <action selector="record:" destination="We8-gb-gcK" eventType="touchUpInside" id="Svv-qi-d5V"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="6LC-Lv-aF9">
-                                <rect key="frame" x="44" y="231" width="681" height="534"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hmp-nI-q7D">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.40000000596046448" id="gLB-NT-25U">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LZT-XQ-UhT">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Cj0-3Z-GvN"/>
+                                    <action selector="Explain:" destination="We8-gb-gcK" eventType="touchUpInside" id="uH5-bc-Pv9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1730,6 +1884,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ButtonPlay" destination="kzy-NV-Xx2" id="AWQ-69-UEc"/>
+                        <outlet property="ButttonRecord" destination="5fS-bo-L9E" id="RLO-SS-9b9"/>
+                        <outlet property="UseRecordSwitch" destination="Xe3-DG-7IS" id="3gC-Hp-tDE"/>
+                        <outlet property="progressView" destination="gLB-NT-25U" id="UwB-Uc-95p"/>
+                        <outlet property="switchOutput" destination="0Df-Rg-I6I" id="txO-JG-9TS"/>
+                        <outlet property="timeLabel" destination="hmp-nI-q7D" id="RvB-mL-Aco"/>
+                        <outlet property="videoPreviewLayer" destination="6W1-0i-zb1" id="0Q5-B6-glt"/>
                         <segue destination="0r5-V6-xYa" kind="push" identifier="completevideotask" id="fBs-gA-cfd"/>
                     </connections>
                 </viewController>
@@ -1744,6 +1905,7 @@
         <image name="Files-Check-File-icon.png" width="32" height="32"/>
         <image name="Files-Edit-File-icon.png" width="32" height="32"/>
         <image name="Healthcare-Groups-icon" width="96" height="96"/>
+        <image name="Image" width="48" height="48"/>
         <image name="Mail-icon.png" width="32" height="32"/>
         <image name="Numbers-1-Black-icon" width="16" height="16"/>
         <image name="Numbers-2-Black-icon" width="16" height="16"/>
@@ -1751,11 +1913,8 @@
         <image name="Numbers-4-Black-icon" width="16" height="16"/>
         <image name="Numbers-5-Black-icon" width="16" height="16"/>
         <image name="Status-dialog-information-icon" width="32" height="32"/>
-        <image name="delete" width="512" height="512"/>
-        <image name="download" width="512" height="512"/>
         <image name="logout" width="512" height="512"/>
         <image name="play" width="512" height="512"/>
-        <image name="playvideo" width="512" height="512"/>
         <image name="record" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1765,6 +1924,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="fBs-gA-cfd"/>
+        <segue reference="iAf-5R-EcU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

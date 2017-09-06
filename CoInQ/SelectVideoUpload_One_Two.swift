@@ -9,12 +9,15 @@
 import Foundation
 import MobileCoreServices
 import MediaPlayer
+import CoreData
 
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
-    var firstAsset: URL!
-    var secondAsset: URL!
+    var firstAsset: URL?
+    var secondAsset: URL?
+    var VideoNameArray = [VideoTaskInfo]()
+    var managedObjextContext: NSManagedObjectContext!
     
     @IBOutlet weak var firstcomplete: UIImageView!
     @IBOutlet weak var secondcomplete: UIImageView!
@@ -81,7 +84,35 @@ class SelectVideoUpload_One_Two : UIViewController{
         super.viewDidLoad()
         firstcomplete.isHidden = true
         secondcomplete.isHidden = true
+        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        loadData()
     }
+    
+    func loadData() {
+        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+        do {
+            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+            
+            if (VideoNameArray[Index].videoone) != nil {
+                print("videoone is not empty")
+                self.firstAsset = URL(string: VideoNameArray[Index].videoone!)
+                firstcomplete.isHidden = false
+            }
+            
+            if (VideoNameArray[Index].videotwo) != nil{
+                print("videotwo is not empty")
+                self.secondAsset = URL(string: VideoNameArray[Index].videotwo!)
+                secondcomplete.isHidden = false
+            }
+        }catch {
+            print("Could not load data from coredb \(error.localizedDescription)")
+        }
+
+        print(self.VideoNameArray[Index])
+        
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -100,23 +131,28 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
         if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
+            
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
-                firstcomplete.isHidden = false
+                //firstcomplete.isHidden = false
+                VideoNameArray[Index].videoone = firstAsset?.absoluteString
+                self.loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"
                 secondAsset = avAsset
-                secondcomplete.isHidden = false
+                //secondcomplete.isHidden = false
+                VideoNameArray[Index].videotwo = secondAsset?.absoluteString
+                self.loadData()
             }
             let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             
-            //Store videopath in userdefault
-            let userdefault = UserDefaults.standard
-            userdefault.set(firstAsset, forKey: "VideoOne")
-            userdefault.set(secondAsset, forKey: "VideoTwo")
+
+            //let userdefault = UserDefaults.standard
+            //userdefault.set(firstAsset, forKey: "VideoOne")
+            //userdefault.set(secondAsset, forKey: "VideoTwo")
         }
     }
 }
