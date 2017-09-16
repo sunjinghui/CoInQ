@@ -40,6 +40,7 @@
 		A56FF5DE1F11398F00B072D5 /* RecordAudio_Two.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */; };
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
 		A59FA4AE1F5568310049EACD /* Helper_page.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FA4AD1F5568300049EACD /* Helper_page.swift */; };
+		A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FA4AF1F6101990049EACD /* Helper_VC.swift */; };
 		A5AA958B1F4D84790089A54D /* Helper_pageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA958A1F4D84760089A54D /* Helper_pageVC.swift */; };
 		A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */; };
 		A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */; };
@@ -111,6 +112,7 @@
 		A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Two.swift; sourceTree = "<group>"; };
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
 		A59FA4AD1F5568300049EACD /* Helper_page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper_page.swift; sourceTree = "<group>"; };
+		A59FA4AF1F6101990049EACD /* Helper_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper_VC.swift; sourceTree = "<group>"; };
 		A5AA958A1F4D84760089A54D /* Helper_pageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper_pageVC.swift; sourceTree = "<group>"; };
 		A5E263101F1F473B00D1783D /* CoInQDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoInQDataModel.xcdatamodel; sourceTree = "<group>"; };
 		A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellcompletevideo.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				A537AD141EC6EB6700B70596 /* InvitaionViewController.swift */,
 				A537AD161EC6EC2200B70596 /* CompeleteViewController.swift */,
 				A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */,
+				A59FA4AF1F6101990049EACD /* Helper_VC.swift */,
 				A5AA958A1F4D84760089A54D /* Helper_pageVC.swift */,
 				A59FA4AD1F5568300049EACD /* Helper_page.swift */,
 				A537AD181EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift */,
@@ -483,6 +486,7 @@
 				A537AD1B1EC6FA5100B70596 /* SelectVideoUpload_Three_Four.swift in Sources */,
 				A5E2631F1F2CFBE200D1783D /* RecordAudio_Eight.swift in Sources */,
 				A5E2631B1F2CFB9400D1783D /* RecordAudio_Six.swift in Sources */,
+				A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */,
 				A5E263151F2CF28900D1783D /* RecordAudio_Four.swift in Sources */,
 				A5E263171F2CF3A900D1783D /* RecordAudio_Three.swift in Sources */,
 				A521ECF21ED535840074327B /* RecordAudio_One.swift in Sources */,

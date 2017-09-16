@@ -112,11 +112,11 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         
         Index = self.VideoNameArray.count
         
-        let alertController = UIAlertController(title:"探究影片名稱",message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title:"探究影片名稱",message: "生活中有各式各樣的自然現象\n這些現象是如何產生的呢？\n讓我們一起來探究並透過\n影音將這探究過程記錄下來！", preferredStyle: .alert)
         
         alertController.addTextField(configurationHandler: {(textField) -> Void in
             textField.delegate = self
-            textField.placeholder = "請輸入影片名稱"
+            textField.placeholder = "請輸入你想問的探究問題"
         })
         
         // set the date

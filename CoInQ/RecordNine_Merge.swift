@@ -206,7 +206,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                     
                     print(self.VideoComplete)
 
-                    let alertController = UIAlertController(title: "你的探究影片已經製作完成嘍！\n請至“已完成”頁面觀看影片作品吧！", message: nil, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的科學探究影片！\n你可以在「已完成」中找到你的傑作。", message: nil, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
@@ -284,10 +284,10 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     @IBAction func merge(_ sender: AnyObject) {
         
-        if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset /*,let ninethAsset = ninethAsset*/{
+        if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninethAsset{
             startActivityIndicator()
             
-            let totalTIME = firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration //+ ninethAsset.duration
+            let totalTIME = firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration + ninethAsset.duration
             videoseconds = totalTIME.seconds
 
             // 1 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.
@@ -351,12 +351,12 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 print("Failed to load eighth track")
             }
             // Video Nine
-//            let ninethTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-//            do {
-//                try ninethTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration), of: ninethAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
-//            } catch _ {
-//                print("Failed to load nineth track")
-//            }
+            let ninethTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            do {
+                try ninethTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration), of: ninethAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
+            } catch _ {
+                print("Failed to load nineth track")
+            }
             
             
             // 2.1
@@ -389,8 +389,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             let eighthInstruction = videoCompositionInstructionForTrack(eighthTrack, asset: eighthAsset)
             eighthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
             
-            //let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)
-            //ninethInstruction.setOpacity(0.0, at: totalTIME)
+            let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)
+            ninethInstruction.setOpacity(0.0, at: totalTIME)
             
             
             // 2.3
@@ -634,9 +634,9 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             }
 
             // Record Auido Nine
-            /*if useRecordnine!  {
+            if VideoNameArray[Index].useRecordnine  {
                 
-                let audioURL = AudioURL
+                let audioURL = URL(string: VideoNameArray[Index].audionine!)
                 audioAssetOne = AVAsset(url:audioURL!)
                 
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -659,8 +659,9 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 } catch _ {
                     print("Failed to load 故事版 9 Audio track")
                 }
+            }
             
-                        let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            /*            let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
                 try v4audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration),
                                                  of: fourthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
