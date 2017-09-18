@@ -128,49 +128,6 @@
             </objects>
             <point key="canvasLocation" x="2165" y="963"/>
         </scene>
-        <!--Helper page-->
-        <scene sceneID="Nu3-o5-yjn">
-            <objects>
-                <viewController id="CRk-hs-n4k" customClass="Helper_page" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zgB-gt-6WI">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" id="NiE-7u-EJ3">
-                                <rect key="frame" x="20" y="20" width="728" height="813"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="c5j-uM-cCu" kind="embed" id="Vnt-Fg-cJr"/>
-                                </connections>
-                            </containerView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="GAP-F3-nXM">
-                                <rect key="frame" x="313" y="862" width="143" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="pageIndicatorTintColor" red="1" green="0.81690987464431464" blue="0.27250104366514094" alpha="0.50240796232876717" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="1" green="0.79978855770000001" blue="0.50010107150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="gah-vb-1Zj"/>
-                    <connections>
-                        <outlet property="pageControl" destination="GAP-F3-nXM" id="A8X-TM-rmi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lIN-BX-c2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4098" y="2027"/>
-        </scene>
-        <!--Helper pageVC-->
-        <scene sceneID="xXf-yx-WHF">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="c5j-uM-cCu" customClass="Helper_pageVC" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="7jk-1A-J7o"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PsU-dE-cym" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5095" y="1922"/>
-        </scene>
         <!--HelperVC-->
         <scene sceneID="gVt-XZ-Oy7">
             <objects>
@@ -180,205 +137,99 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="2-3" id="0OP-lH-RBA">
-                                <rect key="frame" x="525" y="540" width="87" height="78"/>
+                                <rect key="frame" x="553" y="561" width="87" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SPv-4h-l4M">
-                                <rect key="frame" x="302" y="201" width="170" height="170"/>
+                                <rect key="frame" x="299" y="146" width="170" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="circle1">
                                     <color key="titleColor" red="0.25098040700000002" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="7gC-lE-h9f" kind="popover" identifier="segue_one" popoverAnchorView="SPv-4h-l4M" id="cPo-RK-ok3">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="StageOne:" destination="xJN-wX-mDc" eventType="touchUpInside" id="Ib0-No-G64"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kdM-fK-YPi">
-                                <rect key="frame" x="174" y="613" width="170" height="170"/>
+                                <rect key="frame" x="145" y="658" width="170" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="circle4"/>
                                 <connections>
-                                    <segue destination="HFd-dY-9ca" kind="popover" identifier="segue_four" popoverAnchorView="kdM-fK-YPi" id="A3c-go-MiZ">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="StageFour:" destination="xJN-wX-mDc" eventType="touchUpInside" id="yoZ-xg-ckC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="K8D-8W-3Ij">
-                                <rect key="frame" x="105" y="368" width="170" height="170"/>
+                                <rect key="frame" x="62" y="364" width="170" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="circle5"/>
                                 <connections>
-                                    <segue destination="se8-5f-4de" kind="popover" identifier="segue_five" popoverAnchorView="K8D-8W-3Ij" id="6pM-af-D0Z">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="StageFive:" destination="xJN-wX-mDc" eventType="touchUpInside" id="9Pk-e5-707"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PHz-fL-vv7">
-                                <rect key="frame" x="505" y="373" width="170" height="170"/>
+                                <rect key="frame" x="553" y="364" width="170" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="circle2"/>
                                 <connections>
-                                    <segue destination="YEB-ZG-NDg" kind="popover" identifier="segue_two" popoverAnchorView="PHz-fL-vv7" id="HLZ-dn-Nho">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="StageTwo:" destination="xJN-wX-mDc" eventType="touchUpInside" id="SHM-cq-NmN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TfW-eq-Joc">
-                                <rect key="frame" x="430" y="613" width="170" height="170"/>
+                                <rect key="frame" x="470" y="658" width="170" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="形成解釋" image="circle3"/>
                                 <connections>
-                                    <segue destination="ZSC-JW-h00" kind="popover" identifier="segue_three" popoverAnchorView="TfW-eq-Joc" id="yHp-BQ-0CP">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="StageThree:" destination="xJN-wX-mDc" eventType="touchUpInside" id="hfu-8L-9Jx"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="circle6" id="9fb-6j-emR">
-                                <rect key="frame" x="240" y="324" width="75" height="81"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="1-2" id="q36-Xt-tzY">
-                                <rect key="frame" x="454" y="324" width="74" height="81"/>
+                                <rect key="frame" x="502" y="275" width="74" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="3-4" id="JoJ-Hq-1C6">
-                                <rect key="frame" x="347" y="658" width="72" height="90"/>
+                                <rect key="frame" x="348" y="698" width="72" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="4-5" id="sOh-zr-HW0">
-                                <rect key="frame" x="170" y="542" width="87" height="77"/>
+                                <rect key="frame" x="135" y="561" width="87" height="77"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" misplaced="YES" id="sFC-oI-ZrO">
+                                <rect key="frame" x="264" y="373" width="240" height="266"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ieS-n0-oVL">
+                                        <rect key="frame" x="5" y="5" width="230" height="256"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="circle6" id="9fb-6j-emR">
+                                <rect key="frame" x="184" y="275" width="75" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="LhA-CK-Zet"/>
+                    <connections>
+                        <outlet property="Helpfultext" destination="ieS-n0-oVL" id="E3A-DG-7Tt"/>
+                        <outlet property="HelpfultextView" destination="sFC-oI-ZrO" id="aHf-mZ-QTt"/>
+                        <outlet property="stagefive" destination="K8D-8W-3Ij" id="3pk-bj-kUE"/>
+                        <outlet property="stagefour" destination="kdM-fK-YPi" id="6HE-I1-3bi"/>
+                        <outlet property="stageone" destination="SPv-4h-l4M" id="rXt-EH-jdO"/>
+                        <outlet property="stagethree" destination="TfW-eq-Joc" id="FKp-jv-qzl"/>
+                        <outlet property="stagetwo" destination="PHz-fL-vv7" id="PIt-OV-CF1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGr-am-eAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="980" y="-1486"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="0Ge-7i-fDQ">
-            <objects>
-                <viewController id="7gC-lE-h9f" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="yRJ-7X-4Fs">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="160"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="科學探究皆從 一個問題開始。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CzJ-G9-8O4">
-                                <rect key="frame" x="26" y="20" width="218" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="270" height="160"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LPG-F9-lzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="90" y="-1793"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Md3-EX-j6e">
-            <objects>
-                <viewController id="ZSC-JW-h00" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="rmg-vQ-o1Q">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="160"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="分析、比較「證據」 便能得出可能的解釋。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UyW-k2-OpX">
-                                <rect key="frame" x="10" y="20" width="250" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="270" height="160"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bEX-xe-re4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="90" y="-1312"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="48n-Rd-MIl">
-            <objects>
-                <viewController id="HFd-dY-9ca" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="HBI-MZ-fcP">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="160"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="最終解釋應符合科學、邏輯的標準。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HBK-RV-dI8">
-                                <rect key="frame" x="10" y="20" width="250" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="270" height="160"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lbN-f9-lBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="90" y="-1091"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="U3H-Hp-dui">
-            <objects>
-                <viewController id="se8-5f-4de" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="AKq-a4-lGO">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="160"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="積極分享是勇氣， 願意回饋是美德。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T01-cK-Mou">
-                                <rect key="frame" x="10" y="20" width="250" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="270" height="160"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gzR-8i-XgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="90" y="-880"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="0WG-Kn-fdh">
-            <objects>
-                <viewController id="YEB-ZG-NDg" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="Ywz-Ta-dfJ">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="160"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="能夠確實回答問題的「資料」 稱為「證據」。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pZy-GP-GRD">
-                                <rect key="frame" x="10" y="20" width="250" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="270" height="160"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wuh-4H-iM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="90" y="-1559"/>
         </scene>
         <!--project-->
         <scene sceneID="tne-QT-ifu">
@@ -1012,7 +863,7 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="368"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Rw-we-Dsg" id="5OR-AV-DNh">
-                                            <rect key="frame" x="0.0" y="0.0" width="702" height="368"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="735" height="368"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qIt-4F-X2C">
@@ -1077,78 +928,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3062" y="166"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="WPl-v6-dAO">
-            <objects>
-                <viewController storyboardIdentifier="firstVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LMx-co-PgB" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xNU-uT-58x">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vnr-oE-cQl">
-                                <rect key="frame" x="59" y="162" width="650" height="495"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <string key="text">第一階段   所有科學探究都始於一個問題。
-日常生活中有各式各樣的自然現象，
-這些自然現象是如何產生的呢？
-請仔細記錄自然現象發生的過程，
-並提出一個明確的問題
-接著，我們就可以開始進行科學探究囉！</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RJp-2k-ZBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4098" y="840"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="ZIb-wN-pHR">
-            <objects>
-                <viewController storyboardIdentifier="secondVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="clL-ns-IVc" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="29a-H0-wCb">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aTR-aD-eYB">
-                                <rect key="frame" x="59" y="168" width="650" height="495"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <string key="text">第二階段   在科學探究的過程中
-可以使用觀察、實驗、測量等 多樣化的研究方法，
-這些方法都能有效地蒐集到 我們需要的「資料」，
-而這些「資料」 正是我們用來回答問題的重要關鍵。</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wfu-hc-IS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5095" y="840"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="SJ5-nv-QWM">
-            <objects>
-                <viewController storyboardIdentifier="thirdVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rdI-mP-OgR" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CfV-Dg-PZz">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LJU-HS-ebQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6083" y="840"/>
         </scene>
         <!--Record Navigation Controller-->
         <scene sceneID="Drg-kV-i9R">
