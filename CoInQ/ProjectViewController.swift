@@ -64,17 +64,24 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
 //                self.managedObjextContext.delete(self.VideoNameArray[indexPath.row])
 //                self.VideoNameArray.remove(at: indexPath.row)
+                
+                let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
+                let videoid = videoInfo?["id"] as? Int
+                
+                self.deleteData(id: videoid!)
+                
                 self.loadData()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
+            self.loadData()
             self.present(deleteAlert, animated: true, completion: nil)
             
         }
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Index = indexPath.row
+//        Index = indexPath.row
         self.performSegue(withIdentifier: "startvideotask", sender: self)
     }
     
@@ -104,7 +111,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
-                    print(errorMessage!)
+                    print("1\(errorMessage!)")
                     return
                 }
                 guard let JSON = response.result.value as? [String: Any] else {
@@ -126,6 +133,13 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
     }
     
+    func deleteData(id: Int){
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/deletevideo.php", method: .post, parameters: ["videoid":id]).responseJSON
+            {
+                response in
+                print(response)
+        }
+    }
     
     @IBAction func AddVideoTask(_ sender: Any) {
         //  Delete the data in the VideoInfo
@@ -196,9 +210,9 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 //                    }catch {
 //                        print("Could not save data \(error.localizedDescription)")
 //                    }
-                UserDefaults.standard.removeObject(forKey: "VideotaskTitle")
-                UserDefaults.standard.set(VideoName, forKey: "VideotaskTitle")
-                self.performSegue(withIdentifier: "startvideotask", sender: self)
+//                UserDefaults.standard.removeObject(forKey: "VideotaskTitle")
+//                UserDefaults.standard.set(VideoName, forKey: "VideotaskTitle")
+//                self.performSegue(withIdentifier: "startvideotask", sender: self)
                 
             }else{
                 let errorAlert = UIAlertController(title:"請注意",message: "不能沒有探究影片名稱", preferredStyle: .alert)
@@ -224,6 +238,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 else { return }
             
             videotaskViewController.title = videoinfo["videoname"] as? String
+            Index = (videoinfo["id"] as? Int)!
+            
         }
     }
     

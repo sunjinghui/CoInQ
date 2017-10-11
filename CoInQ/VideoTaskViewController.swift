@@ -25,9 +25,9 @@ class VideoTaskViewController:UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if UserDefaults.standard.string(forKey: "VideotaskTitle") != nil{
-            self.title = UserDefaults.standard.string(forKey: "VideotaskTitle")
-        }
+//        if UserDefaults.standard.string(forKey: "VideotaskTitle") != nil{
+//            self.title = UserDefaults.standard.string(forKey: "VideotaskTitle")
+//        }
         
         //UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 20)], for: .normal)
         

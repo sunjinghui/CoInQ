@@ -18,7 +18,8 @@ class SelectVideoUpload_One_Two : UIViewController{
     var loadingAssetOne = false
     var firstAsset: URL?
     var secondAsset: URL?
-    var VideoNameArray = [VideoTaskInfo]()
+    var videoArray: [Any]?
+//    var VideoNameArray = [VideoTaskInfo]()
     var managedObjextContext: NSManagedObjectContext!
     
     @IBOutlet weak var firstcomplete: UIImageView!
@@ -108,30 +109,58 @@ class SelectVideoUpload_One_Two : UIViewController{
         managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         //loadData()
+        getvideoinfo()
     }
     
-    func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            
-            if (VideoNameArray[Index].videoone) != nil {
-                print("videoone is not empty")
-                self.firstAsset = URL(string: VideoNameArray[Index].videoone!)
-                firstcomplete.isHidden = false
-            }
-            
-            if (VideoNameArray[Index].videotwo) != nil{
-                print("videotwo is not empty")
-                self.secondAsset = URL(string: VideoNameArray[Index].videotwo!)
-                secondcomplete.isHidden = false
-            }
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
+    func getvideoinfo(){
+        let parameters: Parameters=["videoid": Index]
+        print(Index)
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let videoinfo = JSON["videoURLtable"] as? [Any] {
+                    self.videoArray = videoinfo
+//                    let video = self.videoArray
+//                    if video["videoone"] != nil {
+//                        self.firstcomplete.isHidden = false
+//                    }
+                }
         }
-
-        
     }
+    
+//    func loadData() {
+//        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+//        do {
+//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+//            
+//            if (VideoNameArray[Index].videoone) != nil {
+//                print("videoone is not empty")
+//                self.firstAsset = URL(string: VideoNameArray[Index].videoone!)
+//                firstcomplete.isHidden = false
+//            }
+//            
+//            if (VideoNameArray[Index].videotwo) != nil{
+//                print("videotwo is not empty")
+//                self.secondAsset = URL(string: VideoNameArray[Index].videotwo!)
+//                secondcomplete.isHidden = false
+//            }
+//        }catch {
+//            print("Could not load data from coredb \(error.localizedDescription)")
+//        }
+//
+//        
+//    }
 
     
     override func didReceiveMemoryWarning() {
@@ -141,16 +170,20 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     //上传视频到服务器
     func uploadVideo(mp4Path : URL , message : String){
-        let parameters = ["user":"root", "password":"austin3916"]
-        
+        print(google_userid)
+        print(Index)
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
+
                 multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
-                for (key, val) in parameters {
-                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
-                }
-                //服务器地址
+                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
+                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
+//                for (key, val) in parameters {
+//                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
+//                }
+                
+                //SERVER ADD
         },to: "http://140.122.76.201/CoInQ/v1/uploadvideo.php",
           encodingCompletion: { encodingResult in
             switch encodingResult {
@@ -204,18 +237,18 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 message = "故事版1 影片已匯入成功！"
                 firstAsset = avAsset
                 //firstcomplete.isHidden = false
-                VideoNameArray[Index].videoone = firstAsset?.absoluteString
+                //VideoNameArray[Index].videoone = firstAsset?.absoluteString
                 
                 let videoURL = avAsset
                 self.uploadVideo(mp4Path: videoURL,message: message)
                 
-                self.loadData()
+                //self.loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"
                 secondAsset = avAsset
                 //secondcomplete.isHidden = false
-                VideoNameArray[Index].videotwo = secondAsset?.absoluteString
-                self.loadData()
+                //VideoNameArray[Index].videotwo = secondAsset?.absoluteString
+                //self.loadData()
 
             }
 //            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
