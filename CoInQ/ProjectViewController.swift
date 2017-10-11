@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 var Index = 0
 
@@ -17,14 +19,19 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     @IBOutlet weak var VideoNameTableView: UITableView!
     @IBOutlet weak var TableEmpty: UIView!
     
-    
-    var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext!
+    var videoInfoArray: [Any]?
+//    var VideoNameArray = [VideoTaskInfo]()
+//    var managedObjextContext: NSManagedObjectContext!
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("array count in cscl \(VideoNameArray.count)")
-        return VideoNameArray.count
+        if let num = self.videoInfoArray?.count {
+            VideoNameTableView.backgroundView = nil
+            return num
+        } else {
+            VideoNameTableView.backgroundView = TableEmpty
+            return 0
+        }
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -32,9 +39,14 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         var cell: TableView_cellvideotask
 
             cell = tableView.dequeueReusableCell(withIdentifier: "cellvideotask", for: indexPath) as! TableView_cellvideotask
-            let VideoNamearray = VideoNameArray[indexPath.row]
-            cell.VideoName.text = VideoNamearray.videoname
-            cell.Date.text = VideoNamearray.creatdate
+        
+        guard let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any] else {
+            print("Get row \(indexPath.row) error")
+            return cell
+        }
+            //let VideoNamearray = VideoNameArray[indexPath.row]
+            cell.VideoName.text = videoInfo["videoname"] as? String
+            cell.Date.text = videoInfo["date"] as? String
         
         
         return cell
@@ -48,19 +60,15 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
         if editingStyle == .delete {
 
-            let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片任務後無法復原！", preferredStyle: .alert)
+            let deleteAlert = UIAlertController(title:"確定要刪除影片任務嗎？",message: "刪除影片任務後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-                self.managedObjextContext.delete(self.VideoNameArray[indexPath.row])
-                self.VideoNameArray.remove(at: indexPath.row)
+//                self.managedObjextContext.delete(self.VideoNameArray[indexPath.row])
+//                self.VideoNameArray.remove(at: indexPath.row)
                 self.loadData()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
             self.present(deleteAlert, animated: true, completion: nil)
-
-            /*tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()*/
             
         }
     }
@@ -75,24 +83,46 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         AddButton.layer.cornerRadius = 8
         VideoNameTableView.tableFooterView = UIView(frame: .zero)
         
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
         loadData()
     }
     
     func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            self.VideoNameTableView.reloadData()
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
+//        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+//        do {
+//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+//            self.VideoNameTableView.reloadData()
+//        }catch {
+//            print("Could not load data from coredb \(error.localizedDescription)")
+//        }
+        
+        let parameters: Parameters=["google_userid": google_userid]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let videoinfo = JSON["table"] as? [Any] {
+                    self.videoInfoArray = videoinfo
+                    self.VideoNameTableView.reloadData()
+                }
         }
-        if VideoNameArray.count == 0 {
-            VideoNameTableView.backgroundView = TableEmpty
-        }else{
-            VideoNameTableView.backgroundView = nil
-        }
+        
+//        if VideoNameArray.count == 0 {
+//            VideoNameTableView.backgroundView = TableEmpty
+//        }else{
+//            VideoNameTableView.backgroundView = nil
+//        }
 
     }
     
@@ -107,10 +137,10 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 //            
 //        }
 //        print(VideoInfo())
-        
-        let videotaskitem = VideoTaskInfo(context: managedObjextContext)
-        
-        Index = self.VideoNameArray.count
+//        
+//        let videotaskitem = VideoTaskInfo(context: managedObjextContext)
+//        
+//        Index = self.VideoNameArray.count
         
         let alertController = UIAlertController(title:"探究影片名稱",message: "生活中有各式各樣的自然現象\n這些現象是如何產生的呢？\n讓我們一起來探究並透過\n影音將這探究過程記錄下來！", preferredStyle: .alert)
         
@@ -127,22 +157,49 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         
         let StartVideoTask = UIAlertAction(title:"開始製作影片", style: .default, handler:{
             (action) -> Void in
-            let VideoName = alertController.textFields?.first
-            if VideoName?.text != ""{
+            let VideoName = alertController.textFields?.first?.text
+            if VideoName != ""{
 
-                    videotaskitem.videoname = VideoName?.text
-                    videotaskitem.creatdate = dateresult
-                    do {
-                        try self.managedObjextContext.save()
-                        self.loadData()
-                    }catch {
-                        print("Could not save data \(error.localizedDescription)")
-                    }
-                    self.performSegue(withIdentifier: "startvideotask", sender: self)
+//                    videotaskitem.videoname = VideoName?.text
+//                    videotaskitem.creatdate = dateresult
+//                    do {
+//                        try self.managedObjextContext.save()
+                        //UPLOAD VideoTask
+                        let parameters: Parameters=[
+                            "google_userid": google_userid,
+                            "videoname":    VideoName!,
+                            "cdate":        dateresult,
+                            "videoone":     "1",
+                            "videoone_path":"1"
+                        ]
                 
-                    /*self.VideoNameTableView.beginUpdates()
-                    self.VideoNameTableView.insertRows(at: [IndexPath(row: self.VideoNameArray.count - 1, section: 0)], with: .automatic)
-                    self.VideoNameTableView.endUpdates()*/
+                        //Sending http post request
+                        Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadvideo.php", method: .post, parameters: parameters).responseJSON
+                            {
+                                response in
+                                //printing response
+                                print(response)
+                                
+                                //getting the json value from the server
+                                //                    if let result = response.result.value {
+                                //
+                                //                        //converting it as NSDictionary
+                                //                        let jsonData = result as! NSDictionary
+                                //
+                                //                        //displaying the message in label
+                                //                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
+                                //                        print(jsonData.value(forKey: "message") as Any)
+                                //                    }
+                        }
+                        
+                        self.loadData()
+//                    }catch {
+//                        print("Could not save data \(error.localizedDescription)")
+//                    }
+                UserDefaults.standard.removeObject(forKey: "VideotaskTitle")
+                UserDefaults.standard.set(VideoName, forKey: "VideotaskTitle")
+                self.performSegue(withIdentifier: "startvideotask", sender: self)
+                
             }else{
                 let errorAlert = UIAlertController(title:"請注意",message: "不能沒有探究影片名稱", preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title:"OK",style: .cancel, handler:{ (action) -> Void in self.present(alertController, animated: true, completion: nil)}))
@@ -158,4 +215,16 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         self.present(alertController, animated: true, completion: nil)
 
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "startvideotask" {
+            guard let videotaskViewController = segue.destination as? VideoTaskViewController,
+                let row = self.VideoNameTableView.indexPathForSelectedRow?.row,
+                let videoinfo = self.videoInfoArray?[row] as? [String: Any]
+                else { return }
+            
+            videotaskViewController.title = videoinfo["videoname"] as? String
+        }
+    }
+    
 }

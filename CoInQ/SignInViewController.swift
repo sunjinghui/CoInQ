@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 
+var google_userid = ""
+
 class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate
 {
     
@@ -21,14 +23,17 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             return
         }else{
             print(user.userID)
-            print(user.profile.name)
-            print(user.profile.email)
+            //print(user.profile.name)
+            //print(user.profile.email)
             //print(user.profile.imageURL(withDimension: 400))
             print("google sign in")
             
+            google_userid = user.userID
+            
             let parameters: Parameters=[
-                "username": user.profile.name,
-                "email":    user.profile.email
+                "username":        user.profile.name,
+                "google_userid":   user.userID,
+                "email":           user.profile.email
             ]
             
             //Sending http post request
@@ -39,15 +44,15 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                     print(response)
                     
                     //getting the json value from the server
-                    if let result = response.result.value {
-                        
-                        //converting it as NSDictionary
-                        let jsonData = result as! NSDictionary
-                        
-                        //displaying the message in label
-                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
-                        print(jsonData.value(forKey: "message") as Any)
-                    }
+//                    if let result = response.result.value {
+//                        
+//                        //converting it as NSDictionary
+//                        let jsonData = result as! NSDictionary
+//                        
+//                        //displaying the message in label
+//                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
+//                        print(jsonData.value(forKey: "message") as Any)
+//                    }
             }
             
             self.performSegue(withIdentifier: "login", sender: self)

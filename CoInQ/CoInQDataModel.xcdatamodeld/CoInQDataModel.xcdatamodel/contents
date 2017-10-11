@@ -29,6 +29,7 @@
         <attribute name="videoeight" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videofive" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videofour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoid" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="videoname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videonine" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoone" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,7 +40,7 @@
         <relationship name="videoinfo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VideoInfo" inverseName="videotaskinfo" inverseEntity="VideoInfo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="VideoTaskInfo" positionX="-63" positionY="-18" width="128" height="493"/>
         <element name="VideoInfo" positionX="126" positionY="11" width="117" height="103"/>
+        <element name="VideoTaskInfo" positionX="-63" positionY="-18" width="128" height="510"/>
     </elements>
 </model>

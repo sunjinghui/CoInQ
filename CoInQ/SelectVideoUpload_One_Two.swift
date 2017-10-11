@@ -10,6 +10,8 @@ import Foundation
 import MobileCoreServices
 import MediaPlayer
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 class SelectVideoUpload_One_Two : UIViewController{
     
@@ -82,11 +84,30 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let requestUrl = "http://140.122.76.201/CoInQ/v1/upload/circle1_1.png"
+//        
+//        Alamofire.request( requestUrl, method: .get)
+//            .downloadProgress { progress in
+//                print("Download Progress: \(progress.fractionCompleted)")
+//            }
+//            .responseData { response in
+//                if let data = response.result.value {
+//                    let image = UIImage(data: data)
+//                    if image != nil {
+//                        self.firstcomplete.image = image
+//                        print("image load success")
+//                    } else {
+//                        print("image hasn't been generated yet")
+//                    }
+//                }
+//        }
+        
         firstcomplete.isHidden = true
         secondcomplete.isHidden = true
         managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        loadData()
+        //loadData()
     }
     
     func loadData() {
@@ -109,7 +130,6 @@ class SelectVideoUpload_One_Two : UIViewController{
             print("Could not load data from coredb \(error.localizedDescription)")
         }
 
-        print(self.VideoNameArray[Index])
         
     }
 
@@ -119,12 +139,60 @@ class SelectVideoUpload_One_Two : UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    //上传视频到服务器
+    func uploadVideo(mp4Path : URL , message : String){
+        let parameters = ["user":"root", "password":"austin3916"]
+        
+        Alamofire.upload(
+            //同样采用post表单上传
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
+                for (key, val) in parameters {
+                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
+                }
+                //服务器地址
+        },to: "http://140.122.76.201/CoInQ/v1/uploadvideo.php",
+          encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                //json处理
+                upload.responseJSON { response in
+                    //解包
+                    guard let result = response.result.value else { return }
+                    print("\(result)")
+                    //须导入 swiftyJSON 第三方框架，否则报错
+                    let success = JSON(result)["success"].int ?? -1
+                    if success == 1 {
+                        print("Upload Succes")
+                        let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
+                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alert.addAction(action2)
+                        self.present(alert , animated: true , completion: nil)
+                    }else{
+                        print("Upload Failed")
+                        let alert = UIAlertController(title:"提示",message:"上傳失敗，請重新上傳", preferredStyle: .alert)
+                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alert.addAction(action2)
+                        self.present(alert , animated: true , completion: nil)
+                    }
+                }
+                //上传进度
+                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        })
+    }
+    
 }
 
 
 // MARK: - UIImagePickerControllerDelegate
 extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismiss(animated: true, completion: nil)
         
@@ -137,6 +205,10 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 firstAsset = avAsset
                 //firstcomplete.isHidden = false
                 VideoNameArray[Index].videoone = firstAsset?.absoluteString
+                
+                let videoURL = avAsset
+                self.uploadVideo(mp4Path: videoURL,message: message)
+                
                 self.loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"
@@ -144,10 +216,11 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 //secondcomplete.isHidden = false
                 VideoNameArray[Index].videotwo = secondAsset?.absoluteString
                 self.loadData()
+
             }
-            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+//            present(alert, animated: true, completion: nil)
             
 
             //let userdefault = UserDefaults.standard
