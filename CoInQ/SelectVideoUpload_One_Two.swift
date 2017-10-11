@@ -131,14 +131,18 @@ class SelectVideoUpload_One_Two : UIViewController{
                 // 2.
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
                     self.videoArray = videoinfo
-//                    let video = self.videoArray
-//                    if video["videoone"] != nil {
-//                        self.firstcomplete.isHidden = false
-//                    }
+                    self.check()
                 }
         }
     }
-    
+    func check(){
+        var video = self.videoArray?[0] as? [String: Any]
+        let videoone = video?["videoone"] as? String
+
+        if !(videoone == "1") {
+            self.firstcomplete.isHidden = false
+        }
+    }
 //    func loadData() {
 //        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
 //        do {

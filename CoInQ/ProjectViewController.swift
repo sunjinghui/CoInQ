@@ -120,6 +120,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 }
                 // 2.
                 if let videoinfo = JSON["table"] as? [Any] {
+                    print(videoinfo)
                     self.videoInfoArray = videoinfo
                     self.VideoNameTableView.reloadData()
                 }
