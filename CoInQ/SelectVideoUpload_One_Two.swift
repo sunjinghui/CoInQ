@@ -114,7 +114,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     func getvideoinfo(){
         let parameters: Parameters=["videoid": Index]
-        print(Index)
+        
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
@@ -131,16 +131,20 @@ class SelectVideoUpload_One_Two : UIViewController{
                 // 2.
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
                     self.videoArray = videoinfo
+                    print(videoinfo)
                     self.check()
                 }
         }
     }
     func check(){
         var video = self.videoArray?[0] as? [String: Any]
-        let videoone = video?["videoone"] as? String
-
-        if !(videoone == "1") {
+        let videoone = video?["videoone_path"] as? String
+        let videotwo = video?["videotwo_path"] as? String
+        if !(videoone == nil) {
             self.firstcomplete.isHidden = false
+        }
+        if !(videotwo == nil) {
+            self.secondcomplete.isHidden = false
         }
     }
 //    func loadData() {
@@ -173,9 +177,8 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //上传视频到服务器
-    func uploadVideo(mp4Path : URL , message : String){
-        print(google_userid)
-        print(Index)
+    func uploadVideo(mp4Path : URL , message : String, clip: Int){
+        
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
@@ -183,6 +186,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                 multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
                 multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
                 multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
+                multipartFormData.append(mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videopath")
+                multipartFormData.append("\(clip)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "clip")
 //                for (key, val) in parameters {
 //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
 //                }
@@ -244,8 +249,8 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 //VideoNameArray[Index].videoone = firstAsset?.absoluteString
                 
                 let videoURL = avAsset
-                self.uploadVideo(mp4Path: videoURL,message: message)
-                
+                self.uploadVideo(mp4Path: videoURL,message: message,clip:1)
+                self.getvideoinfo()
                 //self.loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"
@@ -253,6 +258,9 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 //secondcomplete.isHidden = false
                 //VideoNameArray[Index].videotwo = secondAsset?.absoluteString
                 //self.loadData()
+                let videoURL = avAsset
+                self.uploadVideo(mp4Path: videoURL,message: message,clip:2)
+                self.getvideoinfo()
 
             }
 //            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)

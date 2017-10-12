@@ -74,7 +74,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
-            self.loadData()
+            //self.loadData()
             self.present(deleteAlert, animated: true, completion: nil)
             
         }
@@ -184,8 +184,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                             "google_userid": google_userid,
                             "videoname":    VideoName!,
                             "cdate":        dateresult,
-                            "videoone":     "1",
-                            "videoone_path":"1"
                         ]
                 
                         //Sending http post request
