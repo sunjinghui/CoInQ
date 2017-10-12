@@ -74,9 +74,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
-            //self.loadData()
             self.present(deleteAlert, animated: true, completion: nil)
-            
+            loadData()
         }
     }
     
@@ -103,7 +102,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 //        }catch {
 //            print("Could not load data from coredb \(error.localizedDescription)")
 //        }
-        
+
         let parameters: Parameters=["google_userid": google_userid]
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
             {
@@ -120,12 +119,11 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 }
                 // 2.
                 if let videoinfo = JSON["table"] as? [Any] {
-                    print(videoinfo)
                     self.videoInfoArray = videoinfo
                     self.VideoNameTableView.reloadData()
                 }
         }
-        
+       
 //        if VideoNameArray.count == 0 {
 //            VideoNameTableView.backgroundView = TableEmpty
 //        }else{
@@ -205,7 +203,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                                 //                    }
                         }
                         
-                        self.loadData()
+                self.loadData()
+
 //                    }catch {
 //                        print("Could not save data \(error.localizedDescription)")
 //                    }
@@ -226,7 +225,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
-
+        loadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

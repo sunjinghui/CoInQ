@@ -13,14 +13,16 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 
+var videoArray: [Any]?
+
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
-    var firstAsset: URL?
-    var secondAsset: URL?
-    var videoArray: [Any]?
+//    var firstAsset: URL?
+//    var secondAsset: URL?
+
 //    var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext!
+//    var managedObjextContext: NSManagedObjectContext!
     
     @IBOutlet weak var firstcomplete: UIImageView!
     @IBOutlet weak var secondcomplete: UIImageView!
@@ -106,13 +108,16 @@ class SelectVideoUpload_One_Two : UIViewController{
         
         firstcomplete.isHidden = true
         secondcomplete.isHidden = true
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        //loadData()
-        getvideoinfo()
+        loadData()
     }
     
-    func getvideoinfo(){
+    func loadData(){
+        getvideoinfo(pathone: "videoone_path", checkone: self.firstcomplete, pathtwo: "videotwo_path", checktwo: self.secondcomplete)
+    }
+    
+    func getvideoinfo(pathone: String,checkone: UIImageView,pathtwo: String,checktwo:UIImageView){
         let parameters: Parameters=["videoid": Index]
         
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
@@ -130,23 +135,20 @@ class SelectVideoUpload_One_Two : UIViewController{
                 }
                 // 2.
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
-                    self.videoArray = videoinfo
-                    print(videoinfo)
-                    self.check()
+                    videoArray = videoinfo
+                    var video = videoArray?[0] as? [String: Any]
+                    let videoone = video?[pathone] as? String
+                    let videotwo = video?[pathtwo] as? String
+                    if !(videoone == nil) {
+                        checkone.isHidden = false
+                    }
+                    if !(videotwo == nil) {
+                        checktwo.isHidden = false
+                    }
                 }
         }
     }
-    func check(){
-        var video = self.videoArray?[0] as? [String: Any]
-        let videoone = video?["videoone_path"] as? String
-        let videotwo = video?["videotwo_path"] as? String
-        if !(videoone == nil) {
-            self.firstcomplete.isHidden = false
-        }
-        if !(videotwo == nil) {
-            self.secondcomplete.isHidden = false
-        }
-    }
+
 //    func loadData() {
 //        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
 //        do {
@@ -177,7 +179,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //上传视频到服务器
-    func uploadVideo(mp4Path : URL , message : String, clip: Int){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIImageView){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -207,15 +209,18 @@ class SelectVideoUpload_One_Two : UIViewController{
                     if success == 1 {
                         print("Upload Succes")
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
-                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        let action2 = UIAlertAction(title: "OK", style: .default, handler: {
+                            (action) -> Void in
+                            check.isHidden = false
+                        })
                         alert.addAction(action2)
-                        self.present(alert , animated: true , completion: nil)
+                        VC.present(alert , animated: true , completion: nil)
                     }else{
                         print("Upload Failed")
                         let alert = UIAlertController(title:"提示",message:"上傳失敗，請重新上傳", preferredStyle: .alert)
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
-                        self.present(alert , animated: true , completion: nil)
+                        VC.present(alert , animated: true , completion: nil)
                     }
                 }
                 //上传进度
@@ -244,25 +249,27 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
-                firstAsset = avAsset
-                //firstcomplete.isHidden = false
-                //VideoNameArray[Index].videoone = firstAsset?.absoluteString
+//                firstAsset = avAsset
+//                firstcomplete.isHidden = false
+//                VideoNameArray[Index].videoone = firstAsset?.absoluteString
                 
                 let videoURL = avAsset
-                self.uploadVideo(mp4Path: videoURL,message: message,clip:1)
-                self.getvideoinfo()
-                //self.loadData()
+                self.uploadVideo(mp4Path: videoURL,message: message,clip:1,VC: self,check: self.firstcomplete)
+                loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"
-                secondAsset = avAsset
-                //secondcomplete.isHidden = false
-                //VideoNameArray[Index].videotwo = secondAsset?.absoluteString
-                //self.loadData()
+//                secondAsset = avAsset
+//                secondcomplete.isHidden = false
+//                VideoNameArray[Index].videotwo = secondAsset?.absoluteString
+//                self.loadData()
                 let videoURL = avAsset
-                self.uploadVideo(mp4Path: videoURL,message: message,clip:2)
-                self.getvideoinfo()
+                self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.secondcomplete)
+                loadData()
 
             }
+            
+            loadData()
+            
 //            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
 //            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
 //            present(alert, animated: true, completion: nil)

@@ -14,10 +14,6 @@ import CoreData
 class SelectVideoUpload_Three_Four : UIViewController{
     
     var loadingAssetOne = false
-    var AssetThree: URL!
-    var AssetFour: URL!
-    var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext!
     
     @IBOutlet weak var threecomplete: UIImageView!
     @IBOutlet weak var fourcomplete: UIImageView!
@@ -40,35 +36,12 @@ class SelectVideoUpload_Three_Four : UIViewController{
         super.viewDidLoad()
         threecomplete.isHidden = true
         fourcomplete.isHidden = true
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        loadData()
+        loaddata()
     }
     
-    func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            
-            if (VideoNameArray[Index].videothree) != nil {
-                print("video3 is not empty")
-                self.AssetThree = URL(string: VideoNameArray[Index].videothree!)
-                threecomplete.isHidden = false
-            }
-            
-            if (VideoNameArray[Index].videofour) != nil{
-                print("video4 is not empty")
-                self.AssetFour = URL(string: VideoNameArray[Index].videofour!)
-                fourcomplete.isHidden = false
-            }
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
-        
-        print(self.VideoNameArray[Index])
-        
+    func loaddata(){
+        SelectVideoUpload_One_Two().getvideoinfo(pathone: "videothree_path", checkone: self.threecomplete, pathtwo: "videofour_path", checktwo: self.fourcomplete)
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -129,27 +102,16 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
             var message = ""
             if loadingAssetOne {
                 message = "故事版3 影片已匯入成功！"
-                AssetThree = avAsset
-                //threecomplete.isHidden = false
-                VideoNameArray[Index].videothree = AssetThree?.absoluteString
-                self.loadData()
-
+                let videoURL = avAsset
+                SelectVideoUpload_One_Two().uploadVideo(mp4Path: videoURL,message: message,clip:3,VC: self,check: self.threecomplete)
+                loaddata()
             } else {
                 message = "故事版4 影片已匯入成功！"
-                AssetFour = avAsset
-                //fourcomplete.isHidden = false
-                VideoNameArray[Index].videofour = AssetFour?.absoluteString
-                self.loadData()
-
+                let videoURL = avAsset
+                SelectVideoUpload_One_Two().uploadVideo(mp4Path: videoURL,message: message,clip:4,VC: self,check: self.fourcomplete)
+                loaddata()
             }
-            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
             
-            //Store videopath in userdefault
-            //let userdefault = UserDefaults.standard
-            //userdefault.set(AssetThree, forKey: "VideoThree")
-            //userdefault.set(AssetFour, forKey: "VideoFour")
         }
     }
 }

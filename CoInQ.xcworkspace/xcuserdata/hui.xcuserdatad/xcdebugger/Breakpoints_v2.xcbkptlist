@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/ProjectViewController.swift"
-            timestampString = "529409879.473067"
+            timestampString = "529507637.504309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "AddVideoTask(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -317,22 +317,6 @@
             startingLineNumber = "52"
             endingLineNumber = "52"
             landmarkName = "pageViewController(_:viewControllerBefore:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CoInQ/SelectVideoUpload_One_Two.swift"
-            timestampString = "529493455.281347"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "check()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
