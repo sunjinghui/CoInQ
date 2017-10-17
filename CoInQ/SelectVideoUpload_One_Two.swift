@@ -9,14 +9,13 @@
 import Foundation
 import MobileCoreServices
 import MediaPlayer
-import CoreData
 import Alamofire
 import SwiftyJSON
 
-var videoArray: [Any]?
+    var videoArray: [Any]?
 
 class SelectVideoUpload_One_Two : UIViewController{
-    
+
     var loadingAssetOne = false
 //    var firstAsset: URL?
 //    var secondAsset: URL?
@@ -88,24 +87,6 @@ class SelectVideoUpload_One_Two : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let requestUrl = "http://140.122.76.201/CoInQ/v1/upload/circle1_1.png"
-//        
-//        Alamofire.request( requestUrl, method: .get)
-//            .downloadProgress { progress in
-//                print("Download Progress: \(progress.fractionCompleted)")
-//            }
-//            .responseData { response in
-//                if let data = response.result.value {
-//                    let image = UIImage(data: data)
-//                    if image != nil {
-//                        self.firstcomplete.image = image
-//                        print("image load success")
-//                    } else {
-//                        print("image hasn't been generated yet")
-//                    }
-//                }
-//        }
-        
         firstcomplete.isHidden = true
         secondcomplete.isHidden = true
 //        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -118,6 +99,10 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     func getvideoinfo(pathone: String,checkone: UIImageView,pathtwo: String,checktwo:UIImageView){
+        
+        let fileManager = FileManager.default
+        
+        
         let parameters: Parameters=["videoid": Index]
         
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
@@ -140,12 +125,67 @@ class SelectVideoUpload_One_Two : UIViewController{
                     let videoone = video?[pathone] as? String
                     let videotwo = video?[pathtwo] as? String
                     if !(videoone == nil) {
+                        let url = URL(string: videoone!)
+                        if fileManager.fileExists(atPath: (url?.path)!) {
+                            print("FILE 1 FOUND")
+                        } else {
+                            self.donloadVideo(url: url!)
+                            print("FILE 1 NOT FOUND")
+                        }
                         checkone.isHidden = false
                     }
                     if !(videotwo == nil) {
+                        let url = URL(string: videotwo!)
+                        if fileManager.fileExists(atPath: (url?.path)!) {
+                            print("FILE 2 FOUND")
+                        } else {
+                            //self.donloadVideo(url: url!)
+                            print("FILE 2 NOT FOUND")
+                        }
                         checktwo.isHidden = false
                     }
                 }
+        }
+    }
+    
+    func donloadVideo(url : URL){
+        
+        let requestUrl = "http://140.122.76.201/CoInQ/upload/"
+        let videoid = "\(Index)"
+        let urls = requestUrl.appending(google_userid).appending("/").appending(videoid).appending("/").appending(url.lastPathComponent)
+        
+        download(downloadUrl: urls, saveUrl: url.lastPathComponent, completion: nil)
+        
+//        Alamofire.request( requestUrl, method: .get)
+//            .downloadProgress { progress in
+//                print("Download Progress: \(progress.fractionCompleted)")
+//            }
+//            .responseData { response in
+//                if let data = response.result.value {
+//                    let image = UIImage(data: data)
+//                    if image != nil {
+//                        self.firstcomplete.image = image
+//                        print("image load success")
+//                    } else {
+//                        print("image hasn't been generated yet")
+//                    }
+//                }
+//        }
+    }
+    
+    func download(downloadUrl:String, saveUrl:String, completion: ((Bool, JSON) -> Void)?) {
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let file = directoryURL.appendingPathComponent(saveUrl, isDirectory: false)
+            print(file)
+            return (file, [.createIntermediateDirectories, .removePreviousFile])
+        }
+        Alamofire.download(downloadUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).responseJSON { response in
+            if response.result.error == nil {
+                completion?(response.result.isSuccess,JSON(response.result.value as? NSDictionary ?? [:]))
+            } else {
+                print("error", response.result.error)
+            }
         }
     }
 
@@ -188,7 +228,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                 multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
                 multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
                 multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
-                multipartFormData.append(mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videopath")
+                multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
                 multipartFormData.append("\(clip)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "clip")
 //                for (key, val) in parameters {
 //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
@@ -247,14 +287,23 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
             
+            
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
 //                firstAsset = avAsset
 //                firstcomplete.isHidden = false
 //                VideoNameArray[Index].videoone = firstAsset?.absoluteString
                 
-                let videoURL = avAsset
-                self.uploadVideo(mp4Path: videoURL,message: message,clip:1,VC: self,check: self.firstcomplete)
+                let videourl = avAsset
+                let path = videourl.path
+                print(path)
+                if(FileManager.default.fileExists(atPath: path)){
+                    print("File exist")
+                }else{
+                    print("Not exist")
+                }
+                
+                self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.firstcomplete)
                 loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"

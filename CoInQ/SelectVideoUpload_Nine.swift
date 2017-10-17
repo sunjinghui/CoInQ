@@ -9,20 +9,22 @@
 import Foundation
 import MobileCoreServices
 import MediaPlayer
-import CoreData
+import Alamofire
 
 class SelectVideoUpload_Nine : UIViewController{
     
     @IBOutlet weak var RecordButton: UIButton!
+    
+    var videoarray: [Any]?
+    var isURLempty = true
+    var buttonClicked = true
     var loadingAssetOne = false
-    var AssetNine: URL!
-    var nullstoryboard: Array<String>!
-    var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext!
+    var nullstoryboard = [String]()
+
     var printArray: String{
         var str = ""
         for element in nullstoryboard {
-            str += "\(element)"
+            str += "\n\(element)"
         }
         return str
     }
@@ -34,28 +36,94 @@ class SelectVideoUpload_Nine : UIViewController{
         super.viewDidLoad()
         ninecomplete.isHidden = true
         RecordButton.layer.cornerRadius = 8
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         loadData()
     }
     
     func loadData() {
-        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            
-            if (VideoNameArray[Index].videonine) != nil {
-                print("video9 is not empty")
-                self.AssetNine = URL(string: VideoNameArray[Index].videonine!)
-                ninecomplete.isHidden = false
-            }
-
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
+        let parameters: Parameters=["videoid": Index]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let videoinfo = JSON["videoURLtable"] as? [Any] {
+                    self.videoarray = videoinfo
+                    print("video info loaded")
+                    var video = self.videoarray?[0] as? [String: Any]
+                    let videopath = video?["videonine_path"] as? String
+                    if !(videopath == nil) {
+                        let url = URL(string: videopath!)
+                        if FileManager.default.fileExists(atPath: (url?.path)!) {
+                            print("FILE FOUND")
+                        } else {
+                            //self.donloadVideo(url: url!)
+                            print("FILE NOT FOUND")
+                        }
+                        self.ninecomplete.isHidden = false
+                    }
+                  
+                        self.isURLempty = true
+                        self.nullstoryboard = [String]()
+                        let videopathone = video?["videoone_path"] as? String
+                        if (videopathone == nil) {
+                            self.nullstoryboard.append("故事版 1")
+                            self.isURLempty = false
+                        }
+                        let videopathtwo = video?["videotwo_path"] as? String
+                        if (videopathtwo == nil) {
+                            self.nullstoryboard.append("故事版 2")
+                            self.isURLempty = false
+                        }
+                        let videopath3 = video?["videothree_path"] as? String
+                        if (videopath3 == nil) {
+                            self.nullstoryboard.append("故事版 3")
+                            self.isURLempty = false
+                        }
+                        let videopath4 = video?["videofour_path"] as? String
+                        if (videopath4 == nil) {
+                            self.nullstoryboard.append("故事版 4")
+                            self.isURLempty = false
+                        }
+                        let videopath5 = video?["videofive_path"] as? String
+                        if (videopath5 == nil) {
+                            self.nullstoryboard.append("故事版 5")
+                            self.isURLempty = false
+                        }
+                        let videopath6 = video?["videosix_path"] as? String
+                        if (videopath6 == nil) {
+                            self.nullstoryboard.append("故事版 6")
+                            self.isURLempty = false
+                        }
+                        let videopath7 = video?["videoseven_path"] as? String
+                        if (videopath7 == nil) {
+                            self.nullstoryboard.append("故事版 7")
+                            self.isURLempty = false
+                        }
+                        let videopath8 = video?["videoeight_path"] as? String
+                        if (videopath8 == nil) {
+                            self.nullstoryboard.append("故事版 8")
+                            self.isURLempty = false
+                        }
+                        let videopath9 = video?["videonine_path"] as? String
+                        if (videopath9 == nil) {
+                            self.nullstoryboard.append("故事版 9")
+                            self.isURLempty = false
+                        }
+                    
+                }
         }
-        
-        print(self.VideoNameArray[Index])
-        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,19 +181,18 @@ class SelectVideoUpload_Nine : UIViewController{
 //    }
     
     
-    @IBAction func checkALLvideoLoaded(_ sender: Any) {
-        let videourl =  VideoNameArray[Index]
+    @IBAction func checkALLvideoLoaded(_ sender: AnyObject) {
+        loadData()
 
-        /*if isURLempty("VideoOne") && isURLempty("VideoTwo") && isURLempty("VideoThree") && isURLempty("VideoFour") && isURLempty("VideoFive") && isURLempty("VideoSix") && isURLempty("VideoSeven") && isURLempty("VideoEight") && isURLempty("VideoNine") {*/
-        if videourl.videoone != nil && videourl.videotwo != nil && videourl.videothree != nil && videourl.videofour != nil && videourl.videofive != nil && videourl.videosix != nil && videourl.videoseven != nil && videourl.videoeight != nil && videourl.videonine != nil {
+        if isURLempty {
             
             let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
             
             present(recordNavigationController, animated: true, completion: nil)
             
         }else{
-            print("alert")
-            let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳", preferredStyle: .alert)
+            loadData()
+            let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳 ,請確認\(printArray)", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
@@ -151,19 +218,12 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
             var message = ""
             if loadingAssetOne {
                 message = "故事版9 影片已匯入成功！"
-                AssetNine = avAsset
-                //ninecomplete.isHidden = false
-                VideoNameArray[Index].videonine = AssetNine?.absoluteString
-                self.loadData()
+                let videoURL = avAsset
+                SelectVideoUpload_One_Two().uploadVideo(mp4Path: videoURL,message: message,clip:9,VC: self,check: self.ninecomplete)
+                loadData()
 
             }
-            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
             
-            //Store videopath in userdefault
-            //let userdefault = UserDefaults.standard
-            //userdefault.set(AssetNine, forKey: "VideoNine")
         }
     }
 }

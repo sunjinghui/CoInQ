@@ -56,94 +56,117 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var eighthAsset: AVAsset?
     var ninethAsset: AVAsset?
 
-    var VideoNameArray = [VideoTaskInfo]()
-    var VideoComplete = [VideoInfo]()
-    
-    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+//    var VideoNameArray = [VideoTaskInfo]()
+//    var VideoComplete = [VideoInfo]()
+//    
+//    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let videorequest = NSFetchRequest<NSFetchRequestResult>(entityName: "VideoInfo")
-        videorequest.returnsObjectsAsFaults = false
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            videotaskRequest.returnsObjectsAsFaults = false
-            ///load video URL from core data
-            let videoURLone   = URL(string: VideoNameArray[Index].videoone!)
-            let videoURLtwo   = URL(string: VideoNameArray[Index].videotwo!)
-            let videoURLthree = URL(string: VideoNameArray[Index].videothree!)
-            let videoURLfour  = URL(string: VideoNameArray[Index].videofour!)
-            let videoURLfive  = URL(string: VideoNameArray[Index].videofive!)
-            let videoURLsix   = URL(string: VideoNameArray[Index].videosix!)
-            let videoURLseven = URL(string: VideoNameArray[Index].videoseven!)
-            let videoURLeight = URL(string: VideoNameArray[Index].videoeight!)
-            let videoURLnine  = URL(string: VideoNameArray[Index].videonine!)
-            firstAsset   = AVAsset(url: videoURLone!)
-            secondAsset  = AVAsset(url: videoURLtwo!)
-            thirdAsset   = AVAsset(url: videoURLthree!)
-            fourthAsset  = AVAsset(url: videoURLfour!)
-            fifthAsset   = AVAsset(url: videoURLfive!)
-            sixthAsset   = AVAsset(url: videoURLsix!)
-            seventhAsset = AVAsset(url: videoURLseven!)
-            eighthAsset  = AVAsset(url: videoURLeight!)
-            ninethAsset  = AVAsset(url: videoURLnine!)
-            /*thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
-             fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
-             fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
-             sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
-             seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
-             eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
-             ninethAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
-            
-            ///load record data
-            setupRecorder()
-            
-            let videoURL = URL(string: VideoNameArray[Index].videonine!)
-            Asset = AVAsset(url:videoURL!)
-            //影片縮圖
-            let asset = AVURLAsset(url: videoURL!, options: nil)
-            let imgGenerator = AVAssetImageGenerator(asset: asset)
-            imgGenerator.appliesPreferredTrackTransform = false
-            
-            do {
-                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                let thumbnail = UIImage(cgImage: cgImage)
-                
-                videoPreviewLayer.image = thumbnail
-                
-            } catch let error {
-                print("*** Error generating thumbnail: \(error)")
-            }
-            
-            showTimeLabel()
-            progressView.progress = progressCounter
-            
-            if (VideoNameArray[Index].audionine) != nil {
-                ButtonPlay.isHidden = false
-                switchOutput.isHidden = false
-                UseRecordSwitch.isHidden = false
-                AudioURL = URL(string: VideoNameArray[Index].audionine!)
-                switchOutput.isEnabled = VideoNameArray[Index].useRecordnine
-            }else{
-                ButtonPlay.isHidden = true
-                switchOutput.isHidden = true
-                UseRecordSwitch.isHidden = true
-                VideoNameArray[Index].useRecordnine = false
-            }
-
-            
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
         
-        print(self.VideoNameArray)
-        print(self.VideoComplete)
+        getvideo()
+        
+//        let videorequest = NSFetchRequest<NSFetchRequestResult>(entityName: "VideoInfo")
+//        videorequest.returnsObjectsAsFaults = false
+//        do {
+//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+//            videotaskRequest.returnsObjectsAsFaults = false
+//            ///load video URL from core data
+//            let videoURLone   = URL(string: VideoNameArray[Index].videoone!)
+//            let videoURLtwo   = URL(string: VideoNameArray[Index].videotwo!)
+//            let videoURLthree = URL(string: VideoNameArray[Index].videothree!)
+//            let videoURLfour  = URL(string: VideoNameArray[Index].videofour!)
+//            let videoURLfive  = URL(string: VideoNameArray[Index].videofive!)
+//            let videoURLsix   = URL(string: VideoNameArray[Index].videosix!)
+//            let videoURLseven = URL(string: VideoNameArray[Index].videoseven!)
+//            let videoURLeight = URL(string: VideoNameArray[Index].videoeight!)
+//            let videoURLnine  = URL(string: VideoNameArray[Index].videonine!)
+//            firstAsset   = AVAsset(url: videoURLone!)
+//            secondAsset  = AVAsset(url: videoURLtwo!)
+//            thirdAsset   = AVAsset(url: videoURLthree!)
+//            fourthAsset  = AVAsset(url: videoURLfour!)
+//            fifthAsset   = AVAsset(url: videoURLfive!)
+//            sixthAsset   = AVAsset(url: videoURLsix!)
+//            seventhAsset = AVAsset(url: videoURLseven!)
+//            eighthAsset  = AVAsset(url: videoURLeight!)
+//            ninethAsset  = AVAsset(url: videoURLnine!)
+//            /*thirdAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoThree")!)
+//             fourthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFour")!)
+//             fifthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoFive")!)
+//             sixthAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSix")!)
+//             seventhAsset = AVAsset(url:UserDefaults.standard.url(forKey: "VideoSeven")!)
+//             eighthAsset  = AVAsset(url:UserDefaults.standard.url(forKey: "VideoEight")!)
+//             ninethAsset   = AVAsset(url:UserDefaults.standard.url(forKey: "VideoNine")!)*/
+//            
+//            ///load record data
+//            setupRecorder()
+//            
+////            let videoURL = URL(string: VideoNameArray[Index].videonine!)
+//            Asset = AVAsset(url:videoURL!)
+//            //影片縮圖
+//            let asset = AVURLAsset(url: videoURL!, options: nil)
+//            let imgGenerator = AVAssetImageGenerator(asset: asset)
+//            imgGenerator.appliesPreferredTrackTransform = false
+//            
+//            do {
+//                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+//                let thumbnail = UIImage(cgImage: cgImage)
+//                
+//                videoPreviewLayer.image = thumbnail
+//                
+//            } catch let error {
+//                print("*** Error generating thumbnail: \(error)")
+//            }
+//            
+//            showTimeLabel()
+//            progressView.progress = progressCounter
+//            
+////            if (VideoNameArray[Index].audionine) != nil {
+//                ButtonPlay.isHidden = false
+//                switchOutput.isHidden = false
+//                UseRecordSwitch.isHidden = false
+////                AudioURL = URL(string: VideoNameArray[Index].audionine!)
+////                switchOutput.isEnabled = VideoNameArray[Index].useRecordnine
+////            }else{
+////                ButtonPlay.isHidden = true
+////                switchOutput.isHidden = true
+////                UseRecordSwitch.isHidden = true
+////                VideoNameArray[Index].useRecordnine = false
+////            }
+//
+//            
+//        }catch {
+//            print("Could not load data from coredb \(error.localizedDescription)")
+//        }
+        
 
         
+    }
+    
+    func getvideo(){
+        var video = videoArray?[0] as? [String: Any]
+        let videoone = video?["videoone_path"] as? String
+        firstAsset   = AVAsset(url: URL(string: videoone!)!)
+        let videotwo = video?["videotwo_path"] as? String
+        secondAsset   = AVAsset(url: URL(string: videotwo!)!)
+        let videothree = video?["videothree_path"] as? String
+        thirdAsset   = AVAsset(url: URL(string: videothree!)!)
+        let videofour = video?["videofour_path"] as? String
+        fourthAsset   = AVAsset(url: URL(string: videofour!)!)
+        let videofive = video?["videofive_path"] as? String
+        fifthAsset   = AVAsset(url: URL(string: videofive!)!)
+        let videosix = video?["videosix_path"] as? String
+        sixthAsset   = AVAsset(url: URL(string: videosix!)!)
+        let videoseven = video?["videoseven_path"] as? String
+        seventhAsset   = AVAsset(url: URL(string: videoseven!)!)
+        let videoeight = video?["videoeight_path"] as? String
+        eighthAsset   = AVAsset(url: URL(string: videoeight!)!)
+        let videonine = video?["videonine_path"] as? String
+        ninethAsset   = AVAsset(url: URL(string: videonine!)!)
     }
     
     func startActivityIndicator() {
@@ -190,21 +213,20 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 if saved {
                     
                     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                    let videourl = VideoInfo(context: context) // Link Task & Context
+//                    let videourl = VideoInfo(context: context) // Link Task & Context
                     
                     let vmilliseconds = Int(self.videoseconds!) * 60
                     let vmilli = (vmilliseconds % 60) + 39
                     let vsec = (vmilliseconds / 60) % 60
                     let vmin = vmilliseconds / 3600
                     
-                    videourl.videourl = outputURL?.absoluteString
-                    videourl.videoname = self.VideoNameArray[Index].videoname
-                    videourl.videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
+//                    videourl.videourl = outputURL?.absoluteString
+//                    videourl.videoname = self.VideoNameArray[Index].videoname
+//                    videourl.videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
                     
                     // Save the data to coredata
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                     
-                    print(self.VideoComplete)
 
                     let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的科學探究影片！\n你可以在「已完成」中找到你的傑作。", message: nil, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
@@ -401,7 +423,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
-          if VideoNameArray[Index].useRecordone {
+          /*if VideoNameArray[Index].useRecordone {
             
             let audioURLone = URL(string: VideoNameArray[Index].audioone!)
             audioAssetOne = AVAsset(url:audioURLone!)
@@ -661,7 +683,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 }
             }
             
-            /*            let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                        let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
                 try v4audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration),
                                                  of: fourthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
@@ -767,7 +789,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             StoreRecordPathInUserdefault()
         }else{
             switchOutput.text = "不使用此配音"
-            VideoNameArray[Index].useRecordnine = false
+//            VideoNameArray[Index].useRecordnine = false
         }
     }
 
@@ -780,10 +802,10 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     func play(){
         do{
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
             
-            let videoURL = URL(string: VideoNameArray[Index].videonine!)
-            Player = AVPlayer(url: videoURL!)
+//            let videoURL = URL(string: VideoNameArray[Index].videonine!)
+//            Player = AVPlayer(url: videoURL!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false
@@ -999,9 +1021,9 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func StoreRecordPathInUserdefault() {
-        VideoNameArray[Index].audionine = directoryURL()?.absoluteString
-        AudioURL = directoryURL()
-        VideoNameArray[Index].useRecordnine = true
+//        VideoNameArray[Index].audionine = directoryURL()?.absoluteString
+//        AudioURL = directoryURL()
+//        VideoNameArray[Index].useRecordnine = true
         //let userdefault = UserDefaults.standard
         //userdefault.set(directoryURL(), forKey: "RecordTwo")
         //userdefault.set(true, forKey: "UseRecordTwo")

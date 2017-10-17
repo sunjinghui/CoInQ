@@ -9,7 +9,8 @@
 import UIKit
 import AVFoundation
 import AVKit
-import CoreData
+import Alamofire
+import SwiftyJSON
 
 class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
@@ -24,9 +25,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
     
-    var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+//    var VideoNameArray = [VideoTaskInfo]()
+//    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
@@ -36,6 +37,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     var AudioFileName = "sound.m4a"
     var AudioURL: URL?
+    var audiourl: String?
+    var useaudio = false
+    var videourl: URL?
     
     var firstAsset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoOne")!)
     var Player: AVPlayer?
@@ -49,10 +53,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         if sender.isOn {
             switchOutput.text = "使用這個配音"
-            StoreRecordPathInUserdefault()
+            StoreUseRecordOrNot()
         }else{
             switchOutput.text = "不使用此配音"
-            VideoNameArray[Index].useRecordone = false
+            StoreUseRecordOrNot()
             //UserDefaults.standard.set(false, forKey: "UseRecordOne")
         }
     }
@@ -70,17 +74,14 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("Index = \(Index)")
         setupRecorder()
         progressView.progress = progressCounter
 
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            let videoURL = URL(string: VideoNameArray[Index].videoone!)
-
-            firstAsset = AVAsset(url: videoURL!)
+        do{
+            getvideo()
+            
             //影片縮圖
-            let asset = AVURLAsset(url: videoURL!, options: nil)
+            let asset = AVURLAsset(url: videourl!, options: nil)
             let imgGenerator = AVAssetImageGenerator(asset: asset)
             imgGenerator.appliesPreferredTrackTransform = false
             
@@ -96,19 +97,19 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             
             showTimeLabel()
 
-                if (VideoNameArray[Index].audioone) != nil {
+                if (audiourl) != nil {
                     print("audioone is not empty")
                     ButtonPlay.isHidden = false
                     switchOutput.isHidden = false
                     UseRecordSwitch.isHidden = false
-                    AudioURL = URL(string: VideoNameArray[Index].audioone!)
-                    switchOutput.isEnabled = VideoNameArray[Index].useRecordone
+                    AudioURL = URL(string: audiourl!)
+                    switchOutput.isEnabled = useaudio
 
                 }else{
                     ButtonPlay.isHidden = true
                     switchOutput.isHidden = true
                     UseRecordSwitch.isHidden = true
-                    VideoNameArray[Index].useRecordone = false
+                    useaudio = false
 
                 }
             
@@ -116,10 +117,18 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             print("Could not load data from coredb \(error.localizedDescription)")
         }
         
-        print(self.VideoNameArray[Index])
-        
     }
 
+    func getvideo(){
+        var video = videoArray?[0] as? [String: Any]
+        let videoone = video?["videoone_path"] as? String
+        videourl = URL(string: videoone!)
+        firstAsset   = AVAsset(url: videourl!)
+        let audioone = video?["audioone_path"] as? String
+        audiourl = audioone
+        let useaudioone = video?["useaudioone"] as? Bool
+        useaudio = useaudioone!
+    }
     
     @IBAction func Explain(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n這個自然現象中特別值得注意的重點。",preferredStyle: .alert)
@@ -130,9 +139,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func play(){
         do{
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            let videoURL = URL(string: VideoNameArray[Index].videoone!)
-            Player = AVPlayer(url: videoURL!)
+            Player = AVPlayer(url: videourl!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false
@@ -195,7 +202,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             showTimeLabel()
         }
         
-        StoreRecordPathInUserdefault()
+        StoreRecord(directoryURL()!,clip: 1)
 
     }
     
@@ -347,12 +354,56 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         UseRecordSwitch.isHidden = false
     }
     
-    func StoreRecordPathInUserdefault() {
-        VideoNameArray[Index].audioone = directoryURL()?.absoluteString
-        VideoNameArray[Index].useRecordone = true
+    func StoreRecord(_ audiourl: URL,clip: Int) {
+        
+        Alamofire.upload(
+            //同样采用post表单上传
+            multipartFormData: { multipartFormData in
+                
+                multipartFormData.append(audiourl, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
+                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
+                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
+                multipartFormData.append((audiourl.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "audiopath")
+                multipartFormData.append("\(clip)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "clip")
+                //                for (key, val) in parameters {
+                //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
+                //                }
+                
+                //SERVER ADD
+        },to: "http://140.122.76.201/CoInQ/v1/uploadaudio.php",
+          encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                //json处理
+                upload.responseJSON { response in
+                    //解包
+                    guard let result = response.result.value else { return }
+                    print("\(result)")
+
+                    let success = JSON(result)["success"].int ?? -1
+                    if success == 1 {
+                        print("Upload Succes")
+                    }else{
+                        print("Upload Failed")
+                    }
+                }
+                
+                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        })
+        
+        
 //        let userdefault = UserDefaults.standard
 //        userdefault.set(directoryURL(), forKey: "RecordOne")
 //        userdefault.set(true, forKey: "UseRecordOne")
+    }
+    
+    func StoreUseRecordOrNot(){
+        
     }
     
     deinit {

@@ -24,9 +24,9 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
     
-    var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
+//    var VideoNameArray = [VideoTaskInfo]()
+//    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
@@ -52,7 +52,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             StoreRecordPathInUserdefault()
         }else{
             switchOutput.text = "不使用此配音"
-            VideoNameArray[Index].useRecordfour = false
+//            VideoNameArray[Index].useRecordfour = false
             //UserDefaults.standard.set(false, forKey: "UseRecordTwo")
         }
     }
@@ -66,47 +66,47 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        do {
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            setupRecorder()
-            
-            let videoURL = URL(string: VideoNameArray[Index].videofour!)
-            Asset = AVAsset(url:videoURL!)
-            //影片縮圖
-            let asset = AVURLAsset(url: videoURL!, options: nil)
-            let imgGenerator = AVAssetImageGenerator(asset: asset)
-            imgGenerator.appliesPreferredTrackTransform = false
-            
-            do {
-                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                let thumbnail = UIImage(cgImage: cgImage)
-                
-                videoPreviewLayer.image = thumbnail
-                
-            } catch let error {
-                print("*** Error generating thumbnail: \(error)")
-            }
-            
-            showTimeLabel()
-            progressView.progress = progressCounter
-            
-            if (VideoNameArray[Index].audiofour) != nil {
-                ButtonPlay.isHidden = false
-                switchOutput.isHidden = false
-                UseRecordSwitch.isHidden = false
-                AudioURL = URL(string: VideoNameArray[Index].audiofour!)
-                switchOutput.isEnabled = VideoNameArray[Index].useRecordfour
-            }else{
-                ButtonPlay.isHidden = true
-                switchOutput.isHidden = true
-                UseRecordSwitch.isHidden = true
-                VideoNameArray[Index].useRecordfour = false
-            }
-            
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
-                
+//        do {
+//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+//            setupRecorder()
+//            
+//            let videoURL = URL(string: VideoNameArray[Index].videofour!)
+//            Asset = AVAsset(url:videoURL!)
+//            //影片縮圖
+//            let asset = AVURLAsset(url: videoURL!, options: nil)
+//            let imgGenerator = AVAssetImageGenerator(asset: asset)
+//            imgGenerator.appliesPreferredTrackTransform = false
+//            
+//            do {
+//                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+//                let thumbnail = UIImage(cgImage: cgImage)
+//                
+//                videoPreviewLayer.image = thumbnail
+//                
+//            } catch let error {
+//                print("*** Error generating thumbnail: \(error)")
+//            }
+//            
+//            showTimeLabel()
+//            progressView.progress = progressCounter
+//            
+//            if (VideoNameArray[Index].audiofour) != nil {
+//                ButtonPlay.isHidden = false
+//                switchOutput.isHidden = false
+//                UseRecordSwitch.isHidden = false
+//                AudioURL = URL(string: VideoNameArray[Index].audiofour!)
+//                switchOutput.isEnabled = VideoNameArray[Index].useRecordfour
+//            }else{
+//                ButtonPlay.isHidden = true
+//                switchOutput.isHidden = true
+//                UseRecordSwitch.isHidden = true
+//                VideoNameArray[Index].useRecordfour = false
+//            }
+//            
+//        }catch {
+//            print("Could not load data from coredb \(error.localizedDescription)")
+//        }
+        
     }
     
     @IBAction func Explain(_ sender: Any) {
@@ -118,10 +118,10 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     func play(){
         do{
-            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-            
-            let videoURL = URL(string: VideoNameArray[Index].videofour!)
-            Player = AVPlayer(url: videoURL!)
+//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
+//            
+//            let videoURL = URL(string: VideoNameArray[Index].videofour!)
+//            Player = AVPlayer(url: videoURL!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false
@@ -337,9 +337,10 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func StoreRecordPathInUserdefault() {
-        VideoNameArray[Index].audiofour = directoryURL()?.absoluteString
-        AudioURL = directoryURL()
-        VideoNameArray[Index].useRecordfour = true
+//        VideoNameArray[Index].audiofour = directoryURL()?.absoluteString
+//        AudioURL = directoryURL()
+//        VideoNameArray[Index].useRecordfour = true
+        
         //let userdefault = UserDefaults.standard
         //userdefault.set(directoryURL(), forKey: "RecordTwo")
         //userdefault.set(true, forKey: "UseRecordTwo")

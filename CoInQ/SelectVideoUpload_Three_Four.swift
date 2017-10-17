@@ -9,7 +9,7 @@
 import Foundation
 import MobileCoreServices
 import MediaPlayer
-import CoreData
+import Alamofire
 
 class SelectVideoUpload_Three_Four : UIViewController{
     
