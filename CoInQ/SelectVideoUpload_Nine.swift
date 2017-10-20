@@ -15,7 +15,7 @@ class SelectVideoUpload_Nine : UIViewController{
     
     @IBOutlet weak var RecordButton: UIButton!
     
-    var videoarray: [Any]?
+    var array: [Any]?
     var isURLempty = true
     var buttonClicked = true
     var loadingAssetOne = false
@@ -42,7 +42,7 @@ class SelectVideoUpload_Nine : UIViewController{
     
     func loadData() {
         let parameters: Parameters=["videoid": Index]
-        
+        array = []
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
@@ -58,9 +58,8 @@ class SelectVideoUpload_Nine : UIViewController{
                 }
                 // 2.
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
-                    self.videoarray = videoinfo
-                    print("video info loaded")
-                    var video = self.videoarray?[0] as? [String: Any]
+                    self.array = videoinfo
+                    var video = self.array?[0] as? [String: Any]
                     let videopath = video?["videonine_path"] as? String
                     if !(videopath == nil) {
                         let url = URL(string: videopath!)
@@ -73,57 +72,36 @@ class SelectVideoUpload_Nine : UIViewController{
                         self.ninecomplete.isHidden = false
                     }
                   
-                        self.isURLempty = true
-                        self.nullstoryboard = [String]()
-                        let videopathone = video?["videoone_path"] as? String
-                        if (videopathone == nil) {
-                            self.nullstoryboard.append("故事版 1")
-                            self.isURLempty = false
-                        }
-                        let videopathtwo = video?["videotwo_path"] as? String
-                        if (videopathtwo == nil) {
-                            self.nullstoryboard.append("故事版 2")
-                            self.isURLempty = false
-                        }
-                        let videopath3 = video?["videothree_path"] as? String
-                        if (videopath3 == nil) {
-                            self.nullstoryboard.append("故事版 3")
-                            self.isURLempty = false
-                        }
-                        let videopath4 = video?["videofour_path"] as? String
-                        if (videopath4 == nil) {
-                            self.nullstoryboard.append("故事版 4")
-                            self.isURLempty = false
-                        }
-                        let videopath5 = video?["videofive_path"] as? String
-                        if (videopath5 == nil) {
-                            self.nullstoryboard.append("故事版 5")
-                            self.isURLempty = false
-                        }
-                        let videopath6 = video?["videosix_path"] as? String
-                        if (videopath6 == nil) {
-                            self.nullstoryboard.append("故事版 6")
-                            self.isURLempty = false
-                        }
-                        let videopath7 = video?["videoseven_path"] as? String
-                        if (videopath7 == nil) {
-                            self.nullstoryboard.append("故事版 7")
-                            self.isURLempty = false
-                        }
-                        let videopath8 = video?["videoeight_path"] as? String
-                        if (videopath8 == nil) {
-                            self.nullstoryboard.append("故事版 8")
-                            self.isURLempty = false
-                        }
-                        let videopath9 = video?["videonine_path"] as? String
-                        if (videopath9 == nil) {
-                            self.nullstoryboard.append("故事版 9")
-                            self.isURLempty = false
-                        }
-                    
                 }
         }
 
+    }
+    
+    func check(_ videonum: String,_ storyboard: String){
+        var video = videoArray?[0] as? [String: Any]
+//        var video = array?[0] as? [String: Any]
+        let videopath = video?[videonum] as? String
+        if videopath == nil {
+            nullstoryboard.append(storyboard)
+            isURLempty = false
+        }
+    }
+    
+    func isVideoLoaded() -> Bool {
+        update()
+        isURLempty = true
+        nullstoryboard = [String]()
+        check("videoone_path", "故事版 1")
+        check("videotwo_path", "故事版 2")
+        check("videothree_path", "故事版 3")
+        check("videofour_path", "故事版 4")
+        check("videofive_path", "故事版 5")
+        check("videosix_path", "故事版 6")
+        check("videoseven_path", "故事版 7")
+        check("videoeight_path", "故事版 8")
+        check("videonine_path", "故事版 9")
+        
+        return isURLempty
     }
     
     override func didReceiveMemoryWarning() {
@@ -180,18 +158,41 @@ class SelectVideoUpload_Nine : UIViewController{
 //        }
 //    }
     
+    func update(){
+        let parameters: Parameters=["videoid": Index]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let videoinfo = JSON["videoURLtable"] as? [Any] {
+                    videoArray = videoinfo
+                    var video = videoArray?[0] as? [String: Any]
+                    print("info loaded")
+                }
+        }
+    }
     
     @IBAction func checkALLvideoLoaded(_ sender: AnyObject) {
-        loadData()
-
-        if isURLempty {
+        
+        
+        if isVideoLoaded() {
             
             let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
             
             present(recordNavigationController, animated: true, completion: nil)
             
         }else{
-            loadData()
             let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳 ,請確認\(printArray)", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)

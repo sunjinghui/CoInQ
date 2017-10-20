@@ -11,20 +11,18 @@ import MobileCoreServices
 import MediaPlayer
 import Alamofire
 import SwiftyJSON
+import Photos
 
     var videoArray: [Any]?
 
 class SelectVideoUpload_One_Two : UIViewController{
-
+    
     var loadingAssetOne = false
-//    var firstAsset: URL?
-//    var secondAsset: URL?
-
-//    var VideoNameArray = [VideoTaskInfo]()
-//    var managedObjextContext: NSManagedObjectContext!
     
     @IBOutlet weak var firstcomplete: UIImageView!
     @IBOutlet weak var secondcomplete: UIImageView!
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBAction func ExplainOne(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"圖片與影片是記錄「自然現象」最佳的工具喔！",preferredStyle: .alert)
@@ -89,16 +87,124 @@ class SelectVideoUpload_One_Two : UIViewController{
         
         firstcomplete.isHidden = true
         secondcomplete.isHidden = true
-//        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        loadData()
+        load()
+    }
+    
+    func load(){
+        check("videoone_path", self.firstcomplete,"videotwo_path", self.secondcomplete,1,2)
+    }
+    
+    func check(_ pathone: String,_ checkone: UIImageView,_ pathtwo: String,_ checktwo:UIImageView,_ clipone: Int,_ cliptwo: Int){
+        
+        let parameters: Parameters=["videoid": Index]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+
+                if let videoinfo = JSON["videoURLtable"] as? [Any] {
+                    videoArray = videoinfo
+                    let video = videoArray?[0] as? [String: Any]
+                    print(video)
+                    if !(video?.isEmpty)! {
+                        let existone = self.checkVideoExist(video!, pathone, clipone)
+                        let existtwo = self.checkVideoExist(video!, pathtwo, cliptwo)
+                        if !existone || !existtwo {
+                            self.startActivityIndicator()
+                            if  existone {
+                                print(1)
+                                checkone.isHidden = false
+                            }else{
+                                let videourl = video?[pathone] as? String
+                                let url = URL(string: videourl!)
+                                self.donloadVideo(url: url!, clipone)
+                            }
+                            if  existtwo {
+                                print(2)
+                                checktwo.isHidden = false
+                            }else{
+                                let videourl = video?[pathtwo] as? String
+                                let url = URL(string: videourl!)
+                                self.donloadVideo(url: url!, cliptwo)
+                            }
+                            self.stopActivityIndicator()
+                        }else{
+                            print(3)
+                            checkone.isHidden = false
+                            checktwo.isHidden = false
+                        }
+//                        self.checkVideoExist(video!, "videotwo_path", clip: 2)
+//                        self.checkVideoExist(video!, "videothree_path", clip: 3)
+//                        self.checkVideoExist(video!, "videofour_path", clip: 4)
+//                        self.checkVideoExist(video!, "videofive_path", clip: 5)
+//                        self.checkVideoExist(video!, "videosix_path", clip: 6)
+//                        self.checkVideoExist(video!, "videoseven_path", clip: 7)
+//                        self.checkVideoExist(video!, "videoeight_path", clip: 8)
+//                        self.checkVideoExist(video!, "videonine_path", clip: 9)
+                        
+//                    }else{
+//                        self.stopActivityIndicator()
+//                        let alertController = UIAlertController(title: "請檢察網路連線", message: nil, preferredStyle: .alert)
+//                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                        alertController.addAction(defaultAction)
+//                        self.present(alertController, animated: true, completion: nil)
+                    }
+
+                }
+        }
+
+    }
+    
+    func startActivityIndicator() {
+        let screenSize: CGRect = UIScreen.main.bounds
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
+        activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        
+        // Change background color and alpha channel here
+        activityIndicator.backgroundColor = UIColor.black
+        activityIndicator.clipsToBounds = true
+        activityIndicator.alpha = 0.5
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+        
+        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
+        {
+            (action) -> Void in
+            self.load()
+        }
+        )
+        alertController.addAction(checkagainAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func loadData(){
-        getvideoinfo(pathone: "videoone_path", checkone: self.firstcomplete, pathtwo: "videotwo_path", checktwo: self.secondcomplete)
+        getvideoinfo("videoone_path", self.firstcomplete, "videotwo_path", self.secondcomplete)
     }
     
-    func getvideoinfo(pathone: String,checkone: UIImageView,pathtwo: String,checktwo:UIImageView){
+    
+    func getvideoinfo(_ pathone: String,_ checkone: UIImageView,_ pathtwo: String,_ checktwo:UIImageView){
         
         let fileManager = FileManager.default
         
@@ -126,91 +232,121 @@ class SelectVideoUpload_One_Two : UIViewController{
                     let videotwo = video?[pathtwo] as? String
                     if !(videoone == nil) {
                         let url = URL(string: videoone!)
+                        //print("videoone\(videoone)")
                         if fileManager.fileExists(atPath: (url?.path)!) {
+                            checkone.isHidden = false
                             print("FILE 1 FOUND")
                         } else {
-                            self.donloadVideo(url: url!)
                             print("FILE 1 NOT FOUND")
                         }
-                        checkone.isHidden = false
+
                     }
                     if !(videotwo == nil) {
                         let url = URL(string: videotwo!)
                         if fileManager.fileExists(atPath: (url?.path)!) {
+                            checktwo.isHidden = false
                             print("FILE 2 FOUND")
                         } else {
-                            //self.donloadVideo(url: url!)
                             print("FILE 2 NOT FOUND")
                         }
-                        checktwo.isHidden = false
                     }
                 }
         }
     }
     
-    func donloadVideo(url : URL){
+
+    func checkVideoExist(_ videoinfo: [String: Any],_ videopath: String,_ clip: Int) -> Bool{
+        let video = videoinfo[videopath] as? String
+        if !(video == nil) {
+            let url = URL(string: video!)
+            //print("videoone\(videoone)")
+            if FileManager.default.fileExists(atPath: (url?.path)!) {
+                print("video \(clip) exist")
+                return true
+            } else {
+                return false
+            }
+        }else{
+            return true
+        }
+    }
+    //                self.donloadVideo(url: url!,clip: clip)
+
+    func donloadVideo(url : URL,_ clip: Int){
         
         let requestUrl = "http://140.122.76.201/CoInQ/upload/"
         let videoid = "\(Index)"
         let urls = requestUrl.appending(google_userid).appending("/").appending(videoid).appending("/").appending(url.lastPathComponent)
+        let videourl = URL(string: urls)
         
-        download(downloadUrl: urls, saveUrl: url.lastPathComponent, completion: nil)
-        
-//        Alamofire.request( requestUrl, method: .get)
-//            .downloadProgress { progress in
-//                print("Download Progress: \(progress.fractionCompleted)")
-//            }
-//            .responseData { response in
-//                if let data = response.result.value {
-//                    let image = UIImage(data: data)
-//                    if image != nil {
-//                        self.firstcomplete.image = image
-//                        print("image load success")
-//                    } else {
-//                        print("image hasn't been generated yet")
-//                    }
-//                }
-//        }
-    }
-    
-    func download(downloadUrl:String, saveUrl:String, completion: ((Bool, JSON) -> Void)?) {
+        let downloadfilename = UUID().uuidString + ".mov"
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let file = directoryURL.appendingPathComponent(saveUrl, isDirectory: false)
-            print(file)
+            let file = directoryURL.appendingPathComponent(downloadfilename, isDirectory: false)
             return (file, [.createIntermediateDirectories, .removePreviousFile])
         }
-        Alamofire.download(downloadUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).responseJSON { response in
-            if response.result.error == nil {
-                completion?(response.result.isSuccess,JSON(response.result.value as? NSDictionary ?? [:]))
-            } else {
-                print("error", response.result.error)
+        
+        Alamofire.download(videourl!, to: destination).validate().responseData { response in
+            print("destinationURL: \(response.destinationURL)")
+            let tmpurl = response.destinationURL
+            
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: tmpurl!)
+            }) { saved, error in
+                if saved {
+                    print("saved video \(clip) successfully")
+                    
+                    let parameters: Parameters=[
+                        "videoid":    Index,
+                        "videopath":  tmpurl!.absoluteString,
+                        "clip" : clip
+                    ]
+                    
+                    //Sending http post request
+                    Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadvideo.php", method: .post, parameters: parameters).responseJSON
+                        {
+                            response in
+                            print(response)
+                            
+                    }
+                    
+                    //                let fetchOptions = PHFetchOptions()
+                    //                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+                    //
+                    //                // After uploading we fetch the PHAsset for most recent video and then get its current location url
+                    //
+                    //                let fetchResult = PHAsset.fetchAssets(with: .video, options: fetchOptions).lastObject
+                    //                PHImageManager().requestAVAsset(forVideo: fetchResult!, options: nil, resultHandler: { (avurlAsset, audioMix, dict) in
+                    //                    let newObj = avurlAsset as! AVURLAsset
+                    //                    print("store path\(newObj.url)")
+                    //                })
+        
+                }
             }
         }
     }
 
-//    func loadData() {
-//        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-//        do {
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            
-//            if (VideoNameArray[Index].videoone) != nil {
-//                print("videoone is not empty")
-//                self.firstAsset = URL(string: VideoNameArray[Index].videoone!)
-//                firstcomplete.isHidden = false
-//            }
-//            
-//            if (VideoNameArray[Index].videotwo) != nil{
-//                print("videotwo is not empty")
-//                self.secondAsset = URL(string: VideoNameArray[Index].videotwo!)
-//                secondcomplete.isHidden = false
-//            }
-//        }catch {
-//            print("Could not load data from coredb \(error.localizedDescription)")
-//        }
 //
-//        
-//    }
+//        Alamofire.request( videourl!, method: .get)
+//            .downloadProgress { progress in
+//                print("Download Progress: \(progress.fractionCompleted)")
+//            }
+//            .responseData { response in
+//                print(response.result.value)
+//        }
+
+//        let downloadfilename = UUID().uuidString + ".mov"
+//        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+//        let savePath = (documentDirectory as NSString).appendingPathComponent(downloadfilename)
+//        let urll = URL(fileURLWithPath: savePath)
+
+        //        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+        //            let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        //            let file = directoryURL.appendingPathComponent(saveUrl, isDirectory: false)
+        //            print(file)
+        //            return (file, [.createIntermediateDirectories, .removePreviousFile])
+        //        }
+        
 
     
     override func didReceiveMemoryWarning() {
@@ -251,6 +387,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
+                            SelectVideoUpload_Nine().update()
                             check.isHidden = false
                         })
                         alert.addAction(action2)
@@ -290,38 +427,18 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
-//                firstAsset = avAsset
-//                firstcomplete.isHidden = false
-//                VideoNameArray[Index].videoone = firstAsset?.absoluteString
                 
                 let videourl = avAsset
-                let path = videourl.path
-                print(path)
-                if(FileManager.default.fileExists(atPath: path)){
-                    print("File exist")
-                }else{
-                    print("Not exist")
-                }
-                
+                print(videourl)
                 self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.firstcomplete)
                 loadData()
             } else {
                 message = "故事版2 影片已匯入成功！"
-//                secondAsset = avAsset
-//                secondcomplete.isHidden = false
-//                VideoNameArray[Index].videotwo = secondAsset?.absoluteString
-//                self.loadData()
+
                 let videoURL = avAsset
                 self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.secondcomplete)
                 loadData()
-
             }
-            
-            loadData()
-            
-//            let alert = UIAlertController(title: "太棒了", message: message, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-//            present(alert, animated: true, completion: nil)
             
 
             //let userdefault = UserDefaults.standard

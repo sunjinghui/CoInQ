@@ -35,7 +35,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var progressViewTimer: Timer?
     var milliseconds: Int = 0
     
-    var AudioFileName = "sound.m4a"
+    var AudioFileName = UUID().uuidString + ".m4a"
     var AudioURL: URL?
     var audiourl: String?
     var useaudio = false
@@ -77,7 +77,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         setupRecorder()
         progressView.progress = progressCounter
 
-        do{
             getvideo()
             
             //影片縮圖
@@ -113,9 +112,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
 
                 }
             
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
         
     }
 
@@ -124,10 +120,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         let videoone = video?["videoone_path"] as? String
         videourl = URL(string: videoone!)
         firstAsset   = AVAsset(url: videourl!)
-        let audioone = video?["audioone_path"] as? String
-        audiourl = audioone
-        let useaudioone = video?["useaudioone"] as? Bool
-        useaudio = useaudioone!
+//        let audioone = video?["audioone_path"] as? String
+//        audiourl = audioone
+//        let useaudioone = video?["useaudioone"] as? Bool
+//        useaudio = useaudioone!
     }
     
     @IBAction func Explain(_ sender: Any) {
@@ -138,7 +134,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func play(){
-        do{
             Player = AVPlayer(url: videourl!)
             let controller = AVPlayerViewController()
             controller.player = Player
@@ -149,10 +144,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             self.view.addSubview(controller.view)
             Player?.volume = 0.0
             Player?.play()
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
-        
     }
     
     func stopPlayer() {
@@ -201,8 +192,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             play()
             showTimeLabel()
         }
-        
-        StoreRecord(directoryURL()!,clip: 1)
 
     }
     
@@ -287,12 +276,17 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound.m4a")
+        let soundURL = documentDirectory.appendingPathComponent(AudioFileName)
         return soundURL
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        ButtonPlay.isEnabled = true
+        if !flag {
+            
+        }else{
+            ButtonPlay.isEnabled = true
+            StoreRecord(directoryURL()!,clip: 1)
+        }
     }
     
     /*func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
@@ -360,7 +354,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
                 
-                multipartFormData.append(audiourl, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
+                multipartFormData.append(audiourl, withName: "file")//, fileName: self.AudioFileName, mimeType: "audio/m4a")
                 multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
                 multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
                 multipartFormData.append((audiourl.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "audiopath")

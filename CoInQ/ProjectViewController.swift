@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import Alamofire
 import SwiftyJSON
+import Photos
 
 var Index = 0
 
@@ -70,13 +71,13 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 
                 self.deleteData(id: videoid!)
                 
-                self.loadData()
+//                self.loadData()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
             self.present(deleteAlert, animated: true, completion: nil)
-            loadData()
         }
+
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -95,13 +96,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     }
     
     func loadData() {
-//        let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-//        do {
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            self.VideoNameTableView.reloadData()
-//        }catch {
-//            print("Could not load data from coredb \(error.localizedDescription)")
-//        }
 
         let parameters: Parameters=["google_userid": google_userid]
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
@@ -123,12 +117,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                     self.VideoNameTableView.reloadData()
                 }
         }
-       
-//        if VideoNameArray.count == 0 {
-//            VideoNameTableView.backgroundView = TableEmpty
-//        }else{
-//            VideoNameTableView.backgroundView = nil
-//        }
 
     }
     
@@ -138,6 +126,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 response in
                 print(response)
         }
+        loadData()
     }
     
     @IBAction func AddVideoTask(_ sender: Any) {
@@ -168,7 +157,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         formater.dateFormat = "yyyy/MM/dd"
         let dateresult = formater.string(from: date)
         
-        let StartVideoTask = UIAlertAction(title:"開始製作影片", style: .default, handler:{
+        let StartVideoTask = UIAlertAction(title:"建立影片任務", style: .default, handler:{
             (action) -> Void in
             let VideoName = alertController.textFields?.first?.text
             if VideoName != ""{
@@ -237,8 +226,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             
             videotaskViewController.title = videoinfo["videoname"] as? String
             Index = (videoinfo["id"] as? Int)!
-            
         }
     }
+    
     
 }

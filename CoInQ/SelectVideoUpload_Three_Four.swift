@@ -40,7 +40,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     }
     
     func loaddata(){
-        SelectVideoUpload_One_Two().getvideoinfo(pathone: "videothree_path", checkone: self.threecomplete, pathtwo: "videofour_path", checktwo: self.fourcomplete)
+        SelectVideoUpload_One_Two().getvideoinfo("videothree_path", self.threecomplete, "videofour_path", self.fourcomplete)
     }
     
     override func didReceiveMemoryWarning() {

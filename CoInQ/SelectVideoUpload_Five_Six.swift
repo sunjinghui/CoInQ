@@ -41,7 +41,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
     }
     
     func loadData(){
-        SelectVideoUpload_One_Two().getvideoinfo(pathone: "videofive_path", checkone: self.fivecomplete, pathtwo: "videosix_path", checktwo: self.sixcomplete)
+        SelectVideoUpload_One_Two().getvideoinfo("videofive_path", self.fivecomplete, "videosix_path", self.sixcomplete)
     }
     
     override func didReceiveMemoryWarning() {

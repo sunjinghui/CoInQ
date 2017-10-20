@@ -27,7 +27,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     }
     
     func loadData() {
-        SelectVideoUpload_One_Two().getvideoinfo(pathone: "videoseven_path", checkone: self.sevencomplete, pathtwo: "videoeight_path", checktwo: self.eightcomplete)
+        SelectVideoUpload_One_Two().getvideoinfo("videoseven_path", self.sevencomplete, "videoeight_path", self.eightcomplete)
     }
     
     override func didReceiveMemoryWarning() {

@@ -24,20 +24,19 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
     
-//    var VideoNameArray = [VideoTaskInfo]()
-//    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-    
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
     var videolength: Double = 0
     var progressViewTimer: Timer?
     var milliseconds: Int = 0
     
-    var AudioFileName = "sound2.m4a"
+    var AudioFileName = "sound2.mp3"
     var AudioURL: URL?
+    var audiourl: String?
+    var useaudio = false
+    var videourl: URL?
     
-    var Asset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
+    var Asset: AVAsset?
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -66,48 +65,52 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        do {
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//        setupRecorder()
-//        
-//            let videoURL = URL(string: VideoNameArray[Index].videotwo!)
-//            Asset = AVAsset(url:videoURL!)
-//        //影片縮圖
-//        let asset = AVURLAsset(url: videoURL!, options: nil)
-//        let imgGenerator = AVAssetImageGenerator(asset: asset)
-//        imgGenerator.appliesPreferredTrackTransform = false
-//        
-//        do {
-//            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//            let thumbnail = UIImage(cgImage: cgImage)
-//            
-//            videoPreviewLayer.image = thumbnail
-//            
-//        } catch let error {
-//            print("*** Error generating thumbnail: \(error)")
-//        }
-//        
-//        showTimeLabel()
-//        progressView.progress = progressCounter
-//
-//            if (VideoNameArray[Index].audiotwo) != nil {
-//                ButtonPlay.isHidden = false
-//                switchOutput.isHidden = false
-//                UseRecordSwitch.isHidden = false
-//                AudioURL = URL(string: VideoNameArray[Index].audiotwo!)
-//                switchOutput.isEnabled = VideoNameArray[Index].useRecordtwo
-//
-//            }else{
-//                ButtonPlay.isHidden = true
-//                switchOutput.isHidden = true
-//                UseRecordSwitch.isHidden = true
-//                VideoNameArray[Index].useRecordtwo = false
-//            }
-//            
-//        }catch {
-//            print("Could not load data from coredb \(error.localizedDescription)")
-//        }
+        setupRecorder()
+        progressView.progress = progressCounter
         
+        getvideo()
+        
+        //影片縮圖
+        let asset = AVURLAsset(url: videourl!, options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        imgGenerator.appliesPreferredTrackTransform = false
+        
+        do {
+            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
+            
+            videoPreviewLayer.image = thumbnail
+            
+        } catch let error {
+            print("*** Error generating thumbnail: \(error)")
+        }
+        
+        showTimeLabel()
+        
+        if (audiourl) != nil {
+            print("audiotwo is not empty")
+            ButtonPlay.isHidden = false
+            switchOutput.isHidden = false
+            UseRecordSwitch.isHidden = false
+            AudioURL = URL(string: audiourl!)
+            switchOutput.isEnabled = useaudio
+            
+        }else{
+            ButtonPlay.isHidden = true
+            switchOutput.isHidden = true
+            UseRecordSwitch.isHidden = true
+            useaudio = false
+            
+        }
+
+        
+    }
+    
+    func getvideo(){
+        var video = videoArray?[0] as? [String: Any]
+        let videopath = video?["videotwo_path"] as? String
+        videourl = URL(string: videopath!)
+        Asset   = AVAsset(url: videourl!)
     }
     
     @IBAction func Explain(_ sender: Any) {
