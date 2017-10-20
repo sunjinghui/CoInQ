@@ -71,7 +71,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 
                 self.deleteData(id: videoid!)
                 
-//                self.loadData()
+                self.loadData()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)

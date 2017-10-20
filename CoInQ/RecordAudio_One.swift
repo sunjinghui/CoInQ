@@ -77,11 +77,12 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         setupRecorder()
         progressView.progress = progressCounter
 
-            getvideo()
+            getvideo("videoone_path")
             
             //影片縮圖
             let asset = AVURLAsset(url: videourl!, options: nil)
             let imgGenerator = AVAssetImageGenerator(asset: asset)
+        firstAsset = AVAsset(url: videourl!)
             imgGenerator.appliesPreferredTrackTransform = false
             
             do {
@@ -115,11 +116,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
     }
 
-    func getvideo(){
+    func getvideo(_ videopath: String){
         var video = videoArray?[0] as? [String: Any]
-        let videoone = video?["videoone_path"] as? String
+        let videoone = video?[videopath] as? String
         videourl = URL(string: videoone!)
-        firstAsset   = AVAsset(url: videourl!)
 //        let audioone = video?["audioone_path"] as? String
 //        audiourl = audioone
 //        let useaudioone = video?["useaudioone"] as? Bool

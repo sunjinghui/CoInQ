@@ -13,6 +13,8 @@ import Alamofire
 
 class SelectVideoUpload_Nine : UIViewController{
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     @IBOutlet weak var RecordButton: UIButton!
     
     var array: [Any]?
@@ -37,6 +39,10 @@ class SelectVideoUpload_Nine : UIViewController{
         ninecomplete.isHidden = true
         RecordButton.layer.cornerRadius = 8
         
+        checknine()
+    }
+    
+    func checknine(){
         loadData()
     }
     
@@ -60,16 +66,25 @@ class SelectVideoUpload_Nine : UIViewController{
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
                     self.array = videoinfo
                     var video = self.array?[0] as? [String: Any]
-                    let videopath = video?["videonine_path"] as? String
-                    if !(videopath == nil) {
-                        let url = URL(string: videopath!)
-                        if FileManager.default.fileExists(atPath: (url?.path)!) {
-                            print("FILE FOUND")
-                        } else {
-                            //self.donloadVideo(url: url!)
-                            print("FILE NOT FOUND")
-                        }
-                        self.ninecomplete.isHidden = false
+                    if !(video?.isEmpty)! {
+                        let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videonine_path", 9)
+                        
+                            switch (existone){
+                            case 1:
+                                self.ninecomplete.isHidden = false
+                            case 2:
+                                self.startActivityIndicator()
+
+                                let videourl = video?["videonine_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 9)
+                                self.stopActivityIndicator()
+
+                            case 3:
+                                break
+                            default: break
+                            }
+                        
                     }
                   
                 }
@@ -86,6 +101,41 @@ class SelectVideoUpload_Nine : UIViewController{
             isURLempty = false
         }
     }
+    
+    func startActivityIndicator() {
+        let screenSize: CGRect = UIScreen.main.bounds
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
+        activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        
+        // Change background color and alpha channel here
+        activityIndicator.backgroundColor = UIColor.black
+        activityIndicator.clipsToBounds = true
+        activityIndicator.alpha = 0.5
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+        
+        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
+        {
+            (action) -> Void in
+            self.checknine()
+        }
+        )
+        alertController.addAction(checkagainAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
     
     func isVideoLoaded() -> Bool {
         update()

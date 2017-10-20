@@ -55,6 +55,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var seventhAsset: AVAsset?
     var eighthAsset: AVAsset?
     var ninethAsset: AVAsset?
+    
+    var useRecordone : Bool = UserDefaults.standard.bool(forKey: "useRecordone")
 
 //    var VideoNameArray = [VideoTaskInfo]()
 //    var VideoComplete = [VideoInfo]()
@@ -412,22 +414,21 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             eighthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
             
             let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)
-            ninethInstruction.setOpacity(0.0, at: totalTIME)
+            //ninethInstruction.setOpacity(0.0, at: totalTIME)
             
             
             // 2.3
-            mainInstruction.layerInstructions = [firstInstruction, secondInstruction, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction]// , ninethInstruction]
+            mainInstruction.layerInstructions = [firstInstruction, secondInstruction, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction , ninethInstruction]
             let mainComposition = AVMutableVideoComposition()
             mainComposition.instructions = [mainInstruction]
             mainComposition.frameDuration = CMTimeMake(1, 30)
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
-          /*if VideoNameArray[Index].useRecordone {
+          if useRecordone {
             
-            let audioURLone = URL(string: VideoNameArray[Index].audioone!)
+            let audioURLone =  UserDefaults.standard.url(forKey: "audiopath")
             audioAssetOne = AVAsset(url:audioURLone!)
-            print(VideoNameArray[Index].useRecordone)
             
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -451,6 +452,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 }
              
             }
+            
+            /*
             
             // Record Auido Two
             if VideoNameArray[Index].useRecordtwo  {

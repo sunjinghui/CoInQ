@@ -18,6 +18,8 @@ class SelectVideoUpload_Five_Six : UIViewController{
     @IBOutlet weak var fivecomplete: UIImageView!
     @IBOutlet weak var sixcomplete: UIImageView!
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     @IBAction func ExplainFive(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"便條紙是一個適合用來\n分類與比較證據的小工具喔！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
@@ -37,12 +39,138 @@ class SelectVideoUpload_Five_Six : UIViewController{
         fivecomplete.isHidden = true
         sixcomplete.isHidden = true
         
+        check()
+    }
+    
+    func check(){
         loadData()
     }
     
     func loadData(){
-        SelectVideoUpload_One_Two().getvideoinfo("videofive_path", self.fivecomplete, "videosix_path", self.sixcomplete)
+        
+        let parameters: Parameters=["videoid": Index]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                
+                if let videoinfo = JSON["videoURLtable"] as? [Any] {
+                    videoArray = videoinfo
+                    let video = videoArray?[0] as? [String: Any]
+                    if !(video?.isEmpty)! {
+                        let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videofive_path", 5)
+                        let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videosix_path", 6)
+                        if existone == 2 || existtwo == 2 {
+                            print("first \(existone) \(existtwo)")
+                            
+                            self.startActivityIndicator()
+                            
+                            switch (existone){
+                            case 1:
+                                self.fivecomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videofive_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 5)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            switch (existtwo){
+                            case 1:
+                                self.sixcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videosix_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 6)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            
+                            self.stopActivityIndicator()
+                        }else if existone == 3 || existtwo == 3 {
+                            print("second \(existone) \(existtwo)")
+                            
+                            switch (existone){
+                            case 1:
+                                self.fivecomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videofive_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 5)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            switch (existtwo){
+                            case 1:
+                                self.sixcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videosix_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 6)
+                            case 3:
+                                break
+                            default: break
+                            }
+                        }else{
+                            print("third \(existone) \(existtwo)")
+                            self.fivecomplete.isHidden = false
+                            self.sixcomplete.isHidden = false
+                        }
+                        
+                    }
+                    
+                }
+        }
+        
     }
+
+    
+    func startActivityIndicator() {
+        let screenSize: CGRect = UIScreen.main.bounds
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
+        activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        
+        // Change background color and alpha channel here
+        activityIndicator.backgroundColor = UIColor.black
+        activityIndicator.clipsToBounds = true
+        activityIndicator.alpha = 0.5
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+        
+        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
+        {
+            (action) -> Void in
+            self.check()
+        }
+        )
+        alertController.addAction(checkagainAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

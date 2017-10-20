@@ -18,17 +18,144 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     @IBOutlet weak var sevencomplete: UIImageView!
     @IBOutlet weak var eightcomplete: UIImageView!
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sevencomplete.isHidden = true
         eightcomplete.isHidden = true
         
+        check()
+    }
+    
+    func check(){
         loadData()
     }
     
     func loadData() {
-        SelectVideoUpload_One_Two().getvideoinfo("videoseven_path", self.sevencomplete, "videoeight_path", self.eightcomplete)
+        
+        let parameters: Parameters=["videoid": Index]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                
+                if let videoinfo = JSON["videoURLtable"] as? [Any] {
+                    videoArray = videoinfo
+                    let video = videoArray?[0] as? [String: Any]
+                    if !(video?.isEmpty)! {
+                        let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoseven_path", 7)
+                        let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoeight_path", 8)
+                        if existone == 2 || existtwo == 2 {
+                            print("first \(existone) \(existtwo)")
+                            
+                            self.startActivityIndicator()
+                            
+                            switch (existone){
+                            case 1:
+                                self.sevencomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videoseven_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 7)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            switch (existtwo){
+                            case 1:
+                                self.eightcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videoeight_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 8)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            
+                            self.stopActivityIndicator()
+                        }else if existone == 3 || existtwo == 3 {
+                            print("second \(existone) \(existtwo)")
+                            
+                            switch (existone){
+                            case 1:
+                                self.sevencomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videoseven_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 7)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            switch (existtwo){
+                            case 1:
+                                self.eightcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videoeight_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 8)
+                            case 3:
+                                break
+                            default: break
+                            }
+                        }else{
+                            print("third \(existone) \(existtwo)")
+                            self.sevencomplete.isHidden = false
+                            self.eightcomplete.isHidden = false
+                        }
+                        
+                    }
+                    
+                }
+        }
+        
     }
+    
+    func startActivityIndicator() {
+        let screenSize: CGRect = UIScreen.main.bounds
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
+        activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        
+        // Change background color and alpha channel here
+        activityIndicator.backgroundColor = UIColor.black
+        activityIndicator.clipsToBounds = true
+        activityIndicator.alpha = 0.5
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+        
+        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
+        {
+            (action) -> Void in
+            self.check()
+        }
+        )
+        alertController.addAction(checkagainAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

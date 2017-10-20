@@ -84,18 +84,16 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         firstcomplete.isHidden = true
         secondcomplete.isHidden = true
-        
         load()
     }
     
     func load(){
-        check("videoone_path", self.firstcomplete,"videotwo_path", self.secondcomplete,1,2)
+        check()
     }
     
-    func check(_ pathone: String,_ checkone: UIImageView,_ pathtwo: String,_ checktwo:UIImageView,_ clipone: Int,_ cliptwo: Int){
+    func check(){
         
         let parameters: Parameters=["videoid": Index]
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
@@ -115,49 +113,69 @@ class SelectVideoUpload_One_Two : UIViewController{
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
                     videoArray = videoinfo
                     let video = videoArray?[0] as? [String: Any]
-                    print(video)
                     if !(video?.isEmpty)! {
-                        let existone = self.checkVideoExist(video!, pathone, clipone)
-                        let existtwo = self.checkVideoExist(video!, pathtwo, cliptwo)
-                        if !existone || !existtwo {
+                        let existone = self.checkVideoExist(video!, "videoone_path", 1)
+                        let existtwo = self.checkVideoExist(video!, "videotwo_path", 2)
+                        if existone == 2 || existtwo == 2 {
+                            print("first \(existone) \(existtwo)")
+                            
                             self.startActivityIndicator()
-                            if  existone {
-                                print(1)
-                                checkone.isHidden = false
-                            }else{
-                                let videourl = video?[pathone] as? String
+                            
+                            switch (existone){
+                            case 1:
+                                self.firstcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videoone_path"] as? String
                                 let url = URL(string: videourl!)
-                                self.donloadVideo(url: url!, clipone)
+                                self.donloadVideo(url: url!, 1)
+                            case 3:
+                                break
+                            default: break
                             }
-                            if  existtwo {
-                                print(2)
-                                checktwo.isHidden = false
-                            }else{
-                                let videourl = video?[pathtwo] as? String
+                            switch (existtwo){
+                            case 1:
+                                self.secondcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videotwo_path"] as? String
                                 let url = URL(string: videourl!)
-                                self.donloadVideo(url: url!, cliptwo)
+                                self.donloadVideo(url: url!, 2)
+                            case 3:
+                                break
+                            default: break
                             }
+
                             self.stopActivityIndicator()
+                        }else if existone == 3 || existtwo == 3 {
+                            print("second \(existone) \(existtwo)")
+
+                            switch (existone){
+                            case 1:
+                                self.firstcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videoone_path"] as? String
+                                let url = URL(string: videourl!)
+                                self.donloadVideo(url: url!, 1)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            switch (existtwo){
+                            case 1:
+                                self.secondcomplete.isHidden = false
+                            case 2:
+                                let videourl = video?["videotwo_path"] as? String
+                                let url = URL(string: videourl!)
+                                self.donloadVideo(url: url!, 2)
+                            case 3:
+                                break
+                            default: break
+                            }
                         }else{
-                            print(3)
-                            checkone.isHidden = false
-                            checktwo.isHidden = false
+                            print("third \(existone) \(existtwo)")
+                            self.firstcomplete.isHidden = false
+                            self.secondcomplete.isHidden = false
                         }
-//                        self.checkVideoExist(video!, "videotwo_path", clip: 2)
-//                        self.checkVideoExist(video!, "videothree_path", clip: 3)
-//                        self.checkVideoExist(video!, "videofour_path", clip: 4)
-//                        self.checkVideoExist(video!, "videofive_path", clip: 5)
-//                        self.checkVideoExist(video!, "videosix_path", clip: 6)
-//                        self.checkVideoExist(video!, "videoseven_path", clip: 7)
-//                        self.checkVideoExist(video!, "videoeight_path", clip: 8)
-//                        self.checkVideoExist(video!, "videonine_path", clip: 9)
-                        
-//                    }else{
-//                        self.stopActivityIndicator()
-//                        let alertController = UIAlertController(title: "請檢察網路連線", message: nil, preferredStyle: .alert)
-//                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//                        alertController.addAction(defaultAction)
-//                        self.present(alertController, animated: true, completion: nil)
+
                     }
 
                 }
@@ -198,79 +216,22 @@ class SelectVideoUpload_One_Two : UIViewController{
         alertController.addAction(checkagainAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    func loadData(){
-        getvideoinfo("videoone_path", self.firstcomplete, "videotwo_path", self.secondcomplete)
-    }
-    
-    
-    func getvideoinfo(_ pathone: String,_ checkone: UIImageView,_ pathtwo: String,_ checktwo:UIImageView){
-        
-        let fileManager = FileManager.default
-        
-        
-        let parameters: Parameters=["videoid": Index]
-        
-        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
-            {
-                response in
-                
-                guard response.result.isSuccess else {
-                    let errorMessage = response.result.error?.localizedDescription
-                    print(errorMessage!)
-                    return
-                }
-                guard let JSON = response.result.value as? [String: Any] else {
-                    print("JSON formate error")
-                    return
-                }
-                // 2.
-                if let videoinfo = JSON["videoURLtable"] as? [Any] {
-                    videoArray = videoinfo
-                    var video = videoArray?[0] as? [String: Any]
-                    let videoone = video?[pathone] as? String
-                    let videotwo = video?[pathtwo] as? String
-                    if !(videoone == nil) {
-                        let url = URL(string: videoone!)
-                        //print("videoone\(videoone)")
-                        if fileManager.fileExists(atPath: (url?.path)!) {
-                            checkone.isHidden = false
-                            print("FILE 1 FOUND")
-                        } else {
-                            print("FILE 1 NOT FOUND")
-                        }
 
-                    }
-                    if !(videotwo == nil) {
-                        let url = URL(string: videotwo!)
-                        if fileManager.fileExists(atPath: (url?.path)!) {
-                            checktwo.isHidden = false
-                            print("FILE 2 FOUND")
-                        } else {
-                            print("FILE 2 NOT FOUND")
-                        }
-                    }
-                }
-        }
-    }
-    
-
-    func checkVideoExist(_ videoinfo: [String: Any],_ videopath: String,_ clip: Int) -> Bool{
+    func checkVideoExist(_ videoinfo: [String: Any],_ videopath: String,_ clip: Int) -> Int{
         let video = videoinfo[videopath] as? String
         if !(video == nil) {
             let url = URL(string: video!)
             //print("videoone\(videoone)")
             if FileManager.default.fileExists(atPath: (url?.path)!) {
                 print("video \(clip) exist")
-                return true
+                return 1
             } else {
-                return false
+                return 2
             }
         }else{
-            return true
+            return 3
         }
     }
-    //                self.donloadVideo(url: url!,clip: clip)
 
     func donloadVideo(url : URL,_ clip: Int){
         
@@ -431,13 +392,13 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 let videourl = avAsset
                 print(videourl)
                 self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.firstcomplete)
-                loadData()
+                load()
             } else {
                 message = "故事版2 影片已匯入成功！"
 
                 let videoURL = avAsset
                 self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.secondcomplete)
-                loadData()
+                load()
             }
             
 
