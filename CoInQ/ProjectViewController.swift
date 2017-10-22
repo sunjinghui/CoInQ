@@ -21,18 +21,18 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     @IBOutlet weak var TableEmpty: UIView!
     
     var videoInfoArray: [Any]?
-//    var VideoNameArray = [VideoTaskInfo]()
-//    var managedObjextContext: NSManagedObjectContext!
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.videoInfoArray?.count {
-            VideoNameTableView.backgroundView = nil
-            return num
-        } else {
-            VideoNameTableView.backgroundView = TableEmpty
-            return 0
-        }
+         let num = self.videoInfoArray?.count
+            if num == nil || num == 0 {
+                VideoNameTableView.backgroundView = TableEmpty
+                return 0
+            } else {
+                VideoNameTableView.backgroundView = nil
+                return num!
+            }
+        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,7 +45,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             print("Get row \(indexPath.row) error")
             return cell
         }
-            //let VideoNamearray = VideoNameArray[indexPath.row]
             cell.VideoName.text = videoInfo["videoname"] as? String
             cell.Date.text = videoInfo["date"] as? String
         
@@ -63,19 +62,19 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
             let deleteAlert = UIAlertController(title:"確定要刪除影片任務嗎？",message: "刪除影片任務後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-//                self.managedObjextContext.delete(self.VideoNameArray[indexPath.row])
-//                self.VideoNameArray.remove(at: indexPath.row)
                 
                 let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
                 let videoid = videoInfo?["id"] as? Int
                 
                 self.deleteData(id: videoid!)
                 
-                self.loadData()
+                self.reload()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
             self.present(deleteAlert, animated: true, completion: nil)
+            self.reload()
+
         }
 
     }
@@ -92,16 +91,21 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         
 //        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-        loadData()
+        reload()
     }
     
-    func loadData() {
-
+//    func reload(){
+//        SelectVideoUpload_Nine().update()
+//        VideoNameTableView.reloadData()
+//    }
+    
+    func reload() {
+        
         let parameters: Parameters=["google_userid": google_userid]
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
-                
+                print(response)
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
                     print("1\(errorMessage!)")
@@ -112,8 +116,15 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                     return
                 }
                 // 2.
-                if let videoinfo = JSON["table"] as? [Any] {
+                let error = JSON["error"] as! Bool
+                if error {
+                    self.videoInfoArray = []
+                    print(self.videoInfoArray?.count)
+                    self.VideoNameTableView.reloadData()
+
+                } else if let videoinfo = JSON["table"] as? [Any] {
                     self.videoInfoArray = videoinfo
+                    print(self.videoInfoArray)
                     self.VideoNameTableView.reloadData()
                 }
         }
@@ -125,24 +136,24 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             {
                 response in
                 print(response)
+                if let result = response.result.value {
+                    let jsonData = result as! NSDictionary
+                    let error = jsonData.value(forKey: "error") as? Bool
+                    if error! {
+                        let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
+                        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
+                        self.present(deleteAlert, animated: true, completion: nil)
+                        self.reload()
+                    }else{
+                        self.reload()
+                    }
+                    
+                }
         }
-        loadData()
+        
     }
     
     @IBAction func AddVideoTask(_ sender: Any) {
-        //  Delete the data in the VideoInfo
-//        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "VideoInfo")
-//        let request = NSBatchDeleteRequest(fetchRequest: fetch)
-//        do{
-//            try managedObjextContext.execute(request)
-//        }catch{
-//            
-//        }
-//        print(VideoInfo())
-//        
-//        let videotaskitem = VideoTaskInfo(context: managedObjextContext)
-//        
-//        Index = self.VideoNameArray.count
         
         let alertController = UIAlertController(title:"探究影片名稱",message: "生活中有各式各樣的自然現象\n這些現象是如何產生的呢？\n讓我們一起來探究並透過\n影音將這探究過程記錄下來！", preferredStyle: .alert)
         
@@ -161,11 +172,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             (action) -> Void in
             let VideoName = alertController.textFields?.first?.text
             if VideoName != ""{
-
-//                    videotaskitem.videoname = VideoName?.text
-//                    videotaskitem.creatdate = dateresult
-//                    do {
-//                        try self.managedObjextContext.save()
                         //UPLOAD VideoTask
                         let parameters: Parameters=[
                             "google_userid": google_userid,
@@ -177,28 +183,18 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadvideo.php", method: .post, parameters: parameters).responseJSON
                             {
                                 response in
-                                //printing response
                                 print(response)
                                 
-                                //getting the json value from the server
                                 //                    if let result = response.result.value {
+                                    //                        let jsonData = result as! NSDictionary
                                 //
-                                //                        //converting it as NSDictionary
-                                //                        let jsonData = result as! NSDictionary
-                                //
-                                //                        //displaying the message in label
                                 //                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
                                 //                        print(jsonData.value(forKey: "message") as Any)
                                 //                    }
                         }
                         
-                self.loadData()
+                self.reload()
 
-//                    }catch {
-//                        print("Could not save data \(error.localizedDescription)")
-//                    }
-//                UserDefaults.standard.removeObject(forKey: "VideotaskTitle")
-//                UserDefaults.standard.set(VideoName, forKey: "VideotaskTitle")
 //                self.performSegue(withIdentifier: "startvideotask", sender: self)
                 
             }else{
@@ -214,7 +210,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
-        loadData()
+        reload()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

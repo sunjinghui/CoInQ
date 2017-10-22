@@ -23,6 +23,9 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
+    var audiourl: String?
+    var useaudio = false
+
     
 //    var VideoNameArray = [VideoTaskInfo]()
 //    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -33,7 +36,8 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     var videolength: Double = 0
     var progressViewTimer: Timer?
     var milliseconds: Int = 0
-    
+    var videourl : URL?
+
     var AudioFileName = "sound3.m4a"
     var AudioURL: URL?
     
@@ -65,31 +69,44 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRecorder()
 
-//        do {
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            setupRecorder()
-//            
-//            let videoURL = URL(string: VideoNameArray[Index].videothree!)
-//            Asset = AVAsset(url:videoURL!)
-//            //影片縮圖
-//            let asset = AVURLAsset(url: videoURL!, options: nil)
-//            let imgGenerator = AVAssetImageGenerator(asset: asset)
-//            imgGenerator.appliesPreferredTrackTransform = false
-//            
-//            do {
-//                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//                let thumbnail = UIImage(cgImage: cgImage)
-//                
-//                videoPreviewLayer.image = thumbnail
-//                
-//            } catch let error {
-//                print("*** Error generating thumbnail: \(error)")
-//            }
-//            
-//            showTimeLabel()
-//            progressView.progress = progressCounter
-//            
+        videourl = RecordAudio_One().getvideo("videothree_path")
+            Asset = AVAsset(url:videourl!)
+            //影片縮圖
+            let asset = AVURLAsset(url: videourl!, options: nil)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            imgGenerator.appliesPreferredTrackTransform = false
+            
+            do {
+                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+                
+                videoPreviewLayer.image = thumbnail
+                
+            } catch let error {
+                print("*** Error generating thumbnail: \(error)")
+            }
+            
+            showTimeLabel()
+            progressView.progress = progressCounter
+        
+        if (audiourl) != nil {
+            print("audioone is not empty")
+            ButtonPlay.isHidden = false
+            switchOutput.isHidden = false
+            UseRecordSwitch.isHidden = false
+            AudioURL = URL(string: audiourl!)
+            switchOutput.isEnabled = useaudio
+            
+        }else{
+            ButtonPlay.isHidden = true
+            switchOutput.isHidden = true
+            UseRecordSwitch.isHidden = true
+            useaudio = false
+            
+        }
+        
 //            if (VideoNameArray[Index].audiothree) != nil {
 //                ButtonPlay.isHidden = false
 //                switchOutput.isHidden = false
@@ -102,10 +119,6 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
 //                UseRecordSwitch.isHidden = true
 //                VideoNameArray[Index].useRecordthree = false
 //            }
-//            
-//        }catch {
-//            print("Could not load data from coredb \(error.localizedDescription)")
-//        }
         
     }
     
@@ -118,10 +131,7 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     
     func play(){
         do{
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            
-//            let videoURL = URL(string: VideoNameArray[Index].videothree!)
-//            Player = AVPlayer(url: videoURL!)
+            Player = AVPlayer(url: videourl!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false

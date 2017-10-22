@@ -23,11 +23,9 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
-    
-//    var VideoNameArray = [VideoTaskInfo]()
-//    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
-    
+    var audiourl: String?
+    var useaudio = false
+
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
     var videolength: Double = 0
@@ -36,8 +34,9 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     var AudioFileName = "sound5.m4a"
     var AudioURL: URL?
-    
-    var Asset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
+    var videourl : URL?
+
+    var Asset: AVAsset?
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -66,46 +65,44 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        do {
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            setupRecorder()
-//            
-//            let videoURL = URL(string: VideoNameArray[Index].videofive!)
-//            Asset = AVAsset(url:videoURL!)
-//            //影片縮圖
-//            let asset = AVURLAsset(url: videoURL!, options: nil)
-//            let imgGenerator = AVAssetImageGenerator(asset: asset)
-//            imgGenerator.appliesPreferredTrackTransform = false
-//            
-//            do {
-//                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//                let thumbnail = UIImage(cgImage: cgImage)
-//                
-//                videoPreviewLayer.image = thumbnail
-//                
-//            } catch let error {
-//                print("*** Error generating thumbnail: \(error)")
-//            }
-//            
-//            showTimeLabel()
-//            progressView.progress = progressCounter
-//            
-//            if (VideoNameArray[Index].audiofive) != nil {
-//                ButtonPlay.isHidden = false
-//                switchOutput.isHidden = false
-//                UseRecordSwitch.isHidden = false
-//                AudioURL = URL(string: VideoNameArray[Index].audiofive!)
-//                switchOutput.isEnabled = VideoNameArray[Index].useRecordfive
-//            }else{
-//                ButtonPlay.isHidden = true
-//                switchOutput.isHidden = true
-//                UseRecordSwitch.isHidden = true
-//                VideoNameArray[Index].useRecordfive = false
-//            }
-//            
-//        }catch {
-//            print("Could not load data from coredb \(error.localizedDescription)")
-//        }
+            setupRecorder()
+            
+        videourl = RecordAudio_One().getvideo("videofive_path")
+            Asset = AVAsset(url:videourl!)
+            //影片縮圖
+            let asset = AVURLAsset(url: videourl!, options: nil)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            imgGenerator.appliesPreferredTrackTransform = false
+            
+            do {
+                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+                
+                videoPreviewLayer.image = thumbnail
+                
+            } catch let error {
+                print("*** Error generating thumbnail: \(error)")
+            }
+            
+            showTimeLabel()
+            progressView.progress = progressCounter
+            
+        if (audiourl) != nil {
+            print("audioone is not empty")
+            ButtonPlay.isHidden = false
+            switchOutput.isHidden = false
+            UseRecordSwitch.isHidden = false
+            AudioURL = URL(string: audiourl!)
+            switchOutput.isEnabled = useaudio
+            
+        }else{
+            ButtonPlay.isHidden = true
+            switchOutput.isHidden = true
+            UseRecordSwitch.isHidden = true
+            useaudio = false
+            
+        }
+        
         
     }
     
@@ -118,10 +115,7 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     func play(){
         do{
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            
-//            let videoURL = URL(string: VideoNameArray[Index].videofive!)
-//            Player = AVPlayer(url: videoURL!)
+            Player = AVPlayer(url: videourl!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false

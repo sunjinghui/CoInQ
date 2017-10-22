@@ -8,20 +8,26 @@
 
 import AVFoundation
 import AVKit
-import CoreData
+import Alamofire
 
 class CompeleteViewController : UIViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var VideoTableView: UITableView!
     @IBOutlet weak var TableEmpty: UIView!
     
-    
-    var Video = [VideoInfo]()
-    var managedObjextContext: NSManagedObjectContext!
+    var FinalVideoArray: [Any]?
+    var finalvideoURL: String?
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Video.count
+        let num = self.FinalVideoArray?.count
+        if num == nil || num == 0 {
+            VideoTableView.backgroundView = TableEmpty
+            return 0
+        } else {
+            VideoTableView.backgroundView = nil
+            return num!
+        }
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -29,12 +35,15 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         var cell: TableView_cellcompletevideo
         
         cell = tableView.dequeueReusableCell(withIdentifier: "cellvideocomplete", for: indexPath) as! TableView_cellcompletevideo
-        let Videoarray = Video[indexPath.row]
-        cell.videoname.text = Videoarray.videoname
-        cell.videolength.text = Videoarray.videolength
-        
+        guard let finalvideo = self.FinalVideoArray?[indexPath.row] as? [String: Any] else {
+            print("Get row \(indexPath.row) error")
+            return cell
+        }
+        cell.videoname.text = finalvideo["videoname"] as? String
+        cell.videolength.text = finalvideo["videolength"] as? String
+        finalvideoURL = finalvideo["finalvideopath"] as? String
         //影片縮圖
-        let videoURL = URL(string: Videoarray.videourl!)
+        let videoURL = URL(string: finalvideoURL!)
         let asset = AVURLAsset(url: videoURL!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = false
@@ -63,8 +72,11 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             
             let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-                self.managedObjextContext.delete(self.Video[indexPath.row])
-                self.Video.remove(at: indexPath.row)
+                let finalvideo = self.FinalVideoArray?[indexPath.row] as? [String: Any]
+                let videoid = finalvideo?["id"] as? Int
+                
+                self.deleteData(id: videoid!)
+                
                 self.loadData()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
@@ -76,8 +88,8 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Index = indexPath.row
-        let Player = AVPlayer(url: URL(string:Video[indexPath.row].videourl!)!)
+        
+        let Player = AVPlayer(url: URL(string: finalvideoURL!)!)
         let playerViewController = AVPlayerViewController()
         playerViewController.player = Player
         self.present(playerViewController,animated: true){
@@ -116,26 +128,54 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         super.viewDidLoad()
         VideoTableView.tableFooterView = UIView(frame: .zero)
         
-        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
         loadData()
     }
     
     func loadData() {
-        //let videoRequest: NSFetchRequest<VideoInfo> = VideoInfo.fetchRequest()
-
-        do {
-            Video = try managedObjextContext.fetch(VideoInfo.fetchRequest())
-            
-            self.VideoTableView.reloadData()
-
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
+        let parameters: Parameters=["google_userid": google_userid]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getFinalVideo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                print(response)
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print("\(errorMessage!)")
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                let error = JSON["error"] as! Bool
+                if error {
+                    self.FinalVideoArray = []
+                    self.VideoTableView.reloadData()
+                    
+                } else if let FinalVideo = JSON["table"] as? [Any] {
+                    self.FinalVideoArray = FinalVideo
+                    self.VideoTableView.reloadData()
+                }
         }
-        if Video.count == 0 {
-            VideoTableView.backgroundView = TableEmpty
-        }else{
-            VideoTableView.backgroundView = nil
+        
+    }
+    
+    func deleteData(id: Int){
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteFinalVideo.php", method: .post, parameters: ["videoid":id]).responseJSON
+            {
+                response in
+                print(response)
+                if let result = response.result.value {
+                    let jsonData = result as! NSDictionary
+                    let error = jsonData.value(forKey: "error") as? Bool
+                    if error! {
+                        let deleteAlert = UIAlertController(title:"提示",message: "影片刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
+                        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
+                        self.present(deleteAlert, animated: true, completion: nil)
+                    }else{
+                        self.loadData()
+                    }
+                }
         }
         
     }

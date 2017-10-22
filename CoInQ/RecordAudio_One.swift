@@ -37,11 +37,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     var AudioFileName = UUID().uuidString + ".m4a"
     var AudioURL: URL?
-    var audiourl: String?
     var useaudio = false
-    var videourl: URL?
+    var videourl : URL?
     
-    var firstAsset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoOne")!)
+    var firstAsset: AVAsset?
     var Player: AVPlayer?
     
     let recordSettings = [AVSampleRateKey : NSNumber(value: Float(44100.0) as Float),
@@ -53,11 +52,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         
         if sender.isOn {
             switchOutput.text = "使用這個配音"
-            StoreUseRecordOrNot()
+            UserDefaults.standard.set(true, forKey: "userecordone")
         }else{
             switchOutput.text = "不使用此配音"
-            StoreUseRecordOrNot()
-            //UserDefaults.standard.set(false, forKey: "UseRecordOne")
+            UserDefaults.standard.set(false, forKey: "userecordone")
         }
     }
     
@@ -74,15 +72,15 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupRecorder()
+        getaudio()
         progressView.progress = progressCounter
 
-            getvideo("videoone_path")
+        videourl = getvideo("videoone_path")
             
             //影片縮圖
             let asset = AVURLAsset(url: videourl!, options: nil)
             let imgGenerator = AVAssetImageGenerator(asset: asset)
-        firstAsset = AVAsset(url: videourl!)
+            firstAsset = AVAsset(url: videourl!)
             imgGenerator.appliesPreferredTrackTransform = false
             
             do {
@@ -96,34 +94,60 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             }
             
             showTimeLabel()
-
-                if (audiourl) != nil {
-                    print("audioone is not empty")
-                    ButtonPlay.isHidden = false
-                    switchOutput.isHidden = false
-                    UseRecordSwitch.isHidden = false
-                    AudioURL = URL(string: audiourl!)
-                    switchOutput.isEnabled = useaudio
-
-                }else{
-                    ButtonPlay.isHidden = true
-                    switchOutput.isHidden = true
-                    UseRecordSwitch.isHidden = true
-                    useaudio = false
-
-                }
             
-        
+            ButtonPlay.isHidden = true
+            switchOutput.isHidden = true
+            UseRecordSwitch.isHidden = true
     }
 
-    func getvideo(_ videopath: String){
+    func getvideo(_ videopath: String) -> URL{
         var video = videoArray?[0] as? [String: Any]
         let videoone = video?[videopath] as? String
-        videourl = URL(string: videoone!)
-//        let audioone = video?["audioone_path"] as? String
-//        audiourl = audioone
-//        let useaudioone = video?["useaudioone"] as? Bool
-//        useaudio = useaudioone!
+        return URL(string: videoone!)!
+    }
+    
+    func getaudio(){
+        let parameters: Parameters=["videoid": Index,"num": 1]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let audioinfo = JSON["audiopath"] as? String {
+//                    audioArray = audioinfo
+                    let audiopath = audioinfo
+                    
+                    if !(audiopath.isEmpty) {
+                        let url = URL(string: audiopath)
+                        if FileManager.default.fileExists(atPath: (url?.path)!) {
+                            print("FILE 1 FOUND")
+                            print("audioone is not empty")
+                            self.ButtonPlay.isHidden = false
+                            self.switchOutput.isHidden = false
+                            self.UseRecordSwitch.isHidden = false
+                            UserDefaults.standard.set(true, forKey: "userecordone")
+                            self.AudioURL = URL(string: audiopath)
+                            //self.switchOutput.isEnabled = self.useaudio
+                        
+                        } else {
+                            //self.donloadVideo(url: url!)
+                            print("FILE 1 NOT FOUND")
+
+                        }
+                    }
+                }
+        }
+
     }
     
     @IBAction func Explain(_ sender: Any) {
@@ -157,7 +181,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func record(_ sender: AnyObject) {
-        
+        setupRecorder()
         timeTimer?.invalidate()
         
         if soundRecorder.isRecording{
@@ -191,7 +215,9 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
+
         }
+            StoreRecord(directoryURL()!,clip: 1)
 
     }
     
@@ -232,10 +258,11 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         ButtonPlay.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
     }
     
+    /////////////////
     func preparePlayer(){
-        
+        let url = playURL()
         do {
-            try SoundPlayer = AVAudioPlayer(contentsOf: directoryURL()!)
+            try SoundPlayer = AVAudioPlayer(contentsOf: url!)
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
@@ -243,6 +270,14 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             print("Error playing")
         }
         
+    }
+    
+    func playURL() -> URL? {
+        if AudioURL == nil {
+            return directoryURL()
+        } else {
+            return AudioURL
+        }
     }
     
     func setupRecorder(){
@@ -282,10 +317,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
-            
+            print("succes?")
         }else{
+            print("nothing")
             ButtonPlay.isEnabled = true
-            StoreRecord(directoryURL()!,clip: 1)
         }
     }
     
@@ -389,15 +424,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 print(encodingError)
             }
         })
-        
-        
-//        let userdefault = UserDefaults.standard
-//        userdefault.set(directoryURL(), forKey: "RecordOne")
-//        userdefault.set(true, forKey: "UseRecordOne")
-    }
-    
-    func StoreUseRecordOrNot(){
-        
     }
     
     deinit {

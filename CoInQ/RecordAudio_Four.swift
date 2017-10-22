@@ -23,7 +23,9 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     var soundRecorder : AVAudioRecorder!
     var SoundPlayer : AVAudioPlayer!
-    
+    var audiourl: String?
+    var useaudio = false
+
 //    var VideoNameArray = [VideoTaskInfo]()
 //    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 //    let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
@@ -36,7 +38,8 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     var AudioFileName = "sound4.m4a"
     var AudioURL: URL?
-    
+    var videourl : URL?
+
     var Asset: AVAsset? //= AVAsset(url: UserDefaults.standard.url(forKey: "VideoTwo")!)
     var Player: AVPlayer?
     
@@ -66,46 +69,43 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        do {
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            setupRecorder()
-//            
-//            let videoURL = URL(string: VideoNameArray[Index].videofour!)
-//            Asset = AVAsset(url:videoURL!)
-//            //影片縮圖
-//            let asset = AVURLAsset(url: videoURL!, options: nil)
-//            let imgGenerator = AVAssetImageGenerator(asset: asset)
-//            imgGenerator.appliesPreferredTrackTransform = false
-//            
-//            do {
-//                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//                let thumbnail = UIImage(cgImage: cgImage)
-//                
-//                videoPreviewLayer.image = thumbnail
-//                
-//            } catch let error {
-//                print("*** Error generating thumbnail: \(error)")
-//            }
-//            
-//            showTimeLabel()
-//            progressView.progress = progressCounter
-//            
-//            if (VideoNameArray[Index].audiofour) != nil {
-//                ButtonPlay.isHidden = false
-//                switchOutput.isHidden = false
-//                UseRecordSwitch.isHidden = false
-//                AudioURL = URL(string: VideoNameArray[Index].audiofour!)
-//                switchOutput.isEnabled = VideoNameArray[Index].useRecordfour
-//            }else{
-//                ButtonPlay.isHidden = true
-//                switchOutput.isHidden = true
-//                UseRecordSwitch.isHidden = true
-//                VideoNameArray[Index].useRecordfour = false
-//            }
-//            
-//        }catch {
-//            print("Could not load data from coredb \(error.localizedDescription)")
-//        }
+            setupRecorder()
+            videourl = RecordAudio_One().getvideo("videofour_path")
+
+            Asset = AVAsset(url:videourl!)
+            //影片縮圖
+            let asset = AVURLAsset(url: videourl!, options: nil)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            imgGenerator.appliesPreferredTrackTransform = false
+            
+            do {
+                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+                
+                videoPreviewLayer.image = thumbnail
+                
+            } catch let error {
+                print("*** Error generating thumbnail: \(error)")
+            }
+            
+            showTimeLabel()
+            progressView.progress = progressCounter
+            
+        if (audiourl) != nil {
+            print("audioone is not empty")
+            ButtonPlay.isHidden = false
+            switchOutput.isHidden = false
+            UseRecordSwitch.isHidden = false
+            AudioURL = URL(string: audiourl!)
+            switchOutput.isEnabled = useaudio
+            
+        }else{
+            ButtonPlay.isHidden = true
+            switchOutput.isHidden = true
+            UseRecordSwitch.isHidden = true
+            useaudio = false
+            
+        }
         
     }
     
@@ -118,10 +118,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     func play(){
         do{
-//            VideoNameArray = try managedObjextContext.fetch(videotaskRequest)
-//            
-//            let videoURL = URL(string: VideoNameArray[Index].videofour!)
-//            Player = AVPlayer(url: videoURL!)
+            Player = AVPlayer(url: videourl!)
             let controller = AVPlayerViewController()
             controller.player = Player
             controller.showsPlaybackControls = false
