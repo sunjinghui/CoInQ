@@ -345,6 +345,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
                         print("Upload Succes")
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
@@ -355,6 +357,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                         VC.present(alert , animated: true , completion: nil)
                     }else{
                         print("Upload Failed")
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:"上傳失敗，請重新上傳", preferredStyle: .alert)
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
@@ -363,7 +367,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                 }
                 //上传进度
                 upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    print("Upload Progress: \(progress.fractionCompleted)")
+//                    print("Upload Progress: \(progress.fractionCompleted)")
                 }
             case .failure(let encodingError):
                 print(encodingError)
@@ -388,14 +392,14 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
-                
+                self.startActivityIndicator()
                 let videourl = avAsset
                 print(videourl)
                 self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.firstcomplete)
                 load()
             } else {
                 message = "故事版2 影片已匯入成功！"
-
+                self.startActivityIndicator()
                 let videoURL = avAsset
                 self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.secondcomplete)
                 load()

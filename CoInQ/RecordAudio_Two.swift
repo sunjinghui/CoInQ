@@ -32,7 +32,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     var AudioFileName = UUID().uuidString + ".m4a"
     var AudioURL: URL?
-    var useaudio = false
     var videourl: URL?
     
     var Asset: AVAsset?
@@ -90,7 +89,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
-            useaudio = false
+        UserDefaults.standard.set(false, forKey: "userecordtwo")
 
     }
     
@@ -112,14 +111,12 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 }
                 // 2.
                 if let audioinfo = JSON["audiopath"] as? String {
-                    //                    audioArray = audioinfo
                     let audiopath = audioinfo
                     
                     if !(audiopath.isEmpty) {
                         let url = URL(string: audiopath)
                         if FileManager.default.fileExists(atPath: (url?.path)!) {
                             print("FILE 2 FOUND")
-                            print("audioone is not empty")
                             self.ButtonPlay.isHidden = false
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
@@ -247,7 +244,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func preparePlayer(){
         let url = playURL()
-        print(url)
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
             SoundPlayer.delegate = self
@@ -305,7 +301,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        //ButtonPlay.isEnabled = true
+        ButtonPlay.isEnabled = true
     }
     
     /*func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {

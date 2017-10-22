@@ -37,7 +37,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     var AudioFileName = UUID().uuidString + ".m4a"
     var AudioURL: URL?
-    var useaudio = false
     var videourl : URL?
     
     var firstAsset: AVAsset?
@@ -98,6 +97,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
+        UserDefaults.standard.set(false, forKey: "userecordone")
     }
 
     func getvideo(_ videopath: String) -> URL{

@@ -37,7 +37,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var milliseconds: Int = 0
     var videoseconds: Double?
     
-    var AudioFileName = "sound9.m4a"
+    var AudioFileName = UUID().uuidString + ".m4a"
     var AudioURL: URL?
     var videourl : URL?
 
@@ -68,7 +68,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var useRecordsix :   Bool = UserDefaults.standard.bool(forKey: "userecordsix")
     var useRecordseven : Bool = UserDefaults.standard.bool(forKey: "userecordseven")
     var useRecordeight : Bool = UserDefaults.standard.bool(forKey: "userecordeight")
-    var useRecordnine :  Bool = UserDefaults.standard.bool(forKey: "userecordnine")
+    var userecordnine :  Bool?
 
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -78,9 +78,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         super.viewDidLoad()
         
         getvideo()
-        
-            setupRecorder()
-            
+        getaudio()
         videourl = RecordAudio_One().getvideo("videonine_path")
             Asset = AVAsset(url:videourl!)
             //影片縮圖
@@ -100,25 +98,54 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             
             showTimeLabel()
             progressView.progress = progressCounter
-        
-        if (audiourl) != nil {
-            print("audioone is not empty")
-            ButtonPlay.isHidden = false
-            switchOutput.isHidden = false
-            UseRecordSwitch.isHidden = false
-            AudioURL = URL(string: audiourl!)
-            switchOutput.isEnabled = useaudio
-            
-        }else{
+
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
-            useaudio = false
-            
-        }
+            usereordnine = false
 
     }
+
+func getaudio(){
+    let parameters: Parameters=["videoid": Index,"num": 9]
     
+    Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
+        {
+            response in
+            
+            guard response.result.isSuccess else {
+                let errorMessage = response.result.error?.localizedDescription
+                print(errorMessage!)
+                return
+            }
+            guard let JSON = response.result.value as? [String: Any] else {
+                print("JSON formate error")
+                return
+            }
+            if let audioinfo = JSON["audiopath"] as? String {
+                let audiopath = audioinfo
+                
+                if !(audiopath.isEmpty) {
+                    let url = URL(string: audiopath)
+                    if FileManager.default.fileExists(atPath: (url?.path)!) {
+                        print("FILE 9 FOUND")
+                        self.ButtonPlay.isHidden = false
+                        self.switchOutput.isHidden = false
+                        self.UseRecordSwitch.isHidden = false
+                        self.AudioURL = URL(string: audiopath)
+                        usereordnine = true
+                        //self.switchOutput.isEnabled = self.useaudio
+                        
+                    } else {
+                        //self.donloadVideo(url: url!)
+                        print("FILE 9 NOT FOUND")
+                    }
+                }
+            }
+    }
+    
+}
+
     func getvideo(){
         var video = videoArray?[0] as? [String: Any]
         let videoone = video?["videoone_path"] as? String
@@ -165,28 +192,12 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         UIApplication.shared.endIgnoringInteractionEvents()
     }
 
-    //    func storevideocompleteURL(){
-    //        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    //        let videourlitem = VideoInfo(context: managedObjextContext)
-    //        videourlitem.videourl = videocompleteurl?.absoluteString
-    //        videourlitem.videoname = VideoNameArray[Index].videoname
-    //
-    //        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-    //
-    //        print(VideoInfo.self)
-    //    }
-    
-
     //匯出並儲存影片至相簿
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
             let outputURL = session.outputURL
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
-                    
-//                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//                    let videourl = VideoInfo(context: context) // Link Task & Context
-                    
                     let vmilliseconds = Int(self.videoseconds!) * 60
                     let vmilli = (vmilliseconds % 60) + 39
                     let vsec = (vmilliseconds / 60) % 60
@@ -205,51 +216,35 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         }
         
         stopActivityIndicator()
-        //firstAsset = nil
-        //secondAsset = nil
-        //thirdAsset = nil
-        //fourthAsset = nil
-        //fifthAsset = nil
-        //sixthAsset = nil
-        //seventhAsset = nil
-        //eighthAsset = nil
-        //ninethAsset = nil
-        //audioAsset = nil
+        firstAsset = nil
+        secondAsset = nil
+        thirdAsset = nil
+        fourthAsset = nil
+        fifthAsset = nil
+        sixthAsset = nil
+        seventhAsset = nil
+        eighthAsset = nil
+        ninethAsset = nil
+        audioAsset = nil
     }
     
     func switchPage(action: UIAlertAction){
         //7 - Page switch to CompleteVC
-//        dismiss(animated: true, completion: nil)
-//        loadfinalvideo()
+        dismiss(animated: true, completion: nil)
+        gotoPageVC()
         //self.tabBarController?.selectedIndex = 3
-        self.performSegue(withIdentifier: "completevideotask", sender: self)
+//        self.performSegue(withIdentifier: "completevideotask", sender: self)
     }
     
-//    func loadfinalvideo() {
-//        let parameters: Parameters=["google_userid": google_userid]
-//        Alamofire.request("http://140.122.76.201/CoInQ/v1/getFinalVideo.php", method: .post, parameters: parameters).responseJSON
-//            {
-//                response in
-//                print(response)
-//                guard response.result.isSuccess else {
-//                    let errorMessage = response.result.error?.localizedDescription
-//                    print("\(errorMessage!)")
-//                    return
-//                }
-//                guard let JSON = response.result.value as? [String: Any] else {
-//                    print("JSON formate error")
-//                    return
-//                }
-//                // 2.
-//                let error = JSON["error"] as! Bool
-//                if error {
-//                    self.FinalVideoArray = []
-//                } else if let FinalVideo = JSON["table"] as? [Any] {
-//                    self.FinalVideoArray = FinalVideo
-//                }
-//        }
-//        
-//    }
+    func gotoPageVC(){
+        for vc in (self.navigationController?.viewControllers ?? []) {
+            print(vc)
+            if vc is ProjectViewController {
+                _ = self.navigationController?.popToViewController(vc, animated: true)
+                break
+            }
+        }
+    }
     
     func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
         var assetOrientation = UIImageOrientation.up
@@ -407,8 +402,6 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             eighthInstruction.setOpacity(0.0, at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
             
             let ninethInstruction = videoCompositionInstructionForTrack(ninethTrack, asset:ninethAsset)
-            //ninethInstruction.setOpacity(0.0, at: totalTIME)
-            
             
             // 2.3
             mainInstruction.layerInstructions = [firstInstruction, secondInstruction, thirdInstruction ,fourthInstruction ,fifthInstruction , sixthInstruction , seventhInstruction , eighthInstruction , ninethInstruction]
@@ -420,7 +413,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             // 3 - Audio track
           if useRecordone {
             
-            getaudio(1){ (audiourl) in
+            getaudiourl(1){ (audiourl) in
                 print(audiourl)
             self.audioAssetOne = AVAsset(url:audiourl)
             
@@ -447,23 +440,23 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
              
             }
             
-            /*
-            
             // Record Auido Two
-            if VideoNameArray[Index].useRecordtwo  {
+            if useRecordtwo {
                 
-                //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                let audioURLtwo = URL(string: VideoNameArray[Index].audiotwo!)
-                audioAssetOne = AVAsset(url:audioURLtwo!)
-                print(VideoNameArray[Index].useRecordtwo)
-                
-                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-                do {
-                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
-                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
-                                                   at: firstAsset.duration)
-                } catch _ {
-                    print("Failed to load Audio track")
+                getaudiourl(2){ (audiourl) in
+                    //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
+                    let audioURLtwo = URL(string: VideoNameArray[Index].audiotwo!)
+                    audioAssetOne = AVAsset(url:audioURLtwo!)
+                    print(VideoNameArray[Index].useRecordtwo)
+                    
+                    let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                    do {
+                        try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
+                                                       of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                       at: firstAsset.duration)
+                    } catch _ {
+                        print("Failed to load Audio track")
+                    }
                 }
                 
             }else{
@@ -481,20 +474,21 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             }
             
             // Record Auido Three
-            if VideoNameArray[Index].useRecordthree  {
-                
-                //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                let audioURLthree = URL(string: VideoNameArray[Index].audiothree!)
-                audioAssetOne = AVAsset(url:audioURLthree!)
-                print(VideoNameArray[Index].useRecordthree)
-                
-                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-                do {
-                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
-                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
-                                                   at: firstAsset.duration + secondAsset.duration)
-                } catch _ {
-                    print("Failed to load Audio track")
+            if useRecordthree  {
+                getaudiourl(3){ (audiourl) in
+                    //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
+                    let audioURLthree = URL(string: VideoNameArray[Index].audiothree!)
+                    audioAssetOne = AVAsset(url:audioURLthree!)
+                    print(VideoNameArray[Index].useRecordthree)
+                    
+                    let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                    do {
+                        try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
+                                                       of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                       at: firstAsset.duration + secondAsset.duration)
+                    } catch _ {
+                        print("Failed to load Audio track")
+                    }
                 }
                 
             }else{
@@ -510,8 +504,8 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 }
                 
             }
-            // Record Auido Four
-            if VideoNameArray[Index].useRecordfour  {
+ /*           // Record Auido Four
+            if useRecordfour  {
                 
                 let audioURL = URL(string: VideoNameArray[Index].audiofour!)
                 audioAssetOne = AVAsset(url:audioURL!)
@@ -540,7 +534,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             }
             
             // Record Auido Five
-            if VideoNameArray[Index].useRecordfive  {
+            if useRecordfive  {
                 
                 let audioURL = URL(string: VideoNameArray[Index].audiofive!)
                 audioAssetOne = AVAsset(url:audioURL!)
@@ -568,7 +562,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 
             }
             // Record Auido Six
-            if VideoNameArray[Index].useRecordsix  {
+            if useRecordsix  {
                 
                 let audioURL = URL(string: VideoNameArray[Index].audiosix!)
                 audioAssetOne = AVAsset(url:audioURL!)
@@ -596,7 +590,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 
             }
             // Record Auido Seven
-            if VideoNameArray[Index].useRecordseven  {
+            if useRecordseven  {
                 
                 let audioURL = URL(string: VideoNameArray[Index].audioseven!)
                 audioAssetOne = AVAsset(url:audioURL!)
@@ -624,7 +618,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 
             }
             // Record Auido Eight
-            if VideoNameArray[Index].useRecordeight  {
+            if useRecordeight  {
                 
                 let audioURL = URL(string: VideoNameArray[Index].audioeight!)
                 audioAssetOne = AVAsset(url:audioURL!)
@@ -653,7 +647,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             }
 
             // Record Auido Nine
-            if VideoNameArray[Index].useRecordnine  {
+            if useRecordnine  {
                 
                 let audioURL = URL(string: VideoNameArray[Index].audionine!)
                 audioAssetOne = AVAsset(url:audioURL!)
@@ -679,56 +673,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                     print("Failed to load 故事版 9 Audio track")
                 }
             }
-            
-                        let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v4audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration),
-                                                 of: fourthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration + secondAsset.duration + thirdAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 4 Audio track")
-            }
-            let v5audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v5audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fifthAsset.duration),
-                                                 of: fifthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 5 Audio track")
-            }
-            let v6audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v6audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration),
-                                                 of: sixthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 6 Audio track")
-            }
-            let v7audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v7audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, seventhAsset.duration),
-                                                 of: seventhAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 7 Audio track")
-            }
-            let v8audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v8audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, eighthAsset.duration),
-                                                 of: eighthAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 8 Audio track")
-            }
-            let v9audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-            do {
-                try v9audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration),
-                                                 of: ninethAsset.tracks(withMediaType: AVMediaTypeAudio)[0] ,
-                                                 at: firstAsset.duration + secondAsset.duration + thirdAsset.duration + fourthAsset.duration + fifthAsset.duration + sixthAsset.duration + seventhAsset.duration + eighthAsset.duration)
-            } catch _ {
-                print("Failed to load 故事版 9 Audio track")
-            }*/
-            
+            */
             
             // 4 - Get path
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
@@ -828,7 +773,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         })
     }
     
-    func getaudio(_ num: Int, completion: @escaping(URL) -> Void) {
+    func getaudiourl(_ num: Int, completion: @escaping(URL) -> Void) {
         let parameters: Parameters=["videoid": Index,"num": num]
         
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
@@ -862,10 +807,10 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         
         if sender.isOn {
             switchOutput.text = "使用這個配音"
-            StoreRecordPathInUserdefault()
+            userecordnine = true
         }else{
             switchOutput.text = "不使用此配音"
-//            VideoNameArray[Index].useRecordnine = false
+            userrecordnine = false
         }
     }
 
@@ -877,7 +822,6 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func play(){
-        do{
             Player = AVPlayer(url: videourl!)
             let controller = AVPlayerViewController()
             controller.player = Player
@@ -888,9 +832,6 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             self.view.addSubview(controller.view)
             Player?.volume = 0.0
             Player?.play()
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
     }
     
     func stopPlayer() {
@@ -904,7 +845,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     @IBAction func record(_ sender: AnyObject) {
-        
+        setupRecorder()
         timeTimer?.invalidate()
         
         if soundRecorder.isRecording{
@@ -940,7 +881,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             showTimeLabel()
         }
         
-        StoreRecordPathInUserdefault()
+        RecordAudio_One().StoreRecord(directoryURL()!,clip: 9)
         
     }
     
@@ -983,9 +924,9 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func preparePlayer(){
-        
+        let url = playURL()
         do {
-            try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
+            try SoundPlayer = AVAudioPlayer(contentsOf: url!)
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
@@ -993,6 +934,14 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             print("Error playing")
         }
         
+    }
+    
+    func playURL() -> URL? {
+        if AudioURL == nil {
+            return directoryURL()
+        } else {
+            return AudioURL
+        }
     }
     
     func setupRecorder(){
@@ -1026,7 +975,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound8.m4a")
+        let soundURL = documentDirectory.appendingPathComponent(AudioFileName)
         return soundURL
     }
     
@@ -1091,15 +1040,6 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-    }
-    
-    func StoreRecordPathInUserdefault() {
-//        VideoNameArray[Index].audionine = directoryURL()?.absoluteString
-//        AudioURL = directoryURL()
-//        VideoNameArray[Index].useRecordnine = true
-        //let userdefault = UserDefaults.standard
-        //userdefault.set(directoryURL(), forKey: "RecordTwo")
-        //userdefault.set(true, forKey: "UseRecordTwo")
     }
     
     deinit {
