@@ -102,7 +102,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
-            usereordnine = false
+            userecordnine = false
 
     }
 
@@ -133,7 +133,7 @@ func getaudio(){
                         self.switchOutput.isHidden = false
                         self.UseRecordSwitch.isHidden = false
                         self.AudioURL = URL(string: audiopath)
-                        usereordnine = true
+                        self.userecordnine = true
                         //self.switchOutput.isEnabled = self.useaudio
                         
                     } else {
@@ -225,25 +225,21 @@ func getaudio(){
         seventhAsset = nil
         eighthAsset = nil
         ninethAsset = nil
-        audioAsset = nil
+        audioAssetOne = nil
     }
     
     func switchPage(action: UIAlertAction){
         //7 - Page switch to CompleteVC
-        dismiss(animated: true, completion: nil)
-        gotoPageVC()
-        //self.tabBarController?.selectedIndex = 3
-//        self.performSegue(withIdentifier: "completevideotask", sender: self)
-    }
-    
-    func gotoPageVC(){
+//        dismiss(animated: true, completion: nil)
         for vc in (self.navigationController?.viewControllers ?? []) {
             print(vc)
-            if vc is ProjectViewController {
+            if vc is CSCL {
                 _ = self.navigationController?.popToViewController(vc, animated: true)
                 break
             }
         }
+        //self.tabBarController?.selectedIndex = 3
+//        self.performSegue(withIdentifier: "completevideotask", sender: self)
     }
     
     func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
@@ -445,14 +441,11 @@ func getaudio(){
                 
                 getaudiourl(2){ (audiourl) in
                     //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                    let audioURLtwo = URL(string: VideoNameArray[Index].audiotwo!)
-                    audioAssetOne = AVAsset(url:audioURLtwo!)
-                    print(VideoNameArray[Index].useRecordtwo)
-                    
+                    self.audioAssetOne = AVAsset(url:audiourl)
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
-                                                       of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                       of: (self.audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
                                                        at: firstAsset.duration)
                     } catch _ {
                         print("Failed to load Audio track")
@@ -476,15 +469,11 @@ func getaudio(){
             // Record Auido Three
             if useRecordthree  {
                 getaudiourl(3){ (audiourl) in
-                    //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                    let audioURLthree = URL(string: VideoNameArray[Index].audiothree!)
-                    audioAssetOne = AVAsset(url:audioURLthree!)
-                    print(VideoNameArray[Index].useRecordthree)
-                    
+                    self.audioAssetOne = AVAsset(url:audiourl)
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
-                                                       of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                       of: (self.audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
                                                        at: firstAsset.duration + secondAsset.duration)
                     } catch _ {
                         print("Failed to load Audio track")
@@ -782,7 +771,7 @@ func getaudio(){
                 
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
-                    print(errorMessage!)
+                    print("getaudio error\(errorMessage!)")
                     return
                 }
                 guard let JSON = response.result.value as? [String: Any] else {
@@ -793,6 +782,7 @@ func getaudio(){
                 if let audioinfo = JSON["audiopath"] as? String {
                     let audiopath = audioinfo
                     let audiourl = URL(string: audiopath)
+                    print(audiopath)
                     completion(audiourl!)
                 }
         }
@@ -810,7 +800,7 @@ func getaudio(){
             userecordnine = true
         }else{
             switchOutput.text = "不使用此配音"
-            userrecordnine = false
+            userecordnine = false
         }
     }
 

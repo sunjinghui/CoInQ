@@ -239,13 +239,14 @@ class SelectVideoUpload_Nine : UIViewController{
             
 //            let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
 //            present(recordNavigationController, animated: true, completion: nil)
-            self.performSegue(withIdentifier: "StartRecord", sender: self)
+            let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordAudio_One") as! RecordAudio_One
+            self.navigationController?.pushViewController(recordNavigationController, animated: true)
+//            self.performSegue(withIdentifier: "StartRecord", sender: self)
         }else{
             let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳 ,請確認\(printArray)", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
-
         }
 
         /*if isURLempty("RecordOne") || isURLempty("RecordTwo") {

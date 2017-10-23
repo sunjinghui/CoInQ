@@ -949,7 +949,7 @@
         <!--Record Audio One-->
         <scene sceneID="34I-6n-gQw">
             <objects>
-                <viewController id="Lus-hg-Z98" customClass="RecordAudio_One" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordAudio_One" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Lus-hg-Z98" customClass="RecordAudio_One" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Ha-xo-I2J">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -59,7 +59,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func BackToSelectVideoNine(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     
     }
     
