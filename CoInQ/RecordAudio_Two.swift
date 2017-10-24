@@ -121,8 +121,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
-                            UserDefaults.standard.set(true, forKey: "userecordtwo")
-                            //self.switchOutput.isEnabled = self.useaudio
+                            self.UseRecordSwitch.isOn = false
                             
                         } else {
                             //self.donloadVideo(url: url!)
@@ -243,6 +242,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -361,6 +361,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        UserDefaults.standard.set(true, forKey: "userecordtwo")
     }
     
     deinit {

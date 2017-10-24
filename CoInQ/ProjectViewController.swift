@@ -67,13 +67,11 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 let videoid = videoInfo?["id"] as? Int
                 
                 self.deleteData(id: videoid!)
-                
-                self.reload()
+                SelectVideoUpload_Nine().update()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
             self.present(deleteAlert, animated: true, completion: nil)
-            self.reload()
 
         }
 
@@ -108,7 +106,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 print(response)
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
-                    print("1\(errorMessage!)")
+                    print("load video task \(errorMessage!)")
                     return
                 }
                 guard let JSON = response.result.value as? [String: Any] else {
@@ -119,12 +117,10 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 let error = JSON["error"] as! Bool
                 if error {
                     self.videoInfoArray = []
-                    print(self.videoInfoArray?.count)
                     self.VideoNameTableView.reloadData()
 
                 } else if let videoinfo = JSON["table"] as? [Any] {
                     self.videoInfoArray = videoinfo
-                    print(self.videoInfoArray)
                     self.VideoNameTableView.reloadData()
                 }
         }
@@ -193,6 +189,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                                 //                    }
                         }
                         
+                SelectVideoUpload_Nine().update()
                 self.reload()
 
 //                self.performSegue(withIdentifier: "startvideotask", sender: self)
@@ -210,7 +207,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
-        reload()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

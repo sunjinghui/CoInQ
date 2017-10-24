@@ -91,7 +91,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     }
     
     func getaudio(){
-        let parameters: Parameters=["videoid": Index,"num": 2]
+        let parameters: Parameters=["videoid": Index,"num": 7]
         
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
             {
@@ -118,8 +118,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
-                            UserDefaults.standard.set(true, forKey: "userecordseven")
-                            //self.switchOutput.isEnabled = self.useaudio
+                            self.UseRecordSwitch.isOn = false
                             
                         } else {
                             //self.donloadVideo(url: url!)
@@ -243,6 +242,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     }
     
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -361,6 +361,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        UserDefaults.standard.set(true, forKey: "userecordseven")
     }
     
     deinit {

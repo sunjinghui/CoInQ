@@ -116,8 +116,7 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
-                            UserDefaults.standard.set(true, forKey: "userecordfive")
-                            //self.switchOutput.isEnabled = self.useaudio
+                            self.UseRecordSwitch.isOn = false
                             
                         } else {
                             //self.donloadVideo(url: url!)
@@ -244,6 +243,7 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -362,6 +362,7 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        UserDefaults.standard.set(true, forKey: "userecordfive")
     }
     
     deinit {

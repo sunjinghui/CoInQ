@@ -54,7 +54,7 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
         }else{
             switchOutput.text = "不使用此配音"
 //            VideoNameArray[Index].useRecordthree = false
-            UserDefaults.standard.set(false, forKey: "userecordfour")
+            UserDefaults.standard.set(false, forKey: "userecordthree")
         }
     }
     
@@ -90,7 +90,7 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true        
-            UserDefaults.standard.set(false, forKey: "userecordtwo")
+            UserDefaults.standard.set(false, forKey: "userecordthree")
     }
     
     func getaudio(){
@@ -121,9 +121,8 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
                             self.ButtonPlay.isHidden = false
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
-                            UserDefaults.standard.set(true, forKey: "userecordthree")
                             self.AudioURL = URL(string: audiopath)
-                            //self.switchOutput.isEnabled = self.useaudio
+                            self.UseRecordSwitch.isOn = false
                             
                         } else {
                             //self.donloadVideo(url: url!)
@@ -247,6 +246,7 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     }
     
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -363,6 +363,7 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        UserDefaults.standard.set(true, forKey: "userecordthree")
     }
     
     deinit {

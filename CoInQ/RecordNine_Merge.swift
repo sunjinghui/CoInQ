@@ -60,14 +60,14 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var eighthAsset: AVAsset?
     var ninethAsset: AVAsset?
     
-    var useRecordone :   Bool = UserDefaults.standard.bool(forKey: "userecordone")
-    var useRecordtwo :   Bool = UserDefaults.standard.bool(forKey: "userecordtwo")
-    var useRecordthree : Bool = UserDefaults.standard.bool(forKey: "userecordthree")
-    var useRecordfour :  Bool = UserDefaults.standard.bool(forKey: "userecordfour")
-    var useRecordfive :  Bool = UserDefaults.standard.bool(forKey: "userecordfive")
-    var useRecordsix :   Bool = UserDefaults.standard.bool(forKey: "userecordsix")
-    var useRecordseven : Bool = UserDefaults.standard.bool(forKey: "userecordseven")
-    var useRecordeight : Bool = UserDefaults.standard.bool(forKey: "userecordeight")
+    var useRecordone :   Bool?
+    var useRecordtwo :   Bool?
+    var useRecordthree : Bool?
+    var useRecordfour :  Bool?
+    var useRecordfive :  Bool?
+    var useRecordsix :   Bool?
+    var useRecordseven : Bool?
+    var useRecordeight : Bool?
     var userecordnine :  Bool?
 
     
@@ -79,6 +79,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         
         getvideo()
         getaudio()
+        getuserecordornot()
         videourl = RecordAudio_One().getvideo("videonine_path")
             Asset = AVAsset(url:videourl!)
             //影片縮圖
@@ -134,7 +135,7 @@ func getaudio(){
                         self.UseRecordSwitch.isHidden = false
                         self.AudioURL = URL(string: audiopath)
                         self.userecordnine = true
-                        //self.switchOutput.isEnabled = self.useaudio
+                        self.UseRecordSwitch.isOn = false
                         
                     } else {
                         //self.donloadVideo(url: url!)
@@ -145,6 +146,19 @@ func getaudio(){
     }
     
 }
+    
+    func getuserecordornot(){
+        useRecordone    = UserDefaults.standard.bool(forKey: "userecordone")
+        useRecordtwo    = UserDefaults.standard.bool(forKey: "userecordtwo")
+        useRecordthree  = UserDefaults.standard.bool(forKey: "userecordthree")
+        useRecordfour   = UserDefaults.standard.bool(forKey: "userecordfour")
+        useRecordfive   = UserDefaults.standard.bool(forKey: "userecordfive")
+        useRecordsix    = UserDefaults.standard.bool(forKey: "userecordsix")
+        useRecordseven  = UserDefaults.standard.bool(forKey: "userecordseven")
+        useRecordeight  = UserDefaults.standard.bool(forKey: "userecordeight")
+        print(useRecordone,useRecordtwo,useRecordthree)
+
+    }
 
     func getvideo(){
         var video = videoArray?[0] as? [String: Any]
@@ -235,6 +249,7 @@ func getaudio(){
             print(vc)
             if vc is CSCL {
                 _ = self.navigationController?.popToViewController(vc, animated: true)
+                NotificationCenter.default.post(name: NSNotification.Name("CSCL"), object: nil)
                 break
             }
         }
@@ -407,11 +422,11 @@ func getaudio(){
             mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             // 3 - Audio track
-          if useRecordone {
+          if useRecordone! {
             
-            getaudiourl(1){ (audiourl) in
+            getaudiourl(1){ (success,audiourl) in
                 print(audiourl)
-            self.audioAssetOne = AVAsset(url:audiourl)
+            self.audioAssetOne = AVAsset(url:audiourl!)
             
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -437,11 +452,11 @@ func getaudio(){
             }
             
             // Record Auido Two
-            if useRecordtwo {
+            if useRecordtwo! {
                 
-                getaudiourl(2){ (audiourl) in
+                getaudiourl(2){ (success,audiourl) in
                     //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                    self.audioAssetOne = AVAsset(url:audiourl)
+                    self.audioAssetOne = AVAsset(url:audiourl!)
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
@@ -453,7 +468,7 @@ func getaudio(){
                 }
                 
             }else{
-                print("false")
+                print("false2")
                 
                 let v2audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -467,9 +482,9 @@ func getaudio(){
             }
             
             // Record Auido Three
-            if useRecordthree  {
-                getaudiourl(3){ (audiourl) in
-                    self.audioAssetOne = AVAsset(url:audiourl)
+            if useRecordthree!  {
+                getaudiourl(3){ (success,audiourl) in
+                    self.audioAssetOne = AVAsset(url:audiourl!)
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
@@ -481,7 +496,7 @@ func getaudio(){
                 }
                 
             }else{
-                print("false")
+                print("false3")
                 
                 let v3audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -762,29 +777,43 @@ func getaudio(){
         })
     }
     
-    func getaudiourl(_ num: Int, completion: @escaping(URL) -> Void) {
+    func getaudiourl(_ num: Int,completion: @escaping ((Bool, URL?)->Void)){
+        makecall(num,completion: completion)
+    }
+    
+    func makecall(_ num: Int, completion: @escaping ((Bool, URL?)->Void)) {
         let parameters: Parameters=["videoid": Index,"num": num]
         
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
-                
-                guard response.result.isSuccess else {
-                    let errorMessage = response.result.error?.localizedDescription
-                    print("getaudio error\(errorMessage!)")
-                    return
+                print (response)
+                switch response.result {
+                case .success(let result):
+                    let jsonData = result as! NSDictionary
+                    let audiourl = URL(string: (jsonData.value(forKey: "audiopath") as! String?)!)
+                        completion(true,audiourl)
+    
+                case .failure(let error):
+                    print(error)
+                    completion(false,nil)
                 }
-                guard let JSON = response.result.value as? [String: Any] else {
-                    print("JSON formate error")
-                    return
-                }
-                // 2.
-                if let audioinfo = JSON["audiopath"] as? String {
-                    let audiopath = audioinfo
-                    let audiourl = URL(string: audiopath)
-                    print(audiopath)
-                    completion(audiourl!)
-                }
+//                guard response.result.isSuccess else {
+//                    let errorMessage = response.result.error?.localizedDescription
+//                    print("getaudio error\(errorMessage!)")
+//                    return
+//                }
+//                guard let JSON = response.result.value as? [String: Any] else {
+//                    print("JSON formate error")
+//                    return
+//                }
+//                // 2.
+//                if let audioinfo = JSON["audiopath"] as? String {
+//                    let audiopath = audioinfo
+//                    let audiourl = URL(string: audiopath)
+//                    print(audiopath)
+//                    completion(audiourl!)
+//                }
         }
         
     }
@@ -914,6 +943,7 @@ func getaudio(){
     }
     
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -1030,6 +1060,7 @@ func getaudio(){
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        userecordnine = true
     }
     
     deinit {

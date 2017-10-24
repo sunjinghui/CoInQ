@@ -50,7 +50,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         }else{
             switchOutput.text = "不使用此配音"
 //            VideoNameArray[Index].useRecordfour = false
-            UserDefaults.standard.set(true, forKey: "userecordfive")
+            UserDefaults.standard.set(true, forKey: "userecordfour")
         }
     }
     
@@ -119,8 +119,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
-                            UserDefaults.standard.set(true, forKey: "userecordfour")
-                            //self.switchOutput.isEnabled = self.useaudio
+                            self.UseRecordSwitch.isOn = false
                             
                         } else {
                             //self.donloadVideo(url: url!)
@@ -244,6 +243,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
@@ -360,6 +360,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        UserDefaults.standard.set(true, forKey: "userecordfour")
     }
     
     deinit {

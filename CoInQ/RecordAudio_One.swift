@@ -98,7 +98,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isHidden = true
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
-        UserDefaults.standard.set(false, forKey: "userecordone")
+            UserDefaults.standard.set(false, forKey: "userecordone")
+        print(UserDefaults.standard.bool(forKey: "userecordone"))
     }
 
     func getvideo(_ videopath: String) -> URL{
@@ -131,14 +132,12 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                     if !(audiopath.isEmpty) {
                         let url = URL(string: audiopath)
                         if FileManager.default.fileExists(atPath: (url?.path)!) {
-                            print("FILE 1 FOUND")
-                            print("audioone is not empty")
+                            print("FILE 1 FOUND \(audiopath)")
                             self.ButtonPlay.isHidden = false
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
-                            UserDefaults.standard.set(true, forKey: "userecordone")
                             self.AudioURL = URL(string: audiopath)
-                            //self.switchOutput.isEnabled = self.useaudio
+                            self.UseRecordSwitch.isOn = false
                         
                         } else {
                             //self.donloadVideo(url: url!)
@@ -223,7 +222,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        
+        getaudio()
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -261,6 +260,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     /////////////////
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -382,6 +382,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        UserDefaults.standard.set(true, forKey: "userecordone")
     }
     
     func StoreRecord(_ audiourl: URL,clip: Int) {

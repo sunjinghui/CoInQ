@@ -116,7 +116,7 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
-                            UserDefaults.standard.set(true, forKey: "userecordsix")
+                            self.UseRecordSwitch.isOn = false
                         } else {
                             //self.donloadVideo(url: url!)
                             print("FILE 6 NOT FOUND")
@@ -238,6 +238,7 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     func preparePlayer(){
+        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -354,6 +355,7 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
+        UserDefaults.standard.set(true, forKey: "userecordsix")
     }
     
     deinit {

@@ -10,17 +10,19 @@ import AVFoundation
 import AVKit
 import Alamofire
 
+var FinalVideoArray: [Any]?
+
 class CompeleteViewController : UIViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var VideoTableView: UITableView!
     @IBOutlet weak var TableEmpty: UIView!
     
-    var FinalVideoArray: [Any]?
+
     var finalvideoURL: String?
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let num = self.FinalVideoArray?.count
+        let num = FinalVideoArray?.count
         if num == nil || num == 0 {
             VideoTableView.backgroundView = TableEmpty
             return 0
@@ -35,7 +37,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         var cell: TableView_cellcompletevideo
         
         cell = tableView.dequeueReusableCell(withIdentifier: "cellvideocomplete", for: indexPath) as! TableView_cellcompletevideo
-        guard let finalvideo = self.FinalVideoArray?[indexPath.row] as? [String: Any] else {
+        guard let finalvideo = FinalVideoArray?[indexPath.row] as? [String: Any] else {
             print("Get row \(indexPath.row) error")
             return cell
         }
@@ -72,7 +74,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             
             let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-                let finalvideo = self.FinalVideoArray?[indexPath.row] as? [String: Any]
+                let finalvideo = FinalVideoArray?[indexPath.row] as? [String: Any]
                 let videoid = finalvideo?["id"] as? Int
                 
                 self.deleteData(id: videoid!)
@@ -127,7 +129,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         VideoTableView.tableFooterView = UIView(frame: .zero)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: NSNotification.Name("CSCL"), object: nil)
         loadData()
     }
     
@@ -149,11 +151,11 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
                 // 2.
                 let error = JSON["error"] as! Bool
                 if error {
-                    self.FinalVideoArray = []
+                    FinalVideoArray = []
                     self.VideoTableView.reloadData()
                     
                 } else if let FinalVideo = JSON["table"] as? [Any] {
-                    self.FinalVideoArray = FinalVideo
+                    FinalVideoArray = FinalVideo
                     self.VideoTableView.reloadData()
                 }
         }
