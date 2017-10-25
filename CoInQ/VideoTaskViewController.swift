@@ -15,6 +15,7 @@ class VideoTaskViewController:UITabBarController{
 //    var managedObjextContext: NSManagedObjectContext!
 
     @IBAction func GoBack(){
+        lognote("bhp", google_userid, "\(Index)")
             _ = self.navigationController?.popViewController(animated: true)
     }
     

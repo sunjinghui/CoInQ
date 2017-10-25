@@ -25,16 +25,18 @@ class SelectVideoUpload_One_Two : UIViewController{
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBAction func ExplainOne(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"圖片與影片是記錄「自然現象」最佳的工具喔！",preferredStyle: .alert)
-        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"將我想要探究的自然現象記錄下來吧！",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:nil)
         myAlert.addAction(action)
+        lognote("ve1",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
     @IBAction func ExplainTwo(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"例如：\n天空為什麼會出現彩虹？\n天空中的彩虹是如何形成的？",preferredStyle: .alert)
-        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著用「為什麼」或「如何」來表示我的探究問題吧！",preferredStyle: .alert)
+        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:nil)
         myAlert.addAction(action)
+        lognote("ve2",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -355,6 +357,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                         })
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
+                        lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
                         self.activityIndicator.stopAnimating()
@@ -363,6 +366,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
+                        lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
                 //上传进度

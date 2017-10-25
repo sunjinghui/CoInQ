@@ -156,7 +156,7 @@ func getaudio(){
         useRecordsix    = UserDefaults.standard.bool(forKey: "userecordsix")
         useRecordseven  = UserDefaults.standard.bool(forKey: "userecordseven")
         useRecordeight  = UserDefaults.standard.bool(forKey: "userecordeight")
-        print(useRecordone,useRecordtwo,useRecordthree)
+        print(useRecordone?.hashValue,useRecordtwo,useRecordthree)
 
     }
 
@@ -219,27 +219,20 @@ func getaudio(){
                     let videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
                     
                     self.uploadFinalvideo(outputURL!, videolength)
-                    
-                    let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的\n科學探究影片！\n你可以在「已完成」中\n找到你的傑作。", message: nil, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
-                    alertController.addAction(defaultAction)
-                    self.present(alertController, animated: true, completion: nil)
 
                 }
             }
         }
-        
-        stopActivityIndicator()
-        firstAsset = nil
-        secondAsset = nil
-        thirdAsset = nil
-        fourthAsset = nil
-        fifthAsset = nil
-        sixthAsset = nil
-        seventhAsset = nil
-        eighthAsset = nil
-        ninethAsset = nil
-        audioAssetOne = nil
+//        firstAsset = nil
+//        secondAsset = nil
+//        thirdAsset = nil
+//        fourthAsset = nil
+//        fifthAsset = nil
+//        sixthAsset = nil
+//        seventhAsset = nil
+//        eighthAsset = nil
+//        ninethAsset = nil
+//        audioAssetOne = nil
     }
     
     func switchPage(action: UIAlertAction){
@@ -426,7 +419,8 @@ func getaudio(){
             
             getaudiourl(1){ (success,audiourl) in
                 print(audiourl)
-            self.audioAssetOne = AVAsset(url:audiourl!)
+                let url = URL(string: audiourl!)
+            self.audioAssetOne = AVAsset(url:url!)
             
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -456,7 +450,8 @@ func getaudio(){
                 
                 getaudiourl(2){ (success,audiourl) in
                     //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                    self.audioAssetOne = AVAsset(url:audiourl!)
+                    let url = URL(string: audiourl!)
+                    self.audioAssetOne = AVAsset(url:url!)
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
@@ -484,7 +479,8 @@ func getaudio(){
             // Record Auido Three
             if useRecordthree!  {
                 getaudiourl(3){ (success,audiourl) in
-                    self.audioAssetOne = AVAsset(url:audiourl!)
+                    let url = URL(string: audiourl!)
+                    self.audioAssetOne = AVAsset(url:url!)
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
@@ -681,11 +677,12 @@ func getaudio(){
             
             // 4 - Get path
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .long
-            dateFormatter.timeStyle = .short
-            let date = dateFormatter.string(from: Date())
-            let savePath = (documentDirectory as NSString).appendingPathComponent("mergeVideo-\(date).mov")
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateStyle = .long
+//            dateFormatter.timeStyle = .short
+//            let date = dateFormatter.string(from: Date())
+            let filename = UUID().uuidString + ".mov"
+            let savePath = (documentDirectory as NSString).appendingPathComponent(filename)
             let url = URL(fileURLWithPath: savePath)
             
             // 4.5 - store complete video url to core data
@@ -729,7 +726,7 @@ func getaudio(){
     /////////////////  Data Transmit    ////////////////
     
     func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
-        
+        lognote("mvt", google_userid, "videoid:\(Index)")
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
@@ -757,10 +754,15 @@ func getaudio(){
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
-                        print("Upload Succes")
-                        
+                        let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的\n科學探究影片！\n你可以在「已完成」中\n找到你的傑作。", message: nil, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        self.stopActivityIndicator()
+                        lognote("ufs", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
+                        lognote("uff", google_userid, "\(Index)")
 //                        let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
 //                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
 //                        alert.addAction(action2)
@@ -769,7 +771,7 @@ func getaudio(){
                 }
                 //上传进度
                 upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    print("Upload Progress: \(progress.fractionCompleted)")
+//                    print("Upload Progress: \(progress.fractionCompleted)")
                 }
             case .failure(let encodingError):
                 print(encodingError)
@@ -777,11 +779,11 @@ func getaudio(){
         })
     }
     
-    func getaudiourl(_ num: Int,completion: @escaping ((Bool, URL?)->Void)){
+    func getaudiourl(_ num: Int,completion: @escaping ((Bool, String?)->Void)){
         makecall(num,completion: completion)
     }
     
-    func makecall(_ num: Int, completion: @escaping ((Bool, URL?)->Void)) {
+    func makecall(_ num: Int, completion: @escaping ((Bool, String?)->Void)) {
         let parameters: Parameters=["videoid": Index,"num": num]
         
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
@@ -791,7 +793,7 @@ func getaudio(){
                 switch response.result {
                 case .success(let result):
                     let jsonData = result as! NSDictionary
-                    let audiourl = URL(string: (jsonData.value(forKey: "audiopath") as! String?)!)
+                    let audiourl = jsonData.value(forKey: "audiopath") as! String
                         completion(true,audiourl)
     
                 case .failure(let error):
@@ -834,9 +836,10 @@ func getaudio(){
     }
 
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以分享\n我的科學探究歷程與這不科學探究影片\n想要傳達給觀眾的話。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"說說看\n如果他人對於我的解釋有所懷疑\n我會如何回應他人的懷疑。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ae9",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -905,7 +908,8 @@ func getaudio(){
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        
+        lognote("pr9", google_userid, "\(Index)")
+
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -1060,7 +1064,7 @@ func getaudio(){
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        userecordnine = true
+        UseRecordSwitch.isOn = false
     }
     
     deinit {

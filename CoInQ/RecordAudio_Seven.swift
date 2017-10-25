@@ -132,9 +132,10 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     }
     
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明我觀察到的\n科學家使用的科學方法與研究結果。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"說說看\n我發現科學家的方法與研究的結果有哪些特別的地方。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ae7",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -204,7 +205,8 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        
+        lognote("pr7", google_userid, "\(Index)")
+
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -296,7 +298,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound7.m4a")
+        let soundURL = documentDirectory.appendingPathComponent(AudioFileName)
         return soundURL
     }
     
@@ -361,7 +363,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UserDefaults.standard.set(true, forKey: "userecordseven")
+        UseRecordSwitch.isOn = false
     }
     
     deinit {

@@ -130,14 +130,14 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n如何將證據分類， 以及如何比較證據之間的關係。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"說說看\n我運用哪些策略與工具分類證據。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ae5",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
     func play(){
-        do{
             Player = AVPlayer(url: videourl!)
             let controller = AVPlayerViewController()
             controller.player = Player
@@ -148,9 +148,7 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             self.view.addSubview(controller.view)
             Player?.volume = 0.0
             Player?.play()
-        }catch {
-            print("Could not load data from coredb \(error.localizedDescription)")
-        }
+
     }
     
     func stopPlayer() {
@@ -205,7 +203,8 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        
+        lognote("pr5", google_userid, "\(Index)")
+
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -258,10 +257,8 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     
     func playURL() -> URL? {
         if AudioURL == nil {
-            print("dir\(directoryURL())")
             return directoryURL()
         } else {
-            print("server\(AudioURL)")
             return AudioURL
         }
     }
@@ -297,7 +294,7 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound5.m4a")
+        let soundURL = documentDirectory.appendingPathComponent(AudioFileName)
         return soundURL
     }
     
@@ -362,7 +359,7 @@ class RecordAudio_Five: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UserDefaults.standard.set(true, forKey: "userecordfive")
+        UseRecordSwitch.isOn = false
     }
     
     deinit {

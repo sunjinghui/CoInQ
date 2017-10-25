@@ -135,9 +135,10 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n為什麼會提出這樣的問題。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"說說看\n關於我提出的探究問題，可能的答案是什麼。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ae2",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -204,7 +205,8 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        
+        lognote("pr2", google_userid, "\(Index)")
+
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -361,7 +363,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UserDefaults.standard.set(true, forKey: "userecordtwo")
+        UseRecordSwitch.isOn = false
     }
     
     deinit {

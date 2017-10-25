@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/SignInViewController.swift"
-            timestampString = "528645894.569464"
+            timestampString = "530611776.347271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
-            timestampString = "530530898.376856"
+            timestampString = "530617038.362041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "videoCompositionInstructionForTrack(_:asset:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordAudio_One.swift"
-            timestampString = "530530898.376856"
+            timestampString = "530611776.347271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "stopPlayer()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordAudio_Six.swift"
-            timestampString = "530423653.257853"
+            timestampString = "530611776.347271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "playvideo(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -263,11 +263,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/CompeleteViewController.swift"
-            timestampString = "530441717.076228"
+            timestampString = "530611776.347271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -295,28 +295,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/SelectVideoUpload_One_Two.swift"
-            timestampString = "530212359.279055"
+            timestampString = "530611776.347271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CoInQ/RecordAudio_One.swift"
-            timestampString = "530550156.354754"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
-            landmarkName = "preparePlayer()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -391,11 +375,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
-            timestampString = "530530898.376856"
+            timestampString = "530617038.362041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
             landmarkName = "merge(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -407,11 +391,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
-            timestampString = "530548690.647527"
+            timestampString = "530611776.347271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "794"
-            endingLineNumber = "794"
+            startingLineNumber = "796"
+            endingLineNumber = "796"
             landmarkName = "makecall(_:completion:)"
             landmarkType = "7">
             <Locations>

@@ -133,9 +133,10 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n如何分辨資料是否為有效證據。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"說說看，我認為符合哪些條件的資料\n才能算是有效的證據。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ae4",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -205,7 +206,8 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        
+        lognote("pr4", google_userid, "\(Index)")
+
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -295,7 +297,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound4.m4a")
+        let soundURL = documentDirectory.appendingPathComponent(AudioFileName)
         return soundURL
     }
     
@@ -360,7 +362,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UserDefaults.standard.set(true, forKey: "userecordfour")
+        UseRecordSwitch.isOn = false
     }
     
     deinit {

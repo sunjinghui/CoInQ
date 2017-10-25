@@ -13,6 +13,9 @@ import SwiftyJSON
 import Photos
 
 var Index = 0
+func lognote(_ actiontype: String,_ google_userid: String,_ note: String){
+    Alamofire.request("http://140.122.76.201/CoInQ/v1/log.php", method: .post, parameters: ["actiontype":actiontype,"google_userid": google_userid,"note":note])
+}
 
 class ProjectViewController : UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -26,9 +29,11 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          let num = self.videoInfoArray?.count
             if num == nil || num == 0 {
+                print("nil\(num)")
                 VideoNameTableView.backgroundView = TableEmpty
-                return 0
+                return num!
             } else {
+                print(num)
                 VideoNameTableView.backgroundView = nil
                 return num!
             }
@@ -67,7 +72,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 let videoid = videoInfo?["id"] as? Int
                 
                 self.deleteData(id: videoid!)
-                SelectVideoUpload_Nine().update()
+//                SelectVideoUpload_Nine().update()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
@@ -79,6 +84,9 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        Index = indexPath.row
+        let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
+        let videoid = videoInfo?["id"] as? Int
+        lognote("evt", google_userid, "\(videoid)")
         self.performSegue(withIdentifier: "startvideotask", sender: self)
     }
     
@@ -139,8 +147,10 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
                         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
                         self.present(deleteAlert, animated: true, completion: nil)
+                        lognote("dtf", google_userid, "\(id)")
                         self.reload()
                     }else{
+                        lognote("dvt", google_userid, "\(id)")
                         self.reload()
                     }
                     
@@ -167,7 +177,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         let StartVideoTask = UIAlertAction(title:"建立影片任務", style: .default, handler:{
             (action) -> Void in
             let VideoName = alertController.textFields?.first?.text
-            if VideoName != ""{
+            if !(VideoName?.isEmpty)! {
                         //UPLOAD VideoTask
                         let parameters: Parameters=[
                             "google_userid": google_userid,
@@ -179,8 +189,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadvideo.php", method: .post, parameters: parameters).responseJSON
                             {
                                 response in
-                                print(response)
-                                
                                 //                    if let result = response.result.value {
                                     //                        let jsonData = result as! NSDictionary
                                 //
@@ -189,7 +197,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                                 //                    }
                         }
                         
-                SelectVideoUpload_Nine().update()
+//                SelectVideoUpload_Nine().update()
+                lognote("nvt", google_userid, VideoName!)
                 self.reload()
 
 //                self.performSegue(withIdentifier: "startvideotask", sender: self)

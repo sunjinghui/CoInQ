@@ -164,16 +164,18 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     }
     
     @IBAction func ExplainSeven(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"仔細觀察和紀錄\n科學家使用的科學方法與研究結果吧！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"仔細觀察與紀錄\n科學家使用的科學方法與研究結果吧！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ve7",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
     @IBAction func ExplainEight(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"試試看加入科學家提出的科學術語，\n讓我的解釋看起來更專業！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試試看加入科學家提出的科學術語，\n讓解釋看起來更專業！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ve8",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -257,6 +259,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         })
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
+                        lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
                         self.activityIndicator.stopAnimating()
@@ -265,6 +268,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
+                        lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
                 //上传进度

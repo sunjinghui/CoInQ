@@ -136,9 +136,10 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     }
     
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以分享蒐集資料的過程。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"說說看\n我運用哪些方法與資源蒐集資料。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ae3",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -208,7 +209,8 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        
+        lognote("pr3", google_userid, "\(Index)")
+
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -363,7 +365,7 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UserDefaults.standard.set(true, forKey: "userecordthree")
+        UseRecordSwitch.isOn = false
     }
     
     deinit {

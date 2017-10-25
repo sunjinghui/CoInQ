@@ -40,7 +40,7 @@ class RAM: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     var eighthAsset: AVAsset?
     
     var VideoNameArray = [VideoTaskInfo]()
-    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    var managedObjextContext: NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let videotaskRequest: NSFetchRequest<VideoTaskInfo> = VideoTaskInfo.fetchRequest()
     
     var timeTimer: Timer?

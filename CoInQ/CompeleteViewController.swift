@@ -76,7 +76,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
                 let finalvideo = FinalVideoArray?[indexPath.row] as? [String: Any]
                 let videoid = finalvideo?["id"] as? Int
-                
+                lognote("dfv", google_userid, "\(videoid)")
                 self.deleteData(id: videoid!)
                 
                 self.loadData()
@@ -90,7 +90,9 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let finalvideo = FinalVideoArray?[indexPath.row] as? [String: Any]
+        let videoid = finalvideo?["id"] as? Int
+        lognote("pfv", google_userid, "\(videoid)")
         let Player = AVPlayer(url: URL(string: finalvideoURL!)!)
         let playerViewController = AVPlayerViewController()
         playerViewController.player = Player
@@ -173,6 +175,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
                     if error! {
                         let deleteAlert = UIAlertController(title:"提示",message: "影片刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
                         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
+                        lognote("dvf", google_userid, "\(id)")
                         self.present(deleteAlert, animated: true, completion: nil)
                     }else{
                         self.loadData()

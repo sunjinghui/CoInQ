@@ -23,11 +23,20 @@ class SelectVideoUpload_Nine : UIViewController{
     var buttonClicked = true
     var loadingAssetOne = false
     var nullstoryboard = [String]()
+    var emptystoryboards = [String]()
 
     var printArray: String{
         var str = ""
         for element in nullstoryboard {
             str += "\n\(element)"
+        }
+        return str
+    }
+    
+    var emptystoryboard: String{
+        var str = ""
+        for element in emptystoryboards {
+            str += "\(element)"
         }
         return str
     }
@@ -99,6 +108,7 @@ class SelectVideoUpload_Nine : UIViewController{
         let videopath = video?[videonum] as? String
         if videopath == nil {
             nullstoryboard.append(storyboard)
+            emptystoryboards.append(storyboard)
             isURLempty = false
         }
     }
@@ -142,6 +152,7 @@ class SelectVideoUpload_Nine : UIViewController{
         update()
         isURLempty = true
         nullstoryboard = [String]()
+        emptystoryboards = [String]()
         check("videoone_path", "故事版 1")
         check("videotwo_path", "故事版 2")
         check("videothree_path", "故事版 3")
@@ -161,9 +172,10 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     @IBAction func ExplainNine(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"積極分享是勇氣，願意回饋是美德。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著將鏡頭轉換成自拍模式\n對著鏡頭說幾句話吧！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ve9",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -241,12 +253,15 @@ class SelectVideoUpload_Nine : UIViewController{
 //            present(recordNavigationController, animated: true, completion: nil)
             let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordAudio_One") as! RecordAudio_One
             self.navigationController?.pushViewController(recordNavigationController, animated: true)
+            
+            lognote("sra", google_userid, "\(Index)")
 //            self.performSegue(withIdentifier: "StartRecord", sender: self)
         }else{
             let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳 ,請確認\(printArray)", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
+            lognote("sbe", google_userid, "id\(Index)\(emptystoryboard)")
         }
 
         /*if isURLempty("RecordOne") || isURLempty("RecordTwo") {
@@ -295,6 +310,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
+                        lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
                         self.activityIndicator.stopAnimating()
@@ -303,6 +319,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
+                        lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
                 //上传进度

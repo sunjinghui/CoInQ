@@ -53,6 +53,7 @@ class Helper_VC: UIViewController {
         }
         Helpfultext.text = "科學探究皆從\n一個問題開始。"
         stageone.setImage(#imageLiteral(resourceName: "circle1_1"), for: UIControlState())
+        lognote("hdp",google_userid,"\(Index)")
     }
     
     @IBAction func StageTwo(_ sender: Any) {
@@ -60,8 +61,9 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
          HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "能夠確實回答問題\n的「資料」\n稱為「證據」。"
+        Helpfultext.text = "蒐集能夠確實回答問題的「資料」\n這「資料」也就是 「證據」。"
         stagetwo.setImage(#imageLiteral(resourceName: "circle2_1"), for: UIControlState())
+        lognote("hcd",google_userid,"\(Index)")
     }
     
     @IBAction func StageThree(_ sender: Any) {
@@ -69,8 +71,9 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "分析、比較「證據」\n便能得出可能的解釋。"
+        Helpfultext.text = "分析「證據」便能得出可能的解釋。"
         stagethree.setImage(#imageLiteral(resourceName: "circle3_1"), for: UIControlState())
+        lognote("hme",google_userid,"\(Index)")
     }
     
     @IBAction func StageFour(_ sender: Any) {
@@ -78,8 +81,9 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "最終解釋應\n符合科學、邏輯\n的標準。"
+        Helpfultext.text = "最終的解釋應該是\n科學的、有邏輯的。"
         stagefour.setImage(#imageLiteral(resourceName: "circle4_1"), for: UIControlState())
+        lognote("hee",google_userid,"\(Index)")
     }
     
     @IBAction func StageFive(_ sender: Any) {
@@ -87,8 +91,9 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "積極分享是勇氣，\n願意回饋是美德。"
+        Helpfultext.text = "與他人分享我的解釋\n會激發更多新想法與新問題。"
         stagefive.setImage(#imageLiteral(resourceName: "circle5_1"), for: UIControlState())
+        lognote("hsr",google_userid,"\(Index)")
     }
     
 /*    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

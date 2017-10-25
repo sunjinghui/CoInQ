@@ -60,6 +60,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     @IBAction func BackToSelectVideoNine(_ sender: Any) {
 //        dismiss(animated: true, completion: nil)
+        lognote("bvt", google_userid, "\(Index)")
         self.navigationController?.popViewController(animated: true)
     
     }
@@ -99,7 +100,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             switchOutput.isHidden = true
             UseRecordSwitch.isHidden = true
             UserDefaults.standard.set(false, forKey: "userecordone")
-        print(UserDefaults.standard.bool(forKey: "userecordone"))
     }
 
     func getvideo(_ videopath: String) -> URL{
@@ -151,9 +151,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func Explain(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小解釋",message:"我可以說明\n這個自然現象中特別值得注意的重點。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"說說看\n我為什麼對這個自然現象感興趣。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
+        lognote("ae1",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -218,11 +219,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
 
         }
             StoreRecord(directoryURL()!,clip: 1)
-
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
-        getaudio()
+        lognote("pr1", google_userid, "\(Index)")
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
             stopPlayer()
@@ -259,8 +259,38 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     /////////////////
+    func updataudiourl(){
+        let parameters: Parameters=["videoid": Index,"num": 1]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let audioinfo = JSON["audiopath"] as? String {
+                    //                    audioArray = audioinfo
+                    let audiopath = audioinfo
+                    
+                    if !(audiopath.isEmpty) {
+                        let url = URL(string: audiopath)
+                        if FileManager.default.fileExists(atPath: (url?.path)!) {
+                            self.AudioURL = URL(string: audiopath)
+                        }
+                    }
+                }
+        }
+
+    }
     func preparePlayer(){
-        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -270,7 +300,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         } catch {
             print("Error playing")
         }
-        
     }
     
     func playURL() -> URL? {
@@ -288,20 +317,14 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         if (audioSession.responds(to: #selector(AVAudioSession.requestRecordPermission(_:)))) {
             AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
                 if granted {
-                    
                     //set category and activate recorder session
                     do {
-                        
                         try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                         try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
                         self.soundRecorder.prepareToRecord()
-                        
                     } catch {
-                        
                         print("Error Recording");
-                        
                     }
-                    
                 }
             })
         }
@@ -312,7 +335,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent(AudioFileName)
+        let soundURL = documentDirectory.appendingPathComponent("sound1.m4a")
         return soundURL
     }
     
@@ -382,11 +405,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UserDefaults.standard.set(true, forKey: "userecordone")
     }
     
     func StoreRecord(_ audiourl: URL,clip: Int) {
-        
+        lognote("ra\(clip)", google_userid, "\(Index)")
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
@@ -409,8 +431,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 upload.responseJSON { response in
                     //解包
                     guard let result = response.result.value else { return }
-                    print("\(result)")
-
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
                         print("Upload Succes")

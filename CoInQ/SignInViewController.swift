@@ -16,6 +16,11 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     
     let URL_USER_REGISTER = "http://140.122.76.201/CoInQ/v1/register.php"
     
+    @discardableResult func log(_ actiontype: String,_ google_userid: String){
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/log.php", method: .post, parameters: ["actiontype":actiontype,"google_userid": google_userid])
+    }
+
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
         if error != nil{
@@ -29,7 +34,7 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             print("google sign in")
             
             google_userid = user.userID
-            
+            log("lgi", user.userID)
             let parameters: Parameters=[
                 "username":        user.profile.name,
                 "google_userid":   user.userID,

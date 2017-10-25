@@ -19,20 +19,8 @@ class CSCL: UITabBarController{
         }
         
         GIDSignIn.sharedInstance().signOut()
+        SignInViewController().log("lgo",google_userid)
         self.navigationController?.popViewController(animated: true)
-        
-    }
-    
-    func signout() {
-        
-        if !UserDefaults.standard.dictionaryRepresentation().isEmpty{
-            for key in UserDefaults.standard.dictionaryRepresentation().keys {
-                UserDefaults.standard.removeObject(forKey: key.description)
-            }
-        }
-        
-        GIDSignIn.sharedInstance().signOut()
-        _ = self.navigationController?.popViewController(animated: true)
         
     }
 

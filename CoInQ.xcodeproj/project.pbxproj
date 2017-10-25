@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		07C9EB21E4E4CD15774D2C45 /* Pods_CoInQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E544807D9724A13524E43A /* Pods_CoInQ.framework */; };
 		A504D1D81F0E8DD000C88D32 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A504D1D71F0E8DD000C88D32 /* libsqlite3.tbd */; };
-		A505AFDE1F2E594900199A80 /* RAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505AFDD1F2E594900199A80 /* RAM.swift */; };
 		A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8E011EB82E4400344F61 /* CSCL.swift */; };
 		A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */; };
 		A521ECF21ED535840074327B /* RecordAudio_One.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521ECF11ED535830074327B /* RecordAudio_One.swift */; };
@@ -25,7 +24,6 @@
 		A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD1C1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift */; };
 		A537AD1F1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD1E1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift */; };
 		A537AD211EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD201EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift */; };
-		A537AD231EC6FC1300B70596 /* RecordAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537AD221EC6FC1300B70596 /* RecordAudio.swift */; };
 		A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */; };
 		A5458D2E1EA3ED8F00B1E26A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */; };
 		A5458D311EA3ED8F00B1E26A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5458D2F1EA3ED8F00B1E26A /* LaunchScreen.storyboard */; };
@@ -71,7 +69,6 @@
 		66E544807D9724A13524E43A /* Pods_CoInQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoInQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EC62984D5899DDF4022D5C /* Pods-CoInQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoInQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoInQ/Pods-CoInQ.debug.xcconfig"; sourceTree = "<group>"; };
 		A504D1D71F0E8DD000C88D32 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		A505AFDD1F2E594900199A80 /* RAM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAM.swift; sourceTree = "<group>"; };
 		A51A8E011EB82E4400344F61 /* CSCL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSCL.swift; sourceTree = "<group>"; };
 		A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordNine_Merge.swift; sourceTree = "<group>"; };
 		A521ECF11ED535830074327B /* RecordAudio_One.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_One.swift; sourceTree = "<group>"; };
@@ -87,7 +84,6 @@
 		A537AD1C1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVideoUpload_Five_Six.swift; sourceTree = "<group>"; };
 		A537AD1E1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVideoUpload_Seven_Eight.swift; sourceTree = "<group>"; };
 		A537AD201EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVideoUpload_Nine.swift; sourceTree = "<group>"; };
-		A537AD221EC6FC1300B70596 /* RecordAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio.swift; sourceTree = "<group>"; };
 		A5458D231EA3ED8E00B1E26A /* CoInQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoInQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -216,7 +212,6 @@
 				A537AD1E1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift */,
 				A537AD201EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift */,
 				A52D1CCA1EF6E6A900FAF465 /* RecordNavigationController.swift */,
-				A537AD221EC6FC1300B70596 /* RecordAudio.swift */,
 				A521ECF11ED535830074327B /* RecordAudio_One.swift */,
 				A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */,
 				A5E263161F2CF3A900D1783D /* RecordAudio_Three.swift */,
@@ -234,7 +229,6 @@
 				A54EE15F1EAF703A0014994C /* GoogleService-Info.plist */,
 				A54EE1611EAF71740014994C /* CoInQ.entitlements */,
 				A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */,
-				A505AFDD1F2E594900199A80 /* RAM.swift */,
 			);
 			path = CoInQ;
 			sourceTree = "<group>";
@@ -458,7 +452,6 @@
 			files = (
 				A537AD111EC5B5BF00B70596 /* VideoTaskViewController.swift in Sources */,
 				A5E2631D1F2CFBBD00D1783D /* RecordAudio_Seven.swift in Sources */,
-				A537AD231EC6FC1300B70596 /* RecordAudio.swift in Sources */,
 				A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */,
 				A537AD1F1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift in Sources */,
 				A537AD131EC6EB1300B70596 /* ProjectViewController.swift in Sources */,
@@ -471,7 +464,6 @@
 				A52D1CCB1EF6E6A900FAF465 /* RecordNavigationController.swift in Sources */,
 				A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */,
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
-				A505AFDE1F2E594900199A80 /* RAM.swift in Sources */,
 				A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
 				A537AD191EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift in Sources */,
