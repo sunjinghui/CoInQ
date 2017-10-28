@@ -60,6 +60,10 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var eighthAsset: AVAsset?
     var ninethAsset: AVAsset?
     
+    var recordone: URL?
+    var recordtwo: URL?
+    var recordthree: URL?
+    
     var useRecordone :   Bool?
     var useRecordtwo :   Bool?
     var useRecordthree : Bool?
@@ -417,24 +421,18 @@ func getaudio(){
             
             // 3 - Audio track
           if useRecordone! {
-            
-            getaudiourl(1){ (success,audiourl) in
-                print(audiourl)
-                let url = URL(string: audiourl!)
-            self.audioAssetOne = AVAsset(url:url!)
-            
+                let audioURL = UserDefaults.standard.url(forKey: "recordone")
+                audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
-                                                   of: (self.audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
                                                    at: kCMTimeZero)
                 } catch _ {
                     print("Failed to load Audio track")
                 }
-            }
-            
             }else{
-             
+            
                 let v1audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v1audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, firstAsset.duration),
@@ -448,24 +446,17 @@ func getaudio(){
             
             // Record Auido Two
             if useRecordtwo! {
-                
-                getaudiourl(2){ (success,audiourl) in
-                    //audioAssetOne = AVAsset(url:UserDefaults.standard.url(forKey: "RecordTwo")!)
-                    let url = URL(string: audiourl!)
-                    self.audioAssetOne = AVAsset(url:url!)
+                let audioURL = UserDefaults.standard.url(forKey: "recordtwo")
+                audioAssetOne = AVAsset(url:audioURL!)
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
-                                                       of: (self.audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                       of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
                                                        at: firstAsset.duration)
                     } catch _ {
                         print("Failed to load Audio track")
                     }
-                }
-                
             }else{
-                print("false2")
-                
                 let v2audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v2audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
@@ -479,22 +470,17 @@ func getaudio(){
             
             // Record Auido Three
             if useRecordthree!  {
-                getaudiourl(3){ (success,audiourl) in
-                    let url = URL(string: audiourl!)
-                    self.audioAssetOne = AVAsset(url:url!)
-                    let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
-                    do {
-                        try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
-                                                       of: (self.audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
-                                                       at: firstAsset.duration + secondAsset.duration)
-                    } catch _ {
-                        print("Failed to load Audio track")
-                    }
+                let audioURL = UserDefaults.standard.url(forKey: "recordthree")
+                audioAssetOne = AVAsset(url:audioURL!)
+                let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+                do {
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
+                                                   of: (self.audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   at: firstAsset.duration + secondAsset.duration)
+                } catch _ {
+                    print("Failed to load Audio track")
                 }
-                
             }else{
-                print("false3")
-                
                 let v3audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v3audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
@@ -505,12 +491,10 @@ func getaudio(){
                 }
                 
             }
- /*           // Record Auido Four
-            if useRecordfour  {
-                
-                let audioURL = URL(string: VideoNameArray[Index].audiofour!)
+            // Record Auido Four
+            if useRecordfour!  {
+                let audioURL = UserDefaults.standard.url(forKey: "recordfour")
                 audioAssetOne = AVAsset(url:audioURL!)
-                
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fourthAsset.duration),
@@ -519,9 +503,7 @@ func getaudio(){
                 } catch _ {
                     print("Failed to load Audio track")
                 }
-                
             }else{
-                print("false")
                 
                 let v4audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -535,11 +517,9 @@ func getaudio(){
             }
             
             // Record Auido Five
-            if useRecordfive  {
-                
-                let audioURL = URL(string: VideoNameArray[Index].audiofive!)
+            if useRecordfive!  {
+                let audioURL = UserDefaults.standard.url(forKey: "recordfive")
                 audioAssetOne = AVAsset(url:audioURL!)
-                
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fifthAsset.duration),
@@ -548,10 +528,7 @@ func getaudio(){
                 } catch _ {
                     print("Failed to load Audio track")
                 }
-                
             }else{
-                print("false")
-                
                 let v5audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v5audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, fifthAsset.duration),
@@ -563,11 +540,9 @@ func getaudio(){
                 
             }
             // Record Auido Six
-            if useRecordsix  {
-                
-                let audioURL = URL(string: VideoNameArray[Index].audiosix!)
+            if useRecordsix!  {
+                let audioURL = UserDefaults.standard.url(forKey: "recordsix")
                 audioAssetOne = AVAsset(url:audioURL!)
-                
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration),
@@ -578,8 +553,6 @@ func getaudio(){
                 }
                 
             }else{
-                print("false")
-                
                 let v6audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v6audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, sixthAsset.duration),
@@ -591,11 +564,9 @@ func getaudio(){
                 
             }
             // Record Auido Seven
-            if useRecordseven  {
-                
-                let audioURL = URL(string: VideoNameArray[Index].audioseven!)
+            if useRecordseven!  {
+                let audioURL = UserDefaults.standard.url(forKey: "recordseven")
                 audioAssetOne = AVAsset(url:audioURL!)
-                
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, seventhAsset.duration),
@@ -606,8 +577,6 @@ func getaudio(){
                 }
                 
             }else{
-                print("false")
-                
                 let v7audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v7audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, seventhAsset.duration),
@@ -619,11 +588,9 @@ func getaudio(){
                 
             }
             // Record Auido Eight
-            if useRecordeight  {
-                
-                let audioURL = URL(string: VideoNameArray[Index].audioeight!)
+            if useRecordeight!  {
+                let audioURL = UserDefaults.standard.url(forKey: "recordeight")
                 audioAssetOne = AVAsset(url:audioURL!)
-                
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, eighthAsset.duration),
@@ -632,7 +599,6 @@ func getaudio(){
                 } catch _ {
                     print("Failed to load Audio track")
                 }
-                
             }else{
                 print("false")
                 
@@ -648,11 +614,9 @@ func getaudio(){
             }
 
             // Record Auido Nine
-            if useRecordnine  {
-                
-                let audioURL = URL(string: VideoNameArray[Index].audionine!)
+            if userecordnine!  {
+                let audioURL = directoryURL()
                 audioAssetOne = AVAsset(url:audioURL!)
-                
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration),
@@ -661,10 +625,7 @@ func getaudio(){
                 } catch _ {
                     print("Failed to load Audio track")
                 }
-                
             }else{
-                print("false")
-                
                 let v9audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v9audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, ninethAsset.duration),
@@ -674,7 +635,6 @@ func getaudio(){
                     print("Failed to load 故事版 9 Audio track")
                 }
             }
-            */
             
             // 4 - Get path
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]

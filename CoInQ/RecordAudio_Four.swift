@@ -199,6 +199,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             play()
             showTimeLabel()
             RecordAudio_One().StoreRecord(directoryURL()!,"userecordfour",clip: 4)
+            UserDefaults.standard.set(directoryURL()!, forKey: "recordfour")
         }
         updataudiourl()
     }

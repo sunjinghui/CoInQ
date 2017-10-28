@@ -200,6 +200,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             play()
             showTimeLabel()
             RecordAudio_One().StoreRecord(directoryURL()!,"userecordtwo",clip: 2)
+            UserDefaults.standard.set(directoryURL()!, forKey: "recordtwo")
         }
         updataudiourl()
     }

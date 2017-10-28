@@ -127,23 +127,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             
                             switch (existone){
                             case 1:
-                                let videourl = video?["videoone_path"] as? String
-                                let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url, options: nil)
-                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-                                imgGenerator.appliesPreferredTrackTransform = false
-                                
-                                do {
-                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                    let thumbnail = UIImage(cgImage: cgImage)
-                                    
-                                    self.firstcomplete.image = thumbnail
-                                    
-                                } catch let error {
-                                    print("*** Error generating thumbnail: \(error)")
-                                }
-                                
-                                self.firstcomplete.isHidden = false
+                                self.showthumbnail(video!, "videoone_path", self.firstcomplete)
                             case 2:
                                 let videourl = video?["videoone_path"] as? String
                                 let url = URL(string: videourl!)
@@ -154,22 +138,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
-                                let videourl = video?["videotwo_path"] as? String
-                                let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url, options: nil)
-                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-                                imgGenerator.appliesPreferredTrackTransform = false
-                                
-                                do {
-                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                    let thumbnail = UIImage(cgImage: cgImage)
-                                    
-                                    self.secondcomplete.image = thumbnail
-                                    
-                                } catch let error {
-                                    print("*** Error generating thumbnail: \(error)")
-                                }
-                                self.secondcomplete.isHidden = false
+                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                             case 2:
                                 let videourl = video?["videotwo_path"] as? String
                                 let url = URL(string: videourl!)
@@ -185,7 +154,7 @@ class SelectVideoUpload_One_Two : UIViewController{
 
                             switch (existone){
                             case 1:
-                                self.firstcomplete.isHidden = false
+                                self.showthumbnail(video!, "videoone_path", self.firstcomplete)
                             case 2:
                                 let videourl = video?["videoone_path"] as? String
                                 let url = URL(string: videourl!)
@@ -196,7 +165,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
-                                self.secondcomplete.isHidden = false
+                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                             case 2:
                                 let videourl = video?["videotwo_path"] as? String
                                 let url = URL(string: videourl!)
@@ -207,8 +176,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                             }
                         }else{
                             print("third \(existone) \(existtwo)")
-                            self.firstcomplete.isHidden = false
-                            self.secondcomplete.isHidden = false
+                            self.showthumbnail(video!, "videoone_path", self.firstcomplete)
+                            self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                         }
 
                     }
@@ -216,6 +185,26 @@ class SelectVideoUpload_One_Two : UIViewController{
                 }
         }
 
+    }
+    
+    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: UIImageView){
+        let videourl = videoinfo[videopath] as? String
+        let url = URL(string: videourl!)
+        let asset = AVURLAsset(url: url!, options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        imgGenerator.appliesPreferredTrackTransform = false
+        
+        do {
+            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
+            
+            check.image = thumbnail
+            
+        } catch let error {
+            print("*** Error generating thumbnail: \(error)")
+        }
+        
+        check.isHidden = false
     }
     
     func startActivityIndicator() {
@@ -386,7 +375,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            
+                            //show video thumbnail
                             let asset = AVURLAsset(url: mp4Path, options: nil)
                             let imgGenerator = AVAssetImageGenerator(asset: asset)
                             imgGenerator.appliesPreferredTrackTransform = false

@@ -83,7 +83,7 @@ class SelectVideoUpload_Nine : UIViewController{
                             case 1:
                                 let videourl = video?["videonine_path"] as? String
                                 let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url, options: nil)
+                                let asset = AVURLAsset(url: url!, options: nil)
                                 let imgGenerator = AVAssetImageGenerator(asset: asset)
                                 imgGenerator.appliesPreferredTrackTransform = false
                                 
@@ -91,7 +91,7 @@ class SelectVideoUpload_Nine : UIViewController{
                                     let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
                                     let thumbnail = UIImage(cgImage: cgImage)
                                     
-                                    self.sevencomplete.image = thumbnail
+                                    self.ninecomplete.image = thumbnail
                                     
                                 } catch let error {
                                     print("*** Error generating thumbnail: \(error)")
@@ -321,6 +321,19 @@ class SelectVideoUpload_Nine : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
+                            let asset = AVURLAsset(url: mp4Path, options: nil)
+                            let imgGenerator = AVAssetImageGenerator(asset: asset)
+                            imgGenerator.appliesPreferredTrackTransform = false
+                            
+                            do {
+                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                let thumbnail = UIImage(cgImage: cgImage)
+                                
+                                check.image = thumbnail
+                                
+                            } catch let error {
+                                print("*** Error generating thumbnail: \(error)")
+                            }
                             check.isHidden = false
                         })
                         alert.addAction(action2)

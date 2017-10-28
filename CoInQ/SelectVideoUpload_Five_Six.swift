@@ -79,22 +79,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                             
                             switch (existone){
                             case 1:
-                                let videourl = video?["videofive_path"] as? String
-                                let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url, options: nil)
-                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-                                imgGenerator.appliesPreferredTrackTransform = false
-                                
-                                do {
-                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                    let thumbnail = UIImage(cgImage: cgImage)
-                                    
-                                    self.fivecomplete.image = thumbnail
-                                    
-                                } catch let error {
-                                    print("*** Error generating thumbnail: \(error)")
-                                }
-                                self.fivecomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videofive_path", self.fivecomplete)
                             case 2:
                                 let videourl = video?["videofive_path"] as? String
                                 let url = URL(string: videourl!)
@@ -105,22 +90,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
-                                let videourl = video?["videosix_path"] as? String
-                                let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url, options: nil)
-                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-                                imgGenerator.appliesPreferredTrackTransform = false
-                                
-                                do {
-                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                    let thumbnail = UIImage(cgImage: cgImage)
-                                    
-                                    self.sixcomplete.image = thumbnail
-                                    
-                                } catch let error {
-                                    print("*** Error generating thumbnail: \(error)")
-                                }
-                                self.sixcomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videosix_path", self.sixcomplete)
                             case 2:
                                 let videourl = video?["videosix_path"] as? String
                                 let url = URL(string: videourl!)
@@ -136,7 +106,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                             
                             switch (existone){
                             case 1:
-                                self.fivecomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videofive_path", self.fivecomplete)
                             case 2:
                                 let videourl = video?["videofive_path"] as? String
                                 let url = URL(string: videourl!)
@@ -147,7 +117,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
-                                self.sixcomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videosix_path", self.sixcomplete)
                             case 2:
                                 let videourl = video?["videosix_path"] as? String
                                 let url = URL(string: videourl!)
@@ -158,8 +128,8 @@ class SelectVideoUpload_Five_Six : UIViewController{
                             }
                         }else{
                             print("third \(existone) \(existtwo)")
-                            self.fivecomplete.isHidden = false
-                            self.sixcomplete.isHidden = false
+                            SelectVideoUpload_One_Two().showthumbnail(video!, "videofive_path", self.fivecomplete)
+                            SelectVideoUpload_One_Two().showthumbnail(video!, "videosix_path", self.sixcomplete)
                         }
                         
                     }
@@ -286,6 +256,19 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
+                            let asset = AVURLAsset(url: mp4Path, options: nil)
+                            let imgGenerator = AVAssetImageGenerator(asset: asset)
+                            imgGenerator.appliesPreferredTrackTransform = false
+                            
+                            do {
+                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                let thumbnail = UIImage(cgImage: cgImage)
+                                
+                                check.image = thumbnail
+                                
+                            } catch let error {
+                                print("*** Error generating thumbnail: \(error)")
+                            }
                             check.isHidden = false
                         })
                         alert.addAction(action2)

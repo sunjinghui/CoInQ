@@ -198,6 +198,7 @@ class RecordAudio_Seven: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
             play()
             showTimeLabel()
             RecordAudio_One().StoreRecord(directoryURL()!,"userecordseven",clip: 7)
+            UserDefaults.standard.set(directoryURL()!, forKey: "recordseven")
         }
         updataudiourl()
     }

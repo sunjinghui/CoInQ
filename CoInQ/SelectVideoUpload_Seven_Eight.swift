@@ -63,7 +63,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             
                             switch (existone){
                             case 1:
-                                self.sevencomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoseven_path", self.sevencomplete)
                             case 2:
                                 let videourl = video?["videoseven_path"] as? String
                                 let url = URL(string: videourl!)
@@ -74,7 +74,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
-                                self.eightcomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
                             case 2:
                                 let videourl = video?["videoeight_path"] as? String
                                 let url = URL(string: videourl!)
@@ -90,22 +90,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             
                             switch (existone){
                             case 1:
-                                let videourl = video?["videoseven_path"] as? String
-                                let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url, options: nil)
-                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-                                imgGenerator.appliesPreferredTrackTransform = false
-                                
-                                do {
-                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                    let thumbnail = UIImage(cgImage: cgImage)
-                                    
-                                    self.sevencomplete.image = thumbnail
-                                    
-                                } catch let error {
-                                    print("*** Error generating thumbnail: \(error)")
-                                }
-                                self.sevencomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoseven_path", self.sevencomplete)
                             case 2:
                                 let videourl = video?["videoseven_path"] as? String
                                 let url = URL(string: videourl!)
@@ -118,7 +103,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             case 1:
                                 let videourl = video?["videoeight_path"] as? String
                                 let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url, options: nil)
+                                let asset = AVURLAsset(url: url!, options: nil)
                                 let imgGenerator = AVAssetImageGenerator(asset: asset)
                                 imgGenerator.appliesPreferredTrackTransform = false
                                 
@@ -131,7 +116,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                                 } catch let error {
                                     print("*** Error generating thumbnail: \(error)")
                                 }
-                                self.eightcomplete.isHidden = false
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
                             case 2:
                                 let videourl = video?["videoeight_path"] as? String
                                 let url = URL(string: videourl!)
@@ -142,8 +127,8 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             }
                         }else{
                             print("third \(existone) \(existtwo)")
-                            self.sevencomplete.isHidden = false
-                            self.eightcomplete.isHidden = false
+                            SelectVideoUpload_One_Two().showthumbnail(video!, "videoseven_path", self.sevencomplete)
+                            SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
                         }
                         
                     }
@@ -285,6 +270,19 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
+                            let asset = AVURLAsset(url: mp4Path, options: nil)
+                            let imgGenerator = AVAssetImageGenerator(asset: asset)
+                            imgGenerator.appliesPreferredTrackTransform = false
+                            
+                            do {
+                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                let thumbnail = UIImage(cgImage: cgImage)
+                                
+                                check.image = thumbnail
+                                
+                            } catch let error {
+                                print("*** Error generating thumbnail: \(error)")
+                            }
                             check.isHidden = false
                         })
                         alert.addAction(action2)

@@ -138,7 +138,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
                             self.UseRecordSwitch.isOn = false
-                        
                         } else {
                             //self.donloadVideo(url: url!)
                             print("FILE 1 NOT FOUND")
@@ -216,6 +215,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             play()
             showTimeLabel()
             StoreRecord(directoryURL()!,"userecordone",clip: 1)
+            UserDefaults.standard.set(directoryURL()!, forKey: "recordone")
         }
             updataudiourl()
     }

@@ -203,6 +203,7 @@ class RecordAudio_Three: UIViewController , AVAudioPlayerDelegate, AVAudioRecord
             play()
             showTimeLabel()
             RecordAudio_One().StoreRecord(directoryURL()!,"userecordthree",clip: 3)
+            UserDefaults.standard.set(directoryURL()!, forKey: "recordthree")
         }
         updataudiourl()
     }
