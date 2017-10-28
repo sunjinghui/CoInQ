@@ -72,7 +72,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupRecorder()
         getaudio()
         progressView.progress = progressCounter
 
@@ -182,7 +182,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func record(_ sender: AnyObject) {
-        setupRecorder()
         timeTimer?.invalidate()
         
         if soundRecorder.isRecording{
@@ -216,12 +215,13 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
-
+            StoreRecord(directoryURL()!,"userecordone",clip: 1)
         }
-            StoreRecord(directoryURL()!,clip: 1)
+            updataudiourl()
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
+//        updataudiourl()
         lognote("pr1", google_userid, "\(Index)")
         if sender.titleLabel?!.text == "Stop" {
             SoundPlayer.stop()
@@ -335,7 +335,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as URL
-        let soundURL = documentDirectory.appendingPathComponent("sound1.m4a")
+        let soundURL = documentDirectory.appendingPathComponent(AudioFileName)
         return soundURL
     }
     
@@ -407,7 +407,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         UseRecordSwitch.isHidden = false
     }
     
-    func StoreRecord(_ audiourl: URL,clip: Int) {
+    func StoreRecord(_ audiourl: URL,_ userecord: String,clip: Int) {
+        UserDefaults.standard.set(true, forKey: userecord)
         lognote("ra\(clip)", google_userid, "\(Index)")
         Alamofire.upload(
             //同样采用post表单上传

@@ -61,8 +61,8 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-            getaudio()
+        setupRecorder()
+        getaudio()
         videourl = RecordAudio_One().getvideo("videosix_path")
             Asset = AVAsset(url:videourl!)
             //影片縮圖
@@ -160,7 +160,6 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func record(_ sender: AnyObject) {
-        setupRecorder()
         timeTimer?.invalidate()
         
         if soundRecorder.isRecording{
@@ -194,10 +193,9 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
+            RecordAudio_One().StoreRecord(directoryURL()!,"userecordsix",clip: 6)
         }
-        
-        RecordAudio_One().StoreRecord(directoryURL()!,clip: 6)
-        
+        updataudiourl()
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
@@ -237,6 +235,38 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         ButttonRecord.isEnabled = true
         ButtonPlay.setTitle("Play", for: UIControlState())
         ButtonPlay.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
+    }
+    
+    func updataudiourl(){
+        let parameters: Parameters=["videoid": Index,"num": 6]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let audioinfo = JSON["audiopath"] as? String {
+                    //                    audioArray = audioinfo
+                    let audiopath = audioinfo
+                    
+                    if !(audiopath.isEmpty) {
+                        let url = URL(string: audiopath)
+                        if FileManager.default.fileExists(atPath: (url?.path)!) {
+                            self.AudioURL = URL(string: audiopath)
+                        }
+                    }
+                }
+        }
+        
     }
     
     func preparePlayer(){
@@ -357,7 +387,6 @@ class RecordAudio_Six: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UseRecordSwitch.isOn = false
     }
     
     deinit {

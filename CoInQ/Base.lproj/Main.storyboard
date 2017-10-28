@@ -109,8 +109,8 @@
                                 <rect key="frame" x="0.0" y="36" width="768" height="934"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="敬請期待" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QgF-1e-2ep" userLabel="尚未有任何影片">
-                                        <rect key="frame" x="129" y="369" width="511" height="130"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="敬請期待" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QgF-1e-2ep" userLabel="尚未有任何影片">
+                                        <rect key="frame" x="129" y="369" width="511" height="156"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -123,6 +123,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="受邀請" image="Mail-icon.png" selectedImage="Mail-icon.png" id="UV5-EI-7uy"/>
+                    <connections>
+                        <outlet property="googleSignInEmail" destination="QgF-1e-2ep" id="Gaj-qr-UOl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2j-rr-LOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -272,7 +275,7 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Gp-Wt-9Ko" id="F4U-TB-hoq">
-                                            <rect key="frame" x="0.0" y="0.0" width="702" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="735" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nye-wh-hun">
@@ -894,12 +897,8 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="Image" id="nze-DP-rQm">
-                                                    <rect key="frame" x="638" y="266" width="64" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="OtE-cu-rfP">
-                                                    <rect key="frame" x="60" y="33" width="212" height="300"/>
+                                                    <rect key="frame" x="60" y="8" width="225" height="325"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -1825,7 +1824,6 @@
                         <outlet property="switchOutput" destination="0Df-Rg-I6I" id="txO-JG-9TS"/>
                         <outlet property="timeLabel" destination="hmp-nI-q7D" id="RvB-mL-Aco"/>
                         <outlet property="videoPreviewLayer" destination="6W1-0i-zb1" id="0Q5-B6-glt"/>
-                        <segue destination="0r5-V6-xYa" kind="push" identifier="completevideotask" id="fBs-gA-cfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AqN-dk-ZkC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1842,7 +1840,6 @@
         <image name="File-Upload-icon" width="128" height="128"/>
         <image name="Files-Check-File-icon.png" width="32" height="32"/>
         <image name="Files-Edit-File-icon.png" width="32" height="32"/>
-        <image name="Image" width="48" height="48"/>
         <image name="Mail-icon.png" width="32" height="32"/>
         <image name="Numbers-1-Black-icon" width="16" height="16"/>
         <image name="Numbers-2-Black-icon" width="16" height="16"/>
@@ -1867,7 +1864,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fBs-gA-cfd"/>
         <segue reference="WK5-UN-69f"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>

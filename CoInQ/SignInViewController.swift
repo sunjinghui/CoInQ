@@ -10,13 +10,15 @@ import UIKit
 import Alamofire
 
 var google_userid = ""
+var google_useremail = ""
+var google_username = ""
 
 class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate
 {
     
     let URL_USER_REGISTER = "http://140.122.76.201/CoInQ/v1/register.php"
     
-    @discardableResult func log(_ actiontype: String,_ google_userid: String){
+    func log(_ actiontype: String,_ google_userid: String){
         Alamofire.request("http://140.122.76.201/CoInQ/v1/log.php", method: .post, parameters: ["actiontype":actiontype,"google_userid": google_userid])
     }
 
@@ -34,6 +36,8 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             print("google sign in")
             
             google_userid = user.userID
+            google_useremail = user.profile.email
+            google_username = user.profile.name
             log("lgi", user.userID)
             let parameters: Parameters=[
                 "username":        user.profile.name,

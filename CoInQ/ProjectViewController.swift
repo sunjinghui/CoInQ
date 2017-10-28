@@ -27,16 +27,13 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         let num = self.videoInfoArray?.count
-            if num == nil || num == 0 {
-                print("nil\(num)")
-                VideoNameTableView.backgroundView = TableEmpty
-                return num!
-            } else {
-                print(num)
-                VideoNameTableView.backgroundView = nil
-                return num!
-            }
+         if let num = self.videoInfoArray?.count {
+            VideoNameTableView.backgroundView = nil
+            return num
+        } else {
+            VideoNameTableView.backgroundView = TableEmpty
+            return 0
+        }
         
     }
     
@@ -86,7 +83,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 //        Index = indexPath.row
         let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
         let videoid = videoInfo?["id"] as? Int
-        lognote("evt", google_userid, "\(videoid)")
+        lognote("evt", google_userid, "\(String(describing: videoid))")
         self.performSegue(withIdentifier: "startvideotask", sender: self)
     }
     
@@ -197,7 +194,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                                 //                    }
                         }
                         
-//                SelectVideoUpload_Nine().update()
+                SelectVideoUpload_Nine().update()
                 lognote("nvt", google_userid, VideoName!)
                 self.reload()
 
@@ -214,7 +211,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
         alertController.addAction(StartVideoTask)
         alertController.addAction(cancelAction)
-        
+        reload()
         self.present(alertController, animated: true, completion: nil)
     }
     

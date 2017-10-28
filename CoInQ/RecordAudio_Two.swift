@@ -62,7 +62,7 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupRecorder()
         getaudio()
         progressView.progress = progressCounter
         
@@ -200,8 +200,9 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
+            RecordAudio_One().StoreRecord(directoryURL()!,"userecordtwo",clip: 2)
         }
-        RecordAudio_One().StoreRecord(directoryURL()!,clip: 2)
+        updataudiourl()
     }
     
     @IBAction func playvideo(_ sender: AnyObject) {
@@ -243,6 +244,38 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         ButtonPlay.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
     }
     
+    func updataudiourl(){
+        let parameters: Parameters=["videoid": Index,"num": 2]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let audioinfo = JSON["audiopath"] as? String {
+                    //                    audioArray = audioinfo
+                    let audiopath = audioinfo
+                    
+                    if !(audiopath.isEmpty) {
+                        let url = URL(string: audiopath)
+                        if FileManager.default.fileExists(atPath: (url?.path)!) {
+                            self.AudioURL = URL(string: audiopath)
+                        }
+                    }
+                }
+        }
+        
+    }
+    
     func preparePlayer(){
         getaudio()
         let url = playURL()
@@ -259,10 +292,10 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func playURL() -> URL? {
         if AudioURL == nil {
-            print("dir\(directoryURL())")
+//            print("dir\(directoryURL())")
             return directoryURL()
         } else {
-            print("server\(AudioURL)")
+//            print("server\(AudioURL)")
             return AudioURL
         }
     }
@@ -274,18 +307,14 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         if (audioSession.responds(to: #selector(AVAudioSession.requestRecordPermission(_:)))) {
             AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
                 if granted {
-                    
                     //set category and activate recorder session
                     do {
-                        
                         try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
                         try self.soundRecorder = AVAudioRecorder(url: self.directoryURL()!, settings: self.recordSettings)
                         self.soundRecorder.prepareToRecord()
                         
                     } catch {
-                        
                         print("Error Recording");
-                        
                     }
                     
                 }
@@ -363,7 +392,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     func showSwitch(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
-        UseRecordSwitch.isOn = false
     }
     
     deinit {
