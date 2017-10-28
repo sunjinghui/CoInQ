@@ -166,7 +166,6 @@ class RecordAudio_Two: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     }
     
     @IBAction func record(_ sender: AnyObject) {
-        setupRecorder()
         timeTimer?.invalidate()
         
         if soundRecorder.isRecording{

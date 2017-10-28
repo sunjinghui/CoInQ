@@ -77,6 +77,21 @@ class SelectVideoUpload_Three_Four : UIViewController{
                             
                             switch (existone){
                             case 1:
+                                let videourl = video?["videothree_path"] as? String
+                                let url = URL(string: videourl!)
+                                let asset = AVURLAsset(url: url, options: nil)
+                                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                                imgGenerator.appliesPreferredTrackTransform = false
+                                
+                                do {
+                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                    let thumbnail = UIImage(cgImage: cgImage)
+                                    
+                                    self.threecomplete.image = thumbnail
+                                    
+                                } catch let error {
+                                    print("*** Error generating thumbnail: \(error)")
+                                }
                                 self.threecomplete.isHidden = false
                             case 2:
                                 let videourl = video?["videothree_path"] as? String
@@ -88,6 +103,21 @@ class SelectVideoUpload_Three_Four : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
+                                let videourl = video?["videofour_path"] as? String
+                                let url = URL(string: videourl!)
+                                let asset = AVURLAsset(url: url, options: nil)
+                                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                                imgGenerator.appliesPreferredTrackTransform = false
+                                
+                                do {
+                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                    let thumbnail = UIImage(cgImage: cgImage)
+                                    
+                                    self.fourcomplete.image = thumbnail
+                                    
+                                } catch let error {
+                                    print("*** Error generating thumbnail: \(error)")
+                                }
                                 self.fourcomplete.isHidden = false
                             case 2:
                                 let videourl = video?["videofour_path"] as? String

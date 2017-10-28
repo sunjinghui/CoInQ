@@ -395,11 +395,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="TYx-fM-WbN">
-                                <rect key="frame" x="207" y="502" width="84" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="4gy-sz-405">
-                                <rect key="frame" x="588" y="487" width="84" height="75"/>
+                                <rect key="frame" x="113" y="503" width="163" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vUx-ak-Yin">
@@ -410,6 +406,10 @@
                                     <action selector="ExplainFour:" destination="nKx-F0-iOd" eventType="touchUpInside" id="vL0-FD-Imp"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="4gy-sz-405">
+                                <rect key="frame" x="493" y="502" width="163" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -461,7 +461,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4rQ-eN-XNb">
-                                <rect key="frame" x="368" y="610" width="32" height="32"/>
+                                <rect key="frame" x="368" y="642" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
@@ -469,7 +469,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AoT-Aq-z2E">
-                                <rect key="frame" x="235" y="394" width="293" height="165"/>
+                                <rect key="frame" x="235" y="430" width="293" height="165"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
@@ -478,7 +478,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="7YC-v7-Mn2">
-                                <rect key="frame" x="388" y="394" width="84" height="75"/>
+                                <rect key="frame" x="300" y="446" width="163" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -555,10 +555,6 @@
                                     <action selector="ExplainTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="18g-cg-fVg"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="vB0-7i-f69">
-                                <rect key="frame" x="612" y="502" width="84" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="agc-4j-FI3">
                                 <rect key="frame" x="178" y="697" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -580,7 +576,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="aXe-QL-0dl">
-                                <rect key="frame" x="204" y="502" width="84" height="75"/>
+                                <rect key="frame" x="113" y="502" width="163" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="vB0-7i-f69">
+                                <rect key="frame" x="518" y="503" width="163" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -677,11 +677,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="COn-Iq-wdT">
-                                <rect key="frame" x="209" y="502" width="84" height="75"/>
+                                <rect key="frame" x="113" y="502" width="163" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="yvU-e8-zoh">
-                                <rect key="frame" x="614" y="502" width="84" height="75"/>
+                                <rect key="frame" x="520" y="502" width="163" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -777,11 +777,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="idq-ZU-dcM">
-                                <rect key="frame" x="207" y="502" width="84" height="75"/>
+                                <rect key="frame" x="114" y="503" width="163" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="VeS-iD-10S">
-                                <rect key="frame" x="612" y="502" width="84" height="75"/>
+                                <rect key="frame" x="518" y="503" width="163" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -866,7 +866,7 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="368"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Rw-we-Dsg" id="5OR-AV-DNh">
-                                            <rect key="frame" x="0.0" y="0.0" width="702" height="368"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="702" height="367.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qIt-4F-X2C">

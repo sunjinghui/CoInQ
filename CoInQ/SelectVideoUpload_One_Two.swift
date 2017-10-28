@@ -18,6 +18,7 @@ import Photos
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
+    var Asset : AVAsset?
     
     @IBOutlet weak var firstcomplete: UIImageView!
     @IBOutlet weak var secondcomplete: UIImageView!
@@ -61,6 +62,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         mediaUI.mediaTypes = [kUTTypeMovie as NSString as String]
         mediaUI.allowsEditing = true
         mediaUI.delegate = delegate
+        mediaUI.videoMaximumDuration = 30.0
         present(mediaUI, animated: true, completion: nil)
         return true
     }
@@ -125,6 +127,22 @@ class SelectVideoUpload_One_Two : UIViewController{
                             
                             switch (existone){
                             case 1:
+                                let videourl = video?["videoone_path"] as? String
+                                let url = URL(string: videourl!)
+                                let asset = AVURLAsset(url: url, options: nil)
+                                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                                imgGenerator.appliesPreferredTrackTransform = false
+                                
+                                do {
+                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                    let thumbnail = UIImage(cgImage: cgImage)
+                                    
+                                    self.firstcomplete.image = thumbnail
+                                    
+                                } catch let error {
+                                    print("*** Error generating thumbnail: \(error)")
+                                }
+                                
                                 self.firstcomplete.isHidden = false
                             case 2:
                                 let videourl = video?["videoone_path"] as? String
@@ -136,6 +154,21 @@ class SelectVideoUpload_One_Two : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
+                                let videourl = video?["videotwo_path"] as? String
+                                let url = URL(string: videourl!)
+                                let asset = AVURLAsset(url: url, options: nil)
+                                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                                imgGenerator.appliesPreferredTrackTransform = false
+                                
+                                do {
+                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                    let thumbnail = UIImage(cgImage: cgImage)
+                                    
+                                    self.secondcomplete.image = thumbnail
+                                    
+                                } catch let error {
+                                    print("*** Error generating thumbnail: \(error)")
+                                }
                                 self.secondcomplete.isHidden = false
                             case 2:
                                 let videourl = video?["videotwo_path"] as? String
@@ -353,6 +386,22 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
+                            
+                            let asset = AVURLAsset(url: mp4Path, options: nil)
+                            let imgGenerator = AVAssetImageGenerator(asset: asset)
+                            imgGenerator.appliesPreferredTrackTransform = false
+                            
+                            do {
+                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                let thumbnail = UIImage(cgImage: cgImage)
+                                
+                                check.image = thumbnail
+                                
+                            } catch let error {
+                                print("*** Error generating thumbnail: \(error)")
+                            }
+
+                            
                             check.isHidden = false
                         })
                         alert.addAction(action2)
@@ -398,9 +447,17 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 message = "故事版1 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videourl = avAsset
-                print(videourl)
-                self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.firstcomplete)
-                load()
+//                Asset = AVAsset(url: videourl)
+//                let time = Asset?.duration.seconds as! Double
+//                if time > 30.0{
+//                    let alertController = UIAlertController(title: "影片需少於30秒，請重新上傳", message: nil, preferredStyle: .alert)
+//                    let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:nil)
+//                    alertController.addAction(checkagainAction)
+//                    self.present(alertController, animated: true, completion: nil)
+//                }else{
+                    self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.firstcomplete)
+                    load()
+//                }
             } else {
                 message = "故事版2 影片已匯入成功！"
                 self.startActivityIndicator()

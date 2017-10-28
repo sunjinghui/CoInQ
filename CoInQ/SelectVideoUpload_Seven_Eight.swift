@@ -90,6 +90,21 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             
                             switch (existone){
                             case 1:
+                                let videourl = video?["videoseven_path"] as? String
+                                let url = URL(string: videourl!)
+                                let asset = AVURLAsset(url: url, options: nil)
+                                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                                imgGenerator.appliesPreferredTrackTransform = false
+                                
+                                do {
+                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                    let thumbnail = UIImage(cgImage: cgImage)
+                                    
+                                    self.sevencomplete.image = thumbnail
+                                    
+                                } catch let error {
+                                    print("*** Error generating thumbnail: \(error)")
+                                }
                                 self.sevencomplete.isHidden = false
                             case 2:
                                 let videourl = video?["videoseven_path"] as? String
@@ -101,6 +116,21 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             }
                             switch (existtwo){
                             case 1:
+                                let videourl = video?["videoeight_path"] as? String
+                                let url = URL(string: videourl!)
+                                let asset = AVURLAsset(url: url, options: nil)
+                                let imgGenerator = AVAssetImageGenerator(asset: asset)
+                                imgGenerator.appliesPreferredTrackTransform = false
+                                
+                                do {
+                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                                    let thumbnail = UIImage(cgImage: cgImage)
+                                    
+                                    self.eightcomplete.image = thumbnail
+                                    
+                                } catch let error {
+                                    print("*** Error generating thumbnail: \(error)")
+                                }
                                 self.eightcomplete.isHidden = false
                             case 2:
                                 let videourl = video?["videoeight_path"] as? String

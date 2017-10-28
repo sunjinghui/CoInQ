@@ -748,10 +748,8 @@ func getaudio(){
             case .success(let upload, _, _):
                 //json处理
                 upload.responseJSON { response in
-                    print(response)
                     //解包
                     guard let result = response.result.value else { return }
-                    print("\(result)")
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
@@ -764,10 +762,10 @@ func getaudio(){
                     }else{
                         print("Upload Failed")
                         lognote("uff", google_userid, "\(Index)")
-//                        let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
-//                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
-//                        alert.addAction(action2)
-//                        self.present(alert , animated: true , completion: nil)
+                        let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
+                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alert.addAction(action2)
+                        self.present(alert , animated: true , completion: nil)
                     }
                 }
                 //上传进度
@@ -776,6 +774,10 @@ func getaudio(){
                 }
             case .failure(let encodingError):
                 print(encodingError)
+                let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
+                let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action2)
+                self.present(alert , animated: true , completion: nil)
             }
         })
     }
