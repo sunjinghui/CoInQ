@@ -160,31 +160,50 @@ func getaudio(){
         useRecordsix    = UserDefaults.standard.bool(forKey: "userecordsix")
         useRecordseven  = UserDefaults.standard.bool(forKey: "userecordseven")
         useRecordeight  = UserDefaults.standard.bool(forKey: "userecordeight")
-        print(useRecordone?.hashValue,useRecordtwo,useRecordthree)
-
+        print(useRecordone,useRecordtwo,useRecordthree,useRecordfour,useRecordfive,useRecordsix,useRecordseven,useRecordeight)
     }
 
     func getvideo(){
-        SelectVideoUpload_Nine().update()
-        var video = videoArray?[0] as? [String: Any]
-        let videoone = video?["videoone_path"] as? String
-        firstAsset   = AVAsset(url: URL(string: videoone!)!)
-        let videotwo = video?["videotwo_path"] as? String
-        secondAsset   = AVAsset(url: URL(string: videotwo!)!)
-        let videothree = video?["videothree_path"] as? String
-        thirdAsset   = AVAsset(url: URL(string: videothree!)!)
-        let videofour = video?["videofour_path"] as? String
-        fourthAsset   = AVAsset(url: URL(string: videofour!)!)
-        let videofive = video?["videofive_path"] as? String
-        fifthAsset   = AVAsset(url: URL(string: videofive!)!)
-        let videosix = video?["videosix_path"] as? String
-        sixthAsset   = AVAsset(url: URL(string: videosix!)!)
-        let videoseven = video?["videoseven_path"] as? String
-        seventhAsset   = AVAsset(url: URL(string: videoseven!)!)
-        let videoeight = video?["videoeight_path"] as? String
-        eighthAsset   = AVAsset(url: URL(string: videoeight!)!)
-        let videonine = video?["videonine_path"] as? String
-        ninethAsset   = AVAsset(url: URL(string: videonine!)!)
+        let parameters: Parameters=["videoid": Index]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print(errorMessage!)
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                if let videoinfo = JSON["videoURLtable"] as? [Any] {
+                    videoArray = videoinfo
+                    var video = videoArray?[0] as? [String: Any]
+                    let videoone = video?["videoone_path"] as? String
+                    self.firstAsset   = AVAsset(url: URL(string: videoone!)!)
+                    let videotwo = video?["videotwo_path"] as? String
+                    self.secondAsset   = AVAsset(url: URL(string: videotwo!)!)
+                    let videothree = video?["videothree_path"] as? String
+                    self.thirdAsset   = AVAsset(url: URL(string: videothree!)!)
+                    let videofour = video?["videofour_path"] as? String
+                    self.fourthAsset   = AVAsset(url: URL(string: videofour!)!)
+                    let videofive = video?["videofive_path"] as? String
+                    self.fifthAsset   = AVAsset(url: URL(string: videofive!)!)
+                    let videosix = video?["videosix_path"] as? String
+                    self.sixthAsset   = AVAsset(url: URL(string: videosix!)!)
+                    let videoseven = video?["videoseven_path"] as? String
+                    self.seventhAsset   = AVAsset(url: URL(string: videoseven!)!)
+                    let videoeight = video?["videoeight_path"] as? String
+                    self.eighthAsset   = AVAsset(url: URL(string: videoeight!)!)
+                    let videonine = video?["videonine_path"] as? String
+                    self.ninethAsset   = AVAsset(url: URL(string: videonine!)!)
+                }
+        }
+        
     }
     
     func startActivityIndicator() {
@@ -215,6 +234,7 @@ func getaudio(){
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
             let outputURL = session.outputURL
+            print("export")
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
                     let vmilliseconds = Int(self.videoseconds!) * 60
@@ -222,22 +242,28 @@ func getaudio(){
                     let vsec = (vmilliseconds / 60) % 60
                     let vmin = vmilliseconds / 3600
                     let videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
-                    
+                    print("saved")
                     self.uploadFinalvideo(outputURL!, videolength)
 
                 }
             }
+        }else{
+            let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            self.stopActivityIndicator()
         }
-//        firstAsset = nil
-//        secondAsset = nil
-//        thirdAsset = nil
-//        fourthAsset = nil
-//        fifthAsset = nil
-//        sixthAsset = nil
-//        seventhAsset = nil
-//        eighthAsset = nil
-//        ninethAsset = nil
-//        audioAssetOne = nil
+        firstAsset = nil
+        secondAsset = nil
+        thirdAsset = nil
+        fourthAsset = nil
+        fifthAsset = nil
+        sixthAsset = nil
+        seventhAsset = nil
+        eighthAsset = nil
+        ninethAsset = nil
+        audioAssetOne = nil
     }
     
     func switchPage(action: UIAlertAction){
@@ -423,6 +449,7 @@ func getaudio(){
           if useRecordone! {
                 let audioURL = UserDefaults.standard.url(forKey: "recordone")
                 audioAssetOne = AVAsset(url:audioURL!)
+            print("1---\(audioURL)")
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
@@ -448,6 +475,7 @@ func getaudio(){
             if useRecordtwo! {
                 let audioURL = UserDefaults.standard.url(forKey: "recordtwo")
                 audioAssetOne = AVAsset(url:audioURL!)
+                print("2---\(audioURL)")
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
@@ -471,7 +499,8 @@ func getaudio(){
             // Record Auido Three
             if useRecordthree!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordthree")
-                audioAssetOne = AVAsset(url:audioURL!)
+                print("3---\(audioURL)")
+               audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
@@ -494,6 +523,7 @@ func getaudio(){
             // Record Auido Four
             if useRecordfour!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordfour")
+                print("4---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -519,6 +549,7 @@ func getaudio(){
             // Record Auido Five
             if useRecordfive!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordfive")
+                print("5---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -542,6 +573,7 @@ func getaudio(){
             // Record Auido Six
             if useRecordsix!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordsix")
+                print("6---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -566,6 +598,7 @@ func getaudio(){
             // Record Auido Seven
             if useRecordseven!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordseven")
+                print("7---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -590,6 +623,7 @@ func getaudio(){
             // Record Auido Eight
             if useRecordeight!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordeight")
+                print("8---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -599,9 +633,7 @@ func getaudio(){
                 } catch _ {
                     print("Failed to load Audio track")
                 }
-            }else{
-                print("false")
-                
+            }else{                
                 let v8audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try v8audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, eighthAsset.duration),
@@ -616,6 +648,7 @@ func getaudio(){
             // Record Auido Nine
             if userecordnine!  {
                 let audioURL = directoryURL()
+                print("9---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -644,7 +677,8 @@ func getaudio(){
 //            let date = dateFormatter.string(from: Date())
             let filename = UUID().uuidString + ".mov"
             let savePath = (documentDirectory as NSString).appendingPathComponent(filename)
-            let url = URL(fileURLWithPath: savePath)
+            deleteFile(URL(string: savePath)!)
+            let outputurl = URL(fileURLWithPath: savePath)
             
             // 4.5 - store complete video url to core data
 //            let videourlitem = VideoInfo(context: managedObjextContext)
@@ -663,10 +697,10 @@ func getaudio(){
 //            }catch{
 //            
 //            }
-            
+            print("merge")
             // 5 - Create Exporter
             guard let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
-            exporter.outputURL = url
+            exporter.outputURL = outputurl
             exporter.outputFileType = AVFileTypeQuickTimeMovie
             exporter.shouldOptimizeForNetworkUse = true 
             exporter.videoComposition = mainComposition
@@ -679,15 +713,32 @@ func getaudio(){
             }
             //storevideocompleteURL()
 
+        }else{
+            let alertController = UIAlertController(title: "合併失敗，請重新操作", message: nil, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            self.stopActivityIndicator()
         }
         
     }// end of merge
     
+    func deleteFile(_ filePath:URL) {
+        
+        guard FileManager.default.fileExists(atPath: filePath.path) else { return }
+        
+        do {
+            try    FileManager.default.removeItem(atPath: filePath.path)
+            print("remove video from \(filePath)")
+        } catch {
+            fatalError("Unable to delete file: \(error) : \(#function).")
+        }
+    }
     
     /////////////////  Data Transmit    ////////////////
     
     func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
-        lognote("mvt", google_userid, "videoid:\(Index)")
+        lognote("mvt", google_userid, "videoid:\(Index)\(useRecordone)\(useRecordtwo)\(useRecordthree)\(useRecordfour)\(useRecordfive)\(useRecordsix)\(useRecordseven)\(useRecordeight)\(userecordnine)")
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
@@ -730,7 +781,7 @@ func getaudio(){
                 }
                 //上传进度
                 upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-//                    print("Upload Progress: \(progress.fractionCompleted)")
+                    print("Upload Progress: \(progress.fractionCompleted)")
                 }
             case .failure(let encodingError):
                 print(encodingError)
@@ -742,46 +793,30 @@ func getaudio(){
         })
     }
     
-    func getaudiourl(_ num: Int,completion: @escaping ((Bool, String?)->Void)){
-        makecall(num,completion: completion)
-    }
-    
-    func makecall(_ num: Int, completion: @escaping ((Bool, String?)->Void)) {
-        let parameters: Parameters=["videoid": Index,"num": num]
-        
-        Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
-            {
-                response in
-                print (response)
-                switch response.result {
-                case .success(let result):
-                    let jsonData = result as! NSDictionary
-                    let audiourl = jsonData.value(forKey: "audiopath") as! String
-                        completion(true,audiourl)
-    
-                case .failure(let error):
-                    print(error)
-                    completion(false,nil)
-                }
-//                guard response.result.isSuccess else {
-//                    let errorMessage = response.result.error?.localizedDescription
-//                    print("getaudio error\(errorMessage!)")
-//                    return
+//    func getaudiourl(_ num: Int,completion: @escaping ((Bool, String?)->Void)){
+//        makecall(num,completion: completion)
+//    }
+//    
+//    func makecall(_ num: Int, completion: @escaping ((Bool, String?)->Void)) {
+//        let parameters: Parameters=["videoid": Index,"num": num]
+//        
+//        Alamofire.request("http://140.122.76.201/CoInQ/v1/getAudioInfo.php", method: .post, parameters: parameters).responseJSON
+//            {
+//                response in
+//                print (response)
+//                switch response.result {
+//                case .success(let result):
+//                    let jsonData = result as! NSDictionary
+//                    let audiourl = jsonData.value(forKey: "audiopath") as! String
+//                        completion(true,audiourl)
+//    
+//                case .failure(let error):
+//                    print(error)
+//                    completion(false,nil)
 //                }
-//                guard let JSON = response.result.value as? [String: Any] else {
-//                    print("JSON formate error")
-//                    return
-//                }
-//                // 2.
-//                if let audioinfo = JSON["audiopath"] as? String {
-//                    let audiopath = audioinfo
-//                    let audiourl = URL(string: audiopath)
-//                    print(audiopath)
-//                    completion(audiourl!)
-//                }
-        }
-        
-    }
+//        }
+//        
+//    }
 
     
     
@@ -843,6 +878,8 @@ func getaudio(){
             progressView.progress = 0.0
             if progressViewTimer != nil {
                 progressViewTimer?.invalidate()
+                StoreRecord(directoryURL()!,clip: 9)
+                userecordnine = true
             }
             //showTimeLabel()
             
@@ -863,8 +900,6 @@ func getaudio(){
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
-            RecordAudio_One().StoreRecord(directoryURL()!,"userecordnine",clip: 9)
-            userecordnine = true
         }
         updataudiourl()
     }
@@ -879,7 +914,9 @@ func getaudio(){
             sender.setTitle("Play", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
             ButttonRecord.isEnabled = true
-            
+            if progressViewTimer != nil {
+                progressViewTimer?.invalidate()
+            }
         }else{
             preparePlayer()
             play()
@@ -940,7 +977,6 @@ func getaudio(){
     }
     
     func preparePlayer(){
-        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: url!)
@@ -1018,11 +1054,9 @@ func getaudio(){
                 timeLabel.textColor = UIColor.red
             }
         }else{
-            ButtonPlay.isEnabled = true
-            ButtonPlay.isHidden = false
-            ButttonRecord.setTitle("錄音", for: UIControlState())
-            ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
-            showSwitch()
+            timeTimer?.invalidate()
+            StoreRecord(directoryURL()!,clip: 9)
+            userecordnine = true
         }
     }
     
@@ -1058,6 +1092,52 @@ func getaudio(){
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
     }
+    
+    func StoreRecord(_ audiourl: URL,clip: Int) {
+        lognote("ra\(clip)", google_userid, "\(Index)")
+        Alamofire.upload(
+            //同样采用post表单上传
+            multipartFormData: { multipartFormData in
+                
+                multipartFormData.append(audiourl, withName: "file")//, fileName: self.AudioFileName, mimeType: "audio/m4a")
+                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
+                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
+                multipartFormData.append((audiourl.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "audiopath")
+                multipartFormData.append("\(clip)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "clip")
+                //                for (key, val) in parameters {
+                //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
+                //                }
+                
+                //SERVER ADD
+        },to: "http://140.122.76.201/CoInQ/v1/uploadaudio.php",
+          encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                //json处理
+                upload.responseJSON { response in
+                    //解包
+                    guard let result = response.result.value else { return }
+                    let success = JSON(result)["success"].int ?? -1
+                    if success == 1 {
+                        print("Upload Succes")
+                        self.ButtonPlay.isEnabled = true
+                        self.ButtonPlay.isHidden = false
+                        self.ButttonRecord.setTitle("錄音", for: UIControlState())
+                        self.ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
+                        self.showSwitch()
+                    }else{
+                        print("Upload Failed")
+                    }
+                }
+                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        })
+    }
+
     
     deinit {
         NotificationCenter.default.removeObserver(self)

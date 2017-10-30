@@ -10,15 +10,14 @@ import AVFoundation
 import AVKit
 import Alamofire
 
-var FinalVideoArray: [Any]?
 
 class CompeleteViewController : UIViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var VideoTableView: UITableView!
     @IBOutlet weak var TableEmpty: UIView!
     
-
-    var finalvideoURL: String?
+    var FinalVideoArray: [Any]?
+//    var finalvideoURL: String?
     
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,7 +42,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         }
         cell.videoname.text = finalvideo["videoname"] as? String
         cell.videolength.text = finalvideo["videolength"] as? String
-        finalvideoURL = finalvideo["finalvideopath"] as? String
+        let finalvideoURL = finalvideo["finalvideopath"] as? String
         //影片縮圖
         let videoURL = URL(string: finalvideoURL!)
         let asset = AVURLAsset(url: videoURL!, options: nil)
@@ -74,7 +73,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             
             let deleteAlert = UIAlertController(title:"確定要刪除影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-                let finalvideo = FinalVideoArray?[indexPath.row] as? [String: Any]
+                let finalvideo = self.FinalVideoArray?[indexPath.row] as? [String: Any]
                 let videoid = finalvideo?["id"] as? Int
                 lognote("dfv", google_userid, "\(videoid)")
                 self.deleteData(id: videoid!)
@@ -93,7 +92,13 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         let finalvideo = FinalVideoArray?[indexPath.row] as? [String: Any]
         let videoid = finalvideo?["id"] as? Int
         lognote("pfv", google_userid, "\(videoid)")
-        let Player = AVPlayer(url: URL(string: finalvideoURL!)!)
+        
+        let finalvideopath = finalvideo?["finalvideopath"] as? String
+//        let finalvideoURL = URL(string: finalvideopath!)
+//        let requestUrl = "http://140.122.76.201/CoInQ/upload/"
+//        let urls = requestUrl.appending(google_userid).appending("/").appending("\(videoid)").appending("/").appending((finalvideoURL?.lastPathComponent)!)
+//        let videourl = URL(string: urls)
+        let Player = AVPlayer(url: URL(string: finalvideopath!)!)
         let playerViewController = AVPlayerViewController()
         playerViewController.player = Player
         self.present(playerViewController,animated: true){
@@ -153,11 +158,12 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
                 // 2.
                 let error = JSON["error"] as! Bool
                 if error {
-                    FinalVideoArray = []
+                    self.FinalVideoArray = []
                     self.VideoTableView.reloadData()
                     
                 } else if let FinalVideo = JSON["table"] as? [Any] {
-                    FinalVideoArray = FinalVideo
+                    self.FinalVideoArray = FinalVideo
+                    print(self.FinalVideoArray)
                     self.VideoTableView.reloadData()
                 }
         }

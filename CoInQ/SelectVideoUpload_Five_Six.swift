@@ -201,6 +201,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
         mediaUI.mediaTypes = [kUTTypeMovie as NSString as String]
         mediaUI.allowsEditing = true
         mediaUI.delegate = delegate
+        mediaUI.videoMaximumDuration = 30.0
         present(mediaUI, animated: true, completion: nil)
         return true
     }

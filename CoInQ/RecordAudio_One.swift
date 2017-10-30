@@ -126,7 +126,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 }
                 // 2.
                 if let audioinfo = JSON["audiopath"] as? String {
-//                    audioArray = audioinfo
                     let audiopath = audioinfo
                     
                     if !(audiopath.isEmpty) {
@@ -137,6 +136,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
+                            UserDefaults.standard.set(self.AudioURL!, forKey: "recordone")
                             self.UseRecordSwitch.isOn = false
                         } else {
                             //self.donloadVideo(url: url!)
@@ -194,6 +194,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             progressView.progress = 0.0
             if progressViewTimer != nil {
                 progressViewTimer?.invalidate()
+                StoreRecord(directoryURL()!,"userecordone",clip: 1)
             }
             //showTimeLabel()
 
@@ -214,8 +215,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
-            StoreRecord(directoryURL()!,"userecordone",clip: 1)
-            UserDefaults.standard.set(directoryURL()!, forKey: "recordone")
+            
         }
             updataudiourl()
     }
@@ -230,6 +230,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             sender.setTitle("Play", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
             ButttonRecord.isEnabled = true
+            progressView.progress = 0.0
+            if progressViewTimer != nil {
+                progressViewTimer?.invalidate()
+            }
 
         }else{
             preparePlayer()
@@ -277,7 +281,6 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 }
                 // 2.
                 if let audioinfo = JSON["audiopath"] as? String {
-                    //                    audioArray = audioinfo
                     let audiopath = audioinfo
                     
                     if !(audiopath.isEmpty) {
@@ -366,11 +369,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                 timeLabel.textColor = UIColor.red
             }
         }else{
-            ButtonPlay.isEnabled = true
-            ButtonPlay.isHidden = false
-            ButttonRecord.setTitle("錄音", for: UIControlState())
-            ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
-            showSwitch()
+            timeTimer?.invalidate()
+            StoreRecord(directoryURL()!,"userecordone",clip: 1)
         }
     }
     
@@ -435,11 +435,16 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
                         print("Upload Succes")
+                        self.ButtonPlay.isEnabled = true
+                        self.ButtonPlay.isHidden = false
+                        self.ButttonRecord.setTitle("錄音", for: UIControlState())
+                        self.ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
+                        UserDefaults.standard.set(audiourl, forKey: "recordone")
+                        self.showSwitch()
                     }else{
                         print("Upload Failed")
                     }
                 }
-                
                 upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
                     print("Upload Progress: \(progress.fractionCompleted)")
                 }

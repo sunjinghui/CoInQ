@@ -67,7 +67,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 
                 let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
                 let videoid = videoInfo?["id"] as? Int
-                
+                let videoname = videoInfo?["videoname"] as? String
+                lognote("dtf", google_userid, "\(videoid)\(videoname)")
                 self.deleteData(id: videoid!)
 //                SelectVideoUpload_Nine().update()
             }))
@@ -144,7 +145,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
                         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
                         self.present(deleteAlert, animated: true, completion: nil)
-                        lognote("dtf", google_userid, "\(id)")
                         self.reload()
                     }else{
                         lognote("dvt", google_userid, "\(id)")
@@ -171,7 +171,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         formater.dateFormat = "yyyy/MM/dd"
         let dateresult = formater.string(from: date)
         
-        let StartVideoTask = UIAlertAction(title:"建立影片任務", style: .default, handler:{
+        let StartVideoTask = UIAlertAction(title:"建立影片專案", style: .default, handler:{
             (action) -> Void in
             let VideoName = alertController.textFields?.first?.text
             if !(VideoName?.isEmpty)! {

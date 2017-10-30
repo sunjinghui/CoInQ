@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 import AVKit
 import Alamofire
+import SwiftyJSON
+
 
 class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
@@ -119,6 +121,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                             self.switchOutput.isHidden = false
                             self.UseRecordSwitch.isHidden = false
                             self.AudioURL = URL(string: audiopath)
+                            UserDefaults.standard.set(self.AudioURL!, forKey: "recordfour")
                             self.UseRecordSwitch.isOn = false
                             
                         } else {
@@ -178,6 +181,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             progressView.progress = 0.0
             if progressViewTimer != nil {
                 progressViewTimer?.invalidate()
+                StoreRecord(directoryURL()!,"userecordfour",clip: 4)
             }
             //showTimeLabel()
             
@@ -198,8 +202,6 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             ButtonPlay.isEnabled = false
             play()
             showTimeLabel()
-            RecordAudio_One().StoreRecord(directoryURL()!,"userecordfour",clip: 4)
-            UserDefaults.standard.set(directoryURL()!, forKey: "recordfour")
         }
         updataudiourl()
     }
@@ -214,7 +216,9 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
             sender.setTitle("Play", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
             ButttonRecord.isEnabled = true
-            
+            if progressViewTimer != nil {
+                progressViewTimer?.invalidate()
+            }
         }else{
             preparePlayer()
             play()
@@ -276,7 +280,6 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func preparePlayer(){
-        getaudio()
         let url = playURL()
         do {
             try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
@@ -354,11 +357,8 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                 timeLabel.textColor = UIColor.red
             }
         }else{
-            ButtonPlay.isEnabled = true
-            ButtonPlay.isHidden = false
-            ButttonRecord.setTitle("錄音", for: UIControlState())
-            ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
-            showSwitch()
+            timeTimer?.invalidate()
+            StoreRecord(directoryURL()!,"userecordfour",clip: 4)
         }
     }
     
@@ -394,6 +394,52 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
         switchOutput.isHidden = false
         UseRecordSwitch.isHidden = false
     }
+    
+    func StoreRecord(_ audiourl: URL,_ userecord: String,clip: Int) {
+        UserDefaults.standard.set(true, forKey: userecord)
+        lognote("ra\(clip)", google_userid, "\(Index)")
+        Alamofire.upload(
+            //同样采用post表单上传
+            multipartFormData: { multipartFormData in
+                
+                multipartFormData.append(audiourl, withName: "file")//, fileName: self.AudioFileName, mimeType: "audio/m4a")
+                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
+                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
+                multipartFormData.append((audiourl.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "audiopath")
+                multipartFormData.append("\(clip)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "clip")
+                //                for (key, val) in parameters {
+                //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
+                //                }
+                
+                //SERVER ADD
+        },to: "http://140.122.76.201/CoInQ/v1/uploadaudio.php",
+          encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                //json处理
+                upload.responseJSON { response in
+                    //解包
+                    guard let result = response.result.value else { return }
+                    let success = JSON(result)["success"].int ?? -1
+                    if success == 1 {
+                        print("Upload Succes")
+                        self.ButtonPlay.isEnabled = true
+                        self.ButtonPlay.isHidden = false
+                        self.ButttonRecord.setTitle("錄音", for: UIControlState())
+                        self.ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
+                        UserDefaults.standard.set(audiourl, forKey: "recordfour")
+                        self.showSwitch()
+                    }else{
+                        print("Upload Failed")
+                    }
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        })
+    }
+
     
     deinit {
         NotificationCenter.default.removeObserver(self)

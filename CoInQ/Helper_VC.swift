@@ -71,7 +71,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "分析「證據」便能得出可能的解釋。"
+        Helpfultext.text = "分析「證據」以便得出可能的解釋。"
         stagethree.setImage(#imageLiteral(resourceName: "circle3_1"), for: UIControlState())
         lognote("hme",google_userid,"\(Index)")
     }

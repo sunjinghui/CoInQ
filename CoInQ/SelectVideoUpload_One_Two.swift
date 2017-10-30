@@ -272,7 +272,6 @@ class SelectVideoUpload_One_Two : UIViewController{
         }
         
         Alamofire.download(videourl!, to: destination).validate().responseData { response in
-            print("destinationURL: \(response.destinationURL)")
             let tmpurl = response.destinationURL
             
             PHPhotoLibrary.shared().performChanges({

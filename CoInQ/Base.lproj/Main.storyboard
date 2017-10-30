@@ -266,27 +266,27 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="28" sectionFooterHeight="28" id="8PA-OZ-YnE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="163" sectionHeaderHeight="28" sectionFooterHeight="28" id="8PA-OZ-YnE">
                                 <rect key="frame" x="0.0" y="98" width="768" height="704"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellvideotask" rowHeight="130" id="1Gp-Wt-9Ko" customClass="TableView_cellvideotask" customModule="CoInQ" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="130"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellvideotask" rowHeight="163" id="1Gp-Wt-9Ko" customClass="TableView_cellvideotask" customModule="CoInQ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="768" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Gp-Wt-9Ko" id="F4U-TB-hoq">
-                                            <rect key="frame" x="0.0" y="0.0" width="735" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="702" height="163"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nye-wh-hun">
-                                                    <rect key="frame" x="103" y="8" width="416" height="89"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nye-wh-hun">
+                                                    <rect key="frame" x="103" y="8" width="416" height="132"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="yyy/mm/dd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Jj-0r-Qo9">
-                                                    <rect key="frame" x="532" y="36" width="126" height="33"/>
+                                                    <rect key="frame" x="527" y="58" width="126" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -346,24 +346,16 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7zg-e8-GuU">
                                 <rect key="frame" x="0.0" y="245" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">針對我提出的科學探究問題，
-我應該蒐集哪些資料來回答問題？
-
-我又應該透過哪些管道
-來蒐集這些資料呢？</string>
+                                <string key="text">我應該蒐集哪些資料
+來回答我提出的探究問題呢？
+我可以透過哪些管道蒐集這些資料呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JR4-A3-zPW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我從不同管道蒐集來的資料 可能包括文字、圖片、影像、影片等， 每一筆資料 都可以用來回答我的科學探究問題嗎？  我應該如何篩選出有效的證據呢？" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JR4-A3-zPW">
                                 <rect key="frame" x="380" y="245" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我從不同管道蒐集來的資料
-可能包括文字、圖片、影像...等
-我應該如何整理這些資料呢？
-
-每一筆資料都可以用來
-回答我的科學探究問題嗎？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -378,7 +370,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VPS-2V-C9u">
-                                <rect key="frame" x="178" y="697" width="32" height="32"/>
+                                <rect key="frame" x="178" y="724" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
@@ -395,21 +387,21 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="TYx-fM-WbN">
-                                <rect key="frame" x="113" y="503" width="163" height="132"/>
+                                <rect key="frame" x="82" y="489" width="225" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="4gy-sz-405">
+                                <rect key="frame" x="462" y="489" width="225" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vUx-ak-Yin">
-                                <rect key="frame" x="558" y="697" width="32" height="32"/>
+                                <rect key="frame" x="558" y="724" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
                                     <action selector="ExplainFour:" destination="nKx-F0-iOd" eventType="touchUpInside" id="vL0-FD-Imp"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="4gy-sz-405">
-                                <rect key="frame" x="493" y="502" width="163" height="132"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -432,7 +424,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LMl-dB-a76">
-                                <rect key="frame" x="175" y="865" width="420" height="90"/>
+                                <rect key="frame" x="174" y="837" width="420" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
@@ -448,20 +440,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="42X-fW-R2N">
-                                <rect key="frame" x="119" y="209" width="530" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">在科學探究歷程中有最令我印象深刻的是什麼呢？
-下一次進行科學探究時我可以做什麼與這次不同的事情呢？
-
-另外，
-我還有一些話要對觀賞這部探究影片的觀眾說...</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4rQ-eN-XNb">
-                                <rect key="frame" x="368" y="642" width="32" height="32"/>
+                                <rect key="frame" x="368" y="674" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
@@ -478,9 +458,17 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="7YC-v7-Mn2">
-                                <rect key="frame" x="300" y="446" width="163" height="132"/>
+                                <rect key="frame" x="269" y="432" width="225" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="42X-fW-R2N">
+                                <rect key="frame" x="119" y="225" width="530" height="197"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">當我向同學分享我的解釋時， 同學們提供給我什麼建議呢？我經過這一次的探究所提出的解釋 能夠回答哪些問題呢？還有哪些問題等待著我們繼續深入研究呢？</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -496,7 +484,7 @@
             </objects>
             <point key="canvasLocation" x="6083" y="-2007"/>
         </scene>
-        <!--定義問題-->
+        <!--決定問題-->
         <scene sceneID="H6J-SY-YZh">
             <objects>
                 <viewController id="cak-fm-8ax" customClass="SelectVideoUpload_One_Two" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
@@ -517,14 +505,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uVZ-zs-rh6">
-                                <rect key="frame" x="0.0" y="245" width="388" height="197"/>
+                                <rect key="frame" x="-30" y="245" width="449" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我發現
-日常生活中有這個有趣的「自然現象」...
-我知道
-這個「自然現象」可能與...有關...
-我曾學過
-與這個「自然現象」相關的知識有...</string>
+                                <string key="text">我想知道的是什麼「自然現象」？我知道這樣的「自然現象」 有哪些特別的地方呢？我曾學過哪些課程 與這樣的「自然現象」相關呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -539,7 +522,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="csP-1p-vxz">
-                                <rect key="frame" x="453" y="450" width="293" height="239"/>
+                                <rect key="frame" x="431" y="450" width="293" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
@@ -547,46 +530,41 @@
                                     <action selector="loadAssetTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="fDO-Tu-Kgz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MSj-zm-NDu">
-                                <rect key="frame" x="583" y="697" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Status-dialog-information-icon"/>
-                                <connections>
-                                    <action selector="ExplainTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="18g-cg-fVg"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="agc-4j-FI3">
-                                <rect key="frame" x="178" y="697" width="32" height="32"/>
+                                <rect key="frame" x="178" y="750" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
                                     <action selector="ExplainOne:" destination="cak-fm-8ax" eventType="touchUpInside" id="Z79-zB-Wut"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EGe-v5-A4J">
-                                <rect key="frame" x="380" y="245" width="388" height="197"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="對於這樣的「自然現象」， 我想知道什麼？  可以用問句的形式呈現出來嗎？" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EGe-v5-A4J">
+                                <rect key="frame" x="386" y="245" width="382" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">對於這個「自然現象」，
-我有一些疑問...
-
-試著用「為什麼」或「如何」來表示
-我想提出的科學探究問題吧！</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="aXe-QL-0dl">
-                                <rect key="frame" x="113" y="502" width="163" height="132"/>
+                                <rect key="frame" x="82" y="489" width="225" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="vB0-7i-f69">
-                                <rect key="frame" x="518" y="503" width="163" height="132"/>
+                                <rect key="frame" x="462" y="489" width="225" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MSj-zm-NDu">
+                                <rect key="frame" x="561" y="750" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="ExplainTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="18g-cg-fVg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="定義問題" image="Numbers-1-Black-icon" id="Tzv-QQ-wME"/>
+                    <tabBarItem key="tabBarItem" title="決定問題" image="Numbers-1-Black-icon" id="Tzv-QQ-wME"/>
                     <connections>
                         <outlet property="firstcomplete" destination="aXe-QL-0dl" id="ek1-wT-fK8"/>
                         <outlet property="secondcomplete" destination="vB0-7i-f69" id="uud-Ed-TTK"/>
@@ -611,33 +589,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="故事版6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wko-k8-vos">
-                                <rect key="frame" x="455" y="132" width="243" height="92"/>
+                                <rect key="frame" x="446" y="132" width="243" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zan-W7-aRF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我擁有的證據可以分類嗎？ 應該要如何分類呢？ 可以分成幾類？" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zan-W7-aRF">
                                 <rect key="frame" x="2" y="245" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">同樣類型的證據可以分在同一類，
-我應該將證據分類成哪些類型呢？
-
-我又應該運用哪些曾經學過的數學概念
-來比較不同類型的證據之間的關係呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8zY-ap-vjs">
-                                <rect key="frame" x="382" y="245" width="388" height="197"/>
+                                <rect key="frame" x="374" y="245" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">經過分類與比較之後，
-原本雜亂的證據變得有條有理。
-
-想一想，
-是什麼特別的原因
-造成證據之間的關係呢？
-試著將每一個可能的原因記錄下來吧！</string>
+                                <string key="text">經過分類之後， 原本雜亂的證據變得有條理。想一想， 是什麼特別的原因造成證據間的相同之處？想一想， 是什麼特別的原因造成證據間的相異之處？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -652,7 +619,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vn7-Z2-Vli">
-                                <rect key="frame" x="455" y="450" width="293" height="239"/>
+                                <rect key="frame" x="421" y="449" width="293" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="File-Upload-icon"/>
@@ -661,7 +628,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ojM-Kt-7MZ">
-                                <rect key="frame" x="180" y="697" width="32" height="32"/>
+                                <rect key="frame" x="178" y="736" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
@@ -669,7 +636,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tyY-v9-gAz">
-                                <rect key="frame" x="585" y="697" width="32" height="32"/>
+                                <rect key="frame" x="560" y="736" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
@@ -677,11 +644,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="COn-Iq-wdT">
-                                <rect key="frame" x="113" y="502" width="163" height="132"/>
+                                <rect key="frame" x="84" y="489" width="225" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="yvU-e8-zoh">
-                                <rect key="frame" x="520" y="502" width="163" height="132"/>
+                                <rect key="frame" x="456" y="488" width="225" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -720,11 +687,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5zo-hM-EeH">
                                 <rect key="frame" x="1" y="245" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我提出的問題是不是
-已經有科學家研究過了呢？
-
-科學家是利用了什麼方法來研究的呢？
-那科學家研究出的結果又是什麼呢？</string>
+                                <string key="text">是不是有科學家的研究， 與我的探究問題一樣呢？ 科學家運用了哪些方法來研究呢？科學家的研究得到了什麼結果呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -732,12 +695,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r8w-qd-jHB">
                                 <rect key="frame" x="380" y="245" width="388" height="197"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我提出的解釋與科學家提出的理論
-似乎有一些相似的地方，
-好像也有一些不太一樣的地方...
-
-我應該要如何修改我的解釋
-才能符合科學與邏輯的標準呢？</string>
+                                <string key="text">我提出的解釋 與科學家的理論有哪些相似的地方呢？我提出的解釋 與科學家的理論有哪些不太一樣的地方呢？我應該要如何修改， 我的解釋才能具備科學性、邏輯性呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -761,29 +719,29 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pka-LT-PdC">
-                                <rect key="frame" x="178" y="697" width="32" height="32"/>
+                                <rect key="frame" x="178" y="738" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
                                     <action selector="ExplainSeven:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="g4s-qn-gHS"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="idq-ZU-dcM">
+                                <rect key="frame" x="83" y="489" width="225" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="VeS-iD-10S">
+                                <rect key="frame" x="487" y="489" width="225" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D9c-RO-PIZ">
-                                <rect key="frame" x="583" y="697" width="32" height="32"/>
+                                <rect key="frame" x="583" y="738" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
                                     <action selector="ExplainEight:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="fNI-rb-mjC"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="idq-ZU-dcM">
-                                <rect key="frame" x="114" y="503" width="163" height="132"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="480px-check bule" id="VeS-iD-10S">
-                                <rect key="frame" x="518" y="503" width="163" height="132"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -866,7 +824,7 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="368"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Rw-we-Dsg" id="5OR-AV-DNh">
-                                            <rect key="frame" x="0.0" y="0.0" width="702" height="367.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="702" height="368"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qIt-4F-X2C">
