@@ -121,7 +121,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let existone = self.checkVideoExist(video!, "videoone_path", 1)
                         let existtwo = self.checkVideoExist(video!, "videotwo_path", 2)
                         if existone == 2 || existtwo == 2 {
-                            print("first \(existone) \(existtwo)")
+//                            print("first \(existone) \(existtwo)")
                             
                             self.startActivityIndicator()
                             
@@ -150,7 +150,7 @@ class SelectVideoUpload_One_Two : UIViewController{
 
                             self.stopActivityIndicator()
                         }else if existone == 3 || existtwo == 3 {
-                            print("second \(existone) \(existtwo)")
+//                            print("second \(existone) \(existtwo)")
 
                             switch (existone){
                             case 1:
@@ -175,7 +175,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             default: break
                             }
                         }else{
-                            print("third \(existone) \(existtwo)")
+//                            print("third \(existone) \(existtwo)")
                             self.showthumbnail(video!, "videoone_path", self.firstcomplete)
                             self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                         }
@@ -247,7 +247,7 @@ class SelectVideoUpload_One_Two : UIViewController{
             let url = URL(string: video!)
             //print("videoone\(videoone)")
             if FileManager.default.fileExists(atPath: (url?.path)!) {
-                print("video \(clip) exist")
+//                print("video \(clip) exist")
                 return 1
             } else {
                 return 2
@@ -290,7 +290,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                     Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadvideo.php", method: .post, parameters: parameters).responseJSON
                         {
                             response in
-                            print(response)
+//                            print(response)
                             
                     }
                     
@@ -414,6 +414,17 @@ class SelectVideoUpload_One_Two : UIViewController{
                 print(encodingError)
             }
         })
+    }
+    
+    func deleteFile(_ filePath:URL) {
+        
+        guard FileManager.default.fileExists(atPath: filePath.path) else { return }
+        
+        do {
+            try    FileManager.default.removeItem(atPath: filePath.path)
+        } catch {
+            fatalError("Unable to delete file: \(error) : \(#function).")
+        }
     }
     
 }

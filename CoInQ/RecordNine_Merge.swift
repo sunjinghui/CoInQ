@@ -160,7 +160,7 @@ func getaudio(){
         useRecordsix    = UserDefaults.standard.bool(forKey: "userecordsix")
         useRecordseven  = UserDefaults.standard.bool(forKey: "userecordseven")
         useRecordeight  = UserDefaults.standard.bool(forKey: "userecordeight")
-        print(useRecordone,useRecordtwo,useRecordthree,useRecordfour,useRecordfive,useRecordsix,useRecordseven,useRecordeight)
+//        print(useRecordone,useRecordtwo,useRecordthree,useRecordfour,useRecordfive,useRecordsix,useRecordseven,useRecordeight)
     }
 
     func getvideo(){
@@ -234,7 +234,7 @@ func getaudio(){
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
             let outputURL = session.outputURL
-            print("export")
+//            print("export")
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
                     let vmilliseconds = Int(self.videoseconds!) * 60
@@ -254,23 +254,23 @@ func getaudio(){
             self.present(alertController, animated: true, completion: nil)
             self.stopActivityIndicator()
         }
-        firstAsset = nil
-        secondAsset = nil
-        thirdAsset = nil
-        fourthAsset = nil
-        fifthAsset = nil
-        sixthAsset = nil
-        seventhAsset = nil
-        eighthAsset = nil
-        ninethAsset = nil
-        audioAssetOne = nil
+//        firstAsset = nil
+//        secondAsset = nil
+//        thirdAsset = nil
+//        fourthAsset = nil
+//        fifthAsset = nil
+//        sixthAsset = nil
+//        seventhAsset = nil
+//        eighthAsset = nil
+//        ninethAsset = nil
+//        audioAssetOne = nil
     }
     
     func switchPage(action: UIAlertAction){
         //7 - Page switch to CompleteVC
 //        dismiss(animated: true, completion: nil)
         for vc in (self.navigationController?.viewControllers ?? []) {
-            print(vc)
+//            print(vc)
             if vc is CSCL {
                 _ = self.navigationController?.popToViewController(vc, animated: true)
                 NotificationCenter.default.post(name: NSNotification.Name("CSCL"), object: nil)
@@ -330,7 +330,7 @@ func getaudio(){
     
     
     @IBAction func merge(_ sender: AnyObject) {
-        
+        getvideo()
         if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninethAsset{
             startActivityIndicator()
             
@@ -449,7 +449,7 @@ func getaudio(){
           if useRecordone! {
                 let audioURL = UserDefaults.standard.url(forKey: "recordone")
                 audioAssetOne = AVAsset(url:audioURL!)
-            print("1---\(audioURL)")
+//            print("1---\(audioURL)")
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
@@ -475,7 +475,7 @@ func getaudio(){
             if useRecordtwo! {
                 let audioURL = UserDefaults.standard.url(forKey: "recordtwo")
                 audioAssetOne = AVAsset(url:audioURL!)
-                print("2---\(audioURL)")
+//                print("2---\(audioURL)")
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                     do {
                         try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, secondAsset.duration),
@@ -499,7 +499,7 @@ func getaudio(){
             // Record Auido Three
             if useRecordthree!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordthree")
-                print("3---\(audioURL)")
+//                print("3---\(audioURL)")
                audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -523,7 +523,7 @@ func getaudio(){
             // Record Auido Four
             if useRecordfour!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordfour")
-                print("4---\(audioURL)")
+//                print("4---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -549,7 +549,7 @@ func getaudio(){
             // Record Auido Five
             if useRecordfive!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordfive")
-                print("5---\(audioURL)")
+//                print("5---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -573,7 +573,7 @@ func getaudio(){
             // Record Auido Six
             if useRecordsix!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordsix")
-                print("6---\(audioURL)")
+//                print("6---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -598,7 +598,7 @@ func getaudio(){
             // Record Auido Seven
             if useRecordseven!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordseven")
-                print("7---\(audioURL)")
+//                print("7---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -623,7 +623,7 @@ func getaudio(){
             // Record Auido Eight
             if useRecordeight!  {
                 let audioURL = UserDefaults.standard.url(forKey: "recordeight")
-                print("8---\(audioURL)")
+//                print("8---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -648,7 +648,6 @@ func getaudio(){
             // Record Auido Nine
             if userecordnine!  {
                 let audioURL = directoryURL()
-                print("9---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -697,7 +696,6 @@ func getaudio(){
 //            }catch{
 //            
 //            }
-            print("merge")
             // 5 - Create Exporter
             guard let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
             exporter.outputURL = outputurl
@@ -729,7 +727,7 @@ func getaudio(){
         
         do {
             try    FileManager.default.removeItem(atPath: filePath.path)
-            print("remove video from \(filePath)")
+//            print("remove video from \(filePath)")
         } catch {
             fatalError("Unable to delete file: \(error) : \(#function).")
         }
@@ -738,7 +736,7 @@ func getaudio(){
     /////////////////  Data Transmit    ////////////////
     
     func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
-        lognote("mvt", google_userid, "videoid:\(Index)\(useRecordone)\(useRecordtwo)\(useRecordthree)\(useRecordfour)\(useRecordfive)\(useRecordsix)\(useRecordseven)\(useRecordeight)\(userecordnine)")
+        lognote("mvt", google_userid, "videoid:\(Index)\(useRecordone?.description ?? "none")\(useRecordtwo?.description ?? "none")\(useRecordthree?.description ?? "none")\(useRecordfour?.description ?? "none")\(useRecordfive?.description ?? "none")\(useRecordsix?.description ?? "none")\(useRecordseven?.description ?? "none")\(useRecordeight?.description ?? "none")\(userecordnine?.description ?? "none")")
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
@@ -1033,7 +1031,11 @@ func getaudio(){
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        ButtonPlay.isEnabled = true
+        if !flag {
+            print("finish")
+        }else{
+            ButtonPlay.isEnabled = true
+        }
     }
     
     /*func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
@@ -1129,9 +1131,9 @@ func getaudio(){
                         print("Upload Failed")
                     }
                 }
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+//                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+//                    print("Upload Progress: \(progress.fractionCompleted)")
+//                }
             case .failure(let encodingError):
                 print(encodingError)
             }

@@ -68,7 +68,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                 let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
                 let videoid = videoInfo?["id"] as? Int
                 let videoname = videoInfo?["videoname"] as? String
-                lognote("dtf", google_userid, "\(videoid)\(videoname)")
+                lognote("dtf", google_userid, "\(videoid!)\(videoname ?? "nil")")
                 self.deleteData(id: videoid!)
 //                SelectVideoUpload_Nine().update()
             }))
@@ -109,7 +109,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
-                print(response)
+//                print(response)
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
                     print("load video task \(errorMessage!)")
@@ -137,7 +137,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         Alamofire.request("http://140.122.76.201/CoInQ/v1/deletevideo.php", method: .post, parameters: ["videoid":id]).responseJSON
             {
                 response in
-                print(response)
+//                print(response)
                 if let result = response.result.value {
                     let jsonData = result as! NSDictionary
                     let error = jsonData.value(forKey: "error") as? Bool

@@ -26,14 +26,14 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
         if error != nil{
-            print(error)
+//            print(error)
             return
         }else{
-            print(user.userID)
+//            print(user.userID)
             //print(user.profile.name)
             //print(user.profile.email)
             //print(user.profile.imageURL(withDimension: 400))
-            print("google sign in")
+//            print("google sign in")
             
             google_userid = user.userID
             google_useremail = user.profile.email
@@ -50,7 +50,7 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
                 {
                     response in
                     //printing response
-                    print(response)
+//                    print(response)
                     
                     //getting the json value from the server
 //                    if let result = response.result.value {

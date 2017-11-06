@@ -344,9 +344,8 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
-            print("succes?")
+            print("finish")
         }else{
-            print("nothing")
             ButtonPlay.isEnabled = true
         }
     }

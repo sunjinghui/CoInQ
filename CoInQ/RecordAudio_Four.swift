@@ -282,7 +282,7 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     func preparePlayer(){
         let url = playURL()
         do {
-            try SoundPlayer = AVAudioPlayer(contentsOf: AudioURL!)
+            try SoundPlayer = AVAudioPlayer(contentsOf: url!)
             SoundPlayer.delegate = self
             SoundPlayer.prepareToPlay()
             SoundPlayer.volume = 1.0
@@ -336,7 +336,11 @@ class RecordAudio_Four: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        ButtonPlay.isEnabled = true
+        if !flag {
+            print("finish")
+        }else{
+            ButtonPlay.isEnabled = true
+        }
     }
     
     /*func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {

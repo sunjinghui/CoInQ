@@ -75,7 +75,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
                 let finalvideo = self.FinalVideoArray?[indexPath.row] as? [String: Any]
                 let videoid = finalvideo?["id"] as? Int
-                lognote("dfv", google_userid, "\(videoid)")
+                lognote("dfv", google_userid, "\(videoid!)")
                 self.deleteData(id: videoid!)
                 
                 self.loadData()
@@ -91,7 +91,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let finalvideo = FinalVideoArray?[indexPath.row] as? [String: Any]
         let videoid = finalvideo?["id"] as? Int
-        lognote("pfv", google_userid, "\(videoid)")
+        lognote("pfv", google_userid, "\(videoid!)")
         
         let finalvideopath = finalvideo?["finalvideopath"] as? String
 //        let finalvideoURL = URL(string: finalvideopath!)
@@ -163,7 +163,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
                     
                 } else if let FinalVideo = JSON["table"] as? [Any] {
                     self.FinalVideoArray = FinalVideo
-                    print(self.FinalVideoArray)
+//                    print(self.FinalVideoArray)
                     self.VideoTableView.reloadData()
                 }
         }
@@ -174,7 +174,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteFinalVideo.php", method: .post, parameters: ["videoid":id]).responseJSON
             {
                 response in
-                print(response)
+//                print(response)
                 if let result = response.result.value {
                     let jsonData = result as! NSDictionary
                     let error = jsonData.value(forKey: "error") as? Bool
