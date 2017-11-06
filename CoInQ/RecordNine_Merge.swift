@@ -247,23 +247,17 @@ func getaudio(){
 
                 }
             }
-        }else{
-            let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
-            self.stopActivityIndicator()
         }
-//        firstAsset = nil
-//        secondAsset = nil
-//        thirdAsset = nil
-//        fourthAsset = nil
-//        fifthAsset = nil
-//        sixthAsset = nil
-//        seventhAsset = nil
-//        eighthAsset = nil
-//        ninethAsset = nil
-//        audioAssetOne = nil
+        firstAsset = nil
+        secondAsset = nil
+        thirdAsset = nil
+        fourthAsset = nil
+        fifthAsset = nil
+        sixthAsset = nil
+        seventhAsset = nil
+        eighthAsset = nil
+        ninethAsset = nil
+        audioAssetOne = nil
     }
     
     func switchPage(action: UIAlertAction){
