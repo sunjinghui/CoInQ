@@ -109,7 +109,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
-//                print(response)
+                
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
                     print("load video task \(errorMessage!)")

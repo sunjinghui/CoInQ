@@ -50,6 +50,7 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
                           AVEncoderAudioQualityKey : NSNumber(value: Int32(AVAudioQuality.medium.rawValue) as Int32)]
     
     var audioAssetOne: AVAsset?
+
     var firstAsset: AVAsset?
     var secondAsset: AVAsset?
     var thirdAsset: AVAsset?
@@ -63,6 +64,11 @@ class RecordNine_Merge: UIViewController , AVAudioPlayerDelegate, AVAudioRecorde
     var recordone: URL?
     var recordtwo: URL?
     var recordthree: URL?
+    var recordfour: URL?
+    var recordfive: URL?
+    var recordsix: URL?
+    var recordseven: URL?
+    var recordeight: URL?
     
     var useRecordone :   Bool?
     var useRecordtwo :   Bool?
@@ -137,7 +143,7 @@ func getaudio(){
                         self.ButtonPlay.isHidden = false
                         self.switchOutput.isHidden = false
                         self.UseRecordSwitch.isHidden = false
-                        self.AudioURL = URL(string: audiopath)
+                        self.AudioURL = url
                         self.userecordnine = true
                         self.UseRecordSwitch.isOn = false
                         
@@ -160,7 +166,24 @@ func getaudio(){
         useRecordsix    = UserDefaults.standard.bool(forKey: "userecordsix")
         useRecordseven  = UserDefaults.standard.bool(forKey: "userecordseven")
         useRecordeight  = UserDefaults.standard.bool(forKey: "userecordeight")
+        recordone = getaudioURL(useRecordone!, "recordone")
+        recordtwo = getaudioURL(useRecordtwo!, "recordtwo")
+        recordthree = getaudioURL(useRecordthree!, "recordthree")
+        recordfour = getaudioURL(useRecordfour!, "recordfour")
+        recordfive = getaudioURL(useRecordfive!, "recordfive")
+        recordsix = getaudioURL(useRecordsix!, "recordsix")
+        recordseven = getaudioURL(useRecordseven!, "recordseven")
+        recordeight = getaudioURL(useRecordeight!, "recordeight")
 //        print(useRecordone,useRecordtwo,useRecordthree,useRecordfour,useRecordfive,useRecordsix,useRecordseven,useRecordeight)
+    }
+    
+    func getaudioURL(_ userecord: Bool,_ key: String) -> URL? {
+        if userecord {
+            let audiourl = UserDefaults.standard.url(forKey: key)
+            return audiourl
+        }else{
+            return nil
+        }
     }
 
     func getvideo(){
@@ -247,6 +270,12 @@ func getaudio(){
 
                 }
             }
+        }else{
+            let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            self.stopActivityIndicator()
         }
         firstAsset = nil
         secondAsset = nil
@@ -324,7 +353,7 @@ func getaudio(){
     
     
     @IBAction func merge(_ sender: AnyObject) {
-        getvideo()
+
         if let firstAsset = firstAsset, let secondAsset = secondAsset ,let thirdAsset = thirdAsset ,let fourthAsset = fourthAsset ,let fifthAsset = fifthAsset ,let sixthAsset = sixthAsset ,let seventhAsset = seventhAsset ,let eighthAsset = eighthAsset ,let ninethAsset = ninethAsset{
             startActivityIndicator()
             
@@ -441,12 +470,12 @@ func getaudio(){
             
             // 3 - Audio track
           if useRecordone! {
-                let audioURL = UserDefaults.standard.url(forKey: "recordone")
+                let audioURL = recordone
                 audioAssetOne = AVAsset(url:audioURL!)
 //            print("1---\(audioURL)")
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
-                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, CMTimeAdd(firstAsset.duration, secondAsset.duration)),
+                    try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, firstAsset.duration),//CMTimeAdd(firstAsset.duration, secondAsset.duration)),
                                                    of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
                                                    at: kCMTimeZero)
                 } catch _ {
@@ -467,7 +496,7 @@ func getaudio(){
             
             // Record Auido Two
             if useRecordtwo! {
-                let audioURL = UserDefaults.standard.url(forKey: "recordtwo")
+                let audioURL = recordtwo
                 audioAssetOne = AVAsset(url:audioURL!)
 //                print("2---\(audioURL)")
                     let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -492,13 +521,13 @@ func getaudio(){
             
             // Record Auido Three
             if useRecordthree!  {
-                let audioURL = UserDefaults.standard.url(forKey: "recordthree")
+                let audioURL = recordthree
 //                print("3---\(audioURL)")
                audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
                     try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, thirdAsset.duration),
-                                                   of: (self.audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
+                                                   of: (audioAssetOne?.tracks(withMediaType: AVMediaTypeAudio)[0])! ,
                                                    at: firstAsset.duration + secondAsset.duration)
                 } catch _ {
                     print("Failed to load Audio track")
@@ -516,7 +545,7 @@ func getaudio(){
             }
             // Record Auido Four
             if useRecordfour!  {
-                let audioURL = UserDefaults.standard.url(forKey: "recordfour")
+                let audioURL = recordfour
 //                print("4---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -542,7 +571,7 @@ func getaudio(){
             
             // Record Auido Five
             if useRecordfive!  {
-                let audioURL = UserDefaults.standard.url(forKey: "recordfive")
+                let audioURL = recordfive
 //                print("5---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -566,7 +595,7 @@ func getaudio(){
             }
             // Record Auido Six
             if useRecordsix!  {
-                let audioURL = UserDefaults.standard.url(forKey: "recordsix")
+                let audioURL = recordsix
 //                print("6---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -591,7 +620,7 @@ func getaudio(){
             }
             // Record Auido Seven
             if useRecordseven!  {
-                let audioURL = UserDefaults.standard.url(forKey: "recordseven")
+                let audioURL = recordseven
 //                print("7---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -616,7 +645,7 @@ func getaudio(){
             }
             // Record Auido Eight
             if useRecordeight!  {
-                let audioURL = UserDefaults.standard.url(forKey: "recordeight")
+                let audioURL = recordeight
 //                print("8---\(audioURL)")
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
@@ -641,7 +670,7 @@ func getaudio(){
 
             // Record Auido Nine
             if userecordnine!  {
-                let audioURL = directoryURL()
+                let audioURL = playURL()
                 audioAssetOne = AVAsset(url:audioURL!)
                 let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
                 do {
@@ -1120,6 +1149,7 @@ func getaudio(){
                         self.ButtonPlay.isHidden = false
                         self.ButttonRecord.setTitle("錄音", for: UIControlState())
                         self.ButttonRecord.setImage(#imageLiteral(resourceName: "record"), for: UIControlState())
+                        self.AudioURL = audiourl
                         self.showSwitch()
                     }else{
                         print("Upload Failed")

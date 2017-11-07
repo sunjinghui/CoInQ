@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -16,7 +15,9 @@
         <scene sceneID="VfU-vU-Rr0">
             <objects>
                 <navigationController id="4WP-cY-Vrq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oFg-lG-R6p">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="1024"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oFg-lG-R6p">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -40,20 +41,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1A-oW-vo3" customClass="GIDSignInButton">
-                                <rect key="frame" x="264" y="608" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1A-oW-vo3" customClass="GIDSignInButton">
+                                <rect key="frame" x="264" y="633" width="240" height="103"/>
                                 <color key="backgroundColor" red="1" green="0.80415630299999996" blue="0.51296342419999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NTNUCSCL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0v-DV-ux4">
-                                <rect key="frame" x="259" y="325" width="250" height="115"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NTNUCSCL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0v-DV-ux4">
+                                <rect key="frame" x="279" y="403" width="210" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BWq-gx-Ifa" firstAttribute="top" secondItem="a1A-oW-vo3" secondAttribute="bottom" constant="288" id="Fa0-Mm-4I3"/>
+                            <constraint firstItem="j0v-DV-ux4" firstAttribute="centerY" secondItem="aHA-w8-PWP" secondAttribute="centerY" multiplier="5/6" id="KyP-wi-OD8"/>
+                            <constraint firstItem="a1A-oW-vo3" firstAttribute="leading" secondItem="aHA-w8-PWP" secondAttribute="leading" constant="264" id="XLw-Uc-SUJ"/>
+                            <constraint firstItem="j0v-DV-ux4" firstAttribute="centerX" secondItem="aHA-w8-PWP" secondAttribute="centerX" id="YOc-m3-za4"/>
+                            <constraint firstItem="a1A-oW-vo3" firstAttribute="centerX" secondItem="aHA-w8-PWP" secondAttribute="centerX" id="j5e-K5-3jp"/>
+                            <constraint firstItem="a1A-oW-vo3" firstAttribute="centerY" secondItem="aHA-w8-PWP" secondAttribute="centerY" constant="172.5" id="z9O-im-bP5"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="BTK-DX-7Xk"/>
                     <navigationItem key="navigationItem" id="zj1-Oz-075"/>
@@ -71,17 +78,24 @@
                 <tabBarController storyboardIdentifier="CSCL" title="首頁" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0r5-V6-xYa" customClass="CSCL" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="CSCL" prompt="" id="ugl-HK-TaK">
                         <barButtonItem key="leftBarButtonItem" id="P9l-3u-g9e">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PXd-0D-W1f">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="PXd-0D-W1f">
                                 <rect key="frame" x="20" y="30" width="43" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name=".PingFangTC-Regular" family=".PingFang TC" pointSize="18"/>
-                                <state key="normal" title="登出" image="logout"/>
+                                <state key="normal" image="logout">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="登出">
+                                            <attributes>
+                                                <font key="NSFont" size="18" name=".PingFangTC-Regular"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                                 <connections>
                                     <action selector="signOut:" destination="0r5-V6-xYa" eventType="touchUpInside" id="H31-Ur-78f"/>
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="icon_circle" style="plain" id="T63-4e-Gpe">
+                        <barButtonItem key="rightBarButtonItem" image="icon_circle" id="T63-4e-Gpe">
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <segue destination="xJN-wX-mDc" kind="push" id="WK5-UN-69f"/>
@@ -391,7 +405,8 @@
                                 <rect key="frame" x="19" y="324.5" width="346.5" height="95.5"/>
                                 <string key="text">我應該蒐集哪些資料
 來回答我提出的探究問題呢？
-我可以透過哪些管道蒐集這些資料呢？</string>
+
+我可以透過哪些管道蒐集這些資料呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -541,7 +556,9 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42X-fW-R2N">
                                 <rect key="frame" x="190.5" y="312.5" width="387.5" height="119.5"/>
-                                <string key="text">當我向同學分享我的解釋時， 同學們提供給我什麼建議呢？我經過這一次的探究所提出的解釋 能夠回答哪些問題呢？還有哪些問題等待著我們繼續深入研究呢？</string>
+                                <string key="text">當我向同學分享我的解釋時， 同學們提供給我什麼建議呢？
+我經過這一次的探究所提出的解釋 能夠回答哪些問題呢？
+還有哪些問題等待著我們繼續深入研究呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -606,7 +623,9 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVZ-zs-rh6">
                                 <rect key="frame" x="39" y="312.5" width="306" height="119.5"/>
-                                <string key="text">我想知道的是什麼「自然現象」？我知道這樣的「自然現象」 有哪些特別的地方呢？我曾學過哪些課程 與這樣的「自然現象」相關呢？</string>
+                                <string key="text">我想知道的是什麼「自然現象」？
+我知道這樣的「自然現象」 有哪些特別的地方呢？
+我曾學過哪些課程 與這樣的「自然現象」相關呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -734,7 +753,10 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zY-ap-vjs">
                                 <rect key="frame" x="382" y="288.5" width="388" height="167.5"/>
-                                <string key="text">經過分類之後， 原本雜亂的證據變得有條理。想一想， 是什麼特別的原因造成證據間的相同之處？想一想， 是什麼特別的原因造成證據間的相異之處？</string>
+                                <string key="text">經過分類之後， 原本雜亂的證據變得有條理。
+想一想， 是什麼特別的原因造成證據間的相同之處？
+想一想， 是什麼特別的原因造成證據間的相異之處？
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -850,14 +872,18 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zo-hM-EeH">
                                 <rect key="frame" x="39" y="312.5" width="306" height="119.5"/>
-                                <string key="text">是不是有科學家的研究， 與我的探究問題一樣呢？ 科學家運用了哪些方法來研究呢？科學家的研究得到了什麼結果呢？</string>
+                                <string key="text">是不是有科學家的研究， 與我的探究問題一樣呢？ 
+科學家運用了哪些方法來研究呢？
+科學家的研究得到了什麼結果呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8w-qd-jHB">
                                 <rect key="frame" x="382" y="300.5" width="388" height="143.5"/>
-                                <string key="text">我提出的解釋 與科學家的理論有哪些相似的地方呢？我提出的解釋 與科學家的理論有哪些不太一樣的地方呢？我應該要如何修改， 我的解釋才能具備科學性、邏輯性呢？</string>
+                                <string key="text">我提出的解釋 與科學家的理論有哪些相似的地方呢？
+我提出的解釋 與科學家的理論有哪些不太一樣的地方呢？
+我應該要如何修改， 我的解釋才能具備科學性、邏輯性呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -955,10 +981,18 @@
                 <tabBarController storyboardIdentifier="VideoTaskViewController" title="編輯探究影片" useStoryboardIdentifierAsRestorationIdentifier="YES" id="taG-3s-S4J" userLabel="VideoTaskViewController" customClass="VideoTaskViewController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="探究影片專案" id="uaq-yQ-SbL">
                         <barButtonItem key="leftBarButtonItem" id="HWk-oG-fKR">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2rA-Kr-We4">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="2rA-Kr-We4">
                                 <rect key="frame" x="20" y="7" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="返回"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="返回">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="system" size="15"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                                 <connections>
                                     <action selector="GoBack" destination="taG-3s-S4J" eventType="touchUpInside" id="TfK-yr-mHP"/>
                                 </connections>
@@ -1024,7 +1058,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIt-4F-X2C">
-                                                    <rect key="frame" x="351" y="83" width="159" height="45"/>
+                                                    <rect key="frame" x="318" y="83" width="159" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="OAh-wf-yYA"/>
                                                         <constraint firstAttribute="width" constant="159" id="eRJ-DQ-3M9"/>
@@ -1034,7 +1068,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影片長度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpJ-br-Jbt">
-                                                    <rect key="frame" x="351" y="185" width="159" height="45"/>
+                                                    <rect key="frame" x="318" y="185" width="159" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="KY5-9l-DLY"/>
                                                     </constraints>
@@ -1043,13 +1077,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQf-s7-pXg">
-                                                    <rect key="frame" x="511" y="65" width="249" height="82"/>
+                                                    <rect key="frame" x="478" y="65" width="249" height="82"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88.88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWu-QA-lBr">
-                                                    <rect key="frame" x="511" y="185" width="159" height="45"/>
+                                                    <rect key="frame" x="478" y="185" width="159" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="159" id="dCb-Km-Sca"/>
                                                     </constraints>
@@ -1058,7 +1092,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OtE-cu-rfP">
-                                                    <rect key="frame" x="60" y="8" width="258" height="325"/>
+                                                    <rect key="frame" x="60" y="8" width="225" height="325"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1124,7 +1158,9 @@
             <objects>
                 <navigationController storyboardIdentifier="RecordNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gVN-0o-a4M" customClass="RecordNavigationController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="OXc-KH-g3f"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kKn-fn-fgd">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="1024"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kKn-fn-fgd">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2091,7 +2127,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WK5-UN-69f"/>
+        <segue reference="XDF-B6-lWb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

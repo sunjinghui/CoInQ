@@ -278,7 +278,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                 PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: tmpurl!)
             }) { saved, error in
                 if saved {
-                    print("saved video \(clip) successfully")
+//                    print("saved video \(clip) successfully")
                     
                     let parameters: Parameters=[
                         "videoid":    Index,
@@ -294,16 +294,17 @@ class SelectVideoUpload_One_Two : UIViewController{
                             
                     }
                     
-                    //                let fetchOptions = PHFetchOptions()
-                    //                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-                    //
-                    //                // After uploading we fetch the PHAsset for most recent video and then get its current location url
-                    //
-                    //                let fetchResult = PHAsset.fetchAssets(with: .video, options: fetchOptions).lastObject
-                    //                PHImageManager().requestAVAsset(forVideo: fetchResult!, options: nil, resultHandler: { (avurlAsset, audioMix, dict) in
-                    //                    let newObj = avurlAsset as! AVURLAsset
-                    //                    print("store path\(newObj.url)")
-                    //                })
+//                                    let fetchOptions = PHFetchOptions()
+//                                    fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+//                    
+//                                    // After uploading we fetch the PHAsset for most recent video and then get its current location url
+//                    
+//                                    let fetchResult = PHAsset.fetchAssets(with: .video, options: fetchOptions).lastObject
+//                                    PHImageManager().requestAVAsset(forVideo: fetchResult!, options: nil, resultHandler: { (avurlAsset, audioMix, dict) in
+//                                        let newObj = avurlAsset as! AVURLAsset
+//                                        self.deleteFile(newObj.url)
+////                                        print("store path\(newObj.url)")
+//                                    })
         
                 }
             }
@@ -363,7 +364,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                 upload.responseJSON { response in
                     //解包
                     guard let result = response.result.value else { return }
-                    print("\(result)")
+//                    print("\(result)")
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {

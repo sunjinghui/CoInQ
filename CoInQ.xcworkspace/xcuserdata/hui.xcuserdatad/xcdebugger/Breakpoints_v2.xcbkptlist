@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
-            timestampString = "531066747.933836"
+            timestampString = "531751154.632978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "351"
+            endingLineNumber = "351"
             landmarkName = "videoCompositionInstructionForTrack(_:asset:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -311,11 +311,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
-            timestampString = "531664316.510586"
+            timestampString = "531751154.632978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "806"
-            endingLineNumber = "806"
+            startingLineNumber = "835"
+            endingLineNumber = "835"
             landmarkName = "RecordNine_Merge"
             landmarkType = "3">
             <Locations>
@@ -359,13 +359,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/RecordNine_Merge.swift"
-            timestampString = "531066747.933836"
+            timestampString = "531751154.632978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "599"
-            endingLineNumber = "599"
+            startingLineNumber = "628"
+            endingLineNumber = "628"
             landmarkName = "merge(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
