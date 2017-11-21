@@ -120,64 +120,36 @@ class SelectVideoUpload_One_Two : UIViewController{
                     if !(video?.isEmpty)! {
                         let existone = self.checkVideoExist(video!, "videoone_path", 1)
                         let existtwo = self.checkVideoExist(video!, "videotwo_path", 2)
-                        if existone == 2 || existtwo == 2 {
-//                            print("first \(existone) \(existtwo)")
-                            
-                            self.startActivityIndicator()
-                            
+                        if existone != 1 {
+                            print("first \(existone)")
                             switch (existone){
                             case 1:
                                 self.showthumbnail(video!, "videoone_path", self.firstcomplete)
                             case 2:
+                                self.startActivityIndicator()
                                 let videourl = video?["videoone_path"] as? String
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!, 1)
-                            case 3:
-                                break
-                            default: break
-                            }
-                            switch (existtwo){
-                            case 1:
-                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
-                            case 2:
-                                let videourl = video?["videotwo_path"] as? String
-                                let url = URL(string: videourl!)
-                                self.donloadVideo(url: url!, 2)
-                            case 3:
-                                break
-                            default: break
-                            }
-
-                            self.stopActivityIndicator()
-                        }else if existone == 3 || existtwo == 3 {
-//                            print("second \(existone) \(existtwo)")
-
-                            switch (existone){
-                            case 1:
-                                self.showthumbnail(video!, "videoone_path", self.firstcomplete)
-                            case 2:
-                                let videourl = video?["videoone_path"] as? String
-                                let url = URL(string: videourl!)
-                                self.donloadVideo(url: url!, 1)
-                            case 3:
-                                break
-                            default: break
-                            }
-                            switch (existtwo){
-                            case 1:
-                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
-                            case 2:
-                                let videourl = video?["videotwo_path"] as? String
-                                let url = URL(string: videourl!)
-                                self.donloadVideo(url: url!, 2)
                             case 3:
                                 break
                             default: break
                             }
                         }else{
-//                            print("third \(existone) \(existtwo)")
+                            print("else \(existone)")
                             self.showthumbnail(video!, "videoone_path", self.firstcomplete)
-                            self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
+                            
+                                switch (existtwo){
+                                    case 1:
+                                        self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
+                                    case 2:
+                                        self.startActivityIndicator()
+                                        let videourl = video?["videotwo_path"] as? String
+                                        let url = URL(string: videourl!)
+                                        self.donloadVideo(url: url!, 2)
+                                    case 3:
+                                        break
+                                    default: break
+                                    }
                         }
 
                     }
@@ -229,16 +201,6 @@ class SelectVideoUpload_One_Two : UIViewController{
     func stopActivityIndicator() {
         self.activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
-        
-        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
-        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
-        {
-            (action) -> Void in
-            self.load()
-        }
-        )
-        alertController.addAction(checkagainAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 
     func checkVideoExist(_ videoinfo: [String: Any],_ videopath: String,_ clip: Int) -> Int{
@@ -257,11 +219,54 @@ class SelectVideoUpload_One_Two : UIViewController{
         }
     }
 
+    func getclipname(_ clip: Int, completion: @escaping (NSDictionary?, Error?) -> ()){
+        let parameters: Parameters=["videoid": Index,"clip": clip]
+        
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getvideoinfo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                switch response.result {
+                case .success(let videoname):
+//                    guard let JSON = response.result.value as? [String: Any] else {
+//                            print("JSON formate error")
+//                            return
+//                    }
+//                    if let videoname = JSON["videoname"] as? String {
+//                        completion(true,videoname)
+//                    }
+                    completion(videoname as? NSDictionary, nil)
+                    
+                case .failure(let error):
+                    print(error)
+                    completion(nil,error)
+                }
+//                guard response.result.isSuccess else {
+//                    let errorMessage = response.result.error?.localizedDescription
+//                    print(errorMessage!)
+//                    return
+//                }
+//                guard let JSON = response.result.value as? [String: Any] else {
+//                    print("JSON formate error")
+//                    return
+//                }
+//                // 2.
+//                if let videoinfo = JSON["videoname"] as? [Any] {
+//                    videoArray = videoinfo
+//                    var video = videoArray?[0] as? [String: Any]
+//                    let videopath = video?[videonum] as? String
+//                }
+        }
+    }
+    
     func donloadVideo(url : URL,_ clip: Int){
         
         let requestUrl = "http://140.122.76.201/CoInQ/upload/"
         let videoid = "\(Index)"
-        let urls = requestUrl.appending(google_userid).appending("/").appending(videoid).appending("/").appending(url.lastPathComponent)
+        getclipname(clip){ responseObject, error in
+            let video = responseObject?.value(forKey: "videoname") as? String
+            print("responseObject = \(responseObject); error = \(error); video = \(video)")
+
+        let urls = requestUrl.appending(google_userid).appending("/").appending(videoid).appending("/").appending(video?.description ?? "none")
         let videourl = URL(string: urls)
         
         let downloadfilename = UUID().uuidString + ".mov"
@@ -279,6 +284,15 @@ class SelectVideoUpload_One_Two : UIViewController{
             }) { saved, error in
                 if saved {
 //                    print("saved video \(clip) successfully")
+                    self.stopActivityIndicator()
+                    let alertController = UIAlertController(title: "故事版\(clip)影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+                    let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
+                    {(action) -> Void in
+                        self.load()
+                    }
+                    )
+                    alertController.addAction(checkagainAction)
+                    self.present(alertController, animated: true, completion: nil)
                     
                     let parameters: Parameters=[
                         "videoid":    Index,
@@ -308,6 +322,8 @@ class SelectVideoUpload_One_Two : UIViewController{
         
                 }
             }
+        }
+            return
         }
     }
 

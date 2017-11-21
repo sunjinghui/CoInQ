@@ -119,7 +119,6 @@ class SelectVideoUpload_Nine : UIViewController{
     
     func check(_ videonum: String,_ storyboard: String){
         var video = videoArray?[0] as? [String: Any]
-//        var video = array?[0] as? [String: Any]
         let videopath = video?[videonum] as? String
         if videopath == nil {
             nullstoryboard.append(storyboard)

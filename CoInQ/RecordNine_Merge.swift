@@ -270,7 +270,7 @@ func getaudio(){
 
                 }
             }
-        }else{
+        }else if session.status == AVAssetExportSessionStatus.failed{
             let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
             alertController.addAction(defaultAction)
