@@ -56,79 +56,42 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                     if !(video?.isEmpty)! {
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoseven_path", 7)
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoeight_path", 8)
-                        if existone == 2 || existtwo == 2 {
-                            print("first \(existone) \(existtwo)")
-                            
-                            self.startActivityIndicator()
-                            
-                            switch (existone){
-                            case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoseven_path", self.sevencomplete)
-                            case 2:
-                                let videourl = video?["videoseven_path"] as? String
-                                let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 7)
-                            case 3:
-                                break
-                            default: break
-                            }
-                            switch (existtwo){
-                            case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
-                            case 2:
-                                let videourl = video?["videoeight_path"] as? String
-                                let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 8)
-                            case 3:
-                                break
-                            default: break
-                            }
-                            
-                            self.stopActivityIndicator()
-                        }else if existone == 3 || existtwo == 3 {
-                            print("second \(existone) \(existtwo)")
-                            
-                            switch (existone){
-                            case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoseven_path", self.sevencomplete)
-                            case 2:
-                                let videourl = video?["videoseven_path"] as? String
-                                let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 7)
-                            case 3:
-                                break
-                            default: break
-                            }
-                            switch (existtwo){
-                            case 1:
-                                let videourl = video?["videoeight_path"] as? String
-                                let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url!, options: nil)
-                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-                                imgGenerator.appliesPreferredTrackTransform = false
-                                
-                                do {
-                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                    let thumbnail = UIImage(cgImage: cgImage)
-                                    
-                                    self.eightcomplete.image = thumbnail
-                                    
-                                } catch let error {
-                                    print("*** Error generating thumbnail: \(error)")
-                                }
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
-                            case 2:
-                                let videourl = video?["videoeight_path"] as? String
-                                let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 8)
-                            case 3:
-                                break
-                            default: break
-                            }
-                        }else{
-                            print("third \(existone) \(existtwo)")
+                        switch (existone){
+                        case 1:
                             SelectVideoUpload_One_Two().showthumbnail(video!, "videoseven_path", self.sevencomplete)
-                            SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
+                            
+                            switch (existtwo){
+                            case 1:
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
+                            case 2:
+                                self.startActivityIndicator()
+                                let videourl = video?["videoeight_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),8)
+                            case 3:
+                                break
+                            default: break
+                            }
+                        case 2:
+                            self.startActivityIndicator()
+                            let videourl = video?["videoseven_path"] as? String
+                            let url = URL(string: videourl!)
+                            SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),7)
+                        case 3:
+                            switch (existtwo){
+                            case 1:
+                                SelectVideoUpload_One_Two().showthumbnail(video!, "videoeight_path", self.eightcomplete)
+                            case 2:
+                                self.startActivityIndicator()
+                                let videourl = video?["videoeight_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),8)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            
+                        default: break
                         }
                         
                     }
@@ -157,17 +120,14 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
-    func stopActivityIndicator() {
+    func stopActivityIndicator(_ clip: Int) {
         self.activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
-        
-        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
-        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
-        {
+        let alertController = UIAlertController(title: "故事版\(clip)影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:{
             (action) -> Void in
             self.check()
-        }
-        )
+        })
         alertController.addAction(checkagainAction)
         self.present(alertController, animated: true, completion: nil)
     }

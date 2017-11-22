@@ -102,8 +102,7 @@ class SelectVideoUpload_Nine : UIViewController{
 
                                 let videourl = video?["videonine_path"] as? String
                                 let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 9)
-                                self.stopActivityIndicator()
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),9)
 
                             case 3:
                                 break
@@ -146,17 +145,14 @@ class SelectVideoUpload_Nine : UIViewController{
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
-    func stopActivityIndicator() {
+    func stopActivityIndicator(_ clip: Int) {
         self.activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
-        
-        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
-        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
-        {
+        let alertController = UIAlertController(title: "故事版\(clip)影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:{
             (action) -> Void in
             self.checknine()
-        }
-        )
+        })
         alertController.addAction(checkagainAction)
         self.present(alertController, animated: true, completion: nil)
     }

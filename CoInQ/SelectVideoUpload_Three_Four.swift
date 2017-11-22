@@ -70,66 +70,44 @@ class SelectVideoUpload_Three_Four : UIViewController{
                     if !(video?.isEmpty)! {
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videothree_path", 3)
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videofour_path", 4)
-                        if existone == 2 || existtwo == 2 {
-                            print("first \(existone) \(existtwo)")
-                            
-                            self.startActivityIndicator()
-                            
+
                             switch (existone){
                             case 1:
                                 SelectVideoUpload_One_Two().showthumbnail(video!, "videothree_path", self.threecomplete)
+                                
+                                switch (existtwo){
+                                case 1:
+                                    SelectVideoUpload_One_Two().showthumbnail(video!, "videofour_path", self.fourcomplete)
+                                case 2:
+                                    self.startActivityIndicator()
+                                    let videourl = video?["videofour_path"] as? String
+                                    let url = URL(string: videourl!)
+                                    SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),4)
+                                case 3:
+                                    break
+                                default: break
+                                }
                             case 2:
+                                self.startActivityIndicator()
                                 let videourl = video?["videothree_path"] as? String
                                 let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 3)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),3)
                             case 3:
-                                break
+                                switch (existtwo){
+                                case 1:
+                                    SelectVideoUpload_One_Two().showthumbnail(video!, "videofour_path", self.fourcomplete)
+                                case 2:
+                                    self.startActivityIndicator()
+                                    let videourl = video?["videofour_path"] as? String
+                                    let url = URL(string: videourl!)
+                                    SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),4)
+                                case 3:
+                                    break
+                                default: break
+                                }
+                                
                             default: break
                             }
-                            switch (existtwo){
-                            case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videofour_path", self.fourcomplete)
-                            case 2:
-                                let videourl = video?["videofour_path"] as? String
-                                let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 4)
-                            case 3:
-                                break
-                            default: break
-                            }
-                            
-                            self.stopActivityIndicator()
-                        }else if existone == 3 || existtwo == 3 {
-                            print("second \(existone) \(existtwo)")
-                            
-                            switch (existone){
-                            case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videothree_path", self.threecomplete)
-                            case 2:
-                                let videourl = video?["videothree_path"] as? String
-                                let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 3)
-                            case 3:
-                                break
-                            default: break
-                            }
-                            switch (existtwo){
-                            case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videofour_path", self.fourcomplete)
-                            case 2:
-                                let videourl = video?["videofour_path"] as? String
-                                let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!, 4)
-                            case 3:
-                                break
-                            default: break
-                            }
-                        }else{
-                            print("third \(existone) \(existtwo)")
-                            SelectVideoUpload_One_Two().showthumbnail(video!, "videothree_path", self.threecomplete)
-                            SelectVideoUpload_One_Two().showthumbnail(video!, "videofour_path", self.fourcomplete)
-                        }
-                        
                     }
                     
                 }
@@ -155,22 +133,18 @@ class SelectVideoUpload_Three_Four : UIViewController{
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
     }
-    
-    func stopActivityIndicator() {
+
+    func stopActivityIndicator(_ clip: Int) {
         self.activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
-        
-        let alertController = UIAlertController(title: "影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
-        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:
-        {
+        let alertController = UIAlertController(title: "故事版\(clip)影片已同步\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+        let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:{
             (action) -> Void in
             self.check()
-        }
-        )
+        })
         alertController.addAction(checkagainAction)
         self.present(alertController, animated: true, completion: nil)
     }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
