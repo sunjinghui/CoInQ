@@ -99,7 +99,6 @@ class SelectVideoUpload_Nine : UIViewController{
                                 self.ninecomplete.isHidden = false
                             case 2:
                                 self.startActivityIndicator()
-
                                 let videourl = video?["videonine_path"] as? String
                                 let url = URL(string: videourl!)
                                 SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),9)
@@ -256,7 +255,6 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     @IBAction func checkALLvideoLoaded(_ sender: AnyObject) {
-        
         
         if isVideoLoaded() {
             
