@@ -38,6 +38,15 @@
 		A56FF5DE1F11398F00B072D5 /* RecordAudio_Two.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */; };
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
 		A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FA4AF1F6101990049EACD /* Helper_VC.swift */; };
+		A5A8FFED1FE7A01F00B1F958 /* TableView_cellcollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFEC1FE7A01F00B1F958 /* TableView_cellcollection.swift */; };
+		A5A8FFEF1FE7A04300B1F958 /* TableView_cellinvite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFEE1FE7A04300B1F958 /* TableView_cellinvite.swift */; };
+		A5A8FFF11FE7A06100B1F958 /* CollectingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFF01FE7A06100B1F958 /* CollectingStage.swift */; };
+		A5A8FFF31FF11E4800B1F958 /* CollectingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFF21FF11E4800B1F958 /* CollectingModel.swift */; };
+		A5A8FFF51FF11FBF00B1F958 /* CollectingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFF41FF11FBF00B1F958 /* CollectingViewModel.swift */; };
+		A5A8FFF81FF1241F00B1F958 /* ClipsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFF61FF1241F00B1F958 /* ClipsCell.swift */; };
+		A5A8FFF91FF1241F00B1F958 /* ClipsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5A8FFF71FF1241F00B1F958 /* ClipsCell.xib */; };
+		A5A8FFFC1FF1250D00B1F958 /* InviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFFA1FF1250D00B1F958 /* InviteCell.swift */; };
+		A5A8FFFD1FF1250D00B1F958 /* InviteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5A8FFFB1FF1250D00B1F958 /* InviteCell.xib */; };
 		A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */; };
 		A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */; };
 		A5E263151F2CF28900D1783D /* RecordAudio_Four.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E263141F2CF28700D1783D /* RecordAudio_Four.swift */; };
@@ -106,6 +115,15 @@
 		A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Two.swift; sourceTree = "<group>"; };
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
 		A59FA4AF1F6101990049EACD /* Helper_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper_VC.swift; sourceTree = "<group>"; };
+		A5A8FFEC1FE7A01F00B1F958 /* TableView_cellcollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellcollection.swift; sourceTree = "<group>"; };
+		A5A8FFEE1FE7A04300B1F958 /* TableView_cellinvite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellinvite.swift; sourceTree = "<group>"; };
+		A5A8FFF01FE7A06100B1F958 /* CollectingStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectingStage.swift; sourceTree = "<group>"; };
+		A5A8FFF21FF11E4800B1F958 /* CollectingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectingModel.swift; sourceTree = "<group>"; };
+		A5A8FFF41FF11FBF00B1F958 /* CollectingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectingViewModel.swift; sourceTree = "<group>"; };
+		A5A8FFF61FF1241F00B1F958 /* ClipsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipsCell.swift; sourceTree = "<group>"; };
+		A5A8FFF71FF1241F00B1F958 /* ClipsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClipsCell.xib; sourceTree = "<group>"; };
+		A5A8FFFA1FF1250D00B1F958 /* InviteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteCell.swift; sourceTree = "<group>"; };
+		A5A8FFFB1FF1250D00B1F958 /* InviteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCell.xib; sourceTree = "<group>"; };
 		A5E263101F1F473B00D1783D /* CoInQDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoInQDataModel.xcdatamodel; sourceTree = "<group>"; };
 		A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellcompletevideo.swift; sourceTree = "<group>"; };
 		A5E263141F2CF28700D1783D /* RecordAudio_Four.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordAudio_Four.swift; sourceTree = "<group>"; };
@@ -211,6 +229,15 @@
 				A537AD1C1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift */,
 				A537AD1E1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift */,
 				A537AD201EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift */,
+				A5A8FFF01FE7A06100B1F958 /* CollectingStage.swift */,
+				A5A8FFEC1FE7A01F00B1F958 /* TableView_cellcollection.swift */,
+				A5A8FFF21FF11E4800B1F958 /* CollectingModel.swift */,
+				A5A8FFF41FF11FBF00B1F958 /* CollectingViewModel.swift */,
+				A5A8FFF61FF1241F00B1F958 /* ClipsCell.swift */,
+				A5A8FFF71FF1241F00B1F958 /* ClipsCell.xib */,
+				A5A8FFEE1FE7A04300B1F958 /* TableView_cellinvite.swift */,
+				A5A8FFFA1FF1250D00B1F958 /* InviteCell.swift */,
+				A5A8FFFB1FF1250D00B1F958 /* InviteCell.xib */,
 				A52D1CCA1EF6E6A900FAF465 /* RecordNavigationController.swift */,
 				A521ECF11ED535830074327B /* RecordAudio_One.swift */,
 				A56FF5DD1F11398F00B072D5 /* RecordAudio_Two.swift */,
@@ -322,7 +349,7 @@
 				TargetAttributes = {
 					A5458D221EA3ED8E00B1E26A = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = UBPB8BKDNW;
+						DevelopmentTeam = QLYSAWM3X9;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -376,8 +403,10 @@
 				A54EE1631EAF87E50014994C /* Podfile in Resources */,
 				A537AD0F1EC5A26100B70596 /* Main.storyboard in Resources */,
 				A5458D311EA3ED8F00B1E26A /* LaunchScreen.storyboard in Resources */,
+				A5A8FFFD1FF1250D00B1F958 /* InviteCell.xib in Resources */,
 				A5458D2E1EA3ED8F00B1E26A /* Assets.xcassets in Resources */,
 				A54EE1601EAF703A0014994C /* GoogleService-Info.plist in Resources */,
+				A5A8FFF91FF1241F00B1F958 /* ClipsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,15 +484,20 @@
 				A5E263131F1F533A00D1783D /* TableView_cellcompletevideo.swift in Sources */,
 				A537AD1F1EC6FB3B00B70596 /* SelectVideoUpload_Seven_Eight.swift in Sources */,
 				A537AD131EC6EB1300B70596 /* ProjectViewController.swift in Sources */,
+				A5A8FFF81FF1241F00B1F958 /* ClipsCell.swift in Sources */,
 				A5458D271EA3ED8F00B1E26A /* AppDelegate.swift in Sources */,
 				A537AD151EC6EB6700B70596 /* InvitaionViewController.swift in Sources */,
+				A5A8FFED1FE7A01F00B1F958 /* TableView_cellcollection.swift in Sources */,
 				A537AD171EC6EC2200B70596 /* CompeleteViewController.swift in Sources */,
 				A5E263191F2CFB6F00D1783D /* RecordAudio_Five.swift in Sources */,
+				A5A8FFF51FF11FBF00B1F958 /* CollectingViewModel.swift in Sources */,
 				A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */,
 				A537AD211EC6FB7C00B70596 /* SelectVideoUpload_Nine.swift in Sources */,
+				A5A8FFFC1FF1250D00B1F958 /* InviteCell.swift in Sources */,
 				A52D1CCB1EF6E6A900FAF465 /* RecordNavigationController.swift in Sources */,
 				A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */,
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
+				A5A8FFF31FF11E4800B1F958 /* CollectingModel.swift in Sources */,
 				A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
 				A537AD191EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift in Sources */,
@@ -471,6 +505,8 @@
 				A54EE1651EB1CE760014994C /* SignInViewController.swift in Sources */,
 				A537AD1B1EC6FA5100B70596 /* SelectVideoUpload_Three_Four.swift in Sources */,
 				A5E2631F1F2CFBE200D1783D /* RecordAudio_Eight.swift in Sources */,
+				A5A8FFEF1FE7A04300B1F958 /* TableView_cellinvite.swift in Sources */,
+				A5A8FFF11FE7A06100B1F958 /* CollectingStage.swift in Sources */,
 				A5E2631B1F2CFB9400D1783D /* RecordAudio_Six.swift in Sources */,
 				A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */,
 				A5E263151F2CF28900D1783D /* RecordAudio_Four.swift in Sources */,
@@ -635,7 +671,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UBPB8BKDNW;
+				DEVELOPMENT_TEAM = QLYSAWM3X9;
 				INFOPLIST_FILE = CoInQ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -692,7 +728,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self7.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -711,7 +747,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UBPB8BKDNW;
+				DEVELOPMENT_TEAM = QLYSAWM3X9;
 				INFOPLIST_FILE = CoInQ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -768,7 +804,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self7.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
