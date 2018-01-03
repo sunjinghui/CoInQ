@@ -18,7 +18,6 @@ public func dataFromServer(completion: @escaping (NSDictionary?, Error?) -> ()) 
             switch response.result {
             case .success(let videoclips):
                 completion(videoclips as? NSDictionary, nil)
-                print("get result: \(videoclips)")
             case .failure(let error):
                 print(error)
                 completion(nil,error)
@@ -34,7 +33,7 @@ class Profile {
     init?(data: Data) {
         do {
             if let body = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-
+                print("body: \(body)")
                 if let clip = body["table"] as? [[String: Any]] {
                     print("clips: \(clip)")
                     self.clips = clip.map { Clips(json: $0) }
@@ -58,7 +57,7 @@ class Clips {
     
     init(json: [String: Any]) {
         self.name = json["username"] as? String
-        self.pictureUrl = json["videopath"] as? String
+//        self.pictureUrl = json["videopath"] as? String
         self.time = json["time"] as? String
     }
 }

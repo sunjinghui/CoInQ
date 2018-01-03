@@ -40,16 +40,17 @@ class ProfileViewModel: NSObject {
             guard let data = jsonToData(responseObject!), let profile = Profile(data: data) else {
                 return
             }
-            print("data: \(data)")
-//            let invites = profile.invite
-//            if !invites.isEmpty {
-//                let InviteItem = ProfileViewModeInviteItem(invites: invites)
-//                self.items.append(InviteItem)
-//            }
-            print("profile: \(profile.clips)")
+            
+            let invites = profile.invite
+            if !invites.isEmpty {
+                let InviteItem = ProfileViewModeInviteItem(invites: invites)
+                self.items.append(InviteItem)
+            }
+            
             let clips = profile.clips
             if !clips.isEmpty {
-                let ClipsItem = ProfileViewModeClipsItem(clips: clips)
+                print("clips is not empty")
+                let ClipsItem = ProfileViewModeClipsItem(clip: clips)
                 self.items.append(ClipsItem)
             }
         }
@@ -74,12 +75,11 @@ extension ProfileViewModel: UITableViewDataSource {
                 cell.item = video
                 return cell
             }
-//        case .invite:
-//            if let item = item as? ProfileViewModeInviteItem, let cell = tableView.dequeueReusableCell(withIdentifier: InviteCell.identifier, for: indexPath) as? InviteCell {
-//                cell.item = item.invites[indexPath.row]
-//                return cell
-//            }
-        default: break
+        case .invite:
+            if let item = item as? ProfileViewModeInviteItem, let cell = tableView.dequeueReusableCell(withIdentifier: InviteCell.identifier, for: indexPath) as? InviteCell {
+                cell.item = item.invites[indexPath.row]
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -124,7 +124,7 @@ class ProfileViewModeClipsItem: ProfileViewModelItem {
     
     var clips: [Clips]
     
-    init(clips: [Clips]) {
-        self.clips = clips
+    init(clip: [Clips]) {
+        self.clips = clip
     }
 }

@@ -28,7 +28,7 @@ class CollectingStage :  UIViewController//, UITableViewDelegate, UITableViewDat
         // Do any additional setup after loading the view, typically from a nib.
 //        tableview.delegate = self
         tableview?.dataSource = viewModel
-//        tableview?.estimatedRowHeight = 100
+        tableview?.estimatedRowHeight = 100
         tableview?.rowHeight = UITableViewAutomaticDimension
         tableview.tableFooterView = UIView(frame: .zero)
         tableview?.register(ClipsCell.nib, forCellReuseIdentifier: ClipsCell.identifier)
@@ -162,10 +162,10 @@ class CollectingStage :  UIViewController//, UITableViewDelegate, UITableViewDat
         return true
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//        // Dispose of any resources that can be recreated.
+//    }
     
     @IBAction func Addclips(_ sender: AnyObject) {
         if savedPhotosAvailable() {

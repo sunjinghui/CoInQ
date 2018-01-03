@@ -369,11 +369,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/CollectingModel.swift"
-            timestampString = "536052074.366255"
+            timestampString = "536233060.248794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "init(json:)"
             landmarkType = "7">
          </BreakpointContent>
