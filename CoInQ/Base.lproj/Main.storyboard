@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -601,6 +600,7 @@
                     <connections>
                         <outlet property="RecordButton" destination="LMl-dB-a76" id="Hel-s5-elL"/>
                         <outlet property="ninecomplete" destination="7YC-v7-Mn2" id="Beq-G6-sgE"/>
+                        <segue destination="gVN-0o-a4M" kind="modal" identifier="StartRecord" id="qrv-re-Ypy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wz2-av-m13" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -983,6 +983,7 @@
             </objects>
             <point key="canvasLocation" x="5095" y="-643"/>
         </scene>
+<<<<<<< HEAD
         <!--TableNavigation-->
         <scene sceneID="v0i-Az-4Ob">
             <objects>
@@ -1062,6 +1063,8 @@
             </objects>
             <point key="canvasLocation" x="5095" y="605"/>
         </scene>
+=======
+>>>>>>> parent of fa19458... tmp
         <!--VideoTaskViewController-->
         <scene sceneID="Xkl-xi-azd">
             <objects>
@@ -1145,7 +1148,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影片名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIt-4F-X2C">
-                                                    <rect key="frame" x="351" y="83" width="159" height="45"/>
+                                                    <rect key="frame" x="318" y="83" width="159" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="OAh-wf-yYA"/>
                                                         <constraint firstAttribute="width" constant="159" id="eRJ-DQ-3M9"/>
@@ -1155,7 +1158,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影片長度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpJ-br-Jbt">
-                                                    <rect key="frame" x="351" y="185" width="159" height="45"/>
+                                                    <rect key="frame" x="318" y="185" width="159" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="KY5-9l-DLY"/>
                                                     </constraints>
@@ -1164,13 +1167,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="影片名稱 xxx" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQf-s7-pXg">
-                                                    <rect key="frame" x="511" y="65" width="249" height="82"/>
+                                                    <rect key="frame" x="478" y="65" width="249" height="82"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88.88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWu-QA-lBr">
-                                                    <rect key="frame" x="511" y="185" width="159" height="45"/>
+                                                    <rect key="frame" x="478" y="185" width="159" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="159" id="dCb-Km-Sca"/>
                                                     </constraints>
@@ -1179,7 +1182,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OtE-cu-rfP">
-                                                    <rect key="frame" x="60" y="8" width="258" height="325"/>
+                                                    <rect key="frame" x="60" y="8" width="225" height="325"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1240,6 +1243,946 @@
             </objects>
             <point key="canvasLocation" x="3062" y="166"/>
         </scene>
+        <!--Record Navigation Controller-->
+        <scene sceneID="Drg-kV-i9R">
+            <objects>
+                <navigationController storyboardIdentifier="RecordNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gVN-0o-a4M" customClass="RecordNavigationController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="OXc-KH-g3f"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="1024"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kKn-fn-fgd">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Lus-hg-Z98" kind="relationship" relationship="rootViewController" id="aBB-8u-znw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OzA-Xd-4tP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7162" y="-2007"/>
+        </scene>
+        <!--Record Audio One-->
+        <scene sceneID="34I-6n-gQw">
+            <objects>
+                <viewController storyboardIdentifier="RecordAudio_One" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Lus-hg-Z98" customClass="RecordAudio_One" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7yy-UT-7db"/>
+                        <viewControllerLayoutGuide type="bottom" id="U5N-Hq-W1V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Ha-xo-I2J">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pni-il-GEa">
+                                <rect key="frame" x="278" y="118" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0w-4G-RNu">
+                                <rect key="frame" x="531" y="112" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Fwg-X9-A8f"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y7g-ni-tpy">
+                                <rect key="frame" x="44" y="200" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFE-IV-yy9">
+                                <rect key="frame" x="630" y="729" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="Q8J-nN-F8b">
+                                <rect key="frame" x="44" y="751" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fB9-EF-KSc">
+                                <rect key="frame" x="653" y="940" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="1t0-EI-XTJ"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPm-Kk-c3u">
+                                <rect key="frame" x="267" y="940" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLi-Ib-UrA">
+                                <rect key="frame" x="622" y="812" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="eLT-lH-fMp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-dn-Qyb">
+                                <rect key="frame" x="493" y="817" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="sDG-or-dtz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uVg-4H-6QU">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="TS7-gZ-ijI">
+                            <connections>
+                                <action selector="BackToSelectVideoNine:" destination="Lus-hg-Z98" id="EOm-fp-0a1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="tE5-W3-HcV">
+                            <connections>
+                                <segue destination="Xq9-hk-AxD" kind="push" id="wSj-Dx-tDe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="FEG-dn-Qyb" id="KmO-Jh-jMt"/>
+                        <outlet property="ButttonRecord" destination="MLi-Ib-UrA" id="Oy1-AG-ldc"/>
+                        <outlet property="UseRecordSwitch" destination="fB9-EF-KSc" id="VG4-84-nn5"/>
+                        <outlet property="progressView" destination="Q8J-nN-F8b" id="DIU-cC-ufV"/>
+                        <outlet property="switchOutput" destination="wPm-Kk-c3u" id="mIB-i8-gd2"/>
+                        <outlet property="timeLabel" destination="tFE-IV-yy9" id="NL9-O1-jNO"/>
+                        <outlet property="videoPreviewLayer" destination="Y7g-ni-tpy" id="FMP-Lp-jez"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2u-vk-597" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8224" y="-2007"/>
+        </scene>
+        <!--Record Audio Two-->
+        <scene sceneID="rVe-c4-h0a">
+            <objects>
+                <viewController id="Xq9-hk-AxD" customClass="RecordAudio_Two" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gcb-A6-qNM"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZMk-bG-MlS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jDc-KB-63A">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCO-wv-WzJ">
+                                <rect key="frame" x="278" y="100" width="212" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goi-2i-IY4">
+                                <rect key="frame" x="529" y="107" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="V5N-pn-xyp"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aL6-Kf-wGj">
+                                <rect key="frame" x="44" y="200" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pX-Q3-pSy">
+                                <rect key="frame" x="629" y="729" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="Wjq-ht-KaF">
+                                <rect key="frame" x="44" y="751" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aWI-ph-9L5">
+                                <rect key="frame" x="653" y="938" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="G5A-pu-j6s"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="Oi6-59-r3B"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDU-w4-hCB">
+                                <rect key="frame" x="267" y="938" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptY-L3-3SV">
+                                <rect key="frame" x="622" y="817" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="WBW-fz-h04"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="do5-VE-KSG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a14-tz-bjU">
+                                <rect key="frame" x="491" y="817" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Kga-dB-tN5"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="cdF-z1-ktf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Bp7-hB-A6i">
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="a8t-D9-51l">
+                            <connections>
+                                <segue destination="pNr-hM-XdX" kind="push" id="EAt-Ul-Yg9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="a14-tz-bjU" id="Bmc-nD-yQs"/>
+                        <outlet property="ButttonRecord" destination="ptY-L3-3SV" id="AuJ-Y6-FaR"/>
+                        <outlet property="UseRecordSwitch" destination="aWI-ph-9L5" id="cbU-Ys-uvR"/>
+                        <outlet property="progressView" destination="Wjq-ht-KaF" id="4A8-Vg-iRP"/>
+                        <outlet property="switchOutput" destination="zDU-w4-hCB" id="kOi-Lm-3WG"/>
+                        <outlet property="timeLabel" destination="3pX-Q3-pSy" id="Ars-EZ-kiq"/>
+                        <outlet property="videoPreviewLayer" destination="aL6-Kf-wGj" id="YnO-9a-Jsa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3CU-Ln-s9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9044" y="-2007"/>
+        </scene>
+        <!--Record Audio Three-->
+        <scene sceneID="PI7-sz-LnF">
+            <objects>
+                <viewController id="pNr-hM-XdX" customClass="RecordAudio_Three" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WZ1-7e-RTa"/>
+                        <viewControllerLayoutGuide type="bottom" id="oWg-sS-0Ff"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0KB-cf-Pl6">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEA-03-Etw">
+                                <rect key="frame" x="278" y="109" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HGb-tO-grA">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyY-4G-Osf">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="Cdy-EG-P67"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="EcZ-Xi-9iE"/>
+                                    <action selector="UseRecordSwitch:" destination="pNr-hM-XdX" eventType="valueChanged" id="q8s-dc-rQe"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcv-uf-wOc">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCN-9a-PeQ">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="XsV-JO-rhG"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Zr0-XC-Lbx"/>
+                                    <action selector="playvideo:" destination="pNr-hM-XdX" eventType="touchUpInside" id="s5Y-QF-3pM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-ZX-ZSG">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="1g2-Hh-mhs"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="K6z-qk-aG4"/>
+                                    <action selector="record:" destination="pNr-hM-XdX" eventType="touchUpInside" id="XEK-nJ-Hxb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqN-TU-Zig">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="XLZ-oD-bef">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5b5-ge-i96">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="pNr-hM-XdX" eventType="touchUpInside" id="Nd7-cG-3YW"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="fjA-MW-9AH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="mH1-tC-GXb">
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="N5q-2y-lWI">
+                            <connections>
+                                <segue destination="Zih-Zr-AVC" kind="push" id="lbX-gq-TPV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="gCN-9a-PeQ" id="Suy-hx-aqZ"/>
+                        <outlet property="ButttonRecord" destination="gdN-ZX-ZSG" id="fpQ-5w-Snd"/>
+                        <outlet property="UseRecordSwitch" destination="zyY-4G-Osf" id="TDn-s4-ePW"/>
+                        <outlet property="progressView" destination="XLZ-oD-bef" id="NEz-SU-aUh"/>
+                        <outlet property="switchOutput" destination="kcv-uf-wOc" id="6vv-GK-Obr"/>
+                        <outlet property="timeLabel" destination="zqN-TU-Zig" id="9iZ-mA-cnr"/>
+                        <outlet property="videoPreviewLayer" destination="HGb-tO-grA" id="jI9-vV-kGp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wz0-au-RBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9884" y="-2007"/>
+        </scene>
+        <!--Record Audio Six-->
+        <scene sceneID="iYL-ha-K7z">
+            <objects>
+                <viewController id="iuh-KL-b2k" customClass="RecordAudio_Six" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dhx-Yf-XVI"/>
+                        <viewControllerLayoutGuide type="bottom" id="rNj-Mc-Yhp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N8d-EX-iDN">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDa-os-F5i">
+                                <rect key="frame" x="278" y="106" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAM-NW-Upk">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hc9-d5-vRu">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="633-Xx-CVZ"/>
+                                    <action selector="UseRecordSwitch:" destination="iuh-KL-b2k" eventType="valueChanged" id="En9-H2-an7"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="Lzm-Lw-kc3"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEX-MC-MBL">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5W-gd-lzv">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="BVu-UY-yMX"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="eLE-GV-viQ"/>
+                                    <action selector="playvideo:" destination="iuh-KL-b2k" eventType="touchUpInside" id="pJh-Ah-tvd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFs-ad-wob">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="iuh-KL-b2k" eventType="touchUpInside" id="9NK-II-yXZ"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Uju-s8-LbX"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="ags-RA-P9A"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4b-ei-deT">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="VJ2-xy-Gjb">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpg-kd-fxD">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="3Ab-Aj-7Rr"/>
+                                    <action selector="Explain:" destination="iuh-KL-b2k" eventType="touchUpInside" id="I3r-Cn-iFg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iJr-3G-U0y">
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="rhS-sg-HwC">
+                            <connections>
+                                <segue destination="FP0-wd-HkN" kind="push" id="OuN-ne-FZ4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="f5W-gd-lzv" id="igR-fT-Yyd"/>
+                        <outlet property="ButttonRecord" destination="TFs-ad-wob" id="QSy-Mh-Kf2"/>
+                        <outlet property="UseRecordSwitch" destination="Hc9-d5-vRu" id="IPq-Qg-H51"/>
+                        <outlet property="progressView" destination="VJ2-xy-Gjb" id="aUj-3I-Onm"/>
+                        <outlet property="switchOutput" destination="zEX-MC-MBL" id="Q2A-f7-EfD"/>
+                        <outlet property="timeLabel" destination="g4b-ei-deT" id="tUF-Wt-Oc2"/>
+                        <outlet property="videoPreviewLayer" destination="gAM-NW-Upk" id="iqA-yL-T7a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nkq-ru-Hy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8224" y="-880"/>
+        </scene>
+        <!--Record Audio Five-->
+        <scene sceneID="83e-UC-nTP">
+            <objects>
+                <viewController id="H33-gb-r4Z" customClass="RecordAudio_Five" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="53T-fh-hj3"/>
+                        <viewControllerLayoutGuide type="bottom" id="fu1-sw-jks"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1He-rC-Mq6">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPg-ip-28M">
+                                <rect key="frame" x="278" y="109" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTm-ZN-pTZ">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUd-rt-NQR">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="6YZ-Er-Hmi"/>
+                                    <action selector="UseRecordSwitch:" destination="H33-gb-r4Z" eventType="valueChanged" id="DCy-Ju-6Bv"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="r7T-PK-300"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Olf-0A-nxC">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CZ-BT-e7y">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Od8-zs-A1k"/>
+                                    <action selector="playvideo:" destination="H33-gb-r4Z" eventType="touchUpInside" id="RfO-t7-4ZO"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="XfS-76-B16"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhj-Te-Fjj">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="VOx-eu-QgF"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="YCN-Ja-aJI"/>
+                                    <action selector="record:" destination="H33-gb-r4Z" eventType="touchUpInside" id="kNk-z8-af2"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ClS-om-3dE">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="eSr-pq-G7X">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="591-re-XKc">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="H33-gb-r4Z" eventType="touchUpInside" id="MUW-NS-oXP"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="eIS-cG-yoG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dFY-XC-djx">
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="NwO-lh-aX8">
+                            <connections>
+                                <segue destination="iuh-KL-b2k" kind="push" id="bUn-Po-rxT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="5CZ-BT-e7y" id="eyd-zO-BWp"/>
+                        <outlet property="ButttonRecord" destination="vhj-Te-Fjj" id="rnD-Qa-Qfe"/>
+                        <outlet property="UseRecordSwitch" destination="lUd-rt-NQR" id="ccq-Lu-VWK"/>
+                        <outlet property="progressView" destination="eSr-pq-G7X" id="XkH-On-xR4"/>
+                        <outlet property="switchOutput" destination="Olf-0A-nxC" id="pcb-W5-Q7D"/>
+                        <outlet property="timeLabel" destination="ClS-om-3dE" id="oOx-ew-HPz"/>
+                        <outlet property="videoPreviewLayer" destination="eTm-ZN-pTZ" id="bPf-hl-DZ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ck2-ET-sXq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9044" y="-880"/>
+        </scene>
+        <!--Record Audio Four-->
+        <scene sceneID="HfF-na-vYM">
+            <objects>
+                <viewController id="Zih-Zr-AVC" customClass="RecordAudio_Four" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Ji-Oz-RKs"/>
+                        <viewControllerLayoutGuide type="bottom" id="dz3-il-QPj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gSz-sP-Ie5">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Atx-KP-bHt">
+                                <rect key="frame" x="278" y="111" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XLo-Hu-U8n">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gB9-qZ-JPl">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Zih-Zr-AVC" eventType="valueChanged" id="Tce-hi-3Li"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="jHE-gF-kM1"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="zoj-iX-eyb"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0j-LS-3FM">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWH-pV-mI0">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="V2X-PG-cre"/>
+                                    <action selector="playvideo:" destination="Zih-Zr-AVC" eventType="touchUpInside" id="vSw-pH-EBE"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="vYN-Tn-PDo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdG-06-dv9">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="4tC-IV-tTe"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="ZLU-Uw-biI"/>
+                                    <action selector="record:" destination="Zih-Zr-AVC" eventType="touchUpInside" id="cmt-d2-5ht"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KT5-Lq-Git">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="Lyf-4t-coM">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKn-dh-emJ">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="2xZ-So-WOc"/>
+                                    <action selector="Explain:" destination="Zih-Zr-AVC" eventType="touchUpInside" id="ryb-Po-7H3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="M8y-OO-xdY">
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="7aW-H5-I02">
+                            <connections>
+                                <segue destination="H33-gb-r4Z" kind="push" id="oYX-sc-fXZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="OWH-pV-mI0" id="dbh-Vv-kgx"/>
+                        <outlet property="ButttonRecord" destination="HdG-06-dv9" id="gSw-Zo-UhV"/>
+                        <outlet property="UseRecordSwitch" destination="gB9-qZ-JPl" id="s1P-um-tOV"/>
+                        <outlet property="progressView" destination="Lyf-4t-coM" id="hhJ-nJ-Dqi"/>
+                        <outlet property="switchOutput" destination="H0j-LS-3FM" id="hSd-fK-5n2"/>
+                        <outlet property="timeLabel" destination="KT5-Lq-Git" id="PKJ-9z-dO2"/>
+                        <outlet property="videoPreviewLayer" destination="XLo-Hu-U8n" id="sRk-TD-9n9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Pg-Lg-WoG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9884" y="-880"/>
+        </scene>
+        <!--Record Audio Seven-->
+        <scene sceneID="oU4-jQ-QSO">
+            <objects>
+                <viewController id="FP0-wd-HkN" customClass="RecordAudio_Seven" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gaO-87-fFV"/>
+                        <viewControllerLayoutGuide type="bottom" id="7zL-Ic-ylr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n9i-5O-f1e">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EtY-te-g6F">
+                                <rect key="frame" x="278" y="106" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nmz-jm-kn2">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3He-1t-3DB">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="FP0-wd-HkN" eventType="valueChanged" id="61P-yK-Fka"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="OlA-6f-cIZ"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="nQg-TA-9p6"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7n-lB-a3I">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Vr-YQ-fes">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="FP0-wd-HkN" eventType="touchUpInside" id="BBm-jX-1Og"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="SaD-bc-gwE"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="jlz-lf-6vk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D1y-sS-gfn">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Ng7-mK-qry"/>
+                                    <action selector="record:" destination="FP0-wd-HkN" eventType="touchUpInside" id="umH-F2-kwL"/>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="yTY-s2-oeT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duD-jC-2vz">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="Wc0-LU-cET">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qF-5r-WXh">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="FP0-wd-HkN" eventType="touchUpInside" id="9ti-nz-oTM"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="BkO-cf-ij0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TPQ-1c-Fhw">
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="Bn0-3L-XjV">
+                            <connections>
+                                <segue destination="4rp-ma-cIM" kind="push" id="UcC-PN-GPT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="4Vr-YQ-fes" id="YJo-ye-m1b"/>
+                        <outlet property="ButttonRecord" destination="D1y-sS-gfn" id="IV9-76-GSm"/>
+                        <outlet property="UseRecordSwitch" destination="3He-1t-3DB" id="VeY-Ka-x3q"/>
+                        <outlet property="progressView" destination="Wc0-LU-cET" id="Lja-0Z-VVF"/>
+                        <outlet property="switchOutput" destination="h7n-lB-a3I" id="0O0-kD-Syn"/>
+                        <outlet property="timeLabel" destination="duD-jC-2vz" id="zJZ-AW-1PC"/>
+                        <outlet property="videoPreviewLayer" destination="nmz-jm-kn2" id="9NI-W6-KR5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kwq-uS-gXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8224" y="222"/>
+        </scene>
+        <!--Record Audio Eight-->
+        <scene sceneID="lj2-uf-tfL">
+            <objects>
+                <viewController id="4rp-ma-cIM" customClass="RecordAudio_Eight" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HY9-7O-9Ct"/>
+                        <viewControllerLayoutGuide type="bottom" id="noE-Bs-zID"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QEj-b5-hQU">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4D-jd-Lvr">
+                                <rect key="frame" x="278" y="109" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0UT-03-yUu">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fms-Yw-NNb">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="0sy-kS-Bnf"/>
+                                    <action selector="UseRecordSwitch:" destination="4rp-ma-cIM" eventType="valueChanged" id="12Z-vv-P7Y"/>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="O1p-wy-51n"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z34-rb-MkT">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2s-UU-6cX">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="AtY-dc-ADh"/>
+                                    <action selector="playvideo:" destination="4rp-ma-cIM" eventType="touchUpInside" id="j4u-gE-Xcv"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="teQ-K8-qOI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bp-ol-MSn">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="Inv-Et-lYN"/>
+                                    <action selector="record:" destination="4rp-ma-cIM" eventType="touchUpInside" id="To3-u7-yyo"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="kIs-ir-14J"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gd-8a-96j">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="I98-q5-fW4">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7s-vh-RDv">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="4rp-ma-cIM" eventType="touchUpInside" id="05D-zG-LnW"/>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="C6F-S1-5Qh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="f9x-da-P2s">
+                        <barButtonItem key="rightBarButtonItem" title="下一個" id="r7y-TV-1bZ">
+                            <connections>
+                                <segue destination="We8-gb-gcK" kind="push" id="gg6-58-AhY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="R2s-UU-6cX" id="Nag-Yt-RAJ"/>
+                        <outlet property="ButttonRecord" destination="8Bp-ol-MSn" id="o5c-qC-Jn5"/>
+                        <outlet property="UseRecordSwitch" destination="fms-Yw-NNb" id="9QI-FQ-z9d"/>
+                        <outlet property="progressView" destination="I98-q5-fW4" id="3bQ-wK-eB7"/>
+                        <outlet property="switchOutput" destination="z34-rb-MkT" id="hzS-4y-TjV"/>
+                        <outlet property="timeLabel" destination="8gd-8a-96j" id="9Xd-Xq-dLu"/>
+                        <outlet property="videoPreviewLayer" destination="0UT-03-yUu" id="dmM-pE-37w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oVG-x6-bIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9044" y="222"/>
+        </scene>
+        <!--Record Nine Merge-->
+        <scene sceneID="rkG-nt-aHP">
+            <objects>
+                <viewController id="We8-gb-gcK" customClass="RecordNine_Merge" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WRr-kj-RwI"/>
+                        <viewControllerLayoutGuide type="bottom" id="gcx-K3-FXs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O7i-I0-7aK">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="故事版9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh6-UU-Ghk">
+                                <rect key="frame" x="278" y="106" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6W1-0i-zb1">
+                                <rect key="frame" x="44" y="199" width="681" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-DG-7IS">
+                                <rect key="frame" x="653" y="937" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="UseRecordSwitch:" destination="Lus-hg-Z98" eventType="valueChanged" id="TWQ-xC-nX2"/>
+                                    <action selector="UseRecordSwitch:" destination="Xq9-hk-AxD" eventType="valueChanged" id="kNo-hQ-4Wl"/>
+                                    <action selector="UseRecordSwitch:" destination="We8-gb-gcK" eventType="valueChanged" id="y9T-Dy-lKR"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用這個配音" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Df-Rg-I6I">
+                                <rect key="frame" x="267" y="937" width="349" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzy-NV-Xx2">
+                                <rect key="frame" x="491" y="816" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playvideo:" destination="We8-gb-gcK" eventType="touchUpInside" id="MNd-G2-In5"/>
+                                    <action selector="playvideo:" destination="Lus-hg-Z98" eventType="touchUpInside" id="qz4-Vo-HBq"/>
+                                    <action selector="playvideo:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="st7-h9-jaa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fS-bo-L9E">
+                                <rect key="frame" x="622" y="816" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="錄音" image="record"/>
+                                <connections>
+                                    <action selector="record:" destination="Lus-hg-Z98" eventType="touchUpInside" id="GLy-ag-w8F"/>
+                                    <action selector="record:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="P4k-cb-dQx"/>
+                                    <action selector="record:" destination="We8-gb-gcK" eventType="touchUpInside" id="Svv-qi-d5V"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmp-nI-q7D">
+                                <rect key="frame" x="629" y="728" width="95" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.40000000596046448" translatesAutoresizingMaskIntoConstraints="NO" id="gLB-NT-25U">
+                                <rect key="frame" x="44" y="750" width="584" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZT-XQ-UhT">
+                                <rect key="frame" x="529" y="106" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Status-dialog-information-icon"/>
+                                <connections>
+                                    <action selector="Explain:" destination="Xq9-hk-AxD" eventType="touchUpInside" id="Cj0-3Z-GvN"/>
+                                    <action selector="Explain:" destination="We8-gb-gcK" eventType="touchUpInside" id="uH5-bc-Pv9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="WhF-5U-A1P">
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="fcA-q3-hPc">
+                            <connections>
+                                <action selector="merge:" destination="We8-gb-gcK" id="Lag-el-g26"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ButtonPlay" destination="kzy-NV-Xx2" id="AWQ-69-UEc"/>
+                        <outlet property="ButttonRecord" destination="5fS-bo-L9E" id="RLO-SS-9b9"/>
+                        <outlet property="UseRecordSwitch" destination="Xe3-DG-7IS" id="3gC-Hp-tDE"/>
+                        <outlet property="progressView" destination="gLB-NT-25U" id="UwB-Uc-95p"/>
+                        <outlet property="switchOutput" destination="0Df-Rg-I6I" id="txO-JG-9TS"/>
+                        <outlet property="timeLabel" destination="hmp-nI-q7D" id="RvB-mL-Aco"/>
+                        <outlet property="videoPreviewLayer" destination="6W1-0i-zb1" id="0Q5-B6-glt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AqN-dk-ZkC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9884" y="222"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1-2" width="74" height="81"/>
@@ -1268,6 +2211,8 @@
         <image name="if_note_upload_66841" width="128" height="128"/>
         <image name="if_user_add_66907" width="128" height="128"/>
         <image name="logout" width="512" height="512"/>
+        <image name="play" width="512" height="512"/>
+        <image name="record" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
