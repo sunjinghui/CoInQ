@@ -28,12 +28,16 @@ class CollectingStage :  UIViewController//, UITableViewDelegate, UITableViewDat
         // Do any additional setup after loading the view, typically from a nib.
 //        tableview.delegate = self
         tableview?.dataSource = viewModel
-        tableview?.estimatedRowHeight = 100
+        tableview?.estimatedRowHeight = 154
         tableview?.rowHeight = UITableViewAutomaticDimension
         tableview.tableFooterView = UIView(frame: .zero)
-        tableview?.register(ClipsCell.nib, forCellReuseIdentifier: ClipsCell.identifier)
+        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
         tableview?.register(InviteCell.nib, forCellReuseIdentifier: InviteCell.identifier)
 //        loaddata()
+    }
+    
+    @IBAction func backtoStage(_ sender: Any){
+        dismiss(animated: true, completion: nil)
     }
     
 //    func loaddata(){
@@ -110,7 +114,7 @@ class CollectingStage :  UIViewController//, UITableViewDelegate, UITableViewDat
                         self.activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
-                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        let action2 = UIAlertAction(title: "OK", style: .default, handler: {action in self.tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)})
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
 //                        self.loaddata()

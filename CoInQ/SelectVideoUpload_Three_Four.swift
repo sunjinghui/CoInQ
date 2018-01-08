@@ -20,6 +20,12 @@ class SelectVideoUpload_Three_Four : UIViewController{
     @IBOutlet weak var threecomplete: UIImageView!
     @IBOutlet weak var fourcomplete: UIImageView!
     
+    @IBAction func Cooperation(_ sender: Any){
+        let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationController") as! TableNavigationController
+        present(navigationtableview, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(navigationtableview, animated: true)
+    }
+    
     @IBAction func ExplainThree(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"心智圖是一個適合用來制定蒐集計畫的好工具。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})

@@ -475,7 +475,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="if_folder_add_66789"/>
                                 <connections>
-                                    <segue destination="PR8-F9-SXW" kind="push" id="uCu-YQ-AT3"/>
+                                    <action selector="Cooperation:" destination="nKx-F0-iOd" eventType="touchUpInside" id="ynG-6o-39Q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -983,17 +983,16 @@
             </objects>
             <point key="canvasLocation" x="5095" y="-643"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--TableNavigation-->
         <scene sceneID="v0i-Az-4Ob">
             <objects>
-                <navigationController id="PR8-F9-SXW" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Sr8-A5-EBs"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yvp-7G-NVR">
+                <navigationController storyboardIdentifier="TableNavigationController" title="TableNavigation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PR8-F9-SXW" customClass="TableNavigationController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Yvp-7G-NVR">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="4Tw-DP-svJ" kind="relationship" relationship="rootViewController" id="gc8-zg-dnZ"/>
+                        <segue destination="4Tw-DP-svJ" kind="relationship" relationship="rootViewController" id="coi-SS-3zJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cjg-vr-BQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1012,28 +1011,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRs-dp-lXi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRs-dp-lXi">
                                 <rect key="frame" x="567" y="888" width="136" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="136" id="cFT-SK-TKh"/>
+                                </constraints>
                                 <state key="normal" title="Button" image="if_note_upload_66841"/>
                                 <connections>
                                     <action selector="Addclips:" destination="4Tw-DP-svJ" eventType="touchUpInside" id="E3t-vB-3nD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="630-rN-PbC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="630-rN-PbC">
                                 <rect key="frame" x="59" y="888" width="156" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="156" id="a9V-Jd-mcN"/>
+                                </constraints>
                                 <state key="normal" title="Button" image="if_user_add_66907"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3zk-hZ-lUi">
-                                <rect key="frame" x="0.0" y="20" width="768" height="860"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3zk-hZ-lUi">
+                                <rect key="frame" x="0.0" y="71" width="768" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="808" id="1gq-yt-Doa"/>
+                                </constraints>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3zk-hZ-lUi" firstAttribute="top" secondItem="lZQ-LD-I5e" secondAttribute="bottom" constant="7" id="1uF-gE-eTB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GRs-dp-lXi" secondAttribute="trailing" constant="45" id="NwB-ox-TNX"/>
+                            <constraint firstItem="630-rN-PbC" firstAttribute="baseline" secondItem="GRs-dp-lXi" secondAttribute="baseline" id="OjV-RG-okX"/>
+                            <constraint firstItem="630-rN-PbC" firstAttribute="top" secondItem="3zk-hZ-lUi" secondAttribute="bottom" constant="9" id="Usz-4W-mu7"/>
+                            <constraint firstItem="630-rN-PbC" firstAttribute="leading" secondItem="dxF-0C-UAl" secondAttribute="leadingMargin" constant="39" id="Zae-fN-28s"/>
+                            <constraint firstAttribute="trailing" secondItem="3zk-hZ-lUi" secondAttribute="trailing" id="qLc-87-qmw"/>
+                            <constraint firstItem="3zk-hZ-lUi" firstAttribute="leading" secondItem="dxF-0C-UAl" secondAttribute="leading" id="z41-Ns-xbw"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="5Kr-Ix-4ig"/>
+                    <navigationItem key="navigationItem" id="5Kr-Ix-4ig">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="sjB-QT-GkJ">
+                            <connections>
+                                <action selector="backtoStage:" destination="4Tw-DP-svJ" id="3vt-iQ-TmY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="3zk-hZ-lUi" id="QcI-rL-Vyv"/>
                     </connections>

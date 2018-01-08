@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 enum ProfileViewModelItemType {
     case clips
@@ -36,11 +37,14 @@ class ProfileViewModel: NSObject {
     
     override init() {
         super.init()
-        dataFromServer(){ responseObject, error in
-            guard let data = jsonToData(responseObject!), let profile = Profile(data: data) else {
-                return
-            }
-            
+//        dataFromServer(){ responseObject, error in
+//            guard let data = jsonToData(responseObject!), let profile = Profile(data: data) else {
+//                return
+//            }
+        guard let data = dataFromFile("ServerData"), let profile = Profile(data: data) else {
+            return
+        }
+        
             let invites = profile.invite
             if !invites.isEmpty {
                 let InviteItem = ProfileViewModeInviteItem(invites: invites)
@@ -49,11 +53,12 @@ class ProfileViewModel: NSObject {
             
             let clips = profile.clips
             if !clips.isEmpty {
-                print("clips is not empty")
                 let ClipsItem = ProfileViewModeClipsItem(clip: clips)
                 self.items.append(ClipsItem)
+                print("clips is not empty\(self.items)")
+
             }
-        }
+//        }
     }
 }
 
@@ -70,7 +75,7 @@ extension ProfileViewModel: UITableViewDataSource {
         let item = items[indexPath.section]
         switch item.type {
         case .clips:
-            if let item = item as? ProfileViewModeClipsItem, let cell = tableView.dequeueReusableCell(withIdentifier: ClipsCell.identifier, for: indexPath) as? ClipsCell {
+            if let item = item as? ProfileViewModeClipsItem, let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell_clip.identifier, for: indexPath) as? TableViewCell_clip {
                 let video = item.clips[indexPath.row]
                 cell.item = video
                 return cell
@@ -86,6 +91,14 @@ extension ProfileViewModel: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return items[section].sectionTitle
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 }
 

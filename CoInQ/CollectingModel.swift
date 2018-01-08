@@ -8,22 +8,33 @@
 
 import Foundation
 import Alamofire
+import AVFoundation
 
-public func dataFromServer(completion: @escaping (NSDictionary?, Error?) -> ()) {
+//public func dataFromServer(completion: @escaping (NSDictionary?, Error?) -> ()) {
+//    
+//    let parameters: Parameters=["google_userid": google_userid,"videoid":Index]
+//    Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameters).responseJSON
+//        {
+//            response in
+//            switch response.result {
+//            case .success(let videoclips):
+//                completion(videoclips as? NSDictionary, nil)
+//            case .failure(let error):
+//                print(error)
+//                completion(nil,error)
+//            }
+//    }
+//    
+//}
+
+public func dataFromFile(_ filename: String) -> Data? {
+    @objc class TestClass: NSObject { }
     
-    let parameters: Parameters=["google_userid": google_userid,"videoid":Index]
-    Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameters).responseJSON
-        {
-            response in
-            switch response.result {
-            case .success(let videoclips):
-                completion(videoclips as? NSDictionary, nil)
-            case .failure(let error):
-                print(error)
-                completion(nil,error)
-            }
+    let bundle = Bundle(for: TestClass.self)
+    if let path = bundle.path(forResource: filename, ofType: "json") {
+        return (try? Data(contentsOf: URL(fileURLWithPath: path)))
     }
-    
+    return nil
 }
 
 class Profile {
@@ -34,7 +45,7 @@ class Profile {
         do {
             if let body = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
                 print("body: \(body)")
-                if let clip = body["table"] as? [[String: Any]] {
+                if let clip = body["friends"] as? [[String: Any]] {
                     print("clips: \(clip)")
                     self.clips = clip.map { Clips(json: $0) }
                 }
@@ -52,11 +63,12 @@ class Profile {
 
 class Clips {
     var name: String?
-    var pictureUrl: String?
+    var pictureUrl: UIImage?
     var time: String?
     
     init(json: [String: Any]) {
         self.name = json["username"] as? String
+        self.pictureUrl = UIImage(named: "playvideo")
 //        self.pictureUrl = json["videopath"] as? String
         self.time = json["time"] as? String
     }
