@@ -12,75 +12,89 @@ import Alamofire
 import MobileCoreServices
 import SwiftyJSON
 
-class CollectingStage :  UIViewController//, UITableViewDelegate, UITableViewDataSource {
-{
+class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var TableEmpty: UIView!
     @IBOutlet weak var tableview : UITableView!
+    @IBOutlet weak var editButtom: UIBarButtonItem!
+    
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    fileprivate let viewModel = ProfileViewModel()
-//    var collection = [Collection()]
-//    var clips: [Any]?
-
-//    var invite = ["Paris", "Rome"]
-//    var searchable = [Searchable]()
+//    fileprivate let viewModel = ProfileViewModel()
+    var clips: [Any]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        tableview.delegate = self
-        tableview?.dataSource = viewModel
-        tableview?.estimatedRowHeight = 154
-        tableview?.rowHeight = UITableViewAutomaticDimension
+        self.title = "蒐集探究資料"
+        
+        tableview.delegate = self
+        tableview?.dataSource = self
+//        tableview?.estimatedRowHeight = 154
+//        tableview?.rowHeight = UITableViewAutomaticDimension
         tableview.tableFooterView = UIView(frame: .zero)
-        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
-        tableview?.register(InviteCell.nib, forCellReuseIdentifier: InviteCell.identifier)
-//        loaddata()
+        let nibName = UINib(nibName: "TableViewCell_clip", bundle: nil)
+        tableview.register(nibName, forCellReuseIdentifier: "tableviewcell")
+//        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
+        loaddata()
     }
     
     @IBAction func backtoStage(_ sender: Any){
         dismiss(animated: true, completion: nil)
+        self.SaveClipOrder()
     }
     
-//    func loaddata(){
-//        let parameters: Parameters=["google_userid": google_userid,"videoid":Index]
-//        Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameters).responseJSON
-//            {
-//                response in
-//                print(response)
-//                guard response.result.isSuccess else {
-//                    let errorMessage = response.result.error?.localizedDescription
-//                    print("\(errorMessage!)")
-//                    return
-//                }
-//                guard let JSON = response.result.value as? [String: Any] else {
-//                    print("JSON formate error")
-//                    return
-//                }
-//                // 2.
-//                let error = JSON["error"] as! Bool
-//                if error {
-//                    self.clips = []
-//                    self.tableview.reloadData()
-//                    
-//                } else if let Collecte = JSON["table"] as? [Any] {
-//                    self.clips = Collecte
-//                    print(self.clips)
+    @IBAction func EditClipOrder(_ sender: UIBarButtonItem) {
+        tableview.isEditing = !tableview.isEditing
+        switch tableview.isEditing {
+        case true:
+            editButtom.title = "完成"
+        case false:
+            editButtom.title = "調整資料順序"
+            self.SaveClipOrder()
+        }
+    }
+    
+    func SaveClipOrder(){
+        for each in self.clips!{
+            let clip = each as? [String: Any]
+            let clipID = clip?["id"] as? Int
+            let order = (clips as AnyObject).index(of: each)
+            print("ID: \(clipID)order: \(order)")
+            self.UpdateOrder(clipid: clipID!, order: order)
+        }
+    }
+    
+    
+    func loaddata(){
+        let parameters: Parameters=["google_userid": google_userid,"videoid":Index]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                print(response)
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print("\(errorMessage!)")
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                let error = JSON["error"] as! Bool
+                if error {
+                    self.clips = []
+                    self.tableview.reloadData()
+                    
+                } else if let Collecte = JSON["table"] as? [Any] {
+                    self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
 //                    var tmp = Collection()
-//                    self.collection[tmp.username] = collect?["username"] as? String
-//                    self.collection.time = collect?["time"] as? String
-//                    self.collection.clips_img = collect?["video_path"] as? String
-////                    let username = collect?["username"] as? String
-////                    self.username.append(username!)
-////                    let videoURL = collect?["video_path"] as? String
-////                    self.clipsURL.append(videoURL!)
-////                    let time = collect?["time"] as? String
-////                    self.time.append(time!)
-//                    print(self.collection)
-//                    self.tableview.reloadData()
-//                }
-//        }
-//
-//    }
+                    
+                    self.tableview.reloadData()
+                }
+        }
+
+    }
     
     func uploadvideo(mp4Path : URL,message: String, clip: Int){
         
@@ -114,10 +128,10 @@ class CollectingStage :  UIViewController//, UITableViewDelegate, UITableViewDat
                         self.activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
-                        let action2 = UIAlertAction(title: "OK", style: .default, handler: {action in self.tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)})
+                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
-//                        self.loaddata()
+                        self.loaddata()
                         lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
@@ -166,149 +180,123 @@ class CollectingStage :  UIViewController//, UITableViewDelegate, UITableViewDat
         return true
     }
     
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     @IBAction func Addclips(_ sender: AnyObject) {
         if savedPhotosAvailable() {
             _ = startMediaBrowserFromViewController(self, usingDelegate: self)
         }
     }
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return searchable.count
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        
-//        if searchable[indexPath.row].collection.username != nil{
-//            // Display User Cell
-//            let cell : TableView_cellcollection = tableview.dequeueReusableCell(withIdentifier: "collectioncell", for: indexPath) as! TableView_cellcollection
-//
-//            cell.username.text = searchable[indexPath.row].collection.username
-//            cell.time.text = searchable[indexPath.row].collection.time
-            //影片縮圖
-//            let imgURL = searchable[indexPath.row].collection.clips_img
-//            let videoURL = URL(string: imgURL!)
-//            let asset = AVURLAsset(url: videoURL!, options: nil)
-//            let imgGenerator = AVAssetImageGenerator(asset: asset)
-//            imgGenerator.appliesPreferredTrackTransform = false
-//            
-//            do {
-//                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//                let thumbnail = UIImage(cgImage: cgImage)
-//                
-//                cell.thumbnail.image = thumbnail
-//                
-//            } catch let error {
-//                print("*** Error generating thumbnail: \(error)")
-//            }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let num = self.clips?.count {
+            tableview.backgroundView = nil
+            if num > 1 {
+                self.navigationItem.rightBarButtonItem = self.editButtom
+            }else{
+                self.navigationItem.rightBarButtonItem = nil
+            }
+            return num
+        } else {
+            tableview.backgroundView = TableEmpty
+            return 0
+        }
+    }
 
-//            return cell
-//        }else{
-//            // Display Place Cell
-//            let cell : TableView_cellinvite = tableview.dequeueReusableCell(withIdentifier: "invitecell", for: indexPath) as! TableView_cellinvite
-//            cell.username.text = searchable[indexPath.row].invitaion.username
-//            cell.time.text = searchable[indexPath.row].invitaion.time
-//            cell.invitedcontext.text = searchable[indexPath.row].invitaion.invitecontext
-            //影片縮圖
-//            let imgURL = searchable[indexPath.row].invitaion.google_userimg
-//            let videoURL = imgURL!
-//            let asset = AVURLAsset(url: videoURL, options: nil)
-//            let imgGenerator = AVAssetImageGenerator(asset: asset)
-//            imgGenerator.appliesPreferredTrackTransform = false
-//            
-//            do {
-//                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//                let thumbnail = UIImage(cgImage: cgImage)
-//                
-//                cell.google_userimg.image = thumbnail
-//                
-//            } catch let error {
-//                print("*** Error generating thumbnail: \(error)")
-//            }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableview.dequeueReusableCell(withIdentifier: "tableviewcell", for: indexPath) as! TableViewCell_clip
+        
+        guard let collect = self.clips?[indexPath.row] as? [String: Any] else {
+            print("Get row \(indexPath.row) error")
+            return cell
+        }
+        
+        let username = collect["username"] as? String
+        let videoURL = collect["videopath"] as? String
+        let time = collect["time"] as? String
+        
+        cell.commonInit(username!, videopath: videoURL!, times: time!)
+        return cell
+    }
+
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let clipitem = self.clips?[sourceIndexPath.row] as? [String: Any]
+        let clipID = clipitem?["id"] as? Int
+        
+        clips?.remove(at: sourceIndexPath.row)
+        clips?.insert(clipitem, at: destinationIndexPath.row)
+        self.UpdateOrder(clipid: clipID!, order: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
+        
+        if editingStyle == .delete {
             
-//            return cell
-//        }
-//    }
-//    
-//    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
+            let deleteAlert = UIAlertController(title:"確定要刪除探究資料影片嗎？",message: "刪除探究資料影片後無法復原！", preferredStyle: .alert)
+            deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+                
+                let clipInfo = self.clips?[indexPath.row] as? [String: Any]
+                let clipid = clipInfo?["id"] as? Int
+//                let videoname = clipInfo?["videoname"] as? String
+//                lognote("dcc", google_userid, "\(videoid!)\(videoname ?? "nil")")
+                self.deleteData(id: clipid!)
+                //                SelectVideoUpload_Nine().update()
+            }))
+            let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+            deleteAlert.addAction(cancelAction)
+            self.present(deleteAlert, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    func UpdateOrder(clipid: Int,order: Int){
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteclips.php", method: .post, parameters: ["clipsid": clipid,"order": order]).responseJSON{
+            response in
+            print("UUUUpdate order \(clipid) \(response)")
+
+        }
+    }
+
+    func deleteData(id: Int){
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteclips.php", method: .post, parameters: ["clipsid":id]).responseJSON
+            {
+                response in
+                print("DDDelete ID\(id) \(response)")
+                if let result = response.result.value {
+                    let jsonData = result as! NSDictionary
+                    let error = jsonData.value(forKey: "error") as? Bool
+                    if error! {
+                        let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
+                        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
+                        self.present(deleteAlert, animated: true, completion: nil)
+                        self.loaddata()
+                    }else{
+//                        lognote("dcf", google_userid, "\(id)")
+                        self.loaddata()
+                    }
+                    
+                }
+        }
+        
+    }
+    
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
 //        return true
 //    }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if searchable[indexPath.row].user.name != nil{
-//            return 123
-//        }else{
-//            return 92
-//        }
-//    }
-    
-//    func populate_array(){
-//        self.searchable.removeAll()
-//        for (key,value) in collection{
-//            var collections = Collection()
-//            switch key{
-//            case "time":
-//                collections.time = value
-//            break;
-//            case "video_path":
-//                collections.clips_img = value
-//            break;
-//            case "username":
-//                collections.username = value
-//            break;
-//            default:
-//                print("\(key): \(value)")
-//            }
-//            var element = Searchable()
-//            element.collection.clips_img = collections.clips_img
-//            element.collection.time = collections.time
-//            element.collection.username = collections.username
-//            self.searchable.append(element)
-//            print(element)
-//        }
-//
-//        for each in invite{
-//            var invitation = Invite()
-//            invitation.username = each
-//            var element = Searchable()
-//            element.invitaion = invitation
-//            self.searchable.append(element)
-//        }
-//       
-//            var invitation = Collection()
-//        
-//            var element = Searchable()
-//            element.collection = invitation
-//            self.searchable.append(element)
-//        
-//        print(searchable)
-//        tableview.reloadData()
-//    }
-//
-//    
-//    class Collection {
-//        var username : String?
-//        var time: String?
-//        var clips_img: String?
-//        init(json: [String: Any]){
-//            
-//        }
-//    }
-    
-//    class Invite {
-//        var username : String?
-//        var invitecontext: String?
-//        var time: String?
-//        var google_userimg: URL?
-//    }
-//    
-//    class Searchable {
-//        var invitaion = Invite()
-//        var collection = Collection()
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 350
+    }
+
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
     func startActivityIndicator() {
         let screenSize: CGRect = UIScreen.main.bounds

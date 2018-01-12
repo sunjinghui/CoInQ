@@ -16,53 +16,56 @@ class TableViewCell_clip: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel?
     
     
-    var item: Clips? {
-        didSet {
-            guard let item = item else {
-                print("nothing")
-                return
-            }
-            print("item: \(item)")
-            if let picture = item.pictureUrl {
-                
-                pictureImageView?.image = picture
-            }
-            let username = "作者：".appending(item.name!)
-            nameLabel?.text = username
-            time?.text = item.time
-            
+//    var item: Clips? {
+//        didSet {
+//            guard let item = item else {
+//                print("nothing")
+//                return
+//            }
+//            if let picture = item.pictureUrl {
+//                pictureImageView?.image = picture
+//            }
+//            let username = "作者：".appending(item.name!)
+//            nameLabel?.text = username
+//            time?.text = item.time
+//        }
+//    }
+//    static var nib:UINib {
+//        return UINib(nibName: identifier, bundle: nil)
+//    }
+//    static var identifier: String {
+//        return String(describing: self)
+//    }
+    
+    func commonInit(_ username: String, videopath: String, times: String) {
+        let videopath = videopath
+        let videourl = URL(string: videopath)
+        let asset = AVURLAsset(url: videourl!, options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        imgGenerator.appliesPreferredTrackTransform = false
+
+        do {
+            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
+
+            pictureImageView?.image = thumbnail
+
+        } catch let error {
+//            print("*** Error generating thumbnail: \(error)")
         }
-    }
-    
-    static var nib:UINib {
-        return UINib(nibName: identifier, bundle: nil)
-    }
-    
-    static var identifier: String {
-        return String(describing: self)
+        
+        let name = "作者：".appending(username) 
+        nameLabel?.text = name
+        time?.text = times
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        let videopath = item?.pictureUrl
-//        let videourl = URL(string: videopath!)
-//        let asset = AVURLAsset(url: videourl!, options: nil)
-//        let imgGenerator = AVAssetImageGenerator(asset: asset)
-//        imgGenerator.appliesPreferredTrackTransform = false
-//        
-//        do {
-//            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//            let thumbnail = UIImage(cgImage: cgImage)
-//            
-//            pictureImageView?.image = thumbnail
-//            
-//        } catch let error {
-//            print("*** Error generating thumbnail: \(error)")
-//        }
+
 //        pictureImageView?.layer.cornerRadius = 40
 //        pictureImageView?.clipsToBounds = true
-                pictureImageView?.contentMode = .scaleAspectFit
+//                pictureImageView?.contentMode = .scaleAspectFit
         //        pictureImageView?.backgroundColor = UIColor.lightGray
     }
     
@@ -72,11 +75,11 @@ class TableViewCell_clip: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        pictureImageView?.image = nil
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        
+//        pictureImageView?.image = nil
+//    }
 
     
 }

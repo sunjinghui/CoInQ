@@ -914,12 +914,12 @@ func getaudio(){
             soundRecorder.record(forDuration: durationtime)
             
             showTimeLabel()
-            timeTimer = Timer.scheduledTimer(timeInterval: 0.0167, target: self, selector: #selector(RecordAudio_Two.updateTimeLabel(_:)), userInfo: nil, repeats: true)
+            timeTimer = Timer.scheduledTimer(timeInterval: 0.0167, target: self, selector: #selector(RecordAudio_One.updateTimeLabel(_:)), userInfo: nil, repeats: true)
             progressCounter = 0.0
             if progressViewTimer != nil {
                 progressViewTimer?.invalidate()
             }
-            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_Two.updateProgressView(_:)), userInfo: nil, repeats: true)
+            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
             sender.setTitle("Stop", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "stop"), for: UIControlState())
             ButtonPlay.isEnabled = false
@@ -950,7 +950,7 @@ func getaudio(){
             if progressViewTimer != nil {
                 progressViewTimer?.invalidate()
             }
-            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_Two.updateProgressView(_:)), userInfo: nil, repeats: true)
+            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
             
             sender.setTitle("Stop", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "stop"), for: UIControlState())
