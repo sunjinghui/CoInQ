@@ -51,7 +51,7 @@ class TableViewCell_clip: UITableViewCell {
             pictureImageView?.image = thumbnail
 
         } catch let error {
-//            print("*** Error generating thumbnail: \(error)")
+            print("*** Error generating thumbnail: \(error)")
         }
         
         let name = "作者：".appending(username) 

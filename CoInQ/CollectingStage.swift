@@ -58,7 +58,6 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
             let clip = each as? [String: Any]
             let clipID = clip?["id"] as? Int
             let order = (clips as AnyObject).index(of: each)
-            print("ID: \(clipID)order: \(order)")
             self.UpdateOrder(clipid: clipID!, order: order)
         }
     }

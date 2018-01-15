@@ -6,9 +6,11 @@
 //  Copyright © 2017年 NTNUCSCL. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 import MobileCoreServices
 import MediaPlayer
+import CoreMedia
+import Photos
 import Alamofire
 import SwiftyJSON
 
@@ -18,12 +20,14 @@ class SelectVideoUpload_Nine : UIViewController{
     
     @IBOutlet weak var RecordButton: UIButton!
     
+    var clips: [Any]?
     var array: [Any]?
     var isURLempty = true
     var buttonClicked = true
     var loadingAssetOne = false
     var nullstoryboard = [String]()
     var emptystoryboards = [String]()
+    var mergeClips = [AVAsset]()
 
     var printArray: String{
         var str = ""
@@ -113,6 +117,32 @@ class SelectVideoUpload_Nine : UIViewController{
                 }
         }
 
+        let parameter: Parameters=["google_userid": google_userid,"videoid":Index]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameter).responseJSON
+            {
+                response in
+                print(response)
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print("\(errorMessage!)")
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                // 2.
+                let error = JSON["error"] as! Bool
+                if error {
+                    self.clips = []
+                } else if let Collecte = JSON["table"] as? [Any] {
+                    self.clips = Collecte
+                    //                    var collect = self.clips?[0] as? [String: Any]
+                    //                    var tmp = Collection()
+                    
+                }
+        }
+        
     }
     
     func check(_ videonum: String,_ storyboard: String){
@@ -122,6 +152,24 @@ class SelectVideoUpload_Nine : UIViewController{
             nullstoryboard.append(storyboard)
             emptystoryboards.append(storyboard)
             isURLempty = false
+        }else{
+            let clipVideo = AVAsset(url: URL(string: videopath!)!)
+            mergeClips.append(clipVideo)
+        }
+    }
+    
+    func checkCollectStageClips(){
+        //判斷有無搜集資料 沒有就記錄log 有就將videopath加入array 裡面
+        let clips = self.clips?[0] as? [String: Any]
+        if clips != nil {
+            for each in self.clips!{
+                let clip = each as? [String: Any]
+                let videopath = clip?["videopath"] as? String
+                let clipVideo = AVAsset(url: URL(string: videopath!)!)
+                mergeClips.append(clipVideo)
+                }
+        }else{
+            check("videofour_path", "故事版 4")
         }
     }
     
@@ -155,6 +203,10 @@ class SelectVideoUpload_Nine : UIViewController{
         alertController.addAction(checkagainAction)
         self.present(alertController, animated: true, completion: nil)
     }
+    func StopActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
 
     
     func isVideoLoaded() -> Bool {
@@ -165,7 +217,7 @@ class SelectVideoUpload_Nine : UIViewController{
         check("videoone_path", "故事版 1")
         check("videotwo_path", "故事版 2")
         check("videothree_path", "故事版 3")
-        check("videofour_path", "故事版 4")
+        checkCollectStageClips()
         check("videofive_path", "故事版 5")
         check("videosix_path", "故事版 6")
         check("videoseven_path", "故事版 7")
@@ -214,6 +266,36 @@ class SelectVideoUpload_Nine : UIViewController{
         return true
     }
     
+    func exportDidFinish(_ session: AVAssetExportSession) {
+        if session.status == AVAssetExportSessionStatus.completed {
+            let outputURL = session.outputURL
+            //            print("export")
+            PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
+                if saved {
+                    let outputVideo = AVAsset(url: outputURL!)
+                    let duration = outputVideo.duration
+                    let videoseconds = CMTimeGetSeconds(duration)
+                    let vmilliseconds = Int(videoseconds) * 60
+                    let vmilli = (vmilliseconds % 60) + 39
+                    let vsec = (vmilliseconds / 60) % 60
+                    let vmin = vmilliseconds / 3600
+                    let videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
+                    print("saved")
+                    self.uploadFinalvideo(outputURL!, videolength)
+                    
+                }
+            }
+        }else if session.status == AVAssetExportSessionStatus.failed{
+            let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+            self.StopActivityIndicator()
+        }
+
+        mergeClips = []
+    }
+    
     @IBAction func loadAssetNine(_ sender: AnyObject) {
         
         if savedPhotosAvailable() {
@@ -258,18 +340,27 @@ class SelectVideoUpload_Nine : UIViewController{
         
         if isVideoLoaded() {
             
+            mergeVideo(mergeClips)
+            
+            //新增VC
 //            let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
 //            present(recordNavigationController, animated: true, completion: nil)
-            let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordAudio_One") as! RecordAudio_One
-            self.navigationController?.pushViewController(recordNavigationController, animated: true)
+            //在 navigationVC 中再新增
+//            let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordAudio_One") as! RecordAudio_One
+//            self.navigationController?.pushViewController(recordNavigationController, animated: true)
             
-            lognote("sra", google_userid, "\(Index)")
+//            lognote("sra", google_userid, "\(Index)")
+            // 沒再用
 //            self.performSegue(withIdentifier: "StartRecord", sender: self)
         }else{
-            let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳 ,請確認\(printArray)", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(defaultAction)
-            self.present(alertController, animated: true, completion: nil)
+            
+            mergeVideo(mergeClips)
+
+            //  警告視窗 提醒未上傳的故事版
+//            let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳 ,請確認\(printArray)", preferredStyle: .alert)
+//            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//            alertController.addAction(defaultAction)
+//            self.present(alertController, animated: true, completion: nil)
             lognote("sbe", google_userid, "id\(Index)\(emptystoryboard)")
         }
 
@@ -354,6 +445,205 @@ class SelectVideoUpload_Nine : UIViewController{
         })
     }
 
+    func mergeVideo(_ mAssetsList: [AVAsset]) {
+        startActivityIndicator()
+        let mainComposition = AVMutableVideoComposition()
+        var startDuration:CMTime = kCMTimeZero
+        let mainInstruction = AVMutableVideoCompositionInstruction()
+        let mixComposition = AVMutableComposition()
+        var allVideoInstruction = [AVMutableVideoCompositionLayerInstruction]()
+        
+        var assets = mAssetsList
+        for i in 0 ..< assets.count {
+            let currentAsset:AVAsset = assets[i] //Current Asset.
+            
+            let currentTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            let currentAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            do {
+                try currentTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero,
+                                                                 currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: startDuration)
+                try currentAudioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeAudio)[0], at: startDuration)
+                
+                //Creates Instruction for current video asset.
+                let currentInstruction:AVMutableVideoCompositionLayerInstruction = videoCompositionInstructionForTrack(currentTrack, asset: currentAsset)
+                
+                currentInstruction.setOpacityRamp(fromStartOpacity: 0.0,
+                                                  toEndOpacity: 1.0,
+                                                  timeRange:CMTimeRangeMake(
+                                                    startDuration,
+                                                    CMTimeMake(1, 1)))
+                if i != assets.count - 1 {
+                    //Sets Fade out effect at the end of the video.
+                    currentInstruction.setOpacityRamp(fromStartOpacity: 1.0,
+                                                      toEndOpacity: 0.0,
+                                                      timeRange:CMTimeRangeMake(
+                                                        CMTimeSubtract(
+                                                            CMTimeAdd(currentAsset.duration, startDuration),
+                                                            CMTimeMake(1, 1)),
+                                                        CMTimeMake(2, 1)))
+                }
+                
+                allVideoInstruction.append(currentInstruction) //Add video instruction in Instructions Array.
+                
+                
+                startDuration = CMTimeAdd(startDuration, currentAsset.duration)
+            } catch _ {
+                print("ERROR_LOADING_VIDEO")
+            }
+        }
+        
+        
+        mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, startDuration)
+        mainInstruction.layerInstructions = allVideoInstruction
+        
+        mainComposition.instructions = [mainInstruction]
+        mainComposition.frameDuration = CMTimeMake(1, 30)
+        mainComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)//width: 640, height: 480)
+        
+        // 4 - Get path
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        let date = dateFormatter.string(from: Date())
+        let savePath = (documentDirectory as NSString).appendingPathComponent("mergeVideo-\(date).mov")
+        let url = URL(fileURLWithPath: savePath)
+        
+        // 5 - Create Exporter
+        guard let exporter = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
+        exporter.outputURL = url
+        exporter.outputFileType = AVFileTypeQuickTimeMovie
+        exporter.shouldOptimizeForNetworkUse = true
+        exporter.videoComposition = mainComposition
+        // Perform the Export
+        exporter.exportAsynchronously() {
+            DispatchQueue.main.async { _ in
+                self.exportDidFinish(exporter)
+            }
+        }
+    }
+
+    func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
+        var assetOrientation = UIImageOrientation.up
+        var isPortrait = false
+        if transform.a == 0 && transform.b == 1.0 && transform.c == -1.0 && transform.d == 0 {
+            assetOrientation = .right
+            isPortrait = true
+        } else if transform.a == 0 && transform.b == -1.0 && transform.c == 1.0 && transform.d == 0 {
+            assetOrientation = .left
+            isPortrait = true
+        } else if transform.a == 1.0 && transform.b == 0 && transform.c == 0 && transform.d == 1.0 {
+            assetOrientation = .up
+        } else if transform.a == -1.0 && transform.b == 0 && transform.c == 0 && transform.d == -1.0 {
+            assetOrientation = .down
+        }
+        return (assetOrientation, isPortrait)
+    }
+    
+    func videoCompositionInstructionForTrack(_ track: AVCompositionTrack, asset: AVAsset) -> AVMutableVideoCompositionLayerInstruction {
+        let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
+        let assetTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0]
+        
+        let transform = assetTrack.preferredTransform
+        let assetInfo = orientationFromTransform(transform)
+        
+        var scaleToFitRatio = UIScreen.main.bounds.width / assetTrack.naturalSize.width
+        if assetInfo.isPortrait {
+            scaleToFitRatio = UIScreen.main.bounds.width / assetTrack.naturalSize.height
+            let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
+            instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor),
+                                     at: kCMTimeZero)
+        } else {
+            let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
+            var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+            if (assetTrack.naturalSize.width > assetTrack.naturalSize.height){
+                concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+            }else{
+                concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: 0))
+            }
+            if assetInfo.orientation == .down {
+                let fixUpsideDown = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                let windowBounds = UIScreen.main.bounds
+                let yFix = assetTrack.naturalSize.height + windowBounds.height/2
+                let centerFix = CGAffineTransform(translationX: assetTrack.naturalSize.width, y: yFix)
+                concat = fixUpsideDown.concatenating(centerFix).concatenating(scaleFactor)
+            }
+            instruction.setTransform(concat, at: kCMTimeZero)
+        }
+        
+        return instruction
+    }
+    
+    func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
+        lognote("mvt", google_userid, "videoid:\(Index)")
+        Alamofire.upload(
+            //同样采用post表单上传
+            multipartFormData: { multipartFormData in
+                
+                multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
+                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
+                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
+                multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
+                multipartFormData.append(videolength.data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videolength")
+                //                for (key, val) in parameters {
+                //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
+                //                }
+                
+                //SERVER ADD
+        },to: "http://140.122.76.201/CoInQ/v1/uploadFinalVideo.php",
+          encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                //json处理
+                upload.responseJSON { response in
+                    //解包
+                    guard let result = response.result.value else { return }
+                    //须导入 swiftyJSON 第三方框架，否则报错
+                    let success = JSON(result)["success"].int ?? -1
+                    if success == 1 {
+                        let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的\n科學探究影片！\n你可以在「已完成」中\n找到你的傑作。", message: nil, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        self.StopActivityIndicator()
+                        lognote("ufs", google_userid, "\(Index)")
+                    }else{
+                        print("Upload Failed")
+                        lognote("uff", google_userid, "\(Index)")
+                        let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
+                        let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alert.addAction(action2)
+                        self.present(alert , animated: true , completion: nil)
+                    }
+                }
+                //上传进度
+                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+                let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
+                let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action2)
+                self.present(alert , animated: true , completion: nil)
+            }
+        })
+    }
+    
+    func switchPage(action: UIAlertAction){
+        //7 - Page switch to CompleteVC
+        //        dismiss(animated: true, completion: nil)
+        for vc in (self.navigationController?.viewControllers ?? []) {
+            //            print(vc)
+            if vc is CSCL {
+                _ = self.navigationController?.popToViewController(vc, animated: true)
+                NotificationCenter.default.post(name: NSNotification.Name("CSCL"), object: nil)
+                break
+            }
+        }
+        //self.tabBarController?.selectedIndex = 3
+        //        self.performSegue(withIdentifier: "completevideotask", sender: self)
+    }
     
 }
 
@@ -385,3 +675,23 @@ extension SelectVideoUpload_Nine : UINavigationControllerDelegate {
 }
 
 
+extension AVAsset {
+    var g_size: CGSize {
+        return tracks(withMediaType: AVMediaTypeVideo).first?.naturalSize ?? .zero
+    }
+    var g_orientation: UIInterfaceOrientation {
+        guard let transform = tracks(withMediaType: AVMediaTypeVideo).first?.preferredTransform else {
+            return .portrait
+        }
+        switch (transform.tx, transform.ty) {
+        case (0, 0):
+            return .landscapeRight
+        case (g_size.width, g_size.height):
+            return .landscapeLeft
+        case (0, g_size.width):
+            return .portraitUpsideDown
+        default:
+            return .portrait
+        }
+    }
+}
