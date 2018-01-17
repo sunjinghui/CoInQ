@@ -449,6 +449,7 @@ class SelectVideoUpload_Nine : UIViewController{
         startActivityIndicator()
         let mainComposition = AVMutableVideoComposition()
         var startDuration:CMTime = kCMTimeZero
+        var endDuration:CMTime = kCMTimeZero
         let mainInstruction = AVMutableVideoCompositionInstruction()
         let mixComposition = AVMutableComposition()
         var allVideoInstruction = [AVMutableVideoCompositionLayerInstruction]()
@@ -456,7 +457,8 @@ class SelectVideoUpload_Nine : UIViewController{
         var assets = mAssetsList
         for i in 0 ..< assets.count {
             let currentAsset:AVAsset = assets[i] //Current Asset.
-            
+            endDuration = CMTimeAdd(startDuration,currentAsset.duration)
+
             let currentTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
             let currentAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
@@ -466,25 +468,24 @@ class SelectVideoUpload_Nine : UIViewController{
                 
                 //Creates Instruction for current video asset.
                 let currentInstruction:AVMutableVideoCompositionLayerInstruction = videoCompositionInstructionForTrack(currentTrack, asset: currentAsset)
-                
-                currentInstruction.setOpacityRamp(fromStartOpacity: 0.0,
-                                                  toEndOpacity: 1.0,
-                                                  timeRange:CMTimeRangeMake(
-                                                    startDuration,
-                                                    CMTimeMake(1, 1)))
-                if i != assets.count - 1 {
-                    //Sets Fade out effect at the end of the video.
-                    currentInstruction.setOpacityRamp(fromStartOpacity: 1.0,
-                                                      toEndOpacity: 0.0,
-                                                      timeRange:CMTimeRangeMake(
-                                                        CMTimeSubtract(
-                                                            CMTimeAdd(currentAsset.duration, startDuration),
-                                                            CMTimeMake(1, 1)),
-                                                        CMTimeMake(2, 1)))
-                }
+                currentInstruction.setOpacity(0.0, at: endDuration)
+//                currentInstruction.setOpacityRamp(fromStartOpacity: 0.0,
+//                                                  toEndOpacity: 1.0,
+//                                                  timeRange:CMTimeRangeMake(
+//                                                    startDuration,
+//                                                    CMTimeMake(1, 1)))
+//                if i != assets.count - 1 {
+//                    //Sets Fade out effect at the end of the video.
+//                    currentInstruction.setOpacityRamp(fromStartOpacity: 1.0,
+//                                                      toEndOpacity: 0.0,
+//                                                      timeRange:CMTimeRangeMake(
+//                                                        CMTimeSubtract(
+//                                                            CMTimeAdd(currentAsset.duration, startDuration),
+//                                                            CMTimeMake(1, 1)),
+//                                                        CMTimeMake(2, 1)))
+//                }
                 
                 allVideoInstruction.append(currentInstruction) //Add video instruction in Instructions Array.
-                
                 
                 startDuration = CMTimeAdd(startDuration, currentAsset.duration)
             } catch _ {
