@@ -35,6 +35,8 @@
 		A54EE1681EB1F15C0014994C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE1671EB1F15C0014994C /* StoreKit.framework */; };
 		A54EE16A1EB1F16C0014994C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */; };
 		A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE16B1EB1F17A0014994C /* AddressBook.framework */; };
+		A55C4877204FE78D0034D7EF /* SearchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C4876204FE78D0034D7EF /* SearchUser.swift */; };
+		A55C4879204FF2640034D7EF /* TableView_cellsearchuser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C4878204FF2640034D7EF /* TableView_cellsearchuser.swift */; };
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
 		A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FA4AF1F6101990049EACD /* Helper_VC.swift */; };
 		A5A8963C1FFC8482006E85F4 /* TableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8963B1FFC8482006E85F4 /* TableNavigationController.swift */; };
@@ -107,6 +109,8 @@
 		A54EE1691EB1F16C0014994C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A54EE16B1EB1F17A0014994C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoInQ-Bridging-Header.h"; sourceTree = "<group>"; };
+		A55C4876204FE78D0034D7EF /* SearchUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUser.swift; sourceTree = "<group>"; };
+		A55C4878204FF2640034D7EF /* TableView_cellsearchuser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellsearchuser.swift; sourceTree = "<group>"; };
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
 		A59FA4AF1F6101990049EACD /* Helper_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper_VC.swift; sourceTree = "<group>"; };
 		A5A8963B1FFC8482006E85F4 /* TableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableNavigationController.swift; sourceTree = "<group>"; };
@@ -223,6 +227,9 @@
 				A5C945A21FFF7EAF001062FC /* TableViewCell_clip.swift */,
 				A5C945A31FFF7EAF001062FC /* TableViewCell_clip.xib */,
 				A5A8963B1FFC8482006E85F4 /* TableNavigationController.swift */,
+				A55C4876204FE78D0034D7EF /* SearchUser.swift */,
+				A55C4878204FF2640034D7EF /* TableView_cellsearchuser.swift */,
+				A537AD0D1EC5A26100B70596 /* Main.storyboard */,
 				A52D1CCA1EF6E6A900FAF465 /* RecordNavigationController.swift */,
 				A521ECF11ED535830074327B /* RecordAudio_One.swift */,
 				A5C945A620035387001062FC /* RecordAudio_Eight.swift */,
@@ -234,7 +241,6 @@
 				A5C945AC20035387001062FC /* RecordAudio_Two.swift */,
 				A521ECEF1ECB4BA80074327B /* RecordNine_Merge.swift */,
 				A5458D2D1EA3ED8F00B1E26A /* Assets.xcassets */,
-				A537AD0D1EC5A26100B70596 /* Main.storyboard */,
 				A5458D2F1EA3ED8F00B1E26A /* LaunchScreen.storyboard */,
 				A5E2630F1F1F473A00D1783D /* CoInQDataModel.xcdatamodeld */,
 				A5458D321EA3ED8F00B1E26A /* Info.plist */,
@@ -334,7 +340,7 @@
 				TargetAttributes = {
 					A5458D221EA3ED8E00B1E26A = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = QLYSAWM3X9;
+						DevelopmentTeam = Y6ZD98NN3V;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -473,6 +479,7 @@
 				A537AD151EC6EB6700B70596 /* InvitaionViewController.swift in Sources */,
 				A5C945AD20035387001062FC /* RecordAudio_Eight.swift in Sources */,
 				A5C945AF20035387001062FC /* RecordAudio_Four.swift in Sources */,
+				A55C4879204FF2640034D7EF /* TableView_cellsearchuser.swift in Sources */,
 				A537AD171EC6EC2200B70596 /* CompeleteViewController.swift in Sources */,
 				A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */,
 				A5C945B020035387001062FC /* RecordAudio_Seven.swift in Sources */,
@@ -481,6 +488,7 @@
 				A5C945B320035387001062FC /* RecordAudio_Two.swift in Sources */,
 				A5C945B120035387001062FC /* RecordAudio_Six.swift in Sources */,
 				A5E263111F1F473B00D1783D /* CoInQDataModel.xcdatamodeld in Sources */,
+				A55C4877204FE78D0034D7EF /* SearchUser.swift in Sources */,
 				A537AD1D1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift in Sources */,
 				A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */,
 				A51A8E021EB82E4400344F61 /* CSCL.swift in Sources */,
@@ -651,7 +659,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QLYSAWM3X9;
+				DEVELOPMENT_TEAM = Y6ZD98NN3V;
 				INFOPLIST_FILE = CoInQ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -708,7 +716,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.selfs.CoInQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -727,7 +735,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = QLYSAWM3X9;
+				DEVELOPMENT_TEAM = Y6ZD98NN3V;
 				INFOPLIST_FILE = CoInQ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -784,7 +792,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.selfs.CoInQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

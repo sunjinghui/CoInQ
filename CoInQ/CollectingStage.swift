@@ -53,6 +53,11 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    @IBAction func SearchUser(_ sender: Any){
+        let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationControllerS") as! TableNavigationController
+        present(navigationtableview, animated: true, completion: nil)
+    }
+    
     func SaveClipOrder(){
         for each in self.clips!{
             let clip = each as? [String: Any]
