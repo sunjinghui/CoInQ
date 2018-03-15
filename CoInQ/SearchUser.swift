@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate , UITextFieldDelegate {
     
     var userArray: [Any]?
     var data = [String]()
@@ -77,6 +77,58 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
         return data.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let alertController = UIAlertController(title:"影片共創邀請",message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField(configurationHandler: {(textField) -> Void in
+            textField.delegate = self
+            textField.placeholder = "請輸入需要的影片資料特點"
+        })
+        
+        
+        let StartVideoTask = UIAlertAction(title:"寄送共創邀請", style: .default, handler:{
+            (action) -> Void in
+            let Invitetext = alertController.textFields?.first?.text
+            if !(Invitetext?.isEmpty)! {
+                //UPLOAD VideoTask
+                let parameters: Parameters=[
+                    "google_userid_FROM": google_userid,
+                    "videoid": Index,
+                    "email":  self.data[indexPath.row],
+                    "context":    Invitetext!,
+                    ]
+                
+                //Sending http post request
+                Alamofire.request("http://140.122.76.201/CoInQ/v1/collaboration.php", method: .post, parameters: parameters).responseJSON
+                    {
+                        response in
+                        //                    if let result = response.result.value {
+                        //                        let jsonData = result as! NSDictionary
+                        //
+                        //                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
+                        //                        print(jsonData.value(forKey: "message") as Any)
+                        //                    }
+                }
+                
+                lognote("nvt", google_userid, Invitetext!)
+                //                self.performSegue(withIdentifier: "startvideotask", sender: self)
+                
+            }else{
+                let errorAlert = UIAlertController(title:"請注意",message: "儘量描述清楚需要的影片資料\n對影片創作更有幫助", preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title:"OK",style: .cancel, handler:{ (action) -> Void in self.present(alertController, animated: true, completion: nil)}))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+            
+        })
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        
+        alertController.addAction(StartVideoTask)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cellsearchuser", for: indexPath) as? TableView_cellsearchuser{
@@ -112,7 +164,11 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
             tableview.reloadData()
         }else{
             isSearching = true
-            filteredata = data.filter({$0 == searchbar.text})
+            filteredata = data.filter({ (country) -> Bool in
+                let countryText : NSString = country as NSString
+                return (countryText.range(of: searchbar.text! , options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
+            })
+//                $0 == searchbar.text})
             tableview.reloadData()
         }
     }

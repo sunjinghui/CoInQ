@@ -37,6 +37,7 @@
 		A54EE16C1EB1F17A0014994C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54EE16B1EB1F17A0014994C /* AddressBook.framework */; };
 		A55C4877204FE78D0034D7EF /* SearchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C4876204FE78D0034D7EF /* SearchUser.swift */; };
 		A55C4879204FF2640034D7EF /* TableView_cellsearchuser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C4878204FF2640034D7EF /* TableView_cellsearchuser.swift */; };
+		A55C487B205AC8D80034D7EF /* TableView_cellcooperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C487A205AC8D70034D7EF /* TableView_cellcooperate.swift */; };
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
 		A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FA4AF1F6101990049EACD /* Helper_VC.swift */; };
 		A5A8963C1FFC8482006E85F4 /* TableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8963B1FFC8482006E85F4 /* TableNavigationController.swift */; };
@@ -111,6 +112,7 @@
 		A54EE16D1EB1FB660014994C /* CoInQ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoInQ-Bridging-Header.h"; sourceTree = "<group>"; };
 		A55C4876204FE78D0034D7EF /* SearchUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUser.swift; sourceTree = "<group>"; };
 		A55C4878204FF2640034D7EF /* TableView_cellsearchuser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellsearchuser.swift; sourceTree = "<group>"; };
+		A55C487A205AC8D70034D7EF /* TableView_cellcooperate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellcooperate.swift; sourceTree = "<group>"; };
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
 		A59FA4AF1F6101990049EACD /* Helper_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper_VC.swift; sourceTree = "<group>"; };
 		A5A8963B1FFC8482006E85F4 /* TableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableNavigationController.swift; sourceTree = "<group>"; };
@@ -213,11 +215,12 @@
 				A51A8E011EB82E4400344F61 /* CSCL.swift */,
 				A537AD121EC6EB1300B70596 /* ProjectViewController.swift */,
 				A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */,
-				A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */,
 				A537AD141EC6EB6700B70596 /* InvitaionViewController.swift */,
+				A55C487A205AC8D70034D7EF /* TableView_cellcooperate.swift */,
 				A537AD161EC6EC2200B70596 /* CompeleteViewController.swift */,
 				A5E263121F1F533A00D1783D /* TableView_cellcompletevideo.swift */,
 				A59FA4AF1F6101990049EACD /* Helper_VC.swift */,
+				A537AD101EC5B5BF00B70596 /* VideoTaskViewController.swift */,
 				A537AD181EC6F8C100B70596 /* SelectVideoUpload_One_Two.swift */,
 				A537AD1A1EC6FA5000B70596 /* SelectVideoUpload_Three_Four.swift */,
 				A537AD1C1EC6FA7000B70596 /* SelectVideoUpload_Five_Six.swift */,
@@ -497,6 +500,7 @@
 				A537AD1B1EC6FA5100B70596 /* SelectVideoUpload_Three_Four.swift in Sources */,
 				A5A8963C1FFC8482006E85F4 /* TableNavigationController.swift in Sources */,
 				A5A8FFF11FE7A06100B1F958 /* CollectingStage.swift in Sources */,
+				A55C487B205AC8D80034D7EF /* TableView_cellcooperate.swift in Sources */,
 				A5C945A41FFF7EAF001062FC /* TableViewCell_clip.swift in Sources */,
 				A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */,
 				A521ECF21ED535840074327B /* RecordAudio_One.swift in Sources */,

@@ -93,7 +93,11 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
 //                    var tmp = Collection()
-                    
+                    if (self.clips?.count)! >= 2 {
+                        self.navigationItem.rightBarButtonItem = self.editButtom
+                    }else{
+                        self.navigationItem.rightBarButtonItem = nil
+                    }
                     self.tableview.reloadData()
                 }
         }
@@ -198,11 +202,6 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let num = self.clips?.count {
             tableview.backgroundView = nil
-            if num > 1 {
-                self.navigationItem.rightBarButtonItem = self.editButtom
-            }else{
-                self.navigationItem.rightBarButtonItem = nil
-            }
             return num
         } else {
             tableview.backgroundView = TableEmpty

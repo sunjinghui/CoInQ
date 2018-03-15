@@ -45,7 +45,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         threecomplete.isHidden = true
-        fourcomplete.isHidden = true
+//        fourcomplete.isHidden = true
         check()
     }
     
@@ -192,12 +192,12 @@ class SelectVideoUpload_Three_Four : UIViewController{
     }
     
     
-    @IBAction func loadAssetFour(_ sender: AnyObject) {
-        if savedPhotosAvailable() {
-            loadingAssetOne = false
-            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-        }
-    }
+//    @IBAction func loadAssetFour(_ sender: AnyObject) {
+//        if savedPhotosAvailable() {
+//            loadingAssetOne = false
+//            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
+//        }
+//    }
     
     func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIImageView){
         

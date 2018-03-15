@@ -47,11 +47,62 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             print("Get row \(indexPath.row) error")
             return cell
         }
-            cell.VideoName.text = videoInfo["videoname"] as? String
-            cell.Date.text = videoInfo["date"] as? String
-        
+        cell.VideoName.text = videoInfo["videoname"] as? String
+        cell.Date.text = videoInfo["date"] as? String
+        cell.editVideoName.tag = indexPath.row
+        cell.editVideoName.addTarget(self, action: #selector(self.editVideoName(_:)), for: .touchUpInside)
         
         return cell
+    }
+    
+    @IBAction func editVideoName(_ sender: UIButton){
+        
+        let alertController = UIAlertController(title:"請更改影片名稱",message: nil, preferredStyle: .alert)
+        let videoinfo = self.videoInfoArray?[sender.tag] as? [String: Any]
+        let originaltext = videoinfo?["videoname"] as? String
+        let videoid = videoinfo?["id"] as? Int
+        alertController.addTextField(configurationHandler: {(textField) -> Void in
+            textField.delegate = self
+            textField.text = originaltext
+        })
+        
+        let StartVideoTask = UIAlertAction(title:"完成", style: .default, handler:{
+            (action) -> Void in
+            let VideoName = alertController.textFields?.first?.text
+            if !(VideoName?.isEmpty)! {
+                //UPLOAD VideoTask
+                let parameters: Parameters=[
+                        "videoid":      videoid,
+                        "videopath":    VideoName!,
+                        "clip": 10
+                    ]
+                print(parameters)
+                //Sending http post request
+                Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadvideo.php", method: .post, parameters: parameters).responseJSON
+                    {
+                        response in
+                        //                    if let result = response.result.value {
+                        //                        let jsonData = result as! NSDictionary
+                        //
+                        //                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
+                        //                        print(jsonData.value(forKey: "message") as Any)
+                        //                    }
+                }
+                SelectVideoUpload_Nine().update()
+                self.reload()
+            }else{
+                let errorAlert = UIAlertController(title:"請注意",message: "不能沒有探究影片名稱", preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title:"OK",style: .cancel, handler:{ (action) -> Void in self.present(alertController, animated: true, completion: nil)}))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+            
+        })
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        
+        alertController.addAction(StartVideoTask)
+        alertController.addAction(cancelAction)
+        reload()
+        self.present(alertController, animated: true, completion: nil)
     }
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
@@ -164,6 +215,11 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             textField.delegate = self
             textField.placeholder = "請輸入你想問的探究問題"
         })
+        
+        let margin: CGFloat = 10.0
+        let rect = CGRect(x: margin,y: margin, width: alertController.view.bounds.size.width - margin * 4.0, height: 120)
+        let view = UIView(frame: rect)
+        alertController.view.addSubview(view)
         
         // set the date
         let date = Date()
