@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TableView_cellcooperate: UITableViewCell{
+class TableView_cellcooperate : UITableViewCell {
     
-    @IBOutlet weak var videoname: UILable!
-    @IBOutlet weak var context: UILable!
-    @IBOutlet weak var owner: UILable!
+    @IBOutlet weak var videoname: UILabel!
+    @IBOutlet weak var context: UILabel!
+    @IBOutlet weak var owner: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

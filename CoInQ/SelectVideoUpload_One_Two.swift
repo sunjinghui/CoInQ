@@ -411,16 +411,16 @@ class SelectVideoUpload_One_Two : UIViewController{
         })
     }
     
-    func deleteFile(_ filePath:URL) {
-        
-        guard FileManager.default.fileExists(atPath: filePath.path) else { return }
-        
-        do {
-            try    FileManager.default.removeItem(atPath: filePath.path)
-        } catch {
-            fatalError("Unable to delete file: \(error) : \(#function).")
-        }
-    }
+//    func deleteFile(_ filePath:URL) {
+//        
+//        guard FileManager.default.fileExists(atPath: filePath.path) else { return }
+//        
+//        do {
+//            try    FileManager.default.removeItem(atPath: filePath.path)
+//        } catch {
+//            fatalError("Unable to delete file: \(error) : \(#function).")
+//        }
+//    }
     
 }
 

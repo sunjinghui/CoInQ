@@ -93,10 +93,10 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
 //                    var tmp = Collection()
-                    if (self.clips?.count)! >= 2 {
-                        self.navigationItem.rightBarButtonItem = self.editButtom
-                    }else{
+                    if (self.clips?.count)! < 2 {
                         self.navigationItem.rightBarButtonItem = nil
+                    }else{
+                        self.navigationItem.rightBarButtonItem = self.editButtom
                     }
                     self.tableview.reloadData()
                 }
