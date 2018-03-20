@@ -103,6 +103,11 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
                 Alamofire.request("http://140.122.76.201/CoInQ/v1/collaboration.php", method: .post, parameters: parameters).responseJSON
                     {
                         response in
+                        if response.result.isSuccess{
+                            NotificationCenter.default.post(name: NSNotification.Name("CoStage"), object: nil)
+                            self.dismiss(animated: true, completion: nil)
+                            //                lognote("nvt", google_userid, Invitetext!)
+                        }
                         //                    if let result = response.result.value {
                         //                        let jsonData = result as! NSDictionary
                         //
@@ -110,9 +115,6 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
                         //                        print(jsonData.value(forKey: "message") as Any)
                         //                    }
                 }
-                
-                lognote("nvt", google_userid, Invitetext!)
-                //                self.performSegue(withIdentifier: "startvideotask", sender: self)
                 
             }else{
                 let errorAlert = UIAlertController(title:"請注意",message: "儘量描述清楚需要的影片資料\n對影片創作更有幫助", preferredStyle: .alert)

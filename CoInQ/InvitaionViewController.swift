@@ -22,6 +22,7 @@ class InvitaionViewController : UIViewController{
     var videoname = [String]()
     var ownerName = [String]()
     var id = [Int]()
+    var videoid = [Int]()
     var owner_googleid = [String]()
     
     override func viewDidLoad() {
@@ -63,11 +64,13 @@ class InvitaionViewController : UIViewController{
                         let videoname = array?["videoname"] as? String
                         let context = array?["context"] as? String
                         let id = array?["id"] as? Int
+                        let videoid = array?["videoid"] as? Int
                         let owner_googleid = array?["google_userid_FROM"] as? String
                         self.ownerName.append(ownerName!)
                         self.context.append(context!)
                         self.videoname.append(videoname!)
                         self.id.append(id!)
+                        self.videoid.append(videoid!)
                         self.owner_googleid.append(owner_googleid!)
                     }
                     
@@ -98,21 +101,21 @@ class InvitaionViewController : UIViewController{
         
     }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int){
+    func uploadVideo(mp4Path : URL , message : String){
         
         let indexPathRow = self.tableview.indexPathForSelectedRow?.row
         let google_FROM = owner_googleid[indexPathRow!]
+        let videoid = self.videoid[indexPathRow!]
         let context = self.context[indexPathRow!]
-        
+
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
                 
                 multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
-                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
+                multipartFormData.append("\(videoid)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
                 multipartFormData.append(google_FROM.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
                 multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
-                multipartFormData.append("\(clip)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "clip")
                 multipartFormData.append(context.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "context")
                 //                for (key, val) in parameters {
                 //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
@@ -127,7 +130,6 @@ class InvitaionViewController : UIViewController{
                 upload.responseJSON { response in
                     //解包
                     guard let result = response.result.value else { return }
-                    //                    print("\(result)")
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
@@ -297,7 +299,7 @@ extension InvitaionViewController : UIImagePickerControllerDelegate {
                 message = "共創影片影片已傳遞成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:11)
+                uploadVideo(mp4Path: videoURL,message: message)
                 getCooperateInfo()
             
         }

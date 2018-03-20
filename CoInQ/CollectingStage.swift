@@ -34,6 +34,9 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         let nibName = UINib(nibName: "TableViewCell_clip", bundle: nil)
         tableview.register(nibName, forCellReuseIdentifier: "tableviewcell")
 //        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loaddata), name: NSNotification.Name("CoStage"), object: nil)
+        
         loaddata()
     }
     
