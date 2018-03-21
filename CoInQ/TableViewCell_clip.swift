@@ -14,6 +14,7 @@ class TableViewCell_clip: UITableViewCell {
     @IBOutlet weak var time: UILabel?
     @IBOutlet weak var pictureImageView: UIImageView?
     @IBOutlet weak var nameLabel: UILabel?
+    @IBOutlet weak var inviteinfo: UILabel?
     
     
 //    var item: Clips? {
@@ -37,7 +38,7 @@ class TableViewCell_clip: UITableViewCell {
 //        return String(describing: self)
 //    }
     
-    func commonInit(_ username: String, videopath: String, times: String) {
+    func commonInit(_ username: String, videopath: String, times: String, info: String) {
         let videopath = videopath
         let videourl = URL(string: videopath)
         let asset = AVURLAsset(url: videourl!, options: nil)
@@ -57,6 +58,8 @@ class TableViewCell_clip: UITableViewCell {
         let name = "作者：".appending(username) 
         nameLabel?.text = name
         time?.text = times
+        inviteinfo?.text = info
+
     }
     
     override func awakeFromNib() {

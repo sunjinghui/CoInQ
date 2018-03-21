@@ -417,12 +417,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/InvitaionViewController.swift"
-            timestampString = "543217567.944066"
+            timestampString = "543229379.1547149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "uploadVideo(mp4Path:message:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoInQ/CollectingStage.swift"
+            timestampString = "543321594.857764"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "loaddata()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

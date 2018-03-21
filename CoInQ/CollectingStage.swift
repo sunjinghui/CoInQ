@@ -11,6 +11,7 @@ import MediaPlayer
 import Alamofire
 import MobileCoreServices
 import SwiftyJSON
+import Photos
 
 class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var TableEmpty: UIView!
@@ -20,6 +21,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
 //    fileprivate let viewModel = ProfileViewModel()
     var clips: [Any]?
+    var invites: [Any]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +35,11 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         tableview.tableFooterView = UIView(frame: .zero)
         let nibName = UINib(nibName: "TableViewCell_clip", bundle: nil)
         tableview.register(nibName, forCellReuseIdentifier: "tableviewcell")
+        tableview.register(UINib(nibName: "TableViewCell_invite", bundle: nil), forCellReuseIdentifier: "cellinvite")
 //        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
         
         NotificationCenter.default.addObserver(self, selector: #selector(loaddata), name: NSNotification.Name("CoStage"), object: nil)
-        
+        loadinvitation()
         loaddata()
     }
     
@@ -70,6 +73,32 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    func loadinvitation(){
+        print(Index)
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/collaboration.php", method: .post, parameters: ["google_userid_FROM": google_userid,"videoid": Index]).responseJSON
+            {
+                response in
+                print(response)
+                guard response.result.isSuccess else {
+                    let errorMessage = response.result.error?.localizedDescription
+                    print("\(errorMessage!)")
+                    return
+                }
+                guard let JSON = response.result.value as? [String: Any] else {
+                    print("JSON formate error")
+                    return
+                }
+                let error = JSON["error"] as! Bool
+                if error {
+                    self.clips = []
+                    self.tableview.reloadData()
+                    
+                } else if let invitation = JSON["table"] as? [Any] {
+                    self.invites = invitation
+                    self.tableview.reloadData()
+                }
+        }
+    }
     
     func loaddata(){
         let parameters: Parameters=["google_userid": google_userid,"videoid":Index]
@@ -96,7 +125,19 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
 //                    var tmp = Collection()
-                    if (self.clips?.count)! < 2 {
+                    for each in self.clips!{
+                        let array = each as? [String: Any]
+                        let videopath = array?["videopath"] as? String
+                        let videoname = array?["videoname"] as? String
+                        let id = array?["id"] as? Int
+                        let url = URL(string: videopath!)
+                        if !(FileManager.default.fileExists(atPath: (url?.path)!)){
+                            self.startActivityIndicator()
+                            self.donloadVideo(videoname: videoname!,id!)
+                        }
+                    }
+                    
+                    if (self.clips?.count)! <= 1 {
                         self.navigationItem.rightBarButtonItem = nil
                     }else{
                         self.navigationItem.rightBarButtonItem = self.editButtom
@@ -143,7 +184,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
                         self.loaddata()
-                        lognote("u\(clip)s", google_userid, "\(Index)")
+//                        lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
                         self.activityIndicator.stopAnimating()
@@ -152,7 +193,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
-                        lognote("u\(clip)f", google_userid, "\(Index)")
+//                        lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
                 //上传进度
@@ -164,6 +205,55 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
             }
         })
     }
+    
+    func donloadVideo(videoname : String,_ dataid: Int){
+        
+        let requestUrl = "http://140.122.76.201/CoInQ/upload/"
+        let videoid = "\(Index)"
+        
+        let urls = requestUrl.appending(google_userid).appending("/").appending(videoid).appending("/").appending(videoname)
+        let videourl = URL(string: urls)
+        
+        let downloadfilename = UUID().uuidString + ".mov"
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let file = directoryURL.appendingPathComponent(downloadfilename, isDirectory: false)
+            return (file, [.createIntermediateDirectories, .removePreviousFile])
+        }
+        
+        Alamofire.download(videourl!, to: destination).validate().responseData { response in
+            let tmpurl = response.destinationURL
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            let alertController = UIAlertController(title: "影片已接收完成\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
+            let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:{
+                (action) -> Void in
+                self.loaddata()
+            })
+            alertController.addAction(checkagainAction)
+            self.present(alertController, animated: true, completion: nil)
+            
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: tmpurl!)
+            }) { saved, error in
+                if saved {
+                    let parameters: Parameters=[
+                        "id":  dataid,
+                        "videopath":  tmpurl!.absoluteString,
+                    ]
+                    
+                    //Sending http post request
+                    Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameters).responseJSON
+                        {
+                            response in
+                            //                            print(response)
+                            
+                    }
+                }
+            }
+        }
+    }
+
     
     func savedPhotosAvailable() -> Bool {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
@@ -202,61 +292,109 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.clips?.count {
-            tableview.backgroundView = nil
-            return num
-        } else {
-            tableview.backgroundView = TableEmpty
-            return 0
+        switch(section){
+        case 0 :
+            if let num = clips?.count {
+                return num
+            } else {
+                return 0
+            }
+        case 1 :
+            if let num = invites?.count {
+                return num
+            } else {
+                return 0
+            }
+        default: return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch(section){
+        case 0 : return "探究資料影片"
+        case 1 : return "共創邀請內容"
+        default: return nil
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableview.dequeueReusableCell(withIdentifier: "tableviewcell", for: indexPath) as! TableViewCell_clip
-        
-        guard let collect = self.clips?[indexPath.row] as? [String: Any] else {
-            print("Get row \(indexPath.row) error")
+        if indexPath.section == 0 {
+            let cell = tableview.dequeueReusableCell(withIdentifier: "tableviewcell", for: indexPath) as! TableViewCell_clip
+            
+            guard let collect = self.clips?[indexPath.row] as? [String: Any] else {
+                print("Get row \(indexPath.row) error")
+                return cell
+            }
+            
+            let username = collect["username"] as? String
+            let videoURL = collect["videopath"] as? String
+            let time = collect["time"] as? String
+            let info = collect["info"] as? String
+            if info != nil {
+                let infos = "請求內容：\n".appending(info!)
+                cell.commonInit(username!, videopath: videoURL!, times: time!, info: infos)
+            }else{
+                let infos = "無資訊"
+                cell.commonInit(username!, videopath: videoURL!, times: time!, info: infos)
+            }
+            return cell
+        }else{
+            let cell = tableview.dequeueReusableCell(withIdentifier: "cellinvite", for: indexPath) as! TableViewCell_invite
+            guard let invitation = self.invites?[indexPath.row] as? [String: Any] else {
+                print("Get row \(indexPath.row) error")
+                return cell
+            }
+            cell.inviteinfo.text = invitation["context"] as? String
+            let invitewho = invitation["ownername"] as? String
+            cell.invitewho.text = "邀請對象：".appending(invitewho!)
+            
             return cell
         }
-        
-        let username = collect["username"] as? String
-        let videoURL = collect["videopath"] as? String
-        let time = collect["time"] as? String
-        
-        cell.commonInit(username!, videopath: videoURL!, times: time!)
-        return cell
     }
 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return true
+        }else{
+            return false
+        }
+    }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let clipitem = self.clips?[sourceIndexPath.row] as? [String: Any]
-        let clipID = clipitem?["id"] as? Int
-        
-        clips?.remove(at: sourceIndexPath.row)
-        clips?.insert(clipitem, at: destinationIndexPath.row)
-        self.UpdateOrder(clipid: clipID!, order: destinationIndexPath.row)
+            let clipitem = self.clips?[sourceIndexPath.row] as? [String: Any]
+            let clipID = clipitem?["id"] as? Int
+            
+            clips?.remove(at: sourceIndexPath.row)
+            clips?.insert(clipitem, at: destinationIndexPath.row)
+            self.UpdateOrder(clipid: clipID!, order: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
         
         if editingStyle == .delete {
-            
-            let deleteAlert = UIAlertController(title:"確定要刪除探究資料影片嗎？",message: "刪除探究資料影片後無法復原！", preferredStyle: .alert)
-            deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            if indexPath.section == 0 {
+                let deleteAlert = UIAlertController(title:"確定要刪除探究資料影片嗎？",message: "刪除探究資料影片後無法復原！", preferredStyle: .alert)
+                deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+                    
+                    let clipInfo = self.clips?[indexPath.row] as? [String: Any]
+                    let clipid = clipInfo?["id"] as? Int
+    //                let videoname = clipInfo?["videoname"] as? String
+    //                lognote("dcc", google_userid, "\(videoid!)\(videoname ?? "nil")")
+                    self.deleteData(id: clipid!)
+                    //                SelectVideoUpload_Nine().update()
+                }))
+                let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+                deleteAlert.addAction(cancelAction)
+                self.present(deleteAlert, animated: true, completion: nil)
+            }else{
                 
-                let clipInfo = self.clips?[indexPath.row] as? [String: Any]
-                let clipid = clipInfo?["id"] as? Int
-//                let videoname = clipInfo?["videoname"] as? String
-//                lognote("dcc", google_userid, "\(videoid!)\(videoname ?? "nil")")
-                self.deleteData(id: clipid!)
-                //                SelectVideoUpload_Nine().update()
-            }))
-            let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
-            deleteAlert.addAction(cancelAction)
-            self.present(deleteAlert, animated: true, completion: nil)
-            
+            }
         }
         
     }
@@ -264,7 +402,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     func UpdateOrder(clipid: Int,order: Int){
         Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteclips.php", method: .post, parameters: ["clipsid": clipid,"order": order]).responseJSON{
             response in
-            print("UUUUpdate order \(clipid) \(response)")
+//            print("UUUUpdate order \(clipid) \(response)")
 
         }
     }
@@ -273,12 +411,12 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteclips.php", method: .post, parameters: ["clipsid":id]).responseJSON
             {
                 response in
-                print("DDDelete ID\(id) \(response)")
+//                print("DDDelete ID\(id) \(response)")
                 if let result = response.result.value {
                     let jsonData = result as! NSDictionary
                     let error = jsonData.value(forKey: "error") as? Bool
                     if error! {
-                        let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
+                        let deleteAlert = UIAlertController(title:"提示",message: "刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
                         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
                         self.present(deleteAlert, animated: true, completion: nil)
                         self.loaddata()
@@ -292,16 +430,20 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         
     }
     
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
-//        return true
-//    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350
+        if indexPath.section == 0 {
+            return 350
+        }else{
+            return 98.5
+        }
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if indexPath.section == 0 {
+            return true
+        }else{
+            return false
+        }
     }
 
     func startActivityIndicator() {
