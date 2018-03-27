@@ -31,6 +31,10 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
         searchbar.returnKeyType = UIReturnKeyType.done
         tableview.tableFooterView = UIView(frame: .zero)
         getUserInfo()
+        
+//        for vc in (self.navigationController?.viewControllers ?? []) {
+//            print(vc)
+//        }
     }
     
     func getUserInfo() {

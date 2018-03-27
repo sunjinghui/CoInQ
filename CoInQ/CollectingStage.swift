@@ -38,7 +38,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         tableview.register(UINib(nibName: "TableViewCell_invite", bundle: nil), forCellReuseIdentifier: "cellinvite")
 //        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(loaddata), name: NSNotification.Name("CoStage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadinvitation), name: NSNotification.Name("CoStage"), object: nil)
         loadinvitation()
         loaddata()
     }
@@ -74,11 +74,10 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func loadinvitation(){
-        print(Index)
         Alamofire.request("http://140.122.76.201/CoInQ/v1/collaboration.php", method: .post, parameters: ["google_userid_FROM": google_userid,"videoid": Index]).responseJSON
             {
                 response in
-                print(response)
+//                print(response)
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
                     print("\(errorMessage!)")
@@ -105,7 +104,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
-                print(response)
+//                print(response)
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
                     print("\(errorMessage!)")
@@ -125,6 +124,8 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
 //                    var tmp = Collection()
+                    var useAI = false
+                    
                     for each in self.clips!{
                         let array = each as? [String: Any]
                         let videopath = array?["videopath"] as? String
@@ -132,11 +133,19 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         let id = array?["id"] as? Int
                         let url = URL(string: videopath!)
                         if !(FileManager.default.fileExists(atPath: (url?.path)!)){
-                            self.startActivityIndicator()
+                            useAI = true
                             self.donloadVideo(videoname: videoname!,id!)
+                        }else{
+                            useAI = false
                         }
+
                     }
-                    
+                        if useAI {
+                            self.startActivityIndicator()
+                        }else{
+                            self.stopActivityIndicator()
+
+                        }
                     if (self.clips?.count)! <= 1 {
                         self.navigationItem.rightBarButtonItem = nil
                     }else{
@@ -224,6 +233,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         Alamofire.download(videourl!, to: destination).validate().responseData { response in
             let tmpurl = response.destinationURL
             self.activityIndicator.stopAnimating()
+            print("stop AcInf")
             UIApplication.shared.endIgnoringInteractionEvents()
             let alertController = UIAlertController(title: "影片已接收完成\n您可以在相簿中找到", message: nil, preferredStyle: .alert)
             let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:{
@@ -447,6 +457,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     }
 
     func startActivityIndicator() {
+        print("startAcIn")
         let screenSize: CGRect = UIScreen.main.bounds
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
@@ -463,6 +474,11 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopActivityIndicator() {
+        self.activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
 }

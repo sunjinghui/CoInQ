@@ -401,11 +401,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/SearchUser.swift"
-            timestampString = "543215461.910583"
+            timestampString = "543852261.64828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -417,11 +417,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/InvitaionViewController.swift"
-            timestampString = "543229379.1547149"
+            timestampString = "543842107.114495"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "uploadVideo(mp4Path:message:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -433,11 +433,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/CollectingStage.swift"
-            timestampString = "543321594.857764"
+            timestampString = "543844489.0767879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "loaddata()"
             landmarkType = "7">
          </BreakpointContent>

@@ -27,6 +27,7 @@ class SelectVideoUpload_Nine : UIViewController{
     var loadingAssetOne = false
     var nullstoryboard = [String]()
     var emptystoryboards = [String]()
+    var collectClips = [String]()
     var mergeClips = [AVAsset]()
 
     var printArray: String{
@@ -137,8 +138,10 @@ class SelectVideoUpload_Nine : UIViewController{
                     self.clips = []
                 } else if let Collecte = JSON["table"] as? [Any] {
                     self.clips = Collecte
-                    //                    var collect = self.clips?[0] as? [String: Any]
-                    //                    var tmp = Collection()
+                    for each in Collecte{
+                        let arrays = each as? [String: Any]
+                        let collectClips = arrays?["videopath"] as? String
+                    }
                     
                 }
         }
@@ -160,14 +163,13 @@ class SelectVideoUpload_Nine : UIViewController{
     
     func checkCollectStageClips(){
         //判斷有無搜集資料 沒有就記錄log 有就將videopath加入array 裡面
-        let clips = self.clips?[0] as? [String: Any]
-        if clips != nil {
-            for each in self.clips!{
-                let clip = each as? [String: Any]
-                let videopath = clip?["videopath"] as? String
-                let clipVideo = AVAsset(url: URL(string: videopath!)!)
+//        let clips = self.clips?[0] as? [String: Any]
+        if collectClips.count != 0 {
+            for each in collectClips{
+                let videopath = each
+                let clipVideo = AVAsset(url: URL(string: videopath)!)
                 mergeClips.append(clipVideo)
-                }
+            }
         }else{
             check("videofour_path", "故事版 4")
         }
@@ -354,13 +356,11 @@ class SelectVideoUpload_Nine : UIViewController{
 //            self.performSegue(withIdentifier: "StartRecord", sender: self)
         }else{
             
-            mergeVideo(mergeClips)
-
             //  警告視窗 提醒未上傳的故事版
-//            let alertController = UIAlertController(title: "請注意", message: "你還有故事版未上傳 ,請確認\(printArray)", preferredStyle: .alert)
-//            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//            alertController.addAction(defaultAction)
-//            self.present(alertController, animated: true, completion: nil)
+            let alertController = UIAlertController(title: "請注意", message: "請選擇以下故事版進行上傳：\n\(printArray)", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
             lognote("sbe", google_userid, "id\(Index)\(emptystoryboard)")
         }
 

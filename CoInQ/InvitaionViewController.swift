@@ -23,7 +23,7 @@ class InvitaionViewController : UIViewController{
     var ownerName = [String]()
     var id = [Int]()
     var videoid = [Int]()
-    var owner_googleid = [String]()
+    var googleid_FROM = [String]()
     
     override func viewDidLoad() {
         
@@ -65,13 +65,13 @@ class InvitaionViewController : UIViewController{
                         let context = array?["context"] as? String
                         let id = array?["id"] as? Int
                         let videoid = array?["videoid"] as? Int
-                        let owner_googleid = array?["google_userid_FROM"] as? String
+                        let googleid_FROM = array?["google_userid_FROM"] as? String
                         self.ownerName.append(ownerName!)
                         self.context.append(context!)
                         self.videoname.append(videoname!)
                         self.id.append(id!)
                         self.videoid.append(videoid!)
-                        self.owner_googleid.append(owner_googleid!)
+                        self.googleid_FROM.append(googleid_FROM!)
                     }
                     
                     self.tableview.reloadData()
@@ -104,7 +104,7 @@ class InvitaionViewController : UIViewController{
     func uploadVideo(mp4Path : URL , message : String){
         
         let indexPathRow = self.tableview.indexPathForSelectedRow?.row
-        let google_FROM = owner_googleid[indexPathRow!]
+        let google_FROM = self.googleid_FROM[indexPathRow!]
         let videoid = self.videoid[indexPathRow!]
         let context = self.context[indexPathRow!]
 
@@ -114,7 +114,8 @@ class InvitaionViewController : UIViewController{
                 
                 multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
                 multipartFormData.append("\(videoid)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
-                multipartFormData.append(google_FROM.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
+                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid_TO")
+                multipartFormData.append(google_FROM.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid_FROM")
                 multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
                 multipartFormData.append(context.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "context")
                 //                for (key, val) in parameters {
