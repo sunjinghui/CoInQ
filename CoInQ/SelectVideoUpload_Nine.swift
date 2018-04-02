@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import AVKit
 import MobileCoreServices
 import MediaPlayer
 import CoreMedia
@@ -19,6 +20,7 @@ class SelectVideoUpload_Nine : UIViewController{
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBOutlet weak var RecordButton: UIButton!
+    @IBOutlet weak var videoPreview: UIView!
     
     var clips: [Any]?
     var array: [Any]?
@@ -29,6 +31,9 @@ class SelectVideoUpload_Nine : UIViewController{
     var emptystoryboards = [String]()
     var collectClips = [String]()
     var mergeClips = [AVAsset]()
+    
+    var player: AVPlayer!
+    var playerController = AVPlayerViewController()
 
     var printArray: String{
         var str = ""
@@ -53,7 +58,7 @@ class SelectVideoUpload_Nine : UIViewController{
         super.viewDidLoad()
         ninecomplete.isHidden = true
         RecordButton.layer.cornerRadius = 8
-        
+        videoPreview.isHidden = true
         checknine()
     }
     
@@ -88,19 +93,20 @@ class SelectVideoUpload_Nine : UIViewController{
                             case 1:
                                 let videourl = video?["videonine_path"] as? String
                                 let url = URL(string: videourl!)
-                                let asset = AVURLAsset(url: url!, options: nil)
-                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-                                imgGenerator.appliesPreferredTrackTransform = false
-                                
-                                do {
-                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                    let thumbnail = UIImage(cgImage: cgImage)
-                                    
-                                    self.ninecomplete.image = thumbnail
-                                    
-                                } catch let error {
-                                    print("*** Error generating thumbnail: \(error)")
-                                }
+                                self.previewVideo(url!)
+//                                let asset = AVURLAsset(url: url!, options: nil)
+//                                let imgGenerator = AVAssetImageGenerator(asset: asset)
+//                                imgGenerator.appliesPreferredTrackTransform = false
+//
+//                                do {
+//                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+//                                    let thumbnail = UIImage(cgImage: cgImage)
+//                                    
+//                                    self.ninecomplete.image = thumbnail
+//                                    
+//                                } catch let error {
+//                                    print("*** Error generating thumbnail: \(error)")
+//                                }
                                 self.ninecomplete.isHidden = false
                             case 2:
                                 self.startActivityIndicator()
@@ -146,6 +152,16 @@ class SelectVideoUpload_Nine : UIViewController{
                 }
         }
         
+    }
+     
+    func previewVideo(_ url: URL){
+        self.player = AVPlayer(url: url)
+        self.playerController = AVPlayerViewController()
+        self.playerController.player = self.player
+        self.playerController.view.frame = self.videoPreview.frame
+        self.addChildViewController(self.playerController)
+        self.view.addSubview(self.playerController.view)
+        self.videoPreview.isHidden = false
     }
     
     func check(_ videonum: String,_ storyboard: String){
