@@ -74,11 +74,42 @@ class SelectVideoUpload_One_Two : UIViewController{
         return true
     }
     
+    func startCameraFromViewController(_ viewController: UIViewController, withDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate) -> Bool {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
+            return false
+        }
+        
+        let cameraController = UIImagePickerController()
+        cameraController.sourceType = .camera
+        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
+        cameraController.cameraCaptureMode = .video
+        cameraController.videoQuality = .typeHigh
+        cameraController.allowsEditing = true
+        cameraController.delegate = delegate
+        cameraController.videoMaximumDuration = 30.0
+        
+        present(cameraController, animated: true, completion: nil)
+        return true
+    }
+    
+//    func video(_ videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject) {
+//        var title = "成功"
+//        var message = "影片已儲存"
+//        if let _ = error {
+//            title = "出錯"
+//            message = "影片儲存失敗"
+//        }
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "確定", style: UIAlertActionStyle.cancel, handler: nil))
+//        present(alert, animated: true, completion: nil)
+//    }
+    
     @IBAction func loadAssetOne(_ sender: AnyObject) {
         let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
             (action) -> Void in
-            
+            self.loadingAssetOne = true
+            _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
@@ -93,10 +124,20 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     
     @IBAction func loadAssetTwo(_ sender: AnyObject) {
-        if savedPhotosAvailable() {
-            loadingAssetOne = false
-            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-        }
+        let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
+            (action) -> Void in
+            self.loadingAssetOne = false
+            _ = self.startCameraFromViewController(self, withDelegate: self)
+        }))
+        alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
+            (action) -> Void in
+            if self.savedPhotosAvailable() {
+                self.loadingAssetOne = false
+                _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
 
     }
     
@@ -196,25 +237,25 @@ class SelectVideoUpload_One_Two : UIViewController{
         preview.isHidden = false
     }
     
-    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: UIImageView){
-        let videourl = videoinfo[videopath] as? String
-        let url = URL(string: videourl!)
-        let asset = AVURLAsset(url: url!, options: nil)
-        let imgGenerator = AVAssetImageGenerator(asset: asset)
-        imgGenerator.appliesPreferredTrackTransform = false
-        
-        do {
-            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-            let thumbnail = UIImage(cgImage: cgImage)
-            
-            check.image = thumbnail
-            
-        } catch let error {
-            print("*** Error generating thumbnail: \(error)")
-        }
-        
-        check.isHidden = false
-    }
+//    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: UIImageView){
+//        let videourl = videoinfo[videopath] as? String
+//        let url = URL(string: videourl!)
+//        let asset = AVURLAsset(url: url!, options: nil)
+//        let imgGenerator = AVAssetImageGenerator(asset: asset)
+//        imgGenerator.appliesPreferredTrackTransform = false
+//        
+//        do {
+//            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+//            let thumbnail = UIImage(cgImage: cgImage)
+//            
+//            check.image = thumbnail
+//            
+//        } catch let error {
+//            print("*** Error generating thumbnail: \(error)")
+//        }
+//        
+//        check.isHidden = false
+//    }
     
     func startActivityIndicator() {
         let screenSize: CGRect = UIScreen.main.bounds
@@ -245,33 +286,6 @@ class SelectVideoUpload_One_Two : UIViewController{
         })
         alertController.addAction(checkagainAction)
         self.present(alertController, animated: true, completion: nil)
-    }
-
-    func startCameraFromViewController(_ viewController: UIViewController, withDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate) -> Bool {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
-            return false
-        }
-        
-        let cameraController = UIImagePickerController()
-        cameraController.sourceType = .camera
-        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
-        cameraController.allowsEditing = false
-        cameraController.delegate = delegate
-        
-        present(cameraController, animated: true, completion: nil)
-        return true
-    }
-    
-    func video(_ videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject) {
-        var title = "Success"
-        var message = "Video was saved"
-        if let _ = error {
-            title = "Error"
-            message = "Video failed to save"
-        }
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
     }
     
     func checkVideoExist(_ videoinfo: [String: Any],_ videopath: String,_ clip: Int) -> Int{
@@ -504,7 +518,7 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             
             guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path, self, #selector(SelectVideoUpload_One_Two.video(_:didFinishSavingWithError:contextInfo:)), nil)
+                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
             }
             
             if loadingAssetOne {

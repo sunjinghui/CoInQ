@@ -209,17 +209,36 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     
     @IBAction func AddVideoTask(_ sender: Any) {
         
-        let alertController = UIAlertController(title:"探究影片名稱",message: "生活中有各式各樣的自然現象\n這些現象是如何產生的呢？\n讓我們一起來探究並透過\n影音將這探究過程記錄下來！", preferredStyle: .alert)
+        let alertController = UIAlertController(title:"探究影片名稱",message: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n生活中有各式各樣的自然現象\n這些現象是如何產生的呢？\n讓我們一起來探究並透過\n影音將這探究過程記錄下來！\n", preferredStyle: .alert)
+        
+//        let saveAction = UIAlertAction(title: "Zip Viewer", style: .default, handler: nil)
+//        saveAction.setValue(UIImage(named:"circle1")?.withRenderingMode(UIImageRenderingMode.automatic), forKey: "image")
+//        alertController.addAction(saveAction)
         
         alertController.addTextField(configurationHandler: {(textField) -> Void in
             textField.delegate = self
             textField.placeholder = "請輸入你想問的探究問題"
         })
+        let img = #imageLiteral(resourceName: "circle")
+        let imgView = UIImageView(frame: CGRect(x: 17, y: 48, width: 236, height: 220))
+        imgView.image = img
+//        imgView.sizeToFit()
         
-        let margin: CGFloat = 10.0
-        let rect = CGRect(x: margin,y: margin, width: alertController.view.bounds.size.width - margin * 4.0, height: 120)
-        let view = UIView(frame: rect)
-        alertController.view.addSubview(view)
+        alertController.view.addSubview(imgView)
+
+//        let button = UIButton(type: .system)
+//        button.setTitle("Button", for: .normal)
+//        button.addTarget(responder, action: "tap", forControlEvents: .TouchUpInside)
+//        button.sizeToFit()
+//        button.center = CGPoint(x: 50, y: 25)
+//        let rect = CGRect(x: 50,y: 110, width: 120, height: 120)
+//        let view = UIView(frame: rect)
+//        view.backgroundColor = UIColor.white
+//        view.addSubview(button)
+        
+//        let height:NSLayoutConstraint = NSLayoutConstraint(item: alertController.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.80)
+//        alertController.view.addConstraint(height)
+//        alertController.view.addSubview(view)
         
         // set the date
         let date = Date()

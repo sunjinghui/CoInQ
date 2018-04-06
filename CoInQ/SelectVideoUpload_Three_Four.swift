@@ -147,6 +147,24 @@ class SelectVideoUpload_Three_Four : UIViewController{
         return true
     }
     
+    func startCameraFromViewController(_ viewController: UIViewController, withDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate) -> Bool {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
+            return false
+        }
+        
+        let cameraController = UIImagePickerController()
+        cameraController.sourceType = .camera
+        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
+        cameraController.cameraCaptureMode = .video
+        cameraController.videoQuality = .typeHigh
+        cameraController.allowsEditing = true
+        cameraController.delegate = delegate
+        cameraController.videoMaximumDuration = 30.0
+        
+        present(cameraController, animated: true, completion: nil)
+        return true
+    }
+    
     func startMediaBrowserFromViewController(_ viewController: UIViewController!, usingDelegate delegate : (UINavigationControllerDelegate & UIImagePickerControllerDelegate)!) -> Bool {
         
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) == false {
@@ -164,11 +182,21 @@ class SelectVideoUpload_Three_Four : UIViewController{
     }
     
     @IBAction func loadAssetThree(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
+            (action) -> Void in
+            self.loadingAssetOne = true
+            _ = self.startCameraFromViewController(self, withDelegate: self)
+        }))
+        alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
+            (action) -> Void in
+            if self.savedPhotosAvailable() {
+                self.loadingAssetOne = true
+                _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
         
-        if savedPhotosAvailable() {
-            loadingAssetOne = true
-            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-        }
     }
     
     
@@ -259,6 +287,10 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
         if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
+            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
+                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
+            }
             if loadingAssetOne {
                 message = "故事版3 影片已匯入成功！"
                 self.startActivityIndicator()

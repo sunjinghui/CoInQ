@@ -27,7 +27,7 @@ class CSCL: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = google_username.appending(" の探究歷程")
         /*UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12)], for: .normal)
         self.title = "CSCL"
         
