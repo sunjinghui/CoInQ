@@ -11,14 +11,20 @@ import MobileCoreServices
 import MediaPlayer
 import Alamofire
 import SwiftyJSON
+import AVKit
 
 class SelectVideoUpload_Five_Six : UIViewController{
     
     var loadingAssetOne = false
     
-    @IBOutlet weak var fivecomplete: UIImageView!
-    @IBOutlet weak var sixcomplete: UIImageView!
+//    @IBOutlet weak var fivecomplete: UIImageView!
+//    @IBOutlet weak var sixcomplete: UIImageView!
+    @IBOutlet weak var previewFive: UIView!
+    @IBOutlet weak var previewSix: UIView!
+    @IBOutlet weak var SatgeTitle: UIButton!
     
+    var player: AVPlayer!
+    var playerController = AVPlayerViewController()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBAction func ExplainFive(_ sender: Any) {
@@ -39,8 +45,8 @@ class SelectVideoUpload_Five_Six : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fivecomplete.isHidden = true
-        sixcomplete.isHidden = true
+        previewFive.isHidden = true
+        previewSix.isHidden = true
         
         check()
     }
@@ -74,11 +80,11 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videosix_path", 6)
                         switch (existone){
                         case 1:
-                            SelectVideoUpload_One_Two().showthumbnail(video!, "videofive_path", self.fivecomplete)
+                            SelectVideoUpload_One_Two().previewVideo(video!, "videofive_path", self.previewFive)
                             
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videosix_path", self.sixcomplete)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
@@ -96,7 +102,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         case 3:
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videosix_path", self.sixcomplete)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
@@ -197,7 +203,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
         }
     }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIImageView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -232,19 +238,12 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            let asset = AVURLAsset(url: mp4Path, options: nil)
-                            let imgGenerator = AVAssetImageGenerator(asset: asset)
-                            imgGenerator.appliesPreferredTrackTransform = false
-                            
-                            do {
-                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                let thumbnail = UIImage(cgImage: cgImage)
-                                
-                                check.image = thumbnail
-                                
-                            } catch let error {
-                                print("*** Error generating thumbnail: \(error)")
-                            }
+                            self.player = AVPlayer(url: mp4Path)
+                            self.playerController = AVPlayerViewController()
+                            self.playerController.player = self.player
+                            self.playerController.view.frame = check.frame
+                            self.addChildViewController(self.playerController)
+                            self.view.addSubview(self.playerController.view)
                             check.isHidden = false
                         })
                         alert.addAction(action2)
@@ -288,13 +287,13 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
                 message = "故事版5 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:5,VC: self,check: self.fivecomplete)
+                uploadVideo(mp4Path: videoURL,message: message,clip:5,VC: self,check: self.previewFive)
                 loadData()
             } else {
                 message = "故事版6 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:6,VC: self,check: self.sixcomplete)
+                uploadVideo(mp4Path: videoURL,message: message,clip:6,VC: self,check: self.previewSix)
                 loadData()
 
             }

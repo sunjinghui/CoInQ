@@ -11,14 +11,19 @@ import MobileCoreServices
 import MediaPlayer
 import Alamofire
 import SwiftyJSON
+import AVKit
 
 class SelectVideoUpload_Three_Four : UIViewController{
     
     var loadingAssetOne = false
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    @IBOutlet weak var threecomplete: UIImageView!
-    @IBOutlet weak var fourcomplete: UIImageView!
+//    @IBOutlet weak var threecomplete: UIImageView!
+//    @IBOutlet weak var fourcomplete: UIImageView!
+    @IBOutlet weak var previewThree: UIView!
+    @IBOutlet weak var StageTitle: UIButton!
+    var player: AVPlayer!
+    var playerController = AVPlayerViewController()
     
     @IBAction func Cooperation(_ sender: Any){
         let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationController") as! TableNavigationController
@@ -44,7 +49,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        threecomplete.isHidden = true
+        previewThree.isHidden = true
 //        fourcomplete.isHidden = true
         check()
     }
@@ -75,43 +80,18 @@ class SelectVideoUpload_Three_Four : UIViewController{
                     let video = videoArray?[0] as? [String: Any]
                     if !(video?.isEmpty)! {
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videothree_path", 3)
-                        let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videofour_path", 4)
 
                             switch (existone){
                             case 1:
-                                SelectVideoUpload_One_Two().showthumbnail(video!, "videothree_path", self.threecomplete)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.previewThree)
                                 
-                                switch (existtwo){
-                                case 1:
-                                    SelectVideoUpload_One_Two().showthumbnail(video!, "videofour_path", self.fourcomplete)
-                                case 2:
-                                    self.startActivityIndicator()
-                                    let videourl = video?["videofour_path"] as? String
-                                    let url = URL(string: videourl!)
-                                    SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),4)
-                                case 3:
-                                    break
-                                default: break
-                                }
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videothree_path"] as? String
                                 let url = URL(string: videourl!)
                                 SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),3)
                             case 3:
-                                switch (existtwo){
-                                case 1:
-                                    SelectVideoUpload_One_Two().showthumbnail(video!, "videofour_path", self.fourcomplete)
-                                case 2:
-                                    self.startActivityIndicator()
-                                    let videourl = video?["videofour_path"] as? String
-                                    let url = URL(string: videourl!)
-                                    SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),4)
-                                case 3:
-                                    break
-                                default: break
-                                }
-                                
+                                break
                             default: break
                             }
                     }
@@ -199,7 +179,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
 //        }
 //    }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIImageView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -234,19 +214,12 @@ class SelectVideoUpload_Three_Four : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            let asset = AVURLAsset(url: mp4Path, options: nil)
-                            let imgGenerator = AVAssetImageGenerator(asset: asset)
-                            imgGenerator.appliesPreferredTrackTransform = false
-                            
-                            do {
-                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                let thumbnail = UIImage(cgImage: cgImage)
-                                
-                                check.image = thumbnail
-                                
-                            } catch let error {
-                                print("*** Error generating thumbnail: \(error)")
-                            }
+                            self.player = AVPlayer(url: mp4Path)
+                            self.playerController = AVPlayerViewController()
+                            self.playerController.player = self.player
+                            self.playerController.view.frame = check.frame
+                            self.addChildViewController(self.playerController)
+                            self.view.addSubview(self.playerController.view)
                             check.isHidden = false
                         })
                         alert.addAction(action2)
@@ -290,15 +263,16 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
                 message = "故事版3 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:3,VC: self,check: self.threecomplete)
-                loaddata()
-            } else {
-                message = "故事版4 影片已匯入成功！"
-                self.startActivityIndicator()
-                let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:4,VC: self,check: self.fourcomplete)
+                uploadVideo(mp4Path: videoURL,message: message,clip:3,VC: self,check: self.previewThree)
                 loaddata()
             }
+//            else {
+//                message = "故事版4 影片已匯入成功！"
+//                self.startActivityIndicator()
+//                let videoURL = avAsset
+//                uploadVideo(mp4Path: videoURL,message: message,clip:4,VC: self,check: self.previewThree)
+//                loaddata()
+//            }
             
         }
     }

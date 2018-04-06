@@ -12,6 +12,7 @@ import MediaPlayer
 import Alamofire
 import SwiftyJSON
 import Photos
+import AVKit
 
     var videoArray: [Any]?
 
@@ -19,9 +20,15 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
     var Asset : AVAsset?
+    var player: AVPlayer!
+    var playerController = AVPlayerViewController()
     
-    @IBOutlet weak var firstcomplete: UIImageView!
-    @IBOutlet weak var secondcomplete: UIImageView!
+    @IBOutlet weak var previewOne: UIView!
+    @IBOutlet weak var previewTwo: UIView!
+    @IBOutlet weak var StageTitle: UIButton!
+    
+//    @IBOutlet weak var firstcomplete: UIImageView!
+//    @IBOutlet weak var secondcomplete: UIImageView!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -67,13 +74,21 @@ class SelectVideoUpload_One_Two : UIViewController{
         return true
     }
     
-    
     @IBAction func loadAssetOne(_ sender: AnyObject) {
-        
-        if savedPhotosAvailable() {
-            loadingAssetOne = true
-            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-        }
+        let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
+            (action) -> Void in
+            
+        }))
+        alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
+            (action) -> Void in
+            if self.savedPhotosAvailable() {
+                self.loadingAssetOne = true
+                _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     
@@ -88,8 +103,8 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstcomplete.isHidden = true
-        secondcomplete.isHidden = true
+        previewOne.isHidden = true
+        previewTwo.isHidden = true
         load()
     }
     
@@ -117,16 +132,19 @@ class SelectVideoUpload_One_Two : UIViewController{
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
                     videoArray = videoinfo
                     let video = videoArray?[0] as? [String: Any]
+
                     if !(video?.isEmpty)! {
                         let existone = self.checkVideoExist(video!, "videoone_path", 1)
                         let existtwo = self.checkVideoExist(video!, "videotwo_path", 2)
+
                         switch (existone){
                         case 1:
-                            self.showthumbnail(video!, "videoone_path", self.firstcomplete)
-                            
+//                            self.showthumbnail(video!, "videoone_path", self.firstcomplete)
+                            self.previewVideo(video!, "videoone_path", self.previewOne)
                             switch (existtwo){
                             case 1:
-                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
+                                self.previewVideo(video!, "videotwo_path", self.previewTwo)
+//                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videotwo_path"] as? String
@@ -144,7 +162,9 @@ class SelectVideoUpload_One_Two : UIViewController{
                         case 3:
                             switch (existtwo){
                             case 1:
-                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
+//                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
+                                self.previewVideo(video!, "videotwo_path", self.previewTwo)
+
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videotwo_path"] as? String
@@ -162,6 +182,18 @@ class SelectVideoUpload_One_Two : UIViewController{
                 }
         }
 
+    }
+    
+    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView){
+        let videourl = videoinfo[videopath] as? String
+        let url = URL(string: videourl!)
+        self.player = AVPlayer(url: url!)
+        self.playerController = AVPlayerViewController()
+        self.playerController.player = self.player
+        self.playerController.view.frame = preview.frame
+        self.addChildViewController(self.playerController)
+        self.view.addSubview(self.playerController.view)
+        preview.isHidden = false
     }
     
     func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: UIImageView){
@@ -215,6 +247,33 @@ class SelectVideoUpload_One_Two : UIViewController{
         self.present(alertController, animated: true, completion: nil)
     }
 
+    func startCameraFromViewController(_ viewController: UIViewController, withDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate) -> Bool {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
+            return false
+        }
+        
+        let cameraController = UIImagePickerController()
+        cameraController.sourceType = .camera
+        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
+        cameraController.allowsEditing = false
+        cameraController.delegate = delegate
+        
+        present(cameraController, animated: true, completion: nil)
+        return true
+    }
+    
+    func video(_ videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject) {
+        var title = "Success"
+        var message = "Video was saved"
+        if let _ = error {
+            title = "Error"
+            message = "Video failed to save"
+        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     func checkVideoExist(_ videoinfo: [String: Any],_ videopath: String,_ clip: Int) -> Int{
         let video = videoinfo[videopath] as? String
         if !(video == nil) {
@@ -334,7 +393,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //上传视频到服务器
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIImageView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -369,23 +428,30 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            //show video thumbnail
-                            let asset = AVURLAsset(url: mp4Path, options: nil)
-                            let imgGenerator = AVAssetImageGenerator(asset: asset)
-                            imgGenerator.appliesPreferredTrackTransform = false
-                            
-                            do {
-                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                let thumbnail = UIImage(cgImage: cgImage)
-                                
-                                check.image = thumbnail
-                                
-                            } catch let error {
-                                print("*** Error generating thumbnail: \(error)")
-                            }
-
-                            
+                            self.player = AVPlayer(url: mp4Path)
+                            self.playerController = AVPlayerViewController()
+                            self.playerController.player = self.player
+                            self.playerController.view.frame = check.frame
+                            self.addChildViewController(self.playerController)
+                            self.view.addSubview(self.playerController.view)
                             check.isHidden = false
+//                            //show video thumbnail
+//                            let asset = AVURLAsset(url: mp4Path, options: nil)
+//                            let imgGenerator = AVAssetImageGenerator(asset: asset)
+//                            imgGenerator.appliesPreferredTrackTransform = false
+//                            
+//                            do {
+//                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+//                                let thumbnail = UIImage(cgImage: cgImage)
+//                                
+//                                check.image = thumbnail
+//                                
+//                            } catch let error {
+//                                print("*** Error generating thumbnail: \(error)")
+//                            }
+//
+//                            
+//                            check.isHidden = false
                         })
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
@@ -436,6 +502,10 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
             
+            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
+                UISaveVideoAtPathToSavedPhotosAlbum(path, self, #selector(SelectVideoUpload_One_Two.video(_:didFinishSavingWithError:contextInfo:)), nil)
+            }
             
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
@@ -449,14 +519,14 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
 //                    alertController.addAction(checkagainAction)
 //                    self.present(alertController, animated: true, completion: nil)
 //                }else{
-                    self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.firstcomplete)
+                    self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.previewOne)
                     load()
 //                }
             } else {
                 message = "故事版2 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.secondcomplete)
+                self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.previewTwo)
                 load()
             }
             

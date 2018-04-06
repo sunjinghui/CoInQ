@@ -21,6 +21,7 @@ class SelectVideoUpload_Nine : UIViewController{
     
     @IBOutlet weak var RecordButton: UIButton!
     @IBOutlet weak var videoPreview: UIView!
+    @IBOutlet weak var StageTitle: UIButton!
     
     var clips: [Any]?
     var array: [Any]?
@@ -52,11 +53,10 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     
-    @IBOutlet weak var ninecomplete: UIImageView!
+//    @IBOutlet weak var ninecomplete: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ninecomplete.isHidden = true
         RecordButton.layer.cornerRadius = 8
         videoPreview.isHidden = true
         checknine()
@@ -107,7 +107,6 @@ class SelectVideoUpload_Nine : UIViewController{
 //                                } catch let error {
 //                                    print("*** Error generating thumbnail: \(error)")
 //                                }
-                                self.ninecomplete.isHidden = false
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videonine_path"] as? String
@@ -387,7 +386,7 @@ class SelectVideoUpload_Nine : UIViewController{
         
     }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,check: UIImageView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,check: UIView){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -422,19 +421,12 @@ class SelectVideoUpload_Nine : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            let asset = AVURLAsset(url: mp4Path, options: nil)
-                            let imgGenerator = AVAssetImageGenerator(asset: asset)
-                            imgGenerator.appliesPreferredTrackTransform = false
-                            
-                            do {
-                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-                                let thumbnail = UIImage(cgImage: cgImage)
-                                
-                                check.image = thumbnail
-                                
-                            } catch let error {
-                                print("*** Error generating thumbnail: \(error)")
-                            }
+                            self.player = AVPlayer(url: mp4Path)
+                            self.playerController = AVPlayerViewController()
+                            self.playerController.player = self.player
+                            self.playerController.view.frame = check.frame
+                            self.addChildViewController(self.playerController)
+                            self.view.addSubview(self.playerController.view)
                             check.isHidden = false
                         })
                         alert.addAction(action2)
@@ -678,7 +670,7 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
                 message = "故事版9 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:9,check: self.ninecomplete)
+                uploadVideo(mp4Path: videoURL,message: message,clip:9,check: self.videoPreview)
                 loadData()
 
             }
