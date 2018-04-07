@@ -755,6 +755,14 @@ name</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-6i-8VW">
+                                <rect key="frame" x="69" y="461" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="AudioRecord:" destination="cak-fm-8ax" eventType="touchUpInside" id="JMT-vp-FYv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1371,6 +1379,7 @@ name</string>
         <image name="if_user_add_66907" width="128" height="128"/>
         <image name="logout" width="512" height="512"/>
         <image name="playvideo" width="512" height="512"/>
+        <image name="record" width="256" height="256"/>
         <image name="sb1" width="512" height="384"/>
         <image name="sb2" width="512" height="384"/>
         <image name="sb3" width="512" height="300"/>

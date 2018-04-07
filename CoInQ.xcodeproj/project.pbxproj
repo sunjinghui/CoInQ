@@ -39,6 +39,8 @@
 		A55C4879204FF2640034D7EF /* TableView_cellsearchuser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C4878204FF2640034D7EF /* TableView_cellsearchuser.swift */; };
 		A55C487B205AC8D80034D7EF /* TableView_cellcooperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C487A205AC8D70034D7EF /* TableView_cellcooperate.swift */; };
 		A56FF5E21F1B68BB00B072D5 /* TableView_cellvideotask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */; };
+		A58BC404207963D100C39615 /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58BC402207963D100C39615 /* AudioRecorderViewController.swift */; };
+		A58BC405207963D100C39615 /* AudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A58BC403207963D100C39615 /* AudioRecorderViewController.xib */; };
 		A59FA4B01F6101990049EACD /* Helper_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FA4AF1F6101990049EACD /* Helper_VC.swift */; };
 		A5A8963C1FFC8482006E85F4 /* TableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8963B1FFC8482006E85F4 /* TableNavigationController.swift */; };
 		A5A8FFF11FE7A06100B1F958 /* CollectingStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A8FFF01FE7A06100B1F958 /* CollectingStage.swift */; };
@@ -116,6 +118,8 @@
 		A55C4878204FF2640034D7EF /* TableView_cellsearchuser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellsearchuser.swift; sourceTree = "<group>"; };
 		A55C487A205AC8D70034D7EF /* TableView_cellcooperate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellcooperate.swift; sourceTree = "<group>"; };
 		A56FF5E11F1B68BA00B072D5 /* TableView_cellvideotask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView_cellvideotask.swift; sourceTree = "<group>"; };
+		A58BC402207963D100C39615 /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
+		A58BC403207963D100C39615 /* AudioRecorderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioRecorderViewController.xib; sourceTree = "<group>"; };
 		A59FA4AF1F6101990049EACD /* Helper_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper_VC.swift; sourceTree = "<group>"; };
 		A5A8963B1FFC8482006E85F4 /* TableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableNavigationController.swift; sourceTree = "<group>"; };
 		A5A8FFF01FE7A06100B1F958 /* CollectingStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectingStage.swift; sourceTree = "<group>"; };
@@ -214,6 +218,8 @@
 		A5458D251EA3ED8E00B1E26A /* CoInQ */ = {
 			isa = PBXGroup;
 			children = (
+				A58BC402207963D100C39615 /* AudioRecorderViewController.swift */,
+				A58BC403207963D100C39615 /* AudioRecorderViewController.xib */,
 				A5458D261EA3ED8F00B1E26A /* AppDelegate.swift */,
 				A54EE1641EB1CE760014994C /* SignInViewController.swift */,
 				A51A8E011EB82E4400344F61 /* CSCL.swift */,
@@ -407,6 +413,7 @@
 				A5DF4CC22060F4BB00975A3E /* TableViewCell_invite.xib in Resources */,
 				A54EE1601EAF703A0014994C /* GoogleService-Info.plist in Resources */,
 				A5C945A51FFF7EAF001062FC /* TableViewCell_clip.xib in Resources */,
+				A58BC405207963D100C39615 /* AudioRecorderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +497,7 @@
 				A5C945AD20035387001062FC /* RecordAudio_Eight.swift in Sources */,
 				A5C945AF20035387001062FC /* RecordAudio_Four.swift in Sources */,
 				A55C4879204FF2640034D7EF /* TableView_cellsearchuser.swift in Sources */,
+				A58BC404207963D100C39615 /* AudioRecorderViewController.swift in Sources */,
 				A537AD171EC6EC2200B70596 /* CompeleteViewController.swift in Sources */,
 				A521ECF01ECB4BA90074327B /* RecordNine_Merge.swift in Sources */,
 				A5C945B020035387001062FC /* RecordAudio_Seven.swift in Sources */,

@@ -27,6 +27,13 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBOutlet weak var previewOne: UIView!
     @IBOutlet weak var previewTwo: UIView!
     
+    @IBAction func AudioRecord(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        present(controller, animated: true, completion: nil)
+        
+    }
 //    @IBOutlet weak var firstcomplete: UIImageView!
 //    @IBOutlet weak var secondcomplete: UIImageView!
     
@@ -561,6 +568,13 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             //userdefault.set(firstAsset, forKey: "VideoOne")
             //userdefault.set(secondAsset, forKey: "VideoTwo")
         }
+    }
+}
+
+extension SelectVideoUpload_One_Two: AudioRecorderViewControllerDelegate {
+    func audioRecorderViewControllerDismissed(withFileURL fileURL: NSURL?) {
+        dismiss(animated: true, completion: nil)
+
     }
 }
 

@@ -279,11 +279,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/SelectVideoUpload_One_Two.swift"
-            timestampString = "544751812.39252"
+            timestampString = "544827152.850396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
