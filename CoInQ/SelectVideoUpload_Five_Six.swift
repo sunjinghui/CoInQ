@@ -16,16 +16,28 @@ import AVKit
 class SelectVideoUpload_Five_Six : UIViewController{
     
     var loadingAssetOne = false
+    var isClicked = true
     
 //    @IBOutlet weak var fivecomplete: UIImageView!
 //    @IBOutlet weak var sixcomplete: UIImageView!
     @IBOutlet weak var previewFive: UIView!
     @IBOutlet weak var previewSix: UIView!
-    @IBOutlet weak var SatgeTitle: UIButton!
     
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    @IBAction func StageTitleThree(_ sender: UIButton) {
+        if isClicked {
+            isClicked = false
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            sender.setTitle("分析「證據」以便得出可能的解釋", for: UIControlState())
+        }else{
+            isClicked = true
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
+            sender.setTitle("形成解釋", for: UIControlState())
+        }
+    }
     
     @IBAction func ExplainFive(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"便條紙是一個適合用來\n分類的小工具喔！",preferredStyle: .alert)

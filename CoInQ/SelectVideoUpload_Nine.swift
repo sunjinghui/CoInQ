@@ -21,12 +21,11 @@ class SelectVideoUpload_Nine : UIViewController{
     
     @IBOutlet weak var RecordButton: UIButton!
     @IBOutlet weak var videoPreview: UIView!
-    @IBOutlet weak var StageTitle: UIButton!
     
     var clips: [Any]?
     var array: [Any]?
     var isURLempty = true
-    var buttonClicked = true
+    var isClicked = true
     var loadingAssetOne = false
     var nullstoryboard = [String]()
     var emptystoryboards = [String]()
@@ -60,6 +59,18 @@ class SelectVideoUpload_Nine : UIViewController{
         RecordButton.layer.cornerRadius = 8
         videoPreview.isHidden = true
         checknine()
+    }
+    
+    @IBAction func StageTitleFive(_ sender: UIButton) {
+        if isClicked {
+            isClicked = false
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            sender.setTitle("與他人分享我的解釋會激發更多新想法與新問題", for: UIControlState())
+        }else{
+            isClicked = true
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
+            sender.setTitle("分享與回饋", for: UIControlState())
+        }
     }
     
     func checknine(){
@@ -127,7 +138,7 @@ class SelectVideoUpload_Nine : UIViewController{
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameter).responseJSON
             {
                 response in
-                print(response)
+//                print(response)
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
                     print("\(errorMessage!)")

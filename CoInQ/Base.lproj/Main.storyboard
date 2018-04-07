@@ -554,6 +554,9 @@ name</string>
                                 <state key="normal" title="蒐集資料" backgroundImage="title">
                                     <color key="titleColor" red="0.96741849179999995" green="0.72392445800000005" blue="0.42209497089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="StageTitleTwo:" destination="nKx-F0-iOd" eventType="touchUpInside" id="SlP-aY-ySA"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我從不同管道蒐集來的資料可能包括文字、圖片、影像、影片等，每一筆資料都可以用來回答我的科學探究問題嗎？ 我應該如何篩選出有效的證據呢？" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JR4-A3-zPW">
                                 <rect key="frame" x="221" y="589" width="453" height="100"/>
@@ -567,7 +570,6 @@ name</string>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="蒐集資料" image="Numbers-2-Black-icon" id="Jd7-Pn-Onl"/>
                     <connections>
-                        <outlet property="StageTitle" destination="wHc-jK-YSj" id="As0-tM-ibk"/>
                         <outlet property="previewThree" destination="yxi-fE-cBx" id="6bA-2j-EF7"/>
                     </connections>
                 </viewController>
@@ -641,6 +643,9 @@ name</string>
                                 <state key="normal" title="分享與回饋" backgroundImage="title">
                                     <color key="titleColor" red="0.96741849179999995" green="0.72392445800000005" blue="0.42209497089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="StageTitleFive:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="lgm-5X-55C"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -649,7 +654,6 @@ name</string>
                     <navigationItem key="navigationItem" id="AiB-QT-JAj"/>
                     <connections>
                         <outlet property="RecordButton" destination="LMl-dB-a76" id="Hel-s5-elL"/>
-                        <outlet property="StageTitle" destination="VYv-YZ-tjR" id="bj4-Fh-RrV"/>
                         <outlet property="videoPreview" destination="WCK-Cz-jIp" id="EEP-xM-z7H"/>
                     </connections>
                 </viewController>
@@ -676,6 +680,9 @@ name</string>
                                 <state key="normal" title="決定問題" backgroundImage="title">
                                     <color key="titleColor" red="0.96741849184036255" green="0.72392445802688599" blue="0.42209497094154358" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="StageTitleOne:" destination="cak-fm-8ax" eventType="touchUpInside" id="Xe4-rO-oQs"/>
+                                </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" image="sb2" translatesAutoresizingMaskIntoConstraints="NO" id="HJw-Ka-ouC">
                                 <rect key="frame" x="0.0" y="562" width="768" height="452"/>
@@ -753,7 +760,6 @@ name</string>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="決定問題" image="Numbers-1-Black-icon" id="Tzv-QQ-wME"/>
                     <connections>
-                        <outlet property="StageTitle" destination="6Nh-8C-zpx" id="J2u-ze-vv4"/>
                         <outlet property="previewOne" destination="7yX-pj-jS3" id="TbJ-co-m6R"/>
                         <outlet property="previewTwo" destination="MVd-Uj-DCX" id="Ejy-mn-aQQ"/>
                     </connections>
@@ -834,6 +840,9 @@ name</string>
                                 <state key="normal" title="形成解釋" backgroundImage="title">
                                     <color key="titleColor" red="0.96741849179999995" green="0.72392445800000005" blue="0.42209497089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="StageTitleThree:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="Dhl-o9-oNz"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMP-sW-fyC">
                                 <rect key="frame" x="225" y="270" width="454" height="253"/>
@@ -859,7 +868,6 @@ name</string>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="形成解釋" image="Numbers-3-Black-icon" id="OcL-R6-A1a"/>
                     <connections>
-                        <outlet property="SatgeTitle" destination="n4d-0Q-E5e" id="dQG-4e-fTx"/>
                         <outlet property="previewFive" destination="XMP-sW-fyC" id="1Jm-t9-uno"/>
                         <outlet property="previewSix" destination="ZRr-Db-VdV" id="4aN-6h-At7"/>
                     </connections>
@@ -949,6 +957,9 @@ name</string>
                                 <state key="normal" title="評估解釋" backgroundImage="title">
                                     <color key="titleColor" red="0.96741849179999995" green="0.72392445800000005" blue="0.42209497089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="StageTitleFour:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="PA9-Do-Ru3"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hUo-uF-RQg">
                                 <rect key="frame" x="216" y="689" width="458" height="247"/>
@@ -965,7 +976,6 @@ name</string>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" title="評估解釋" image="Numbers-4-Black-icon" id="lI5-gW-13f"/>
                     <connections>
-                        <outlet property="StageTitle" destination="Qh6-7x-CZH" id="Jr9-hl-hbP"/>
                         <outlet property="previewEight" destination="hUo-uF-RQg" id="44a-ea-C6n"/>
                         <outlet property="previewSeven" destination="rPY-4e-9n4" id="2jV-Fb-jIc"/>
                     </connections>

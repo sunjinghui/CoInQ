@@ -16,15 +16,27 @@ import AVKit
 class SelectVideoUpload_Seven_Eight : UIViewController{
     
     var loadingAssetOne = false
+    var isClicked = true
     
 //    @IBOutlet weak var sevencomplete: UIImageView!
 //    @IBOutlet weak var eightcomplete: UIImageView!
     @IBOutlet weak var previewSeven: UIView!
     @IBOutlet weak var previewEight: UIView!
-    @IBOutlet weak var StageTitle: UIButton!
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    @IBAction func StageTitleFour(_ sender: UIButton) {
+        if isClicked {
+            isClicked = false
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            sender.setTitle("最終的解釋應該是科學的、有邏輯的！", for: UIControlState())
+        }else{
+            isClicked = true
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
+            sender.setTitle("評估解釋", for: UIControlState())
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

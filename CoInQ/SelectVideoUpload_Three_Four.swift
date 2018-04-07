@@ -16,14 +16,26 @@ import AVKit
 class SelectVideoUpload_Three_Four : UIViewController{
     
     var loadingAssetOne = false
+    var isClicked = true
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
 //    @IBOutlet weak var threecomplete: UIImageView!
 //    @IBOutlet weak var fourcomplete: UIImageView!
     @IBOutlet weak var previewThree: UIView!
-    @IBOutlet weak var StageTitle: UIButton!
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
+    
+    @IBAction func StageTitleTwo(_ sender: UIButton) {
+        if isClicked {
+            isClicked = false
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            sender.setTitle("蒐集能夠確實回答問題的「資料」  這「資料」也就是「證據」", for: UIControlState())
+        }else{
+            isClicked = true
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
+            sender.setTitle("蒐集資料", for: UIControlState())
+        }
+    }
     
     @IBAction func Cooperation(_ sender: Any){
         let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationController") as! TableNavigationController

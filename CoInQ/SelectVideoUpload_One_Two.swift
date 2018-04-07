@@ -19,18 +19,30 @@ import AVKit
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
+    var isClicked = true
     var Asset : AVAsset?
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
     
     @IBOutlet weak var previewOne: UIView!
     @IBOutlet weak var previewTwo: UIView!
-    @IBOutlet weak var StageTitle: UIButton!
     
 //    @IBOutlet weak var firstcomplete: UIImageView!
 //    @IBOutlet weak var secondcomplete: UIImageView!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    @IBAction func StageTitleOne(_ sender: UIButton) {
+        if isClicked {
+            isClicked = false
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            sender.setTitle("科學探究皆從一個問題開始", for: UIControlState())
+        }else{
+            isClicked = true
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
+            sender.setTitle("決定問題", for: UIControlState())
+        }
+    }
     
     @IBAction func ExplainOne(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"將我想要探究的自然現象記錄下來吧！",preferredStyle: .alert)
