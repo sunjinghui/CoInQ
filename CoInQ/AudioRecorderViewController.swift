@@ -9,9 +9,10 @@
 import UIKit
 import AVFoundation
 import AVKit
+import Photos
 
 protocol AudioRecorderViewControllerDelegate: class {
-    func audioRecorderViewControllerDismissed(withFileURL fileURL: NSURL?)
+    func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int)
 }
 
 
@@ -70,6 +71,7 @@ class AudioRecorderViewController: UINavigationController {
         var PlayController = AVPlayerViewController()
         var outputURL: URL
         var videourl : URL?
+        var clip: Int?
         
         init() {
             let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
@@ -127,14 +129,17 @@ class AudioRecorderViewController: UINavigationController {
         
         func dismiss(_ sender: AnyObject) {
             cleanup()
-            audioRecorderDelegate?.audioRecorderViewControllerDismissed(withFileURL: nil)
-            //let alert = UIAlertController
+            audioRecorderDelegate?.audioRecorderViewControllerDismissed(withFileURL: nil,clip: 0)
+            let alertController = UIAlertController(title: "請注意", message: "不會保存配音內容、你將返回上一頁", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title:"取消",style: .cancel, handler: nil)
+            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
         }
         
         func saveAudio(_ sender: AnyObject) {
-            cleanup()
-            audioRecorderDelegate?.audioRecorderViewControllerDismissed(withFileURL: outputURL as NSURL)
-            //mergeaudioandvideo
+            merge(videourl!, outputURL)
         }
         
         func playvideo(){
@@ -256,9 +261,6 @@ class AudioRecorderViewController: UINavigationController {
             
         }
         
-        
-        
-        
         // MARK: Time Label
         
         func updateTimeLabel(_ timer: Timer) {
@@ -282,8 +284,109 @@ class AudioRecorderViewController: UINavigationController {
         }
         
         func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-            print("rec finish")
             updateControls()
+        }
+        
+        func deleteFile(_ filePath:URL) {
+            
+            guard FileManager.default.fileExists(atPath: filePath.path) else { return }
+            
+            do {
+                try    FileManager.default.removeItem(atPath: filePath.path)
+                //            print("remove video from \(filePath)")
+            } catch {
+                fatalError("Unable to delete file: \(error) : \(#function).")
+            }
+        }
+        
+        func merge(_ videourl: URL, _ audiourl: URL){
+            let mixComposition : AVMutableComposition = AVMutableComposition()
+            var mutableCompositionVideoTrack : [AVMutableCompositionTrack] = []
+            var mutableCompositionAudioTrack : [AVMutableCompositionTrack] = []
+            let totalVideoCompositionInstruction : AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
+            
+            
+            //start merge
+            
+            let aVideoAsset : AVAsset = AVAsset(url: videourl)
+            let aAudioAsset : AVAsset = AVAsset(url: audiourl)
+            
+            mutableCompositionVideoTrack.append(mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid))
+            mutableCompositionAudioTrack.append( mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid))
+            
+            let aVideoAssetTrack : AVAssetTrack = aVideoAsset.tracks(withMediaType: AVMediaTypeVideo)[0]
+            let aAudioAssetTrack : AVAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaTypeAudio)[0]
+            
+            
+            
+            do{
+                try mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aVideoAssetTrack, at: kCMTimeZero)
+//                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
+                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
+                
+            }catch{
+                
+            }
+            
+            totalVideoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero,aVideoAssetTrack.timeRange.duration )
+            
+            let mutableVideoComposition : AVMutableVideoComposition = AVMutableVideoComposition()
+            mutableVideoComposition.frameDuration = CMTimeMake(1, 30)
+            
+            mutableVideoComposition.renderSize = aVideoAssetTrack.naturalSize
+            
+            //        playerItem = AVPlayerItem(asset: mixComposition)
+            //        player = AVPlayer(playerItem: playerItem!)
+            //
+            //
+            //        AVPlayerVC.player = player
+            
+            
+            
+            //find your video on this URl
+//            let savePathUrl : URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
+            // 4 - Get path
+            let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let filename = UUID().uuidString + ".mov"
+            let savePath = (documentDirectory as NSString).appendingPathComponent(filename)
+            deleteFile(URL(string: savePath)!)
+            let savePathUrl = URL(fileURLWithPath: savePath)
+            
+            let assetExport: AVAssetExportSession = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)!
+            assetExport.outputFileType = AVFileTypeQuickTimeMovie
+            assetExport.outputURL = savePathUrl as URL
+            assetExport.shouldOptimizeForNetworkUse = true
+            
+            assetExport.exportAsynchronously { () -> Void in
+                switch assetExport.status {
+                    
+                case AVAssetExportSessionStatus.completed:
+                    PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: savePathUrl as URL)}, completionHandler: {saved, error in
+                        if saved {
+                            print("success")
+                            let alertController = UIAlertController(title: "儲存完成", message: "新的配音影片已儲存在相簿中", preferredStyle: .alert)
+                            let defaultAction = UIAlertAction(title: "確定", style: .default, handler:{ (action) -> Void in
+                            (self.audioRecorderDelegate?.audioRecorderViewControllerDismissed(withFileURL: savePathUrl,clip: self.clip!))!
+                            })
+                            alertController.addAction(defaultAction)
+                            self.present(alertController, animated: true, completion: nil)
+                            self.cleanup()
+                        }
+                    })
+                    
+                case  AVAssetExportSessionStatus.failed:
+                    let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "確定", style: .default, handler: nil)
+                    alertController.addAction(defaultAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    print("failed \(String(describing: assetExport.error))")
+                case AVAssetExportSessionStatus.cancelled:
+                    print("cancelled \(String(describing: assetExport.error))")
+                default:
+                    print("complete")
+                }
+            }
+
         }
         
     }

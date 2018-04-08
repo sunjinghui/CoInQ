@@ -38,6 +38,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         let videourl = video?["videoone_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
+        controller.childViewController.clip = 1
         present(controller, animated: true, completion: nil)
         
     }
@@ -50,6 +51,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         let videourl = video?["videotwo_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
+        controller.childViewController.clip = 2
         present(controller, animated: true, completion: nil)
         
     }
@@ -595,8 +597,15 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
 }
 
 extension SelectVideoUpload_One_Two: AudioRecorderViewControllerDelegate {
-    func audioRecorderViewControllerDismissed(withFileURL fileURL: NSURL?) {
+    func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
         dismiss(animated: true, completion: nil)
+        if clip == 1 {
+            let message = "故事版1 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 1, VC: self, check: self.previewOne, self.recAudio)
+        }else if clip == 2 {
+            let message = "故事版2 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 2, VC: self, check: self.previewTwo, self.recAudioTwo)
+        }
 
     }
 }
