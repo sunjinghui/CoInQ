@@ -21,6 +21,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     
 //    @IBOutlet weak var threecomplete: UIImageView!
 //    @IBOutlet weak var fourcomplete: UIImageView!
+    @IBOutlet weak var recThree: UIButton!
     @IBOutlet weak var previewThree: UIView!
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
@@ -37,6 +38,8 @@ class SelectVideoUpload_Three_Four : UIViewController{
         }
     }
     
+    @IBAction func recThree(_ sender: Any) {
+    }
     @IBAction func Cooperation(_ sender: Any){
         let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationController") as! TableNavigationController
         present(navigationtableview, animated: true, completion: nil)
@@ -95,7 +98,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
 
                             switch (existone){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.previewThree)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.previewThree,self.recThree)
                                 
                             case 2:
                                 self.startActivityIndicator()

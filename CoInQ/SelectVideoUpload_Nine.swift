@@ -21,6 +21,7 @@ class SelectVideoUpload_Nine : UIViewController{
     
     @IBOutlet weak var RecordButton: UIButton!
     @IBOutlet weak var videoPreview: UIView!
+    @IBOutlet weak var recNine: UIButton!
     
     var clips: [Any]?
     var array: [Any]?
@@ -73,6 +74,9 @@ class SelectVideoUpload_Nine : UIViewController{
         }
     }
     
+    @IBAction func recNine(_ sender: Any) {
+    }
+    
     func checknine(){
         loadData()
     }
@@ -102,22 +106,8 @@ class SelectVideoUpload_Nine : UIViewController{
                         
                             switch (existone){
                             case 1:
-                                let videourl = video?["videonine_path"] as? String
-                                let url = URL(string: videourl!)
-                                self.previewVideo(url!)
-//                                let asset = AVURLAsset(url: url!, options: nil)
-//                                let imgGenerator = AVAssetImageGenerator(asset: asset)
-//                                imgGenerator.appliesPreferredTrackTransform = false
-//
-//                                do {
-//                                    let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//                                    let thumbnail = UIImage(cgImage: cgImage)
-//                                    
-//                                    self.ninecomplete.image = thumbnail
-//                                    
-//                                } catch let error {
-//                                    print("*** Error generating thumbnail: \(error)")
-//                                }
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.videoPreview,self.recNine)
+
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videonine_path"] as? String
@@ -162,16 +152,6 @@ class SelectVideoUpload_Nine : UIViewController{
                 }
         }
         
-    }
-     
-    func previewVideo(_ url: URL){
-        self.player = AVPlayer(url: url)
-        self.playerController = AVPlayerViewController()
-        self.playerController.player = self.player
-        self.playerController.view.frame = self.videoPreview.frame
-        self.addChildViewController(self.playerController)
-        self.view.addSubview(self.playerController.view)
-        self.videoPreview.isHidden = false
     }
     
     func check(_ videonum: String,_ storyboard: String){

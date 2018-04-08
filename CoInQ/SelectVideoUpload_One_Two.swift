@@ -24,6 +24,8 @@ class SelectVideoUpload_One_Two : UIViewController{
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
     
+    @IBOutlet weak var recAudio: UIButton!
+    @IBOutlet weak var recAudioTwo: UIButton!
     @IBOutlet weak var previewOne: UIView!
     @IBOutlet weak var previewTwo: UIView!
     
@@ -31,6 +33,23 @@ class SelectVideoUpload_One_Two : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videoone_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        present(controller, animated: true, completion: nil)
+        
+    }
+    @IBAction func AudioRecordTwo(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videotwo_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
         present(controller, animated: true, completion: nil)
         
     }
@@ -165,6 +184,8 @@ class SelectVideoUpload_One_Two : UIViewController{
         super.viewDidLoad()
         previewOne.isHidden = true
         previewTwo.isHidden = true
+        recAudio.isHidden = true
+        recAudioTwo.isHidden = true
         load()
     }
     
@@ -200,10 +221,10 @@ class SelectVideoUpload_One_Two : UIViewController{
                         switch (existone){
                         case 1:
 //                            self.showthumbnail(video!, "videoone_path", self.firstcomplete)
-                            self.previewVideo(video!, "videoone_path", self.previewOne)
+                            self.previewVideo(video!, "videoone_path", self.previewOne, self.recAudio)
                             switch (existtwo){
                             case 1:
-                                self.previewVideo(video!, "videotwo_path", self.previewTwo)
+                                self.previewVideo(video!, "videotwo_path", self.previewTwo, self.recAudioTwo)
 //                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                             case 2:
                                 self.startActivityIndicator()
@@ -223,7 +244,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             switch (existtwo){
                             case 1:
 //                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
-                                self.previewVideo(video!, "videotwo_path", self.previewTwo)
+                                self.previewVideo(video!, "videotwo_path", self.previewTwo,self.recAudioTwo)
 
                             case 2:
                                 self.startActivityIndicator()
@@ -244,7 +265,7 @@ class SelectVideoUpload_One_Two : UIViewController{
 
     }
     
-    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView){
+    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton){
         let videourl = videoinfo[videopath] as? String
         let url = URL(string: videourl!)
         self.player = AVPlayer(url: url!)
@@ -254,6 +275,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         self.addChildViewController(self.playerController)
         self.view.addSubview(self.playerController.view)
         preview.isHidden = false
+        recbtn.isHidden = false
     }
     
 //    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: UIImageView){
@@ -426,7 +448,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //上传视频到服务器
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView,_ recbtn: UIButton){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -468,6 +490,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             self.addChildViewController(self.playerController)
                             self.view.addSubview(self.playerController.view)
                             check.isHidden = false
+                            recbtn.isHidden = false
 //                            //show video thumbnail
 //                            let asset = AVURLAsset(url: mp4Path, options: nil)
 //                            let imgGenerator = AVAssetImageGenerator(asset: asset)
@@ -552,14 +575,14 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
 //                    alertController.addAction(checkagainAction)
 //                    self.present(alertController, animated: true, completion: nil)
 //                }else{
-                    self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.previewOne)
+                    self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.previewOne,self.recAudio)
                     load()
 //                }
             } else {
                 message = "故事版2 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.previewTwo)
+                self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.previewTwo,self.recAudioTwo)
                 load()
             }
             

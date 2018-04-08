@@ -22,6 +22,9 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
 //    @IBOutlet weak var eightcomplete: UIImageView!
     @IBOutlet weak var previewSeven: UIView!
     @IBOutlet weak var previewEight: UIView!
+    @IBOutlet weak var recSeven: UIButton!
+    @IBOutlet weak var recEight: UIButton!
+    
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -36,6 +39,12 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
             sender.setTitle("評估解釋", for: UIControlState())
         }
+    }
+    
+    @IBAction func revSeven(_ sender: Any) {
+    }
+    
+    @IBAction func recEight(_ sender: Any) {
     }
     
     override func viewDidLoad() {
@@ -75,11 +84,11 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoeight_path", 8)
                         switch (existone){
                         case 1:
-                            SelectVideoUpload_One_Two().previewVideo(video!, "videoseven_path", self.previewSeven)
+                            SelectVideoUpload_One_Two().previewVideo(video!, "videoseven_path", self.previewSeven,self.recSeven)
                             
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String
@@ -97,7 +106,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         case 3:
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String

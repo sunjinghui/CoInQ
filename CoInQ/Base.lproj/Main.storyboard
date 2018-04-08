@@ -565,12 +565,21 @@ name</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yb4-ET-Iiu">
+                                <rect key="frame" x="70" y="467" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="recThree:" destination="nKx-F0-iOd" eventType="touchUpInside" id="7qr-mE-p2I"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="蒐集資料" image="Numbers-2-Black-icon" id="Jd7-Pn-Onl"/>
                     <connections>
                         <outlet property="previewThree" destination="yxi-fE-cBx" id="6bA-2j-EF7"/>
+                        <outlet property="recThree" destination="yb4-ET-Iiu" id="Ksf-Vc-PpB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgb-U7-RBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -647,6 +656,14 @@ name</string>
                                     <action selector="StageTitleFive:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="lgm-5X-55C"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMj-Jl-7te">
+                                <rect key="frame" x="76" y="581" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="recNine:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="tu8-jt-djN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -654,6 +671,7 @@ name</string>
                     <navigationItem key="navigationItem" id="AiB-QT-JAj"/>
                     <connections>
                         <outlet property="RecordButton" destination="LMl-dB-a76" id="Hel-s5-elL"/>
+                        <outlet property="recNine" destination="JMj-Jl-7te" id="Mca-Mw-9aY"/>
                         <outlet property="videoPreview" destination="WCK-Cz-jIp" id="EEP-xM-z7H"/>
                     </connections>
                 </viewController>
@@ -714,6 +732,14 @@ name</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtW-iQ-c0W">
+                                <rect key="frame" x="69" y="868" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="AudioRecordTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="PKL-wl-TbT"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MVd-Uj-DCX">
                                 <rect key="frame" x="227" y="675" width="467" height="261"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -723,6 +749,14 @@ name</string>
                                 <rect key="frame" x="0.0" y="126" width="768" height="464"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-6i-8VW">
+                                <rect key="frame" x="69" y="461" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="AudioRecord:" destination="cak-fm-8ax" eventType="touchUpInside" id="JMT-vp-FYv"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agc-4j-FI3">
                                 <rect key="frame" x="172" y="212" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -755,14 +789,6 @@ name</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-6i-8VW">
-                                <rect key="frame" x="69" y="461" width="73" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="record"/>
-                                <connections>
-                                    <action selector="AudioRecord:" destination="cak-fm-8ax" eventType="touchUpInside" id="JMT-vp-FYv"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -770,6 +796,8 @@ name</string>
                     <connections>
                         <outlet property="previewOne" destination="7yX-pj-jS3" id="TbJ-co-m6R"/>
                         <outlet property="previewTwo" destination="MVd-Uj-DCX" id="Ejy-mn-aQQ"/>
+                        <outlet property="recAudio" destination="3uo-6i-8VW" id="ccN-UX-7ZP"/>
+                        <outlet property="recAudioTwo" destination="FtW-iQ-c0W" id="wGm-Fq-KOZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEm-Y0-m0J" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -871,6 +899,22 @@ name</string>
                                     <action selector="loadAssetSix:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="zMK-FE-x0F"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whl-gv-jhG">
+                                <rect key="frame" x="77" y="453" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="recFive:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="gWq-UI-fXO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9KY-2E-Elm">
+                                <rect key="frame" x="77" y="859" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="recSix:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="ZhJ-M7-Mdu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -878,6 +922,8 @@ name</string>
                     <connections>
                         <outlet property="previewFive" destination="XMP-sW-fyC" id="1Jm-t9-uno"/>
                         <outlet property="previewSix" destination="ZRr-Db-VdV" id="4aN-6h-At7"/>
+                        <outlet property="recFive" destination="Whl-gv-jhG" id="Slj-NN-DdI"/>
+                        <outlet property="recSix" destination="9KY-2E-Elm" id="Gih-As-tZ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBU-zb-EtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -979,6 +1025,22 @@ name</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XR-dM-9wW">
+                                <rect key="frame" x="58" y="467" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="revSeven:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="B9K-fb-rBA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wov-0d-haK">
+                                <rect key="frame" x="58" y="866" width="73" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="record"/>
+                                <connections>
+                                    <action selector="recEight:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="7rs-Hj-DT2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -986,6 +1048,8 @@ name</string>
                     <connections>
                         <outlet property="previewEight" destination="hUo-uF-RQg" id="44a-ea-C6n"/>
                         <outlet property="previewSeven" destination="rPY-4e-9n4" id="2jV-Fb-jIc"/>
+                        <outlet property="recEight" destination="wov-0d-haK" id="i4A-50-Mn5"/>
+                        <outlet property="recSeven" destination="2XR-dM-9wW" id="B9S-EZ-tku"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6On-Ah-l4p" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -67,6 +67,7 @@ class AudioRecorderViewController: UINavigationController {
         var recorder: AVAudioRecorder!
         var player: AVAudioPlayer?
         var VideoPlayer: AVPlayer?
+        var PlayController = AVPlayerViewController()
         var outputURL: URL
         var videourl : URL?
         
@@ -84,7 +85,6 @@ class AudioRecorderViewController: UINavigationController {
         override func viewDidLoad() {
             title = "配音階段"
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(AudioRecorderChildViewController.dismiss(_:)))
-            navigationItem.leftBarButtonItem?.title = "放棄配音"
             edgesForExtendedLayout = UIRectEdge()
             
             saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(AudioRecorderChildViewController.saveAudio(_:)))
@@ -102,13 +102,8 @@ class AudioRecorderViewController: UINavigationController {
             recordButtonContainer.layer.borderColor = UIColor.white.cgColor
             recordButtonContainer.layer.borderWidth = 3
             
-            //VideoPlayer = AVPlayer(url: videourl!)
-            //let controller = AVPlayerViewController()
-            //controller.player = VideoPlayer
-            //controller.showsPlaybackControls = false
-            //self.addChildViewController(controller)
-            //controller.view.frame = videoview.frame
-            //self.view.addSubview(controller.view)
+            
+
         }
         
         override func viewDidAppear(_ animated: Bool) {
@@ -144,13 +139,13 @@ class AudioRecorderViewController: UINavigationController {
         
         func playvideo(){
             VideoPlayer = AVPlayer(url: videourl!)
-            let controller = AVPlayerViewController()
-            controller.player = VideoPlayer
-            controller.showsPlaybackControls = false
-            self.addChildViewController(controller)
+            PlayController = AVPlayerViewController()
+            PlayController.player = VideoPlayer
+            self.addChildViewController(PlayController)
             let videoFrame = CGRect(x: 44, y: 26, width: 681, height: 534)
-            controller.view.frame = videoFrame
-            self.view.addSubview(controller.view)
+            PlayController.showsPlaybackControls = false
+            PlayController.view.frame = videoFrame
+            self.view.addSubview(PlayController.view)
             VideoPlayer?.volume = 0.0
             VideoPlayer?.play()
         }
@@ -165,21 +160,20 @@ class AudioRecorderViewController: UINavigationController {
         @IBAction func toggleRecord(_ sender: AnyObject) {
             
             timeTimer?.invalidate()
-            
+
             if recorder.isRecording {
                 recorder.stop()
                 stopvideo()
             } else {
-                milliseconds = 0
-                timeLabel.text = "00:00.00"
-                timeTimer = Timer.scheduledTimer(timeInterval: 0.0167, target: self, selector: #selector(AudioRecorderChildViewController.updateTimeLabel(_:)), userInfo: nil, repeats: true)
+                runTimer()
                 recorder.deleteRecording()
-                recorder.record()
+                
+                let Asset = AVAsset(url: videourl!)
+                let durationtime = CMTimeGetSeconds((Asset.duration))
+                recorder.record(forDuration: durationtime)
                 playvideo()
             }
-            
             updateControls()
-            
         }
         
         func stopRecording(_ sender: AnyObject) {
@@ -200,10 +194,24 @@ class AudioRecorderViewController: UINavigationController {
             }
         }
         
+        func runTimer(){
+            //顯示影片秒數
+            let Asset = AVAsset(url: videourl!)
+            let durationtime = CMTimeGetSeconds((Asset.duration))
+            milliseconds = Int(durationtime) * 60
+            let milli = (milliseconds % 60) + 39
+            let sec = (milliseconds / 60) % 60
+            let min = milliseconds / 3600
+            timeLabel.text = NSString(format: "%02d:%02d.%02d", min, sec, milli) as String
+            
+            timeTimer = Timer.scheduledTimer(timeInterval: 0.0167, target: self, selector: #selector(AudioRecorderChildViewController.updateTimeLabel(_:)), userInfo: nil, repeats: true)
+        }
+        
         @IBAction func play(_ sender: AnyObject) {
             
             if let player = player {
                 player.stop()
+                stopvideo()
                 self.player = nil
                 updateControls()
                 return
@@ -215,10 +223,11 @@ class AudioRecorderViewController: UINavigationController {
             catch let error as NSError {
                 NSLog("error: \(error)")
             }
-            
+            runTimer()
             player?.delegate = self
             player?.play()
-            
+            playvideo()
+
             updateControls()
         }
         
@@ -233,13 +242,11 @@ class AudioRecorderViewController: UINavigationController {
                 playButton.setImage(#imageLiteral(resourceName: "stop"), for: UIControlState())
                 recordButton.isEnabled = false
                 recordButtonContainer.alpha = 0.25
-                playvideo()
 
             } else {
                 playButton.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
                 recordButton.isEnabled = true
                 recordButtonContainer.alpha = 1
-                stopvideo()
 
             }
             
@@ -255,11 +262,15 @@ class AudioRecorderViewController: UINavigationController {
         // MARK: Time Label
         
         func updateTimeLabel(_ timer: Timer) {
-            milliseconds += 1
-            let milli = (milliseconds % 60) + 39
-            let sec = (milliseconds / 60) % 60
-            let min = milliseconds / 3600
-            timeLabel.text = NSString(format: "%02d:%02d.%02d", min, sec, milli) as String
+            if timeLabel.text != "00:00.00"{
+                milliseconds -= 1
+                let milli = (milliseconds % 60) + 39
+                let sec = (milliseconds / 60) % 60
+                let min = milliseconds / 3600
+                timeLabel.text = NSString(format: "%02d:%02d.%02d", min, sec, milli) as String
+            }else{
+                timeTimer?.invalidate()
+            }
         }
         
         
@@ -267,6 +278,11 @@ class AudioRecorderViewController: UINavigationController {
         
         func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
             self.player = nil
+            updateControls()
+        }
+        
+        func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+            print("rec finish")
             updateControls()
         }
         

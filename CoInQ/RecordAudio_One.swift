@@ -18,7 +18,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     @IBOutlet weak var ButttonRecord: UIButton!
     @IBOutlet weak var ButtonPlay: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
+    //@IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var switchOutput: UILabel!
     @IBOutlet weak var UseRecordSwitch: UISwitch!
     
@@ -32,7 +32,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
     var timeTimer: Timer?
     var progressCounter: Float = 0.00
     var videolength: Double = 0
-    var progressViewTimer: Timer?
+    //var progressViewTimer: Timer?
     var milliseconds: Int = 0
     
     var AudioFileName = UUID().uuidString + ".m4a"
@@ -74,7 +74,7 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         super.viewDidLoad()
         setupRecorder()
         getaudio()
-        progressView.progress = progressCounter
+        //progressView.progress = progressCounter
 
         videourl = getvideo("videoone_path")
             
@@ -191,11 +191,11 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             ButtonPlay.isEnabled = true
             showSwitch()
             stopPlayer()
-            progressView.progress = 0.0
-            if progressViewTimer != nil {
-                progressViewTimer?.invalidate()
-                StoreRecord(directoryURL()!,"userecordone",clip: 1)
-            }
+            //progressView.progress = 0.0
+            //if progressViewTimer != nil {
+            //    progressViewTimer?.invalidate()
+            //    StoreRecord(directoryURL()!,"userecordone",clip: 1)
+            //}
             //showTimeLabel()
 
         }else{
@@ -206,10 +206,10 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             showTimeLabel()
             timeTimer = Timer.scheduledTimer(timeInterval: 0.0167, target: self, selector: #selector(RecordAudio_One.updateTimeLabel(_:)), userInfo: nil, repeats: true)
             progressCounter = 0.0
-            if progressViewTimer != nil {
-                progressViewTimer?.invalidate()
-            }
-            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
+            //if progressViewTimer != nil {
+            //    progressViewTimer?.invalidate()
+            //}
+            //progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
             sender.setTitle("Stop", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "stop"), for: UIControlState())
             ButtonPlay.isEnabled = false
@@ -230,20 +230,20 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
             sender.setTitle("Play", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
             ButttonRecord.isEnabled = true
-            progressView.progress = 0.0
-            if progressViewTimer != nil {
-                progressViewTimer?.invalidate()
-            }
+            //progressView.progress = 0.0
+            //if progressViewTimer != nil {
+            //    progressViewTimer?.invalidate()
+            //}
 
         }else{
             preparePlayer()
             play()
             SoundPlayer.play()
             progressCounter = 0.0
-            if progressViewTimer != nil {
-                progressViewTimer?.invalidate()
-            }
-            progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
+           // if progressViewTimer != nil {
+           //     progressViewTimer?.invalidate()
+           // }
+            //progressViewTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordAudio_One.updateProgressView(_:)), userInfo: nil, repeats: true)
             sender.setTitle("Stop", for: UIControlState())
             sender.setImage(#imageLiteral(resourceName: "stop"), for: UIControlState())
             ButttonRecord.isEnabled = false
@@ -377,16 +377,16 @@ class RecordAudio_One: UIViewController , AVAudioPlayerDelegate, AVAudioRecorder
         if timeLabel.text != "00:00.00"{
         let progressportion = Float(1/CMTimeGetSeconds((firstAsset?.duration)!))
         progressCounter += progressportion/10
-        progressView.progress = progressCounter
+        //progressView.progress = progressCounter
  
         if progressCounter == 1.0 {
-            progressViewTimer?.invalidate()
+            //progressViewTimer?.invalidate()
         }
  
         /*** DEBUG STATEMENT ***/
         //print("Progress: \(progressCounter)")
         }else{
-            progressView.progress = 0.0
+            //progressView.progress = 0.0
         }
     }
     

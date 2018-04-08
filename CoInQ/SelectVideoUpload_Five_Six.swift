@@ -22,6 +22,8 @@ class SelectVideoUpload_Five_Six : UIViewController{
 //    @IBOutlet weak var sixcomplete: UIImageView!
     @IBOutlet weak var previewFive: UIView!
     @IBOutlet weak var previewSix: UIView!
+    @IBOutlet weak var recFive: UIButton!
+    @IBOutlet weak var recSix: UIButton!
     
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
@@ -38,6 +40,12 @@ class SelectVideoUpload_Five_Six : UIViewController{
             sender.setTitle("形成解釋", for: UIControlState())
         }
     }
+    
+    @IBAction func recFive(_ sender: Any) {
+    }
+    @IBAction func recSix(_ sender: Any) {
+    }
+    
     
     @IBAction func ExplainFive(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"便條紙是一個適合用來\n分類的小工具喔！",preferredStyle: .alert)
@@ -92,11 +100,11 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videosix_path", 6)
                         switch (existone){
                         case 1:
-                            SelectVideoUpload_One_Two().previewVideo(video!, "videofive_path", self.previewFive)
+                            SelectVideoUpload_One_Two().previewVideo(video!, "videofive_path", self.previewFive,self.recFive)
                             
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix, self.recSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
@@ -114,7 +122,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         case 3:
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix,self.recSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
