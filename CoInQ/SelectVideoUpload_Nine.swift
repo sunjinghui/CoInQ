@@ -22,6 +22,7 @@ class SelectVideoUpload_Nine : UIViewController{
     @IBOutlet weak var RecordButton: UIButton!
     @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var recNine: UIButton!
+    @IBOutlet weak var delNine: UIButton!
     
     var clips: [Any]?
     var array: [Any]?
@@ -74,7 +75,27 @@ class SelectVideoUpload_Nine : UIViewController{
         }
     }
     
-    @IBAction func recNine(_ sender: Any) {
+    @IBAction func recNine(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videonine_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        controller.childViewController.clip = 9
+        present(controller, animated: true, completion: nil)
+        
+    }
+    @IBAction func delNine(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版9的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 9)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
     }
     
     func checknine(){
@@ -106,7 +127,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         
                             switch (existone){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.videoPreview,self.recNine)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.videoPreview,self.recNine, self.delNine)
 
                             case 2:
                                 self.startActivityIndicator()
@@ -405,7 +426,7 @@ class SelectVideoUpload_Nine : UIViewController{
         
     }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,check: UIView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,check: UIView,_ recbtn: UIButton){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -447,6 +468,7 @@ class SelectVideoUpload_Nine : UIViewController{
                             self.addChildViewController(self.playerController)
                             self.view.addSubview(self.playerController.view)
                             check.isHidden = false
+                            recbtn.isHidden = false
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
@@ -693,11 +715,21 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
                 message = "故事版9 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:9,check: self.videoPreview)
+                uploadVideo(mp4Path: videoURL,message: message,clip:9,check: self.videoPreview,self.recNine)
                 loadData()
 
             }
             
+        }
+    }
+}
+
+extension SelectVideoUpload_Nine: AudioRecorderViewControllerDelegate {
+    func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
+        dismiss(animated: true, completion: nil)
+        if clip == 9 {
+            let message = "故事版9 影片已匯入成功！"
+            uploadVideo(mp4Path: fileURL!, message: message, clip: 9, check: self.videoPreview,self.recNine)
         }
     }
 }

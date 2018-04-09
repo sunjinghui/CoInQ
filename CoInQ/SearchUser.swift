@@ -16,6 +16,8 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
     var filteredata = [String]()
     var isSearching = false
     
+    var refreshControl: UIRefreshControl!
+    
     @IBOutlet weak var tableview : UITableView!
     @IBOutlet weak var searchbar : UISearchBar!
     
@@ -30,6 +32,11 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
         searchbar.delegate = self
         searchbar.returnKeyType = UIReturnKeyType.done
         tableview.tableFooterView = UIView(frame: .zero)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(getUserInfo), for: UIControlEvents.valueChanged)
+        tableview.addSubview(refreshControl)
+        
         getUserInfo()
         
 //        for vc in (self.navigationController?.viewControllers ?? []) {

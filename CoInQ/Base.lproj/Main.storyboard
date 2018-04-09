@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="4WP-cY-Vrq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="4WP-cY-Vrq">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -486,8 +486,8 @@ name</string>
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" image="sb3" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-An-GQv">
-                                <rect key="frame" x="0.0" y="161" width="766" height="430"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="sb3" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-An-GQv">
+                                <rect key="frame" x="0.0" y="148" width="766" height="468"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-e8-GuU">
@@ -500,7 +500,7 @@ name</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICY-vi-kC3">
-                                <rect key="frame" x="70" y="336" width="123" height="123"/>
+                                <rect key="frame" x="70" y="340" width="123" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="if_note_upload_66841"/>
@@ -516,8 +516,8 @@ name</string>
                                     <action selector="ExplainThree:" destination="nKx-F0-iOd" eventType="touchUpInside" id="9dF-h8-h7X"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" image="sb4" translatesAutoresizingMaskIntoConstraints="NO" id="zLf-7D-jma">
-                                <rect key="frame" x="0.0" y="568" width="768" height="399"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="sb4" translatesAutoresizingMaskIntoConstraints="NO" id="zLf-7D-jma">
+                                <rect key="frame" x="-2" y="557" width="768" height="457"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUx-ak-Yin">
@@ -528,16 +528,8 @@ name</string>
                                     <action selector="ExplainFour:" destination="nKx-F0-iOd" eventType="touchUpInside" id="vL0-FD-Imp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4y-3E-fTe">
-                                <rect key="frame" x="70" y="762" width="123" height="123"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="if_folder_add_66789"/>
-                                <connections>
-                                    <action selector="Cooperation:" destination="nKx-F0-iOd" eventType="touchUpInside" id="ynG-6o-39Q"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yxi-fE-cBx">
-                                <rect key="frame" x="215" y="260" width="465" height="256"/>
+                                <rect key="frame" x="223" y="273" width="465" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -559,18 +551,34 @@ name</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我從不同管道蒐集來的資料可能包括文字、圖片、影像、影片等，每一筆資料都可以用來回答我的科學探究問題嗎？ 我應該如何篩選出有效的證據呢？" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JR4-A3-zPW">
-                                <rect key="frame" x="221" y="589" width="453" height="100"/>
+                                <rect key="frame" x="221" y="607" width="453" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yb4-ET-Iiu">
-                                <rect key="frame" x="70" y="467" width="73" height="70"/>
+                                <rect key="frame" x="50" y="480" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
                                     <action selector="recThree:" destination="nKx-F0-iOd" eventType="touchUpInside" id="7qr-mE-p2I"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UV-p4-vLZ" userLabel="D1">
+                                <rect key="frame" x="143" y="480" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="delThree:" destination="nKx-F0-iOd" eventType="touchUpInside" id="5zl-J3-Vxv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4y-3E-fTe">
+                                <rect key="frame" x="70" y="762" width="123" height="123"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="if_folder_add_66789"/>
+                                <connections>
+                                    <action selector="Cooperation:" destination="nKx-F0-iOd" eventType="touchUpInside" id="ynG-6o-39Q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -578,6 +586,7 @@ name</string>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="蒐集資料" image="Numbers-2-Black-icon" id="Jd7-Pn-Onl"/>
                     <connections>
+                        <outlet property="delThree" destination="2UV-p4-vLZ" id="Pnh-Pq-dP2"/>
                         <outlet property="previewThree" destination="yxi-fE-cBx" id="6bA-2j-EF7"/>
                         <outlet property="recThree" destination="yb4-ET-Iiu" id="Ksf-Vc-PpB"/>
                     </connections>
@@ -656,8 +665,16 @@ name</string>
                                     <action selector="StageTitleFive:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="lgm-5X-55C"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJz-dH-5qF" userLabel="D1">
+                                <rect key="frame" x="144" y="586" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="delNine:" destination="jiQ-Ff-bB9" eventType="touchUpInside" id="dBd-8j-7LS"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMj-Jl-7te">
-                                <rect key="frame" x="76" y="581" width="73" height="70"/>
+                                <rect key="frame" x="49" y="583" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
@@ -671,6 +688,7 @@ name</string>
                     <navigationItem key="navigationItem" id="AiB-QT-JAj"/>
                     <connections>
                         <outlet property="RecordButton" destination="LMl-dB-a76" id="Hel-s5-elL"/>
+                        <outlet property="delNine" destination="uJz-dH-5qF" id="Fj3-Kx-l5i"/>
                         <outlet property="recNine" destination="JMj-Jl-7te" id="Mca-Mw-9aY"/>
                         <outlet property="videoPreview" destination="WCK-Cz-jIp" id="EEP-xM-z7H"/>
                     </connections>
@@ -706,8 +724,8 @@ name</string>
                                 <rect key="frame" x="0.0" y="562" width="768" height="452"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csP-1p-vxz">
-                                <rect key="frame" x="69" y="733" width="123" height="127"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csP-1p-vxz" userLabel="U2">
+                                <rect key="frame" x="69" y="725" width="123" height="127"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="if_note_upload_66841"/>
@@ -715,12 +733,20 @@ name</string>
                                     <action selector="loadAssetTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="fDO-Tu-Kgz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSj-zm-NDu">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSj-zm-NDu" userLabel="i2">
                                 <rect key="frame" x="172" y="628" width="32" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
                                 <connections>
                                     <action selector="ExplainTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="18g-cg-fVg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEY-tr-RIH" userLabel="D2">
+                                <rect key="frame" x="142" y="868" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="delTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="RLt-DT-wiR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGe-v5-A4J">
@@ -733,7 +759,7 @@ name</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtW-iQ-c0W">
-                                <rect key="frame" x="69" y="868" width="73" height="70"/>
+                                <rect key="frame" x="50" y="868" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
@@ -750,14 +776,14 @@ name</string>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-6i-8VW">
-                                <rect key="frame" x="69" y="461" width="73" height="70"/>
+                                <rect key="frame" x="50" y="477" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
                                     <action selector="AudioRecord:" destination="cak-fm-8ax" eventType="touchUpInside" id="JMT-vp-FYv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agc-4j-FI3">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agc-4j-FI3" userLabel="i1">
                                 <rect key="frame" x="172" y="212" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Status-dialog-information-icon"/>
@@ -775,7 +801,7 @@ name</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyw-nz-16W">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyw-nz-16W" userLabel="U1">
                                 <rect key="frame" x="69" y="324" width="123" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -789,11 +815,21 @@ name</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-Yv-cVT" userLabel="D1">
+                                <rect key="frame" x="142" y="477" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="deletVideopath:" destination="cak-fm-8ax" eventType="touchUpInside" id="KAa-hJ-jUR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="決定問題" image="Numbers-1-Black-icon" id="Tzv-QQ-wME"/>
                     <connections>
+                        <outlet property="delTwo" destination="lEY-tr-RIH" id="4Nt-Ad-wXV"/>
+                        <outlet property="deletVideopath" destination="2Kl-Yv-cVT" id="ngO-ML-GgL"/>
                         <outlet property="previewOne" destination="7yX-pj-jS3" id="TbJ-co-m6R"/>
                         <outlet property="previewTwo" destination="MVd-Uj-DCX" id="Ejy-mn-aQQ"/>
                         <outlet property="recAudio" destination="3uo-6i-8VW" id="ccN-UX-7ZP"/>
@@ -843,6 +879,14 @@ name</string>
                                 <rect key="frame" x="11" y="562" width="757" height="413"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Dh-gg-B1T" userLabel="D2">
+                                <rect key="frame" x="150" y="873" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="delSix:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="tBJ-rF-s9B"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zY-ap-vjs">
                                 <rect key="frame" x="225" y="591" width="481" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -900,15 +944,23 @@ name</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whl-gv-jhG">
-                                <rect key="frame" x="77" y="453" width="73" height="70"/>
+                                <rect key="frame" x="65" y="453" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
                                     <action selector="recFive:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="gWq-UI-fXO"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NER-xZ-OT3" userLabel="D1">
+                                <rect key="frame" x="150" y="453" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="delFive:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="3SR-BV-dkj"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9KY-2E-Elm">
-                                <rect key="frame" x="77" y="859" width="73" height="70"/>
+                                <rect key="frame" x="65" y="873" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
@@ -920,6 +972,8 @@ name</string>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="形成解釋" image="Numbers-3-Black-icon" id="OcL-R6-A1a"/>
                     <connections>
+                        <outlet property="delFive" destination="NER-xZ-OT3" id="vf0-nw-52d"/>
+                        <outlet property="delSix" destination="4Dh-gg-B1T" id="Im0-2Z-Ujp"/>
                         <outlet property="previewFive" destination="XMP-sW-fyC" id="1Jm-t9-uno"/>
                         <outlet property="previewSix" destination="ZRr-Db-VdV" id="4aN-6h-At7"/>
                         <outlet property="recFive" destination="Whl-gv-jhG" id="Slj-NN-DdI"/>
@@ -946,6 +1000,14 @@ name</string>
                                 <rect key="frame" x="0.0" y="138" width="768" height="443"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XA2-3o-50V" userLabel="D1">
+                                <rect key="frame" x="140" y="467" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="delSeven:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="pCV-6S-DED"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zo-hM-EeH">
                                 <rect key="frame" x="224" y="179" width="461" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -965,7 +1027,7 @@ name</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGr-km-umx">
-                                <rect key="frame" x="58" y="321" width="123" height="123"/>
+                                <rect key="frame" x="58" y="317" width="123" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="if_note_upload_66841"/>
@@ -977,6 +1039,14 @@ name</string>
                                 <rect key="frame" x="0.0" y="545" width="768" height="447"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYM-FH-sCn" userLabel="D1">
+                                <rect key="frame" x="140" y="871" width="50" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="delete"/>
+                                <connections>
+                                    <action selector="delEight:" destination="uB4-Hz-Br3" eventType="touchUpInside" id="dLT-gG-cQF"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8o-hs-55B">
                                 <rect key="frame" x="58" y="727" width="123" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1026,7 +1096,7 @@ name</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XR-dM-9wW">
-                                <rect key="frame" x="58" y="467" width="73" height="70"/>
+                                <rect key="frame" x="44" y="467" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
@@ -1034,7 +1104,7 @@ name</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wov-0d-haK">
-                                <rect key="frame" x="58" y="866" width="73" height="70"/>
+                                <rect key="frame" x="44" y="868" width="73" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
@@ -1046,6 +1116,8 @@ name</string>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" title="評估解釋" image="Numbers-4-Black-icon" id="lI5-gW-13f"/>
                     <connections>
+                        <outlet property="delEight" destination="eYM-FH-sCn" id="Oxy-rF-4Us"/>
+                        <outlet property="delSeven" destination="XA2-3o-50V" id="amv-k1-YJI"/>
                         <outlet property="previewEight" destination="hUo-uF-RQg" id="44a-ea-C6n"/>
                         <outlet property="previewSeven" destination="rPY-4e-9n4" id="2jV-Fb-jIc"/>
                         <outlet property="recEight" destination="wov-0d-haK" id="i4A-50-Mn5"/>
@@ -1436,6 +1508,7 @@ name</string>
         <image name="circle4" width="268" height="269"/>
         <image name="circle5" width="268" height="269"/>
         <image name="circle6" width="75" height="81"/>
+        <image name="delete" width="512" height="512"/>
         <image name="edit-64" width="64" height="64"/>
         <image name="icon_circle" width="40" height="26"/>
         <image name="if_folder_add_66789" width="128" height="128"/>

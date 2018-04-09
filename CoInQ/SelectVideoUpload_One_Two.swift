@@ -28,6 +28,8 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBOutlet weak var recAudioTwo: UIButton!
     @IBOutlet weak var previewOne: UIView!
     @IBOutlet weak var previewTwo: UIView!
+    @IBOutlet weak var deletVideopath: UIButton!
+    @IBOutlet weak var delTwo: UIButton!
     
     @IBAction func AudioRecord(_ sender: AnyObject) {
         
@@ -57,6 +59,26 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
 //    @IBOutlet weak var firstcomplete: UIImageView!
 //    @IBOutlet weak var secondcomplete: UIImageView!
+    
+    @IBAction func deletVideopath(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版1的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+         self.deleteVideoPath(sb: 1)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func delTwo(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版2的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            self.deleteVideoPath(sb: 2)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
+    }
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -188,6 +210,8 @@ class SelectVideoUpload_One_Two : UIViewController{
         previewTwo.isHidden = true
         recAudio.isHidden = true
         recAudioTwo.isHidden = true
+        delTwo.isHidden = true
+        deletVideopath.isHidden = true
         load()
     }
     
@@ -223,10 +247,10 @@ class SelectVideoUpload_One_Two : UIViewController{
                         switch (existone){
                         case 1:
 //                            self.showthumbnail(video!, "videoone_path", self.firstcomplete)
-                            self.previewVideo(video!, "videoone_path", self.previewOne, self.recAudio)
+                            self.previewVideo(video!, "videoone_path", self.previewOne, self.recAudio, self.deletVideopath)
                             switch (existtwo){
                             case 1:
-                                self.previewVideo(video!, "videotwo_path", self.previewTwo, self.recAudioTwo)
+                                self.previewVideo(video!, "videotwo_path", self.previewTwo, self.recAudioTwo, self.delTwo)
 //                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                             case 2:
                                 self.startActivityIndicator()
@@ -246,7 +270,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             switch (existtwo){
                             case 1:
 //                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
-                                self.previewVideo(video!, "videotwo_path", self.previewTwo,self.recAudioTwo)
+                                self.previewVideo(video!, "videotwo_path", self.previewTwo,self.recAudioTwo, self.delTwo)
 
                             case 2:
                                 self.startActivityIndicator()
@@ -267,7 +291,7 @@ class SelectVideoUpload_One_Two : UIViewController{
 
     }
     
-    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton){
+    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
         let videourl = videoinfo[videopath] as? String
         let url = URL(string: videourl!)
         self.player = AVPlayer(url: url!)
@@ -278,6 +302,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         self.view.addSubview(self.playerController.view)
         preview.isHidden = false
         recbtn.isHidden = false
+        delbtn.isHidden = false
     }
     
 //    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: UIImageView){
@@ -449,8 +474,30 @@ class SelectVideoUpload_One_Two : UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    //刪除故事版的videopath
+    func deleteVideoPath(sb: Int){
+        let parameters: Parameters=[
+            "id":    Index,
+            "clip" : sb
+        ]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/deletevideo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                if response.result.isSuccess{
+                    self.load()
+                }else{
+                    let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
+                    deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
+                    self.present(deleteAlert, animated: true, completion: nil)
+                    self.load()
+                }
+                //         print(response)
+        }
+    }
+    
+    
     //上传视频到服务器
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView,_ recbtn: UIButton){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -488,11 +535,12 @@ class SelectVideoUpload_One_Two : UIViewController{
                             self.player = AVPlayer(url: mp4Path)
                             self.playerController = AVPlayerViewController()
                             self.playerController.player = self.player
-                            self.playerController.view.frame = check.frame
+                            self.playerController.view.frame = preview.frame
                             self.addChildViewController(self.playerController)
                             self.view.addSubview(self.playerController.view)
-                            check.isHidden = false
+                            preview.isHidden = false
                             recbtn.isHidden = false
+                            delbtn.isHidden = false
 //                            //show video thumbnail
 //                            let asset = AVURLAsset(url: mp4Path, options: nil)
 //                            let imgGenerator = AVAssetImageGenerator(asset: asset)
@@ -512,7 +560,7 @@ class SelectVideoUpload_One_Two : UIViewController{
 //                            check.isHidden = false
                         })
                         alert.addAction(action2)
-                        VC.present(alert , animated: true , completion: nil)
+                        self.present(alert , animated: true , completion: nil)
                         lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
@@ -521,7 +569,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let alert = UIAlertController(title:"提示",message:"上傳失敗，請重新上傳", preferredStyle: .alert)
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
-                        VC.present(alert , animated: true , completion: nil)
+                        self.present(alert , animated: true , completion: nil)
                         lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
@@ -577,14 +625,14 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
 //                    alertController.addAction(checkagainAction)
 //                    self.present(alertController, animated: true, completion: nil)
 //                }else{
-                    self.uploadVideo(mp4Path: videourl,message: message,clip:1,VC: self,check: self.previewOne,self.recAudio)
+                    self.uploadVideo(mp4Path: videourl,message: message,clip:1,self.previewOne,self.recAudio,self.deletVideopath)
                     load()
 //                }
             } else {
                 message = "故事版2 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                self.uploadVideo(mp4Path: videoURL,message: message,clip:2,VC: self,check: self.previewTwo,self.recAudioTwo)
+                self.uploadVideo(mp4Path: videoURL,message: message,clip:2,self.previewTwo,self.recAudioTwo,self.delTwo)
                 load()
             }
             
@@ -601,10 +649,10 @@ extension SelectVideoUpload_One_Two: AudioRecorderViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         if clip == 1 {
             let message = "故事版1 影片已匯入成功！"
-            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 1, VC: self, check: self.previewOne, self.recAudio)
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 1, self.previewOne, self.recAudio, self.deletVideopath)
         }else if clip == 2 {
             let message = "故事版2 影片已匯入成功！"
-            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 2, VC: self, check: self.previewTwo, self.recAudioTwo)
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 2, self.previewTwo, self.recAudioTwo, self.delTwo)
         }
 
     }

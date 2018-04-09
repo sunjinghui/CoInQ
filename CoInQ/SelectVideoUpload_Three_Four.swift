@@ -23,6 +23,8 @@ class SelectVideoUpload_Three_Four : UIViewController{
 //    @IBOutlet weak var fourcomplete: UIImageView!
     @IBOutlet weak var recThree: UIButton!
     @IBOutlet weak var previewThree: UIView!
+    @IBOutlet weak var delThree: UIButton!
+    
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
     
@@ -38,8 +40,30 @@ class SelectVideoUpload_Three_Four : UIViewController{
         }
     }
     
-    @IBAction func recThree(_ sender: Any) {
+    @IBAction func recThree(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videothree_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        controller.childViewController.clip = 3
+        present(controller, animated: true, completion: nil)
+        
     }
+    
+    @IBAction func delThree(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版3的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 3)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
+    }
+    
     @IBAction func Cooperation(_ sender: Any){
         let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationController") as! TableNavigationController
         present(navigationtableview, animated: true, completion: nil)
@@ -65,6 +89,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         previewThree.isHidden = true
+        recThree.isHidden = true
 //        fourcomplete.isHidden = true
         check()
     }
@@ -98,7 +123,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
 
                             switch (existone){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.previewThree,self.recThree)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.previewThree,self.recThree, self.delThree)
                                 
                             case 2:
                                 self.startActivityIndicator()
@@ -222,7 +247,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
 //        }
 //    }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView,_ recbtn: UIButton){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -264,6 +289,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
                             self.addChildViewController(self.playerController)
                             self.view.addSubview(self.playerController.view)
                             check.isHidden = false
+                            recbtn.isHidden = false
                         })
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
@@ -310,7 +336,7 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
                 message = "故事版3 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:3,VC: self,check: self.previewThree)
+                uploadVideo(mp4Path: videoURL,message: message,clip:3,VC: self,check: self.previewThree, self.recThree)
                 loaddata()
             }
 //            else {
@@ -321,6 +347,16 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
 //                loaddata()
 //            }
             
+        }
+    }
+}
+
+extension SelectVideoUpload_Three_Four: AudioRecorderViewControllerDelegate {
+    func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
+        dismiss(animated: true, completion: nil)
+        if clip == 3 {
+            let message = "故事版3 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 3, VC: self, check: self.previewThree, self.recThree)
         }
     }
 }

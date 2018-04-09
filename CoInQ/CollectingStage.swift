@@ -12,6 +12,7 @@ import Alamofire
 import MobileCoreServices
 import SwiftyJSON
 import Photos
+import AVKit
 
 class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var TableEmpty: UIView!
@@ -19,6 +20,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var editButtom: UIBarButtonItem!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var refreshControl: UIRefreshControl!
 //    fileprivate let viewModel = ProfileViewModel()
     var clips: [Any]?
     var invites: [Any]?
@@ -37,6 +39,10 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         tableview.register(nibName, forCellReuseIdentifier: "tableviewcell")
         tableview.register(UINib(nibName: "TableViewCell_invite", bundle: nil), forCellReuseIdentifier: "cellinvite")
 //        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.loaddata), for: UIControlEvents.valueChanged)
+        tableview.addSubview(refreshControl)
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadinvitation), name: NSNotification.Name("CoStage"), object: nil)
         loadinvitation()
@@ -381,7 +387,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
             let clipID = clipitem?["id"] as? Int
             
             clips?.remove(at: sourceIndexPath.row)
-            clips?.insert(clipitem, at: destinationIndexPath.row)
+            clips?.insert(clipitem as Any, at: destinationIndexPath.row)
             self.UpdateOrder(clipid: clipID!, order: destinationIndexPath.row)
     }
     
@@ -403,7 +409,17 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                 deleteAlert.addAction(cancelAction)
                 self.present(deleteAlert, animated: true, completion: nil)
             }else{
-                
+                let deleteAlert = UIAlertController(title:"確定要刪除共創邀請嗎？",message: "刪除後無法復原！", preferredStyle: .alert)
+                deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+                    
+                    let invitesInfo = self.invites?[indexPath.row] as? [String: Any]
+                    let invitesid = invitesInfo?["id"] as? Int
+                    self.deleteInvitation(id: invitesid!)
+                    //                SelectVideoUpload_Nine().update()
+                }))
+                let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+                deleteAlert.addAction(cancelAction)
+                self.present(deleteAlert, animated: true, completion: nil)
             }
         }
         
@@ -440,6 +456,29 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         
     }
     
+    func deleteInvitation(id: Int){
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteclips.php", method: .post, parameters: ["id":id]).responseJSON
+            {
+                response in
+                //                print("DDDelete ID\(id) \(response)")
+                if let result = response.result.value {
+                    let jsonData = result as! NSDictionary
+                    let error = jsonData.value(forKey: "error") as? Bool
+                    if error! {
+                        let deleteAlert = UIAlertController(title:"提示",message: "刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
+                        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
+                        self.present(deleteAlert, animated: true, completion: nil)
+                        self.loaddata()
+                    }else{
+                        //                        lognote("dcf", google_userid, "\(id)")
+                        self.loaddata()
+                    }
+                    
+                }
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 350
@@ -454,6 +493,27 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         }else{
             return false
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            let collect = self.clips?[indexPath.row] as? [String: Any]
+            let videoURL = collect?["videopath"] as? String
+//            let clipid = collect?["id"] as? Int
+//            lognote("pfv", google_userid, "\(clipid!)")
+            
+            //        let finalvideoURL = URL(string: finalvideopath!)
+            //        let requestUrl = "http://140.122.76.201/CoInQ/upload/"
+            //        let urls = requestUrl.appending(google_userid).appending("/").appending("\(videoid)").appending("/").appending((finalvideoURL?.lastPathComponent)!)
+            //        let videourl = URL(string: urls)
+            let Player = AVPlayer(url: URL(string: videoURL!)!)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = Player
+            self.present(playerViewController,animated: true){
+                playerViewController.player!.play()
+            }
+        }
+        
     }
 
     func startActivityIndicator() {

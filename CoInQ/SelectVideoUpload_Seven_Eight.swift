@@ -24,6 +24,8 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     @IBOutlet weak var previewEight: UIView!
     @IBOutlet weak var recSeven: UIButton!
     @IBOutlet weak var recEight: UIButton!
+    @IBOutlet weak var delSeven: UIButton!
+    @IBOutlet weak var delEight: UIButton!
     
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
@@ -41,10 +43,51 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         }
     }
     
-    @IBAction func revSeven(_ sender: Any) {
+    @IBAction func revSeven(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videoseven_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        controller.childViewController.clip = 7
+        present(controller, animated: true, completion: nil)
+        
     }
     
-    @IBAction func recEight(_ sender: Any) {
+    @IBAction func recEight(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videoeight_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        controller.childViewController.clip = 8
+        present(controller, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func delSeven(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版7的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 7)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
+    }
+    @IBAction func delEight(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版8的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 8)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -84,11 +127,11 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoeight_path", 8)
                         switch (existone){
                         case 1:
-                            SelectVideoUpload_One_Two().previewVideo(video!, "videoseven_path", self.previewSeven,self.recSeven)
+                            SelectVideoUpload_One_Two().previewVideo(video!, "videoseven_path", self.previewSeven,self.recSeven, self.delSeven)
                             
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String
@@ -106,7 +149,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         case 3:
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String
@@ -261,7 +304,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         
     }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView,_ recbtn: UIButton){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -303,6 +346,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             self.addChildViewController(self.playerController)
                             self.view.addSubview(self.playerController.view)
                             check.isHidden = false
+                            recbtn.isHidden = false
                         })
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
@@ -347,18 +391,32 @@ extension SelectVideoUpload_Seven_Eight : UIImagePickerControllerDelegate {
                 message = "故事版7 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:7,VC: self,check: self.previewSeven)
+                uploadVideo(mp4Path: videoURL,message: message,clip:7,VC: self,check: self.previewSeven,self.recSeven)
                 loadData()
             } else {
                 message = "故事版8 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:8,VC: self,check: self.previewEight)
+                uploadVideo(mp4Path: videoURL,message: message,clip:8,VC: self,check: self.previewEight,self.recEight)
                 loadData()
 
             }
 
         }
+    }
+}
+
+extension SelectVideoUpload_Seven_Eight: AudioRecorderViewControllerDelegate {
+    func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
+        dismiss(animated: true, completion: nil)
+        if clip == 5 {
+            let message = "故事版5 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 5, VC: self, check: self.previewSeven, self.recSeven)
+        }else if clip == 6 {
+            let message = "故事版6 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 6, VC: self, check: self.previewEight, self.recEight)
+        }
+        
     }
 }
 

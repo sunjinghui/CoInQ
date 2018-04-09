@@ -24,6 +24,8 @@ class SelectVideoUpload_Five_Six : UIViewController{
     @IBOutlet weak var previewSix: UIView!
     @IBOutlet weak var recFive: UIButton!
     @IBOutlet weak var recSix: UIButton!
+    @IBOutlet weak var delFive: UIButton!
+    @IBOutlet weak var delSix: UIButton!
     
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
@@ -41,9 +43,51 @@ class SelectVideoUpload_Five_Six : UIViewController{
         }
     }
     
-    @IBAction func recFive(_ sender: Any) {
+    @IBAction func recFive(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videofive_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        controller.childViewController.clip = 5
+        present(controller, animated: true, completion: nil)
+        
     }
-    @IBAction func recSix(_ sender: Any) {
+    @IBAction func recSix(_ sender: AnyObject) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videosix_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        controller.childViewController.clip = 6
+        present(controller, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func delFive(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版5的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 5)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func delSix(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版6的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 6)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
     }
     
     
@@ -67,7 +111,8 @@ class SelectVideoUpload_Five_Six : UIViewController{
         super.viewDidLoad()
         previewFive.isHidden = true
         previewSix.isHidden = true
-        
+        recFive.isHidden = true
+        recSix.isHidden = true
         check()
     }
     
@@ -100,11 +145,11 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videosix_path", 6)
                         switch (existone){
                         case 1:
-                            SelectVideoUpload_One_Two().previewVideo(video!, "videofive_path", self.previewFive,self.recFive)
+                            SelectVideoUpload_One_Two().previewVideo(video!, "videofive_path", self.previewFive,self.recFive, self.delFive)
                             
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix, self.recSix)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix, self.recSix, self.delSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
@@ -122,7 +167,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         case 3:
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix,self.recSix)
+                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix,self.recSix, self.delSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
@@ -262,7 +307,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
         
     }
     
-    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView){
+    func uploadVideo(mp4Path : URL , message : String, clip: Int,VC: UIViewController,check: UIView,_ recbtn: UIButton){
         
         Alamofire.upload(
             //同样采用post表单上传
@@ -304,6 +349,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                             self.addChildViewController(self.playerController)
                             self.view.addSubview(self.playerController.view)
                             check.isHidden = false
+                            recbtn.isHidden = false
                         })
                         alert.addAction(action2)
                         VC.present(alert , animated: true , completion: nil)
@@ -350,18 +396,32 @@ extension SelectVideoUpload_Five_Six : UIImagePickerControllerDelegate {
                 message = "故事版5 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:5,VC: self,check: self.previewFive)
+                uploadVideo(mp4Path: videoURL,message: message,clip:5,VC: self,check: self.previewFive,self.recFive)
                 loadData()
             } else {
                 message = "故事版6 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:6,VC: self,check: self.previewSix)
+                uploadVideo(mp4Path: videoURL,message: message,clip:6,VC: self,check: self.previewSix,self.recSix)
                 loadData()
 
             }
 
         }
+    }
+}
+
+extension SelectVideoUpload_Five_Six: AudioRecorderViewControllerDelegate {
+    func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
+        dismiss(animated: true, completion: nil)
+        if clip == 5 {
+            let message = "故事版5 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 5, VC: self, check: self.previewFive, self.recFive)
+        }else if clip == 6 {
+            let message = "故事版6 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 6, VC: self, check: self.previewSix, self.recSix)
+        }
+        
     }
 }
 

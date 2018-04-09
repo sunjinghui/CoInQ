@@ -17,6 +17,7 @@ class InvitaionViewController : UIViewController{
     @IBOutlet weak var googleSignInEmail: UILabel!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var refreshControl: UIRefreshControl!
     var DataArray: [Any]?
     var context = [String]()
     var videoname = [String]()
@@ -26,10 +27,11 @@ class InvitaionViewController : UIViewController{
     var googleid_FROM = [String]()
     
     override func viewDidLoad() {
-        
         tableview.tableFooterView = UIView(frame: .zero)
         super.viewDidLoad()
-        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.getCooperateInfo), for: UIControlEvents.valueChanged)
+        tableview.addSubview(refreshControl)
         getCooperateInfo()
     }
     
@@ -194,6 +196,24 @@ class InvitaionViewController : UIViewController{
         return true
     }
     
+    func startCameraFromViewController(_ viewController: UIViewController, withDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate) -> Bool {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
+            return false
+        }
+        
+        let cameraController = UIImagePickerController()
+        cameraController.sourceType = .camera
+        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
+        cameraController.cameraCaptureMode = .video
+        cameraController.videoQuality = .typeHigh
+        cameraController.allowsEditing = true
+        cameraController.delegate = delegate
+        cameraController.videoMaximumDuration = 30.0
+        
+        present(cameraController, animated: true, completion: nil)
+        return true
+    }
+    
     func startActivityIndicator() {
         let screenSize: CGRect = UIScreen.main.bounds
         
@@ -248,9 +268,9 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource {
         var cell: TableView_cellcooperate
         
         cell = tableView.dequeueReusableCell(withIdentifier: "cellcooperate", for: indexPath) as! TableView_cellcooperate
-        cell.videoname.text = videoname[indexPath.row]
-        cell.context.text = context[indexPath.row]
-        cell.owner.text = ownerName[indexPath.row]
+        cell.videoname.text = "影片名稱：".appending(videoname[indexPath.row])
+        cell.context.text = "共創影片的相關說明：".appending(context[indexPath.row])
+        cell.owner.text = ownerName[indexPath.row].appending("  請您提供探究資料")
         
         return cell
     }
@@ -281,9 +301,19 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if savedPhotosAvailable() {
-            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-        }
+        let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
+            (action) -> Void in
+            _ = self.startCameraFromViewController(self, withDelegate: self)
+        }))
+        alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
+            (action) -> Void in
+            if self.savedPhotosAvailable() {
+                _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -296,6 +326,10 @@ extension InvitaionViewController : UIImagePickerControllerDelegate {
         
         if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
+            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
+                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
+            }
             var message = ""
                 message = "共創影片影片已傳遞成功！"
                 self.startActivityIndicator()
