@@ -76,6 +76,7 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
                     }
                     
                     self.tableview.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
         }
         

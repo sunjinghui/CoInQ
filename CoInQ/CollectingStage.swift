@@ -158,6 +158,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         self.navigationItem.rightBarButtonItem = self.editButtom
                     }
                     self.tableview.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
         }
 

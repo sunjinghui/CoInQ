@@ -77,6 +77,7 @@ class InvitaionViewController : UIViewController{
                     }
                     
                     self.tableview.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
         }
         
