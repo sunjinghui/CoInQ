@@ -160,13 +160,13 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="225"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oEm-tq-Ata" id="28w-Hm-2tb">
-                                            <rect key="frame" x="0.0" y="0.0" width="702" height="224.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="702" height="225"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6J-4r-EoP">
-                                                    <rect key="frame" x="148" y="19" width="244" height="30"/>
+                                                    <rect key="frame" x="148" y="19" width="554" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="244" id="b8v-xe-bH5"/>
+                                                        <constraint firstAttribute="width" constant="554" id="b8v-xe-bH5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <nil key="textColor"/>
@@ -179,18 +179,14 @@
                                                         <constraint firstAttribute="width" constant="72" id="LM9-3k-QNy"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiA-XF-MhB">
-                                                    <rect key="frame" x="43" y="131" width="692" height="75"/>
-                                                    <string key="text">Label
-label</string>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labellabel" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiA-XF-MhB">
+                                                    <rect key="frame" x="43" y="131" width="725" height="75"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3e1-j8-QTi">
-                                                    <rect key="frame" x="148" y="57" width="586" height="72"/>
-                                                    <string key="text">video
-name</string>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="videoname" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3e1-j8-QTi">
+                                                    <rect key="frame" x="148" y="57" width="619" height="72"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -206,19 +202,20 @@ name</string>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="3e1-j8-QTi" firstAttribute="leading" secondItem="AVa-im-c7M" secondAttribute="trailing" constant="33" id="0l7-GU-gZi"/>
                                                 <constraint firstItem="HAf-Co-bdp" firstAttribute="leading" secondItem="AVa-im-c7M" secondAttribute="leading" id="6FF-Cw-IQT"/>
                                                 <constraint firstItem="AVa-im-c7M" firstAttribute="leading" secondItem="iiA-XF-MhB" secondAttribute="leading" id="9iv-XP-jE6"/>
-                                                <constraint firstItem="AVa-im-c7M" firstAttribute="top" secondItem="3e1-j8-QTi" secondAttribute="top" id="Dg7-Rq-k86"/>
-                                                <constraint firstItem="v6J-4r-EoP" firstAttribute="leading" secondItem="3e1-j8-QTi" secondAttribute="leading" id="FAy-9W-hpx"/>
+                                                <constraint firstItem="3e1-j8-QTi" firstAttribute="leading" secondItem="v6J-4r-EoP" secondAttribute="leading" id="HYd-y0-6em"/>
                                                 <constraint firstItem="HAf-Co-bdp" firstAttribute="top" secondItem="28w-Hm-2tb" secondAttribute="topMargin" constant="11" id="RfC-jj-a9y"/>
                                                 <constraint firstItem="HAf-Co-bdp" firstAttribute="baseline" secondItem="v6J-4r-EoP" secondAttribute="baseline" id="S94-sZ-zqH"/>
+                                                <constraint firstItem="3e1-j8-QTi" firstAttribute="top" secondItem="AVa-im-c7M" secondAttribute="top" id="SCg-pJ-cxm"/>
                                                 <constraint firstItem="AVa-im-c7M" firstAttribute="top" secondItem="HAf-Co-bdp" secondAttribute="bottom" constant="8" symbolic="YES" id="ULe-zK-RA8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3e1-j8-QTi" secondAttribute="trailing" constant="-40" id="VFd-zw-vWA"/>
+                                                <constraint firstItem="3e1-j8-QTi" firstAttribute="leading" secondItem="AVa-im-c7M" secondAttribute="trailing" constant="33" id="dde-V1-7Ld"/>
                                                 <constraint firstItem="iiA-XF-MhB" firstAttribute="top" secondItem="AVa-im-c7M" secondAttribute="bottom" constant="2" id="fcf-yh-T3T"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="3e1-j8-QTi" secondAttribute="trailing" constant="-7" id="fjK-iL-zgs"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="iiA-XF-MhB" secondAttribute="bottom" constant="10.5" id="hwL-us-CC1"/>
-                                                <constraint firstAttribute="trailing" secondItem="iiA-XF-MhB" secondAttribute="trailing" id="iC7-Rr-EZa"/>
+                                                <constraint firstAttribute="trailing" secondItem="iiA-XF-MhB" secondAttribute="trailing" constant="-33" id="iC7-Rr-EZa"/>
                                                 <constraint firstItem="v6J-4r-EoP" firstAttribute="baseline" secondItem="HAf-Co-bdp" secondAttribute="firstBaseline" id="kQM-sZ-36P"/>
+                                                <constraint firstItem="3e1-j8-QTi" firstAttribute="bottom" secondItem="AVa-im-c7M" secondAttribute="bottom" id="mVT-hm-n6S"/>
                                                 <constraint firstItem="HAf-Co-bdp" firstAttribute="leading" secondItem="28w-Hm-2tb" secondAttribute="leadingMargin" constant="35" id="roe-PL-tpw"/>
                                             </constraints>
                                         </tableViewCellContentView>

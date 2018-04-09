@@ -242,6 +242,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
         }
         
         let cameraController = UIImagePickerController()
+        cameraController.allowsEditing = true
         cameraController.sourceType = .camera
         cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
         cameraController.cameraCaptureMode = .video
@@ -284,6 +285,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
+        alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
     }
@@ -303,6 +305,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
+        alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
     }
