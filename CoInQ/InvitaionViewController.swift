@@ -314,7 +314,7 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource {
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
-        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: nil))
+//        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         

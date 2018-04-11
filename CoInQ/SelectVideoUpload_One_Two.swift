@@ -63,7 +63,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBAction func deletVideopath(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版1的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-         self.deleteVideoPath(sb: 1)
+         self.deleteVideoPath(sb: 1, self.previewOne, #imageLiteral(resourceName: "sb1"))
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -73,7 +73,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBAction func delTwo(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版2的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 2)
+            self.deleteVideoPath(sb: 2, self.previewTwo,#imageLiteral(resourceName: "sbimg2.png"))
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -185,7 +185,6 @@ class SelectVideoUpload_One_Two : UIViewController{
 
     }
     
-    
     @IBAction func loadAssetTwo(_ sender: AnyObject) {
         let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
@@ -205,11 +204,12 @@ class SelectVideoUpload_One_Two : UIViewController{
 
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        previewOne.isHidden = true
-        previewTwo.isHidden = true
+//        previewOne.isHidden = true
+//        previewTwo.isHidden = true
+        showSBimage(previewOne, #imageLiteral(resourceName: "sb1"))
+        showSBimage(previewTwo, #imageLiteral(resourceName: "sbimg2.png"))
         recAudio.isHidden = true
         recAudioTwo.isHidden = true
         delTwo.isHidden = true
@@ -245,21 +245,22 @@ class SelectVideoUpload_One_Two : UIViewController{
                     if !(video?.isEmpty)! {
                         let existone = self.checkVideoExist(video!, "videoone_path", 1)
                         let existtwo = self.checkVideoExist(video!, "videotwo_path", 2)
-
                         switch (existone){
                         case 1:
-//                            self.showthumbnail(video!, "videoone_path", self.firstcomplete)
                             self.previewVideo(video!, "videoone_path", self.previewOne, self.recAudio, self.deletVideopath)
                             switch (existtwo){
                             case 1:
                                 self.previewVideo(video!, "videotwo_path", self.previewTwo, self.recAudioTwo, self.delTwo)
-//                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videotwo_path"] as? String
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
+//                                self.playerController.removeFromParentViewController()
+//                                self.playerController.view.removeFromSuperview()
+                                self.recAudioTwo.isHidden = true
+                                self.delTwo.isHidden = true
                                 break
                             default: break
                             }
@@ -269,9 +270,12 @@ class SelectVideoUpload_One_Two : UIViewController{
                             let url = URL(string: videourl!)
                             self.donloadVideo(url: url!,self.stopActivityIndicator(_:),1)
                         case 3:
+                            self.playerController.removeFromParentViewController()
+                            self.playerController.view.removeFromSuperview()
+                            self.recAudio.isHidden = true
+                            self.deletVideopath.isHidden = true
                             switch (existtwo){
                             case 1:
-//                                self.showthumbnail(video!, "videotwo_path", self.secondcomplete)
                                 self.previewVideo(video!, "videotwo_path", self.previewTwo,self.recAudioTwo, self.delTwo)
 
                             case 2:
@@ -280,6 +284,10 @@ class SelectVideoUpload_One_Two : UIViewController{
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
+//                                self.playerController.removeFromParentViewController()
+//                                self.playerController.view.removeFromSuperview()
+                                self.recAudioTwo.isHidden = true
+                                self.delTwo.isHidden = true
                                 break
                             default: break
                             }
@@ -287,10 +295,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                         default: break
                         }
                     }
-
                 }
         }
-
     }
     
     func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
@@ -383,12 +389,10 @@ class SelectVideoUpload_One_Two : UIViewController{
                 switch response.result {
                 case .success(let videoname):
                     completion(videoname as? NSDictionary, nil)
-                    
                 case .failure(let error):
-                    print(error)
                     completion(nil,error)
                 }
-        }
+            }
     }
     
     func donloadVideo(url : URL,_ stopAI: @escaping (Int)->(),_ clip: Int){
@@ -477,7 +481,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //刪除故事版的videopath
-    func deleteVideoPath(sb: Int){
+    func deleteVideoPath(sb: Int,_ preview: UIView,_ image: UIImage){
         let parameters: Parameters=[
             "id":    Index,
             "clip" : sb
@@ -487,16 +491,19 @@ class SelectVideoUpload_One_Two : UIViewController{
                 response in
                 if response.result.isSuccess{
                     self.load()
-                }else{
-                    let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
-                    deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
-                    self.present(deleteAlert, animated: true, completion: nil)
-                    self.load()
+                    self.showSBimage(preview, image)
+                    self.playerController.removeFromParentViewController()
+                    self.playerController.view.removeFromSuperview()
+                    self.playerController.showsPlaybackControls = false
                 }
-                //         print(response)
         }
     }
-    
+    func showSBimage(_ preview: UIView,_ image: UIImage){
+        let imageview = UIImageView(frame: preview.frame)
+        imageview.image = image
+        imageview.contentMode = .scaleAspectFill
+        self.view.addSubview(imageview)
+    }
     
     //上传视频到服务器
     func uploadVideo(mp4Path : URL , message : String, clip: Int,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
@@ -610,10 +617,10 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
             
-            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
-            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
-            }
+//            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
+//            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
+//                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
+//            }
             
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
@@ -638,7 +645,6 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
                 load()
             }
             
-
             //let userdefault = UserDefaults.standard
             //userdefault.set(firstAsset, forKey: "VideoOne")
             //userdefault.set(secondAsset, forKey: "VideoTwo")

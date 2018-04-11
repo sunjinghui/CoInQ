@@ -104,13 +104,27 @@ class AudioRecorderViewController: UINavigationController {
             recordButtonContainer.layer.borderColor = UIColor.white.cgColor
             recordButtonContainer.layer.borderWidth = 3
             
-            
+            let videoFrame = CGRect(x: 44, y: 60, width: 681, height: 480)
+            let imageview = UIImageView(frame: videoFrame)
+            let asset = AVURLAsset(url: videourl!, options: nil)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+//            imgGenerator.appliesPreferredTrackTransform = false
+    
+            do {
+                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                imageview.image = UIImage(cgImage: cgImage)
+        
+            } catch let error {
+                print("*** Error generating thumbnail: \(error)")
+            }
+
+            imageview.contentMode = .scaleAspectFit
+            self.view.addSubview(imageview)
 
         }
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-            
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
                 try AVAudioSession.sharedInstance().setActive(true)
@@ -118,7 +132,6 @@ class AudioRecorderViewController: UINavigationController {
             catch let error as NSError {
                 NSLog("Error: \(error)")
             }
-            
             NotificationCenter.default.addObserver(self, selector: #selector(AudioRecorderChildViewController.stopRecording(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         }
         
@@ -235,7 +248,6 @@ class AudioRecorderViewController: UINavigationController {
 
             updateControls()
         }
-        
         
         func updateControls() {
             

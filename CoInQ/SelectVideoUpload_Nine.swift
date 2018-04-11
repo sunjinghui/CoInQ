@@ -60,6 +60,8 @@ class SelectVideoUpload_Nine : UIViewController{
         super.viewDidLoad()
         RecordButton.layer.cornerRadius = 8
         videoPreview.isHidden = true
+        recNine.isHidden = true
+        delNine.isHidden = true
         checknine()
     }
     
@@ -91,11 +93,31 @@ class SelectVideoUpload_Nine : UIViewController{
     @IBAction func delNine(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版9的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            SelectVideoUpload_One_Two().deleteVideoPath(sb: 9)
+            self.deleteVideoPath(sb: 9)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
         self.present(deleteAlert, animated: true, completion: nil)
+    }
+    //刪除故事版的videopath
+    func deleteVideoPath(sb: Int){
+        let parameters: Parameters=[
+            "id":    Index,
+            "clip" : sb
+        ]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/deletevideo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                if response.result.isSuccess{
+                    self.loadData()
+                }else{
+                    let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
+                    deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
+                    self.present(deleteAlert, animated: true, completion: nil)
+                    self.loadData()
+                }
+                //         print(response)
+        }
     }
     
     func checknine(){
@@ -124,11 +146,10 @@ class SelectVideoUpload_Nine : UIViewController{
                     var video = self.array?[0] as? [String: Any]
                     if !(video?.isEmpty)! {
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videonine_path", 9)
-                        
                             switch (existone){
                             case 1:
                                 SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.videoPreview,self.recNine, self.delNine)
-
+                                break
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videonine_path"] as? String
@@ -136,7 +157,10 @@ class SelectVideoUpload_Nine : UIViewController{
                                 SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),9)
 
                             case 3:
-                                break
+                                self.playerController.removeFromParentViewController()
+                                self.playerController.view.removeFromSuperview()
+                                self.delNine.isHidden = true
+                                self.recNine.isHidden = true
                             default: break
                             }
                         
@@ -236,7 +260,6 @@ class SelectVideoUpload_Nine : UIViewController{
         self.activityIndicator.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
     }
-
     
     func isVideoLoaded() -> Bool {
         update()
@@ -471,6 +494,7 @@ class SelectVideoUpload_Nine : UIViewController{
                             self.view.addSubview(self.playerController.view)
                             check.isHidden = false
                             recbtn.isHidden = false
+                            self.delNine.isHidden = false
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
