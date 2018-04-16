@@ -19,6 +19,7 @@ import AVKit
 class SelectVideoUpload_One_Two : UIViewController{
     
     var loadingAssetOne = false
+    var loadingCamera = false
     var isClicked = true
     var Asset : AVAsset?
     var player: AVPlayer!
@@ -63,7 +64,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBAction func deletVideopath(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版1的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-         self.deleteVideoPath(sb: 1, self.previewOne, #imageLiteral(resourceName: "sb1"))
+         self.deleteVideoPath(sb: 1, self.previewOne, #imageLiteral(resourceName: "sbimg2.png"),self.recAudio,self.deletVideopath)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -73,7 +74,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBAction func delTwo(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版2的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 2, self.previewTwo,#imageLiteral(resourceName: "sbimg2.png"))
+            self.deleteVideoPath(sb: 2, self.previewTwo,#imageLiteral(resourceName: "sbimg2.png"),self.recAudioTwo,self.delTwo)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -171,6 +172,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
             (action) -> Void in
             self.loadingAssetOne = true
+            self.loadingCamera = true
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
@@ -190,6 +192,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
             (action) -> Void in
             self.loadingAssetOne = false
+            self.loadingCamera = true
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
@@ -208,7 +211,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         super.viewDidLoad()
 //        previewOne.isHidden = true
 //        previewTwo.isHidden = true
-        showSBimage(previewOne, #imageLiteral(resourceName: "sb1"))
+        showSBimage(previewOne, #imageLiteral(resourceName: "sbimg2.png"))
         showSBimage(previewTwo, #imageLiteral(resourceName: "sbimg2.png"))
         recAudio.isHidden = true
         recAudioTwo.isHidden = true
@@ -257,10 +260,6 @@ class SelectVideoUpload_One_Two : UIViewController{
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
-//                                self.playerController.removeFromParentViewController()
-//                                self.playerController.view.removeFromSuperview()
-                                self.recAudioTwo.isHidden = true
-                                self.delTwo.isHidden = true
                                 break
                             default: break
                             }
@@ -270,10 +269,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             let url = URL(string: videourl!)
                             self.donloadVideo(url: url!,self.stopActivityIndicator(_:),1)
                         case 3:
-                            self.playerController.removeFromParentViewController()
-                            self.playerController.view.removeFromSuperview()
-                            self.recAudio.isHidden = true
-                            self.deletVideopath.isHidden = true
+
                             switch (existtwo){
                             case 1:
                                 self.previewVideo(video!, "videotwo_path", self.previewTwo,self.recAudioTwo, self.delTwo)
@@ -284,10 +280,6 @@ class SelectVideoUpload_One_Two : UIViewController{
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
-//                                self.playerController.removeFromParentViewController()
-//                                self.playerController.view.removeFromSuperview()
-                                self.recAudioTwo.isHidden = true
-                                self.delTwo.isHidden = true
                                 break
                             default: break
                             }
@@ -481,7 +473,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //刪除故事版的videopath
-    func deleteVideoPath(sb: Int,_ preview: UIView,_ image: UIImage){
+    func deleteVideoPath(sb: Int,_ preview: UIView,_ image: UIImage,_ recbtn:UIButton,_ delbtn: UIButton){
         let parameters: Parameters=[
             "id":    Index,
             "clip" : sb
@@ -490,11 +482,14 @@ class SelectVideoUpload_One_Two : UIViewController{
             {
                 response in
                 if response.result.isSuccess{
-                    self.load()
+                    for view:UIView in self.view.subviews{
+                        if view.frame == preview.frame  {
+                            view.removeFromSuperview()
+                        }
+                    }
                     self.showSBimage(preview, image)
-                    self.playerController.removeFromParentViewController()
-                    self.playerController.view.removeFromSuperview()
-                    self.playerController.showsPlaybackControls = false
+                    recbtn.isHidden = true
+                    delbtn.isHidden = true
                 }
         }
     }
@@ -554,7 +549,6 @@ class SelectVideoUpload_One_Two : UIViewController{
 //                            let asset = AVURLAsset(url: mp4Path, options: nil)
 //                            let imgGenerator = AVAssetImageGenerator(asset: asset)
 //                            imgGenerator.appliesPreferredTrackTransform = false
-//                            
 //                            do {
 //                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
 //                                let thumbnail = UIImage(cgImage: cgImage)
@@ -565,7 +559,6 @@ class SelectVideoUpload_One_Two : UIViewController{
 //                                print("*** Error generating thumbnail: \(error)")
 //                            }
 //
-//                            
 //                            check.isHidden = false
                         })
                         alert.addAction(action2)
@@ -618,9 +611,10 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
             var message = ""
             
 //            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
-//            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
-//                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
-//            }
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(avAsset.path) &&  loadingCamera {
+                UISaveVideoAtPathToSavedPhotosAlbum(avAsset.path, self, nil, nil)
+                loadingCamera = false
+            }
             
             if loadingAssetOne {
                 message = "故事版1 影片已匯入成功！"
@@ -635,14 +629,14 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
 //                    self.present(alertController, animated: true, completion: nil)
 //                }else{
                     self.uploadVideo(mp4Path: videourl,message: message,clip:1,self.previewOne,self.recAudio,self.deletVideopath)
-                    load()
+//                    load()
 //                }
             } else {
                 message = "故事版2 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
                 self.uploadVideo(mp4Path: videoURL,message: message,clip:2,self.previewTwo,self.recAudioTwo,self.delTwo)
-                load()
+//                load()
             }
             
             //let userdefault = UserDefaults.standard

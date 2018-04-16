@@ -42,6 +42,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.loaddata), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.loadinvitation), for: UIControlEvents.valueChanged)
         tableview.addSubview(refreshControl)
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadinvitation), name: NSNotification.Name("CoStage"), object: nil)

@@ -29,6 +29,7 @@ class SelectVideoUpload_Nine : UIViewController{
     var isURLempty = true
     var isClicked = true
     var loadingAssetOne = false
+    var loadingCamera = false
     var nullstoryboard = [String]()
     var emptystoryboards = [String]()
     var collectClips = [String]()
@@ -193,10 +194,8 @@ class SelectVideoUpload_Nine : UIViewController{
                         let arrays = each as? [String: Any]
                         let collectClips = arrays?["videopath"] as? String
                     }
-                    
                 }
         }
-        
     }
     
     func check(_ videonum: String,_ storyboard: String){
@@ -372,6 +371,7 @@ class SelectVideoUpload_Nine : UIViewController{
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
             (action) -> Void in
             self.loadingAssetOne = true
+            self.loadingCamera = true
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
@@ -733,9 +733,9 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
         if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
-            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
-            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(avAsset.path) && loadingCamera {
+                UISaveVideoAtPathToSavedPhotosAlbum(avAsset.path, self, nil, nil)
+                loadingCamera = false
             }
             if loadingAssetOne {
                 message = "故事版9 影片已匯入成功！"
