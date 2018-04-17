@@ -24,11 +24,11 @@ class SelectVideoUpload_One_Two : UIViewController{
     var Asset : AVAsset?
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
+    var previewOne = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
+    var previewTwo = UIView.init(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
     
     @IBOutlet weak var recAudio: UIButton!
     @IBOutlet weak var recAudioTwo: UIButton!
-    @IBOutlet weak var previewOne: UIView!
-    @IBOutlet weak var previewTwo: UIView!
     @IBOutlet weak var deletVideopath: UIButton!
     @IBOutlet weak var delTwo: UIButton!
     
@@ -58,13 +58,11 @@ class SelectVideoUpload_One_Two : UIViewController{
         present(controller, animated: true, completion: nil)
         
     }
-//    @IBOutlet weak var firstcomplete: UIImageView!
-//    @IBOutlet weak var secondcomplete: UIImageView!
     
     @IBAction func deletVideopath(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版1的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-         self.deleteVideoPath(sb: 1, self.previewOne, #imageLiteral(resourceName: "sbimg2.png"),self.recAudio,self.deletVideopath)
+         self.deleteVideoPath(sb: 1, self.previewOne,self.recAudio,self.deletVideopath)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -74,7 +72,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBAction func delTwo(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版2的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 2, self.previewTwo,#imageLiteral(resourceName: "sbimg2.png"),self.recAudioTwo,self.delTwo)
+            self.deleteVideoPath(sb: 2, self.previewTwo,self.recAudioTwo,self.delTwo)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -211,8 +209,8 @@ class SelectVideoUpload_One_Two : UIViewController{
         super.viewDidLoad()
 //        previewOne.isHidden = true
 //        previewTwo.isHidden = true
-        showSBimage(previewOne, #imageLiteral(resourceName: "sbimg2.png"))
-        showSBimage(previewTwo, #imageLiteral(resourceName: "sbimg2.png"))
+        showSBimage(previewOne, #imageLiteral(resourceName: "sb1img.png"))
+        showSBimage(previewTwo, #imageLiteral(resourceName: "sb2img.png"))
         recAudio.isHidden = true
         recAudioTwo.isHidden = true
         delTwo.isHidden = true
@@ -473,7 +471,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //刪除故事版的videopath
-    func deleteVideoPath(sb: Int,_ preview: UIView,_ image: UIImage,_ recbtn:UIButton,_ delbtn: UIButton){
+    func deleteVideoPath(sb: Int,_ preview: UIView,_ recbtn:UIButton,_ delbtn: UIButton){
         let parameters: Parameters=[
             "id":    Index,
             "clip" : sb
@@ -482,12 +480,11 @@ class SelectVideoUpload_One_Two : UIViewController{
             {
                 response in
                 if response.result.isSuccess{
-                    for view:UIView in self.view.subviews{
-                        if view.frame == preview.frame  {
-                            view.removeFromSuperview()
+                    for item in self.view.subviews{
+                        if item.frame == preview.frame {
+                            item.removeFromSuperview()
                         }
                     }
-                    self.showSBimage(preview, image)
                     recbtn.isHidden = true
                     delbtn.isHidden = true
                 }
@@ -545,21 +542,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             preview.isHidden = false
                             recbtn.isHidden = false
                             delbtn.isHidden = false
-//                            //show video thumbnail
-//                            let asset = AVURLAsset(url: mp4Path, options: nil)
-//                            let imgGenerator = AVAssetImageGenerator(asset: asset)
-//                            imgGenerator.appliesPreferredTrackTransform = false
-//                            do {
-//                                let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-//                                let thumbnail = UIImage(cgImage: cgImage)
-//                                
-//                                check.image = thumbnail
-//                                
-//                            } catch let error {
-//                                print("*** Error generating thumbnail: \(error)")
-//                            }
-//
-//                            check.isHidden = false
+
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
@@ -650,9 +633,11 @@ extension SelectVideoUpload_One_Two: AudioRecorderViewControllerDelegate {
     func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
         dismiss(animated: true, completion: nil)
         if clip == 1 {
+            self.startActivityIndicator()
             let message = "故事版1 影片已匯入成功！"
             self.uploadVideo(mp4Path: fileURL!, message: message, clip: 1, self.previewOne, self.recAudio, self.deletVideopath)
         }else if clip == 2 {
+            self.startActivityIndicator()
             let message = "故事版2 影片已匯入成功！"
             self.uploadVideo(mp4Path: fileURL!, message: message, clip: 2, self.previewTwo, self.recAudioTwo, self.delTwo)
         }

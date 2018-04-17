@@ -18,11 +18,11 @@ class SelectVideoUpload_Five_Six : UIViewController{
     var loadingAssetOne = false
     var loadingCamera = false
     var isClicked = true
+    var previewFive = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
+    var previewSix = UIView.init(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
     
-//    @IBOutlet weak var fivecomplete: UIImageView!
-//    @IBOutlet weak var sixcomplete: UIImageView!
-    @IBOutlet weak var previewFive: UIView!
-    @IBOutlet weak var previewSix: UIView!
+//    @IBOutlet weak var previewFive: UIView!
+//    @IBOutlet weak var previewSix: UIView!
     @IBOutlet weak var recFive: UIButton!
     @IBOutlet weak var recSix: UIButton!
     @IBOutlet weak var delFive: UIButton!

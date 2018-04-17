@@ -19,11 +19,9 @@ class SelectVideoUpload_Three_Four : UIViewController{
     var loadingCamera = false
     var isClicked = true
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
-//    @IBOutlet weak var threecomplete: UIImageView!
-//    @IBOutlet weak var fourcomplete: UIImageView!
+    var previewThree = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
     @IBOutlet weak var recThree: UIButton!
-    @IBOutlet weak var previewThree: UIView!
+//    @IBOutlet weak var previewThree: UIView!
     @IBOutlet weak var delThree: UIButton!
     
     var player: AVPlayer!

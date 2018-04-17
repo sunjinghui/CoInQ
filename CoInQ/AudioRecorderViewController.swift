@@ -316,8 +316,6 @@ class AudioRecorderViewController: UINavigationController {
             var mutableCompositionVideoTrack : [AVMutableCompositionTrack] = []
             var mutableCompositionAudioTrack : [AVMutableCompositionTrack] = []
             let totalVideoCompositionInstruction : AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
-            var currentInstruction = [AVMutableVideoCompositionLayerInstruction]()
-            
             
             //start merge
             
@@ -336,8 +334,8 @@ class AudioRecorderViewController: UINavigationController {
                 try mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aVideoAssetTrack, at: kCMTimeZero)
 //                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
                 try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
-                currentInstruction = SelectVideoUpload_Nine().videoCompositionInstructionForTrack(mutableCompositionVideoTrack[0], asset: aVideoAsset)
-                currentInstruction.setOpacity(0.0, at: aVideoAssetTrack.timeRange.duration)
+                
+//                currentInstruction.setOpacity(0.0, at: aVideoAssetTrack.timeRange.duration)
             }catch{
                 
             }
@@ -348,7 +346,7 @@ class AudioRecorderViewController: UINavigationController {
             let mutableVideoComposition : AVMutableVideoComposition = AVMutableVideoComposition()
             mutableVideoComposition.frameDuration = CMTimeMake(1, 30)
             
-            mutableVideoComposition.renderSize = aVideoAssetTrack.naturalSize
+//            mutableVideoComposition.renderSize = aVideoAssetTrack.naturalSize
             
             //        playerItem = AVPlayerItem(asset: mixComposition)
             //        player = AVPlayer(playerItem: playerItem!)

@@ -18,9 +18,9 @@ import SwiftyJSON
 class SelectVideoUpload_Nine : UIViewController{
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
+    var videoPreview = UIView.init(frame: CGRect(x: 225,y: 294,width: 465,height: 257))
     @IBOutlet weak var RecordButton: UIButton!
-    @IBOutlet weak var videoPreview: UIView!
+//    @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var recNine: UIButton!
     @IBOutlet weak var delNine: UIButton!
     

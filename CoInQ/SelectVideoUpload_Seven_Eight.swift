@@ -18,11 +18,9 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     var loadingAssetOne = false
     var loadingCamera = false
     var isClicked = true
-    
-//    @IBOutlet weak var sevencomplete: UIImageView!
-//    @IBOutlet weak var eightcomplete: UIImageView!
-    @IBOutlet weak var previewSeven: UIView!
-    @IBOutlet weak var previewEight: UIView!
+    var previewSeven = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
+    var previewEight = UIView.init(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
+
     @IBOutlet weak var recSeven: UIButton!
     @IBOutlet weak var recEight: UIButton!
     @IBOutlet weak var delSeven: UIButton!
