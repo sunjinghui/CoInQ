@@ -51,7 +51,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         cell.Date.text = videoInfo["date"] as? String
         cell.editVideoName.tag = indexPath.row
         cell.editVideoName.addTarget(self, action: #selector(self.editVideoName(_:)), for: .touchUpInside)
-        
+        cell.backgroundView = UIImageView(image: #imageLiteral(resourceName: "tablecell_bk"))
         return cell
     }
     
@@ -143,7 +143,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         super.viewDidLoad()
         AddButton.layer.cornerRadius = 8
         VideoNameTableView.tableFooterView = UIView(frame: .zero)
-        
 //        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
         reload()

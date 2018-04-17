@@ -311,12 +311,65 @@ class AudioRecorderViewController: UINavigationController {
             }
         }
         
+        func orientationFromTransform(_ transform: CGAffineTransform) -> (orientation: UIImageOrientation, isPortrait: Bool) {
+            var assetOrientation = UIImageOrientation.up
+            var isPortrait = false
+            if transform.a == 0 && transform.b == 1.0 && transform.c == -1.0 && transform.d == 0 {
+                assetOrientation = .right
+                isPortrait = true
+            } else if transform.a == 0 && transform.b == -1.0 && transform.c == 1.0 && transform.d == 0 {
+                assetOrientation = .left
+                isPortrait = true
+            } else if transform.a == 1.0 && transform.b == 0 && transform.c == 0 && transform.d == 1.0 {
+                assetOrientation = .up
+            } else if transform.a == -1.0 && transform.b == 0 && transform.c == 0 && transform.d == -1.0 {
+                assetOrientation = .down
+            }
+            return (assetOrientation, isPortrait)
+        }
+        
+        func videoCompositionInstructionForTrack(_ track: AVCompositionTrack, asset: AVAsset) -> AVMutableVideoCompositionLayerInstruction {
+            let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: track)
+            let assetTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0]
+            
+            let transform = assetTrack.preferredTransform
+            let assetInfo = orientationFromTransform(transform)
+            
+            var scaleToFitRatio = UIScreen.main.bounds.width / assetTrack.naturalSize.width
+            if assetInfo.isPortrait {
+                scaleToFitRatio = UIScreen.main.bounds.width / assetTrack.naturalSize.height
+                let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
+                instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor),
+                                         at: kCMTimeZero)
+            } else {
+                let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
+                var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+                if (assetTrack.naturalSize.width > assetTrack.naturalSize.height){
+                    concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+                }else{
+                    concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: 0))
+                }
+                if assetInfo.orientation == .down {
+                    let fixUpsideDown = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                    let windowBounds = UIScreen.main.bounds
+                    let yFix = assetTrack.naturalSize.height + windowBounds.height/2
+                    let centerFix = CGAffineTransform(translationX: assetTrack.naturalSize.width, y: yFix)
+                    concat = fixUpsideDown.concatenating(centerFix).concatenating(scaleFactor)
+                }
+                instruction.setTransform(concat, at: kCMTimeZero)
+            }
+            
+            return instruction
+        }
+
+        
         func merge(_ videourl: URL, _ audiourl: URL){
+            
             let mixComposition : AVMutableComposition = AVMutableComposition()
             var mutableCompositionVideoTrack : [AVMutableCompositionTrack] = []
             var mutableCompositionAudioTrack : [AVMutableCompositionTrack] = []
             let totalVideoCompositionInstruction : AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
-            
+            var allVideoInstruction = [AVMutableVideoCompositionLayerInstruction]()
             //start merge
             
             let aVideoAsset : AVAsset = AVAsset(url: videourl)
@@ -334,16 +387,18 @@ class AudioRecorderViewController: UINavigationController {
                 try mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aVideoAssetTrack, at: kCMTimeZero)
 //                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
                 try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
-                
-//                currentInstruction.setOpacity(0.0, at: aVideoAssetTrack.timeRange.duration)
+                let currentInstruction: AVMutableVideoCompositionLayerInstruction = videoCompositionInstructionForTrack(mutableCompositionVideoTrack[0], asset: aVideoAsset)
+                currentInstruction.setOpacity(0.0, at: aVideoAssetTrack.timeRange.duration)
+                allVideoInstruction.append(currentInstruction)
             }catch{
                 
             }
             
             totalVideoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero,aVideoAssetTrack.timeRange.duration )
-//            totalVideoCompositionInstruction.layerInstructions = 
+            totalVideoCompositionInstruction.layerInstructions = allVideoInstruction
             
             let mutableVideoComposition : AVMutableVideoComposition = AVMutableVideoComposition()
+            mutableVideoComposition.instructions = [totalVideoCompositionInstruction]
             mutableVideoComposition.frameDuration = CMTimeMake(1, 30)
             
 //            mutableVideoComposition.renderSize = aVideoAssetTrack.naturalSize

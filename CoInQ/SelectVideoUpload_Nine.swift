@@ -89,8 +89,8 @@ class SelectVideoUpload_Nine : UIViewController{
         controller.childViewController.videourl = url
         controller.childViewController.clip = 9
         present(controller, animated: true, completion: nil)
-        
     }
+    
     @IBAction func delNine(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版9的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
