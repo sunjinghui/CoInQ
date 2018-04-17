@@ -209,8 +209,6 @@ class SelectVideoUpload_One_Two : UIViewController{
         super.viewDidLoad()
 //        previewOne.isHidden = true
 //        previewTwo.isHidden = true
-        showSBimage(previewOne, #imageLiteral(resourceName: "sb1img.png"))
-        showSBimage(previewTwo, #imageLiteral(resourceName: "sb2img.png"))
         recAudio.isHidden = true
         recAudioTwo.isHidden = true
         delTwo.isHidden = true
@@ -258,7 +256,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
-                                break
+                                self.showSBimage(self.previewTwo, #imageLiteral(resourceName: "sb2img.png"))
+
                             default: break
                             }
                         case 2:
@@ -267,6 +266,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                             let url = URL(string: videourl!)
                             self.donloadVideo(url: url!,self.stopActivityIndicator(_:),1)
                         case 3:
+                            self.showSBimage(self.previewOne, #imageLiteral(resourceName: "sb1img.png"))
 
                             switch (existtwo){
                             case 1:
@@ -278,7 +278,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
-                                break
+                                self.showSBimage(self.previewTwo, #imageLiteral(resourceName: "sb2img.png"))
+
                             default: break
                             }
                             
@@ -533,15 +534,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            self.player = AVPlayer(url: mp4Path)
-                            self.playerController = AVPlayerViewController()
-                            self.playerController.player = self.player
-                            self.playerController.view.frame = preview.frame
-                            self.addChildViewController(self.playerController)
-                            self.view.addSubview(self.playerController.view)
-                            preview.isHidden = false
-                            recbtn.isHidden = false
-                            delbtn.isHidden = false
+                            self.load()
 
                         })
                         alert.addAction(action2)

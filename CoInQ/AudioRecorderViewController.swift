@@ -366,8 +366,8 @@ class AudioRecorderViewController: UINavigationController {
         func merge(_ videourl: URL, _ audiourl: URL){
             
             let mixComposition : AVMutableComposition = AVMutableComposition()
-            var mutableCompositionVideoTrack : [AVMutableCompositionTrack] = []
-            var mutableCompositionAudioTrack : [AVMutableCompositionTrack] = []
+//            var mutableCompositionVideoTrack : [AVMutableCompositionTrack] = []
+//            var mutableCompositionAudioTrack : [AVMutableCompositionTrack] = []
             let totalVideoCompositionInstruction : AVMutableVideoCompositionInstruction = AVMutableVideoCompositionInstruction()
             var allVideoInstruction = [AVMutableVideoCompositionLayerInstruction]()
             //start merge
@@ -375,33 +375,44 @@ class AudioRecorderViewController: UINavigationController {
             let aVideoAsset : AVAsset = AVAsset(url: videourl)
             let aAudioAsset : AVAsset = AVAsset(url: audiourl)
             
-            mutableCompositionVideoTrack.append(mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid))
-            mutableCompositionAudioTrack.append( mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid))
+//            mutableCompositionVideoTrack.append(mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid))
+//            mutableCompositionAudioTrack.append( mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid))
             
-            let aVideoAssetTrack : AVAssetTrack = aVideoAsset.tracks(withMediaType: AVMediaTypeVideo)[0]
-            let aAudioAssetTrack : AVAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaTypeAudio)[0]
+//            let aVideoAssetTrack : AVAssetTrack = aVideoAsset.tracks(withMediaType: AVMediaTypeVideo)[0]
+//            let aAudioAssetTrack : AVAssetTrack = aAudioAsset.tracks(withMediaType: AVMediaTypeAudio)[0]
             
-            
-            
-            do{
-                try mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aVideoAssetTrack, at: kCMTimeZero)
-//                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
-                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
-                let currentInstruction: AVMutableVideoCompositionLayerInstruction = videoCompositionInstructionForTrack(mutableCompositionVideoTrack[0], asset: aVideoAsset)
-                currentInstruction.setOpacity(0.0, at: aVideoAssetTrack.timeRange.duration)
+            let videoTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
+            let audioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            do {
+                try videoTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAsset.duration), of: aVideoAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: kCMTimeZero)
+                try audioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAsset.duration),//CMTimeAdd(firstAsset.duration, secondAsset.duration)),
+                    of: (aAudioAsset.tracks(withMediaType: AVMediaTypeAudio)[0]) ,
+                    at: kCMTimeZero)
+                let currentInstruction: AVMutableVideoCompositionLayerInstruction = videoCompositionInstructionForTrack(videoTrack, asset: aVideoAsset)
+                currentInstruction.setOpacity(0.0, at: aVideoAsset.duration)
                 allVideoInstruction.append(currentInstruction)
-            }catch{
-                
+            } catch _ {
+                print("Failed to load Audio track")
             }
             
-            totalVideoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero,aVideoAssetTrack.timeRange.duration )
+//            do{
+//                try mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aVideoAssetTrack, at: kCMTimeZero)
+////                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
+//                try mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(kCMTimeZero, aVideoAssetTrack.timeRange.duration), of: aAudioAssetTrack, at: kCMTimeZero)
+//
+//            }catch{
+//                
+//            }
+            
+            totalVideoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, aVideoAsset.duration )
             totalVideoCompositionInstruction.layerInstructions = allVideoInstruction
             
             let mutableVideoComposition : AVMutableVideoComposition = AVMutableVideoComposition()
             mutableVideoComposition.instructions = [totalVideoCompositionInstruction]
             mutableVideoComposition.frameDuration = CMTimeMake(1, 30)
             
-//            mutableVideoComposition.renderSize = aVideoAssetTrack.naturalSize
+            mutableVideoComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+
             
             //        playerItem = AVPlayerItem(asset: mixComposition)
             //        player = AVPlayer(playerItem: playerItem!)
@@ -424,6 +435,7 @@ class AudioRecorderViewController: UINavigationController {
             assetExport.outputFileType = AVFileTypeQuickTimeMovie
             assetExport.outputURL = savePathUrl as URL
             assetExport.shouldOptimizeForNetworkUse = true
+            assetExport.videoComposition = mutableVideoComposition
             
             assetExport.exportAsynchronously { () -> Void in
                 switch assetExport.status {

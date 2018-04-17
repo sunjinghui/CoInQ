@@ -34,7 +34,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             VideoNameTableView.backgroundView = TableEmpty
             return 0
         }
-        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,7 +50,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         cell.Date.text = videoInfo["date"] as? String
         cell.editVideoName.tag = indexPath.row
         cell.editVideoName.addTarget(self, action: #selector(self.editVideoName(_:)), for: .touchUpInside)
-        cell.backgroundView = UIImageView(image: #imageLiteral(resourceName: "tablecell_bk"))
+        cell.backgroundView = UIImageView(image: #imageLiteral(resourceName: "tablecell_bg"))
         return cell
     }
     
