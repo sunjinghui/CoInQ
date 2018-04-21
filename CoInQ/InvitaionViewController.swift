@@ -10,6 +10,8 @@ import Foundation
 import Alamofire
 import MobileCoreServices
 import SwiftyJSON
+import AVFoundation
+import AVKit
 
 class InvitaionViewController : UIViewController{
     
@@ -30,7 +32,7 @@ class InvitaionViewController : UIViewController{
         tableview.tableFooterView = UIView(frame: .zero)
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(self.getCooperateInfo), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.getCooperateInfo), for: .valueChanged)
         tableview.addSubview(refreshControl)
         getCooperateInfo()
     }
@@ -59,6 +61,12 @@ class InvitaionViewController : UIViewController{
                     
                 } else if let cooperationinfo = JSON["table"] as? [Any] {
                     self.DataArray = cooperationinfo
+                    self.ownerName = []
+                    self.context = []
+                    self.videoid = []
+                    self.videoname = []
+                    self.id = []
+                    self.googleid_FROM = []
                     
                     for each in self.DataArray!{
                         let array = each as? [String: Any]
@@ -249,7 +257,7 @@ class InvitaionViewController : UIViewController{
     
 }
 
-extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource {
+extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, AVPlayerViewControllerDelegate {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = DataArray?.count
@@ -314,7 +322,17 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource {
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
-//        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: {
+        (action) -> Void in
+            let videourl = URL(string:"http://140.122.76.201/CoInQ/upload/108096475922049632836/500/trim.610783D8-6E3F-44E1-BCC9-66B15BC4048F.MOV")
+            let player = AVPlayer(url: videourl!)
+            let playervc = AVPlayerViewController()
+            playervc.delegate = self
+            playervc.player = player
+            self.present(playervc,animated: true){
+                playervc.player!.play()
+            }
+    }))
         alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         

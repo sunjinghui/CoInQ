@@ -153,11 +153,11 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                             self.stopActivityIndicator()
 
                         }
-                    if (self.clips?.count)! <= 1 {
-                        self.navigationItem.rightBarButtonItem = nil
-                    }else{
-                        self.navigationItem.rightBarButtonItem = self.editButtom
-                    }
+//                    if (self.clips?.count)! <= 1 {
+//                        self.navigationItem.rightBarButtonItem = nil
+//                    }else{
+//                        self.navigationItem.rightBarButtonItem = self.editButtom
+//                    }
                     self.tableview.reloadData()
                     self.refreshControl.endRefreshing()
                 }
@@ -410,18 +410,6 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                 let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
                 deleteAlert.addAction(cancelAction)
                 self.present(deleteAlert, animated: true, completion: nil)
-            }else{
-                let deleteAlert = UIAlertController(title:"確定要刪除共創邀請嗎？",message: "刪除後無法復原！", preferredStyle: .alert)
-                deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-                    
-                    let invitesInfo = self.invites?[indexPath.row] as? [String: Any]
-                    let invitesid = invitesInfo?["id"] as? Int
-                    self.deleteInvitation(id: invitesid!)
-                    //                SelectVideoUpload_Nine().update()
-                }))
-                let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
-                deleteAlert.addAction(cancelAction)
-                self.present(deleteAlert, animated: true, completion: nil)
             }
         }
         
@@ -514,7 +502,24 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
             self.present(playerViewController,animated: true){
                 playerViewController.player!.play()
             }
+        }else{
+            let deleteAlert = UIAlertController(title:"請選擇",message: nil, preferredStyle: .alert)
+            deleteAlert.addAction(UIAlertAction(title:"刪除該邀請",style: .default, handler:{ (action) -> Void in
+                
+                let invitesInfo = self.invites?[indexPath.row] as? [String: Any]
+                let invitesid = invitesInfo?["id"] as? Int
+                self.deleteInvitation(id: invitesid!)
+                //                SelectVideoUpload_Nine().update()
+            }))
+            deleteAlert.addAction(UIAlertAction(title: "更改邀請內容", style: .default, handler: {
+                (action) -> Void in
+                
+            }))
+            let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+            deleteAlert.addAction(cancelAction)
+            self.present(deleteAlert, animated: true, completion: nil)
         }
+
         
     }
 

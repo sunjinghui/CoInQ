@@ -94,31 +94,11 @@ class SelectVideoUpload_Nine : UIViewController{
     @IBAction func delNine(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版9的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 9)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 9, self.videoPreview, self.recNine, self.delNine)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
         self.present(deleteAlert, animated: true, completion: nil)
-    }
-    //刪除故事版的videopath
-    func deleteVideoPath(sb: Int){
-        let parameters: Parameters=[
-            "id":    Index,
-            "clip" : sb
-        ]
-        Alamofire.request("http://140.122.76.201/CoInQ/v1/deletevideo.php", method: .post, parameters: parameters).responseJSON
-            {
-                response in
-                if response.result.isSuccess{
-                    self.loadData()
-                }else{
-                    let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
-                    deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
-                    self.present(deleteAlert, animated: true, completion: nil)
-                    self.loadData()
-                }
-                //         print(response)
-        }
     }
     
     func checknine(){
@@ -156,17 +136,11 @@ class SelectVideoUpload_Nine : UIViewController{
                                 let videourl = video?["videonine_path"] as? String
                                 let url = URL(string: videourl!)
                                 SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),9)
-
                             case 3:
-                                self.playerController.removeFromParentViewController()
-                                self.playerController.view.removeFromSuperview()
-                                self.delNine.isHidden = true
-                                self.recNine.isHidden = true
+                                break
                             default: break
                             }
-                        
                     }
-                  
                 }
         }
 
@@ -443,12 +417,10 @@ class SelectVideoUpload_Nine : UIViewController{
             self.present(alertController, animated: true, completion: nil)
             lognote("sbe", google_userid, "id\(Index)\(emptystoryboard)")
         }
-
         /*if isURLempty("RecordOne") || isURLempty("RecordTwo") {
             UserDefaults.standard.removeObject(forKey: "RecordOne")
             UserDefaults.standard.removeObject(forKey: "RecordTwo")
         }*/
-        
     }
     
     func uploadVideo(mp4Path : URL , message : String, clip: Int,check: UIView,_ recbtn: UIButton){
@@ -742,8 +714,6 @@ extension SelectVideoUpload_Nine : UIImagePickerControllerDelegate {
                 self.startActivityIndicator()
                 let videoURL = avAsset
                 uploadVideo(mp4Path: videoURL,message: message,clip:9,check: self.videoPreview,self.recNine)
-                loadData()
-
             }
             
         }
@@ -754,6 +724,7 @@ extension SelectVideoUpload_Nine: AudioRecorderViewControllerDelegate {
     func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
         dismiss(animated: true, completion: nil)
         if clip == 9 {
+            self.startActivityIndicator()
             let message = "故事版9 影片已匯入成功！"
             uploadVideo(mp4Path: fileURL!, message: message, clip: 9, check: self.videoPreview,self.recNine)
         }

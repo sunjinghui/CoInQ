@@ -385,11 +385,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoInQ/InvitaionViewController.swift"
-            timestampString = "544976205.4266109"
+            timestampString = "545731821.0823849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "uploadVideo(mp4Path:message:)"
             landmarkType = "7">
          </BreakpointContent>

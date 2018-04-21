@@ -73,7 +73,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     @IBAction func delSeven(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版7的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 7)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 7, self.previewSeven, self.recSeven, self.delSeven)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -82,31 +82,11 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     @IBAction func delEight(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版8的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 8)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 8, self.previewEight, self.recEight, self.delEight)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
         self.present(deleteAlert, animated: true, completion: nil)
-    }
-    //刪除故事版的videopath
-    func deleteVideoPath(sb: Int){
-        let parameters: Parameters=[
-            "id":    Index,
-            "clip" : sb
-        ]
-        Alamofire.request("http://140.122.76.201/CoInQ/v1/deletevideo.php", method: .post, parameters: parameters).responseJSON
-            {
-                response in
-                if response.result.isSuccess{
-                    self.loadData()
-                }else{
-                    let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
-                    deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
-                    self.present(deleteAlert, animated: true, completion: nil)
-                    self.loadData()
-                }
-                //         print(response)
-        }
     }
     
     override func viewDidLoad() {
@@ -375,15 +355,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            self.player = AVPlayer(url: mp4Path)
-                            self.playerController = AVPlayerViewController()
-                            self.playerController.player = self.player
-                            self.playerController.view.frame = preview.frame
-                            self.addChildViewController(self.playerController)
-                            self.view.addSubview(self.playerController.view)
-                            preview.isHidden = false
-                            recbtn.isHidden = false
-                            delbtn.isHidden = false
+                            self.loadData()
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
@@ -447,9 +419,11 @@ extension SelectVideoUpload_Seven_Eight: AudioRecorderViewControllerDelegate {
     func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
         dismiss(animated: true, completion: nil)
         if clip == 7 {
+            self.startActivityIndicator()
             let message = "故事版5 影片已匯入成功！"
             self.uploadVideo(mp4Path: fileURL!, message: message, clip: 7, self.previewSeven, self.recSeven, self.delSeven)
         }else if clip == 8 {
+            self.startActivityIndicator()
             let message = "故事版6 影片已匯入成功！"
             self.uploadVideo(mp4Path: fileURL!, message: message, clip: 8, self.previewEight, self.recEight, self.delEight)
         }

@@ -21,7 +21,6 @@ class SelectVideoUpload_Three_Four : UIViewController{
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var previewThree = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
     @IBOutlet weak var recThree: UIButton!
-//    @IBOutlet weak var previewThree: UIView!
     @IBOutlet weak var delThree: UIButton!
     
     var player: AVPlayer!
@@ -56,28 +55,11 @@ class SelectVideoUpload_Three_Four : UIViewController{
     @IBAction func delThree(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版3的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 3)
-            self.loaddata()
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 3,self.previewThree,self.recThree,self.delThree)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
         self.present(deleteAlert, animated: true, completion: nil)
-    }
-    
-    //刪除故事版的videopath
-    func deleteVideoPath(sb: Int){
-        let parameters: Parameters=[
-            "id":    Index,
-            "clip" : sb
-        ]
-        Alamofire.request("http://140.122.76.201/CoInQ/v1/deletevideo.php", method: .post, parameters: parameters).responseJSON
-            {
-                response in
-                if response.result.isSuccess{
-                    self.check()
-                }
-                //         print(response)
-        }
     }
     
     @IBAction func Cooperation(_ sender: Any){
@@ -107,7 +89,6 @@ class SelectVideoUpload_Three_Four : UIViewController{
         previewThree.isHidden = true
         recThree.isHidden = true
         delThree.isHidden = true
-//        fourcomplete.isHidden = true
         check()
     }
     
@@ -148,10 +129,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
                                 let url = URL(string: videourl!)
                                 SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),3)
                             case 3:
-                                self.playerController.removeFromParentViewController()
-                                self.playerController.view.removeFromSuperview()
-                                self.delThree.isHidden = true
-                                self.recThree.isHidden = true
+                                break
                             default: break
                             }
                     }
@@ -376,6 +354,7 @@ extension SelectVideoUpload_Three_Four: AudioRecorderViewControllerDelegate {
     func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
         dismiss(animated: true, completion: nil)
         if clip == 3 {
+            self.startActivityIndicator()
             let message = "故事版3 影片已匯入成功！"
             uploadVideo(mp4Path: fileURL!,message: message,clip:3, self.previewThree, self.recThree, self.delThree)
         }
