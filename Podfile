@@ -4,4 +4,5 @@ use_frameworks!
 pod 'Google/SignIn'
 pod 'Alamofire', '~> 4.4'
 pod 'SwiftyJSON'
+pod 'MPCoachMarks'
 end

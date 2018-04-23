@@ -35,11 +35,13 @@ PODS:
   - GTMSessionFetcher/Core (1.1.15)
   - GTMSessionFetcher/Full (1.1.15):
     - GTMSessionFetcher/Core (= 1.1.15)
+  - MPCoachMarks (0.0.12)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - Google/SignIn
+  - MPCoachMarks
   - SwiftyJSON
 
 SPEC REPOS:
@@ -53,6 +55,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMOAuth2
     - GTMSessionFetcher
+    - MPCoachMarks
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -65,8 +68,9 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
+  MPCoachMarks: a957aad7e54d0eec7cda88ae2cf7dc9f10f7a96c
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 747dc4d9329855780c4e70c6dfc6361e97138b73
+PODFILE CHECKSUM: c00492aa0c250695de3a8295db99f4e6cf06c296
 
 COCOAPODS: 1.5.0

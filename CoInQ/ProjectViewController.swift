@@ -71,9 +71,9 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             if !(VideoName?.isEmpty)! {
                 //UPLOAD VideoTask
                 let parameters: Parameters=[
-                        "videoid":      videoid,
-                        "videopath":    VideoName!,
-                        "clip": 10
+                    "videoid":      videoid!,
+                    "videopath":    VideoName!,
+                    "clip": 10
                     ]
                 print(parameters)
                 //Sending http post request

@@ -25,12 +25,12 @@ class AudioRecorderViewController: UINavigationController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         statusBarStyle = UIApplication.shared.statusBarStyle
-        UIApplication.shared.setStatusBarStyle(.lightContent, animated: animated)
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
+        UIApplication.shared.statusBarStyle = statusBarStyle
     }
     
     override func viewDidLoad() {

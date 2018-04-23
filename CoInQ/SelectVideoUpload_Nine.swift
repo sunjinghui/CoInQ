@@ -24,7 +24,7 @@ class SelectVideoUpload_Nine : UIViewController{
     @IBOutlet weak var recNine: UIButton!
     @IBOutlet weak var delNine: UIButton!
     
-    var clips: [Any]?
+//    var clips: [Any]?
     var array: [Any]?
     var isURLempty = true
     var isClicked = true
@@ -161,12 +161,15 @@ class SelectVideoUpload_Nine : UIViewController{
                 // 2.
                 let error = JSON["error"] as! Bool
                 if error {
-                    self.clips = []
+                    self.collectClips = []
+//                    self.clips = []
                 } else if let Collecte = JSON["table"] as? [Any] {
-                    self.clips = Collecte
+//                    self.clips = Collecte
+                    self.collectClips = []
                     for each in Collecte{
                         let arrays = each as? [String: Any]
                         let collectClips = arrays?["videopath"] as? String
+                        self.collectClips.append(collectClips!)
                     }
                 }
         }
