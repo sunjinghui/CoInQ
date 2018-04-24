@@ -72,7 +72,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
     @IBAction func delFive(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版5的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            SelectVideoUpload_One_Two().deleteVideoPath(sb: 5, self.previewFive,self.recFive,self.delFive)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 5, self.previewFive,self.recFive,self.delFive,self)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -82,7 +82,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
     @IBAction func delSix(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版6的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            SelectVideoUpload_One_Two().deleteVideoPath(sb: 6, self.previewSix, self.recSix, self.delSix)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 6, self.previewSix, self.recSix, self.delSix,self)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -107,8 +107,6 @@ class SelectVideoUpload_Five_Six : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        previewFive.isHidden = true
-        previewSix.isHidden = true
         recFive.isHidden = true
         recSix.isHidden = true
         delFive.isHidden = true
@@ -145,10 +143,10 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videosix_path", 6)
                         switch (existone){
                         case 1:
-                            SelectVideoUpload_One_Two().previewVideo(video!, "videofive_path", self.previewFive,self.recFive, self.delFive)
+                            self.previewVideo(video!, "videofive_path", self.previewFive,self.recFive, self.delFive)
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix, self.recSix, self.delSix)
+                                self.previewVideo(video!, "videosix_path", self.previewSix, self.recSix, self.delSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
@@ -167,7 +165,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                             
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videosix_path", self.previewSix,self.recSix, self.delSix)
+                                self.previewVideo(video!, "videosix_path", self.previewSix,self.recSix, self.delSix)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videosix_path"] as? String
@@ -188,6 +186,19 @@ class SelectVideoUpload_Five_Six : UIViewController{
         
     }
 
+    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
+        let videourl = videoinfo[videopath] as? String
+        let url = URL(string: videourl!)
+        self.player = AVPlayer(url: url!)
+        self.playerController = AVPlayerViewController()
+        self.playerController.player = self.player
+        self.playerController.view.frame = preview.frame
+        self.addChildViewController(self.playerController)
+        self.view.addSubview(self.playerController.view)
+        preview.isHidden = false
+        recbtn.isHidden = false
+        delbtn.isHidden = false
+    }
     
     func startActivityIndicator() {
         let screenSize: CGRect = UIScreen.main.bounds

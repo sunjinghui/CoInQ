@@ -73,7 +73,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     @IBAction func delSeven(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版7的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            SelectVideoUpload_One_Two().deleteVideoPath(sb: 7, self.previewSeven, self.recSeven, self.delSeven)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 7, self.previewSeven, self.recSeven, self.delSeven,self)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -82,7 +82,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     @IBAction func delEight(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版8的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            SelectVideoUpload_One_Two().deleteVideoPath(sb: 8, self.previewEight, self.recEight, self.delEight)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 8, self.previewEight, self.recEight, self.delEight,self)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -129,10 +129,10 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoeight_path", 8)
                         switch (existone){
                         case 1:
-                            SelectVideoUpload_One_Two().previewVideo(video!, "videoseven_path", self.previewSeven,self.recSeven, self.delSeven)
+                            self.previewVideo(video!, "videoseven_path", self.previewSeven,self.recSeven, self.delSeven)
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
+                                self.previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String
@@ -157,7 +157,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             self.recSeven.isHidden = true
                             switch (existtwo){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
+                                self.previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String
@@ -178,7 +178,20 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                     
                 }
         }
-        
+    }
+    
+    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
+        let videourl = videoinfo[videopath] as? String
+        let url = URL(string: videourl!)
+        self.player = AVPlayer(url: url!)
+        self.playerController = AVPlayerViewController()
+        self.playerController.player = self.player
+        self.playerController.view.frame = preview.frame
+        self.addChildViewController(self.playerController)
+        self.view.addSubview(self.playerController.view)
+        preview.isHidden = false
+        recbtn.isHidden = false
+        delbtn.isHidden = false
     }
     
     func startActivityIndicator() {

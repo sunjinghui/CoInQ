@@ -94,7 +94,7 @@ class SelectVideoUpload_Nine : UIViewController{
     @IBAction func delNine(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版9的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            SelectVideoUpload_One_Two().deleteVideoPath(sb: 9, self.videoPreview, self.recNine, self.delNine)
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 9, self.videoPreview, self.recNine, self.delNine,self)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -129,7 +129,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videonine_path", 9)
                             switch (existone){
                             case 1:
-                                SelectVideoUpload_One_Two().previewVideo(video!, "videothree_path", self.videoPreview,self.recNine, self.delNine)
+                                self.previewVideo(video!, "videothree_path", self.videoPreview,self.recNine, self.delNine)
                                 break
                             case 2:
                                 self.startActivityIndicator()
@@ -173,6 +173,20 @@ class SelectVideoUpload_Nine : UIViewController{
                     }
                 }
         }
+    }
+    
+    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
+        let videourl = videoinfo[videopath] as? String
+        let url = URL(string: videourl!)
+        self.player = AVPlayer(url: url!)
+        self.playerController = AVPlayerViewController()
+        self.playerController.player = self.player
+        self.playerController.view.frame = preview.frame
+        self.addChildViewController(self.playerController)
+        self.view.addSubview(self.playerController.view)
+        preview.isHidden = false
+        recbtn.isHidden = false
+        delbtn.isHidden = false
     }
     
     func check(_ videonum: String,_ storyboard: String){

@@ -11,6 +11,7 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 import Photos
+import  MPCoachMarks
 
 var Index = 0
 func lognote(_ actiontype: String,_ google_userid: String,_ note: String){
@@ -24,7 +25,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     @IBOutlet weak var TableEmpty: UIView!
     
     var videoInfoArray: [Any]?
-    
+    var coachMarksView = MPCoachMarks()
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          if let num = self.videoInfoArray?.count {
@@ -143,14 +144,39 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         AddButton.layer.cornerRadius = 8
         VideoNameTableView.tableFooterView = UIView(frame: .zero)
 //        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
         reload()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        let coachMarksShown: Bool = UserDefaults.standard.bool(forKey: "MPCoachMarksShown")
+        if coachMarksShown == false {
+            UserDefaults.standard.set(true, forKey: "MPCoachMarksShown")
+            UserDefaults.standard.synchronize()
+            coachmark()
+        }
+//        coachmark()
+    }
     
-//    func reload(){
-//        SelectVideoUpload_Nine().update()
-//        VideoNameTableView.reloadData()
-//    }
+    func coachmark(){
+        let coachmark1 = CGRect(x: (UIScreen.main.bounds.size.width / 3) - 170, y: 960, width: 170, height: 65)
+        let coachmark2 = CGRect(x: (UIScreen.main.bounds.size.width / 3) + 55, y: 960, width: 170, height: 65)
+        let coachmark3 = CGRect(x: (UIScreen.main.bounds.size.width / 3) * 2 , y: 960, width: 170, height: 65)
+        let coachmark4 = CGRect(x: 700, y: 40, width: 50, height: 50)
+
+        let coachMarks = [
+            ["rect": NSValue(cgRect: coachmark1), "caption": "即將開始創作影片嘍！\n\n\n\n\n\n這個頁面用來管理製作中的影片專案\n製作影片的過程中您可以請別人提供他的影片\n\n\n\n\n", "position": 2],
+            ["rect": NSValue(cgRect: coachmark2), "caption": "完成的成果影片會呈現在這一頁\n\n\n\n", "position": 2],
+            ["rect": NSValue(cgRect: coachmark3), "caption": "製作影片的過程中您可以請別人提供他的影片\n你→→→🧒🏻✉️\n\n\n這個頁面則列出別人請你提供影片的邀請\n🧒🏻→→→你✉️\n\n","position": 2],
+            ["rect": NSValue(cgRect: coachmark4), "caption": "開始之前來看看要經歷哪些步驟吧！","position": 5, "showArrow": true]
+        ]
+        coachMarksView = MPCoachMarks(frame: (tabBarController?.view.bounds)! , coachMarks: coachMarks)
+        coachMarksView.enableContinueLabel = false
+        coachMarksView.maxLblWidth = 350
+        coachMarksView.skipButtonText = "跳過"
+        tabBarController?.view.addSubview(coachMarksView)
+//        var coachMarksView = MPCoachMarks(frame: view.bounds, coachMarks: coachMarks)
+//        view.addSubview(coachMarksView)
+        coachMarksView.start()
+    }
     
     func reload() {
         

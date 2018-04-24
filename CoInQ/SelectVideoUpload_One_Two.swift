@@ -62,7 +62,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBAction func deletVideopath(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版1的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-         self.deleteVideoPath(sb: 1, self.previewOne,self.recAudio,self.deletVideopath)
+            self.deleteVideoPath(sb: 1, self.previewOne,self.recAudio,self.deletVideopath, self)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -72,7 +72,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     @IBAction func delTwo(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版2的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            self.deleteVideoPath(sb: 2, self.previewTwo,self.recAudioTwo,self.delTwo)
+            self.deleteVideoPath(sb: 2, self.previewTwo,self.recAudioTwo,self.delTwo, self)
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -472,7 +472,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     //刪除故事版的videopath
-    func deleteVideoPath(sb: Int,_ preview: UIView,_ recbtn:UIButton,_ delbtn: UIButton){
+    func deleteVideoPath(sb: Int,_ preview: UIView,_ recbtn:UIButton,_ delbtn: UIButton,_ vc: UIViewController){
         let parameters: Parameters=[
             "id":    Index,
             "clip" : sb
@@ -481,7 +481,7 @@ class SelectVideoUpload_One_Two : UIViewController{
             {
                 response in
                 if response.result.isSuccess{
-                    for item in self.view.subviews{
+                    for item in vc.view.subviews{
                         if item.frame == preview.frame {
                             item.removeFromSuperview()
                         }
