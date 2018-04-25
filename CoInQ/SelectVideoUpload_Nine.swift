@@ -103,6 +103,7 @@ class SelectVideoUpload_Nine : UIViewController{
     
     func checknine(){
         loadData()
+        loadCollectionVideo()
     }
     
     func loadData() {
@@ -143,7 +144,9 @@ class SelectVideoUpload_Nine : UIViewController{
                     }
                 }
         }
+    }
 
+    func loadCollectionVideo(){
         let parameter: Parameters=["google_userid": google_userid,"videoid":Index]
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getCollectingclips.php", method: .post, parameters: parameter).responseJSON
             {
@@ -195,10 +198,11 @@ class SelectVideoUpload_Nine : UIViewController{
         if videopath == nil {
             nullstoryboard.append(storyboard)
             emptystoryboards.append(storyboard)
-            isURLempty = false
+//            isURLempty = false
         }else{
             let clipVideo = AVAsset(url: URL(string: videopath!)!)
             mergeClips.append(clipVideo)
+            isURLempty = true
         }
     }
     
@@ -212,7 +216,10 @@ class SelectVideoUpload_Nine : UIViewController{
                 mergeClips.append(clipVideo)
             }
         }else{
-            check("videofour_path", "故事版 4")
+//            check("videofour_path", "故事版 4")
+            nullstoryboard.append("故事版 4")
+            emptystoryboards.append("故事版 4")
+            isURLempty = false
         }
     }
     
@@ -253,6 +260,7 @@ class SelectVideoUpload_Nine : UIViewController{
     
     func isVideoLoaded() -> Bool {
         update()
+        loadCollectionVideo()
         isURLempty = true
         nullstoryboard = [String]()
         emptystoryboards = [String]()

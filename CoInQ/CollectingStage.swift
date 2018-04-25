@@ -41,11 +41,15 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
 //        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
         
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(self.loaddata), for: UIControlEvents.valueChanged)
-        refreshControl.addTarget(self, action: #selector(self.loadinvitation), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.load), for: UIControlEvents.valueChanged)
         tableview.addSubview(refreshControl)
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadinvitation), name: NSNotification.Name("CoStage"), object: nil)
+
+        load()
+    }
+    
+    func load(){
         loadinvitation()
         loaddata()
     }
@@ -98,10 +102,12 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                 if error {
                     self.clips = []
                     self.tableview.reloadData()
-                    
+                    self.refreshControl.endRefreshing()
+
                 } else if let invitation = JSON["table"] as? [Any] {
                     self.invites = invitation
                     self.tableview.reloadData()
+                    self.refreshControl.endRefreshing()
                 }
         }
     }
@@ -126,7 +132,8 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                 if error {
                     self.clips = []
                     self.tableview.reloadData()
-                    
+                    self.refreshControl.endRefreshing()
+
                 } else if let Collecte = JSON["table"] as? [Any] {
                     self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
@@ -458,10 +465,10 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         let deleteAlert = UIAlertController(title:"提示",message: "刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
                         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
                         self.present(deleteAlert, animated: true, completion: nil)
-                        self.loaddata()
+                        self.loadinvitation()
                     }else{
                         //                        lognote("dcf", google_userid, "\(id)")
-                        self.loaddata()
+                        self.loadinvitation()
                     }
                     
                 }

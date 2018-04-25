@@ -30,8 +30,8 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             return
         }else{
 //            print(user.userID)
-            //print(user.profile.name)
-            //print(user.profile.email)
+//            print(user.profile.name)
+//            print(user.profile.email)
             //print(user.profile.imageURL(withDimension: 400))
 //            print("google sign in")
             
@@ -39,10 +39,11 @@ class SignInViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelega
             google_useremail = user.profile.email
             google_username = user.profile.name
             log("lgi", user.userID)
+
             let parameters: Parameters=[
-                "username":        user.profile.name,
-                "google_userid":   user.userID,
-                "email":           user.profile.email
+                "username":        google_username,
+                "google_userid":   google_userid,
+                "email":           google_useremail
             ]
             
             //Sending http post request

@@ -58,7 +58,7 @@ class InvitaionViewController : UIViewController{
                 if error {
                     self.DataArray = []
                     self.tableview.reloadData()
-                    
+                    self.refreshControl.endRefreshing()
                 } else if let cooperationinfo = JSON["table"] as? [Any] {
                     self.DataArray = cooperationinfo
                     self.ownerName = []

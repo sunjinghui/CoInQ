@@ -65,10 +65,11 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
                 if error {
                     self.data = []
                     self.tableview.reloadData()
-                    
+                    self.refreshControl.endRefreshing()
+
                 } else if let userinfo = JSON["table"] as? [Any] {
                     self.userArray = userinfo
-                    
+                    self.data = []
                     for each in self.userArray!{
                         let email = each as? [String: Any]
                         let text = email?["email"] as? String
