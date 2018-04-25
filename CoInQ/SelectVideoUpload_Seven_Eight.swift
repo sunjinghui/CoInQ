@@ -139,10 +139,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                                 let url = URL(string: videourl!)
                                 SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),8)
                             case 3:
-                                self.playerController.removeFromParentViewController()
-                                self.playerController.view.removeFromSuperview()
-                                self.delEight.isHidden = true
-                                self.recEight.isHidden = true
+                                break
                             default: break
                             }
                         case 2:
@@ -151,10 +148,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             let url = URL(string: videourl!)
                             SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),7)
                         case 3:
-                            self.playerController.removeFromParentViewController()
-                            self.playerController.view.removeFromSuperview()
-                            self.delSeven.isHidden = true
-                            self.recSeven.isHidden = true
+                            
                             switch (existtwo){
                             case 1:
                                 self.previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
@@ -164,10 +158,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                                 let url = URL(string: videourl!)
                                 SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),8)
                             case 3:
-                                self.playerController.removeFromParentViewController()
-                                self.playerController.view.removeFromSuperview()
-                                self.delEight.isHidden = true
-                                self.recEight.isHidden = true
+                                break
                             default: break
                             }
                             

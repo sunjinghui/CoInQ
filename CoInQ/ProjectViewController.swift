@@ -143,7 +143,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         super.viewDidLoad()
         AddButton.layer.cornerRadius = 8
         VideoNameTableView.tableFooterView = UIView(frame: .zero)
-//        managedObjextContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         reload()
     }
     override func viewDidAppear(_ animated: Bool) {
