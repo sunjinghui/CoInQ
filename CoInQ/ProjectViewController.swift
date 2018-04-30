@@ -11,7 +11,7 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 import Photos
-import  MPCoachMarks
+import MPCoachMarks
 
 var Index = 0
 func lognote(_ actiontype: String,_ google_userid: String,_ note: String){
@@ -20,20 +20,22 @@ func lognote(_ actiontype: String,_ google_userid: String,_ note: String){
 
 class ProjectViewController : UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var TableEmpty: UILabel!
     @IBOutlet weak var AddButton: UIButton!
     @IBOutlet weak var VideoNameTableView: UITableView!
-    @IBOutlet weak var TableEmpty: UIView!
     
     var videoInfoArray: [Any]?
     var coachMarksView = MPCoachMarks()
     // Table View Data Source
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         if let num = self.videoInfoArray?.count {
-            VideoNameTableView.backgroundView = nil
-            return num
-        } else {
-            VideoNameTableView.backgroundView = TableEmpty
+        let num = videoInfoArray?.count
+        if num == nil || num == 0 {
+            TableEmpty.text = "沒有影片專案\n請按下方 + 新增並命名"
+            self.view.addSubview(TableEmpty)
             return 0
+        } else {
+            TableEmpty.text = ""
+            return num!
         }
     }
     
@@ -152,7 +154,6 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             UserDefaults.standard.synchronize()
             coachmark()
         }
-//        coachmark()
     }
     
     func coachmark(){
@@ -163,7 +164,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
         let coachMarks = [
             ["rect": NSValue(cgRect: coachmark1), "caption": "即將開始創作影片嘍！\n\n\n\n\n\n這個頁面用來管理製作中的影片專案\n製作影片的過程中您可以請別人提供他的影片\n\n\n\n\n", "position": 2],
-            ["rect": NSValue(cgRect: coachmark2), "caption": "完成的成果影片會呈現在這一頁\n\n\n\n", "position": 2],
+            ["rect": NSValue(cgRect: coachmark2), "caption": "完成的成果影片會呈現在這一頁\n\n\n\n\n\n\n\n", "position": 2],
             ["rect": NSValue(cgRect: coachmark3), "caption": "製作影片的過程中您可以請別人提供他的影片\n你→→→🧒🏻✉️\n\n\n這個頁面則列出別人請你提供影片的邀請\n🧒🏻→→→你✉️\n\n","position": 2],
             ["rect": NSValue(cgRect: coachmark4), "caption": "開始之前來看看要經歷哪些步驟吧！","position": 5, "showArrow": true]
         ]
@@ -174,6 +175,21 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         tabBarController?.view.addSubview(coachMarksView)
 //        var coachMarksView = MPCoachMarks(frame: view.bounds, coachMarks: coachMarks)
 //        view.addSubview(coachMarksView)
+        coachMarksView.start()
+    }
+    
+    func coachmarkAfterNewTask(){
+        let coachmark5 = CGRect(x: (UIScreen.main.bounds.size.width / 10)-63 , y: (UIScreen.main.bounds.size.height / 7)-10,width:80,height:80)
+        let coachmark6 = CGRect(x: (UIScreen.main.bounds.size.width - 690), y: (UIScreen.main.bounds.size.height / 10),width:650,height: 150)
+        let coachMarks = [
+            ["rect": NSValue(cgRect: coachmark5),"caption": "這裡可以修改專案名稱","position": 4,"shape":1,"showArrow":true],
+            ["rect": NSValue(cgRect: coachmark6),"caption": "將專案區塊往左滑←--會出現刪除按鈕\n即可刪除此專案","position": 5,"shape":2]
+        ]
+        coachMarksView = MPCoachMarks(frame: view.bounds, coachMarks: coachMarks)
+        coachMarksView.enableContinueLabel = false
+        coachMarksView.enableSkipButton = false
+        coachMarksView.maxLblWidth = 350
+        view.addSubview(coachMarksView)
         coachMarksView.start()
     }
     
@@ -284,12 +300,14 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadvideo.php", method: .post, parameters: parameters).responseJSON
                             {
                                 response in
-                                //                    if let result = response.result.value {
-                                    //                        let jsonData = result as! NSDictionary
-                                //
-                                //                        //self.labelMessage.text = jsonData.value(forKey: "message") as! String?
-                                //                        print(jsonData.value(forKey: "message") as Any)
-                                //                    }
+                                    if response.result.isSuccess {
+                                        let coachMarksShown: Bool = UserDefaults.standard.bool(forKey: "MPCoachMarksShown_AfterNewTask")
+                                        if coachMarksShown == false {
+                                            UserDefaults.standard.set(true, forKey: "MPCoachMarksShown_AfterNewTask")
+                                            UserDefaults.standard.synchronize()
+                                            self.coachmarkAfterNewTask()
+                                        }
+                                    }
                         }
                         
                 SelectVideoUpload_Nine().update()

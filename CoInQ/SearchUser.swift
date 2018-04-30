@@ -15,7 +15,8 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
     var data = [String]()
     var filteredata = [String]()
     var isSearching = false
-    
+    var email : String!
+
     var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableview : UITableView!
@@ -98,8 +99,13 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
             textField.delegate = self
             textField.placeholder = "請輸入需要的影片資料特點"
         })
-        
-        
+
+        if isSearching{
+            email = self.filteredata[indexPath.row]
+        }else{
+            email = self.data[indexPath.row]
+        }
+        print(email.description)
         let StartVideoTask = UIAlertAction(title:"寄送共創邀請", style: .default, handler:{
             (action) -> Void in
             let Invitetext = alertController.textFields?.first?.text
@@ -108,7 +114,7 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
                 let parameters: Parameters=[
                     "google_userid_FROM": google_userid,
                     "videoid": Index,
-                    "email":  self.data[indexPath.row],
+                    "email":   self.email.description,
                     "context":    Invitetext!,
                     ]
                 

@@ -14,7 +14,7 @@ import Alamofire
 class CompeleteViewController : UIViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var VideoTableView: UITableView!
-    @IBOutlet weak var TableEmpty: UIView!
+    @IBOutlet weak var TableEmpty: UILabel!
     
     var FinalVideoArray: [Any]?
 //    var finalvideoURL: String?
@@ -23,10 +23,11 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = FinalVideoArray?.count
         if num == nil || num == 0 {
-            VideoTableView.backgroundView = TableEmpty
+            TableEmpty.text = "尚未有影片成果\n請前往【影片專案】頁面開始創作"
+            self.view.addSubview(TableEmpty)
             return 0
         } else {
-            VideoTableView.backgroundView = nil
+            TableEmpty.text = ""
             return num!
         }
     }

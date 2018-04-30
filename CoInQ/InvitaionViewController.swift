@@ -27,6 +27,7 @@ class InvitaionViewController : UIViewController{
     var id = [Int]()
     var videoid = [Int]()
     var googleid_FROM = [String]()
+    var loadingCamera = false
     
     override func viewDidLoad() {
         tableview.tableFooterView = UIView(frame: .zero)
@@ -262,15 +263,15 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = DataArray?.count
         if num == nil || num == 0 {
-//            tableview.backgroundView = TableEmpty
-            let text = "\(google_username)\n\(google_useremail)\n沒有影片共創邀請"
+            let text = "\(google_username)\n\(google_useremail)\n暫時沒有影片共創邀請"
             googleSignInEmail.text = text
+            self.view.addSubview(googleSignInEmail)
             return 0
         } else {
-            googleSignInEmail.text = nil
-//            tableview.backgroundView = nil
+            googleSignInEmail.text = ""
             return num!
         }
+        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -314,6 +315,7 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
         let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
             (action) -> Void in
+            self.loadingCamera = true
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
@@ -347,9 +349,10 @@ extension InvitaionViewController : UIImagePickerControllerDelegate {
         
         if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
-            guard let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path else { return }
-            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {
-                UISaveVideoAtPathToSavedPhotosAlbum(path, self, nil, nil)
+
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(avAsset.path) &&  loadingCamera {
+                UISaveVideoAtPathToSavedPhotosAlbum(avAsset.path, self, nil, nil)
+                loadingCamera = false
             }
             var message = ""
                 message = "共創影片影片已傳遞成功！"

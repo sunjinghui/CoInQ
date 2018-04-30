@@ -13,6 +13,7 @@ import MobileCoreServices
 import SwiftyJSON
 import Photos
 import AVKit
+import MPCoachMarks
 
 class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var TableEmpty: UIView!
@@ -24,7 +25,8 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
 //    fileprivate let viewModel = ProfileViewModel()
     var clips: [Any]?
     var invites: [Any]?
-    
+    var coachMarksView = MPCoachMarks()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -41,7 +43,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
 //        tableview.register(TableViewCell_clip.nib, forCellReuseIdentifier: TableViewCell_clip.identifier)
         
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(self.load), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.loaddata), for: UIControlEvents.valueChanged)
         tableview.addSubview(refreshControl)
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadinvitation), name: NSNotification.Name("CoStage"), object: nil)
@@ -49,9 +51,37 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         load()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        let coachMarksShown: Bool = UserDefaults.standard.bool(forKey: "MPCoachMarksShown_CollectingStage")
+        if coachMarksShown == false {
+            UserDefaults.standard.set(true, forKey: "MPCoachMarksShown_CollectingStage")
+            UserDefaults.standard.synchronize()
+            coachmarks()
+        }
+    }
+    
     func load(){
         loadinvitation()
         loaddata()
+    }
+    
+    func coachmarks(){
+        let coachmark1 = CGRect(x: 50, y: 880, width: 130, height: 130)
+        let coachmark2 = CGRect(x: 565, y: 880, width: 130, height: 130)
+        let coachmark3 = CGRect(x: 630, y: 25, width: 130, height: 40)
+        
+        let coachMarks = [
+            ["rect": NSValue(cgRect: coachmark1), "caption": "這裡可以邀請其他人傳送他的影片過來", "position": 2,"alignment":1, "showArrow": true],
+            ["rect": NSValue(cgRect: coachmark2), "caption": "這裡可以拍攝或選擇影片上傳", "position": 2,"alignment": 2, "showArrow": true],
+            ["rect": NSValue(cgRect: coachmark3), "caption": "蒐集完資料後可以進行順序排列\n或刪除該影片","position": 5, "showArrow": true]
+        ]
+        coachMarksView = MPCoachMarks(frame: (navigationController?.view.bounds)! , coachMarks: coachMarks)
+        coachMarksView.enableContinueLabel = false
+        coachMarksView.enableSkipButton = false
+        coachMarksView.maxLblWidth = 350
+//        coachMarksView.lblSpacing = 50
+        navigationController?.view.addSubview(coachMarksView)
+        coachMarksView.start()
     }
     
     @IBAction func backtoStage(_ sender: Any){
@@ -100,11 +130,12 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                 }
                 let error = JSON["error"] as! Bool
                 if error {
-                    self.clips = []
+                    self.invites = []
                     self.tableview.reloadData()
                     self.refreshControl.endRefreshing()
 
                 } else if let invitation = JSON["table"] as? [Any] {
+                    self.invites = []
                     self.invites = invitation
                     self.tableview.reloadData()
                     self.refreshControl.endRefreshing()
@@ -135,6 +166,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     self.refreshControl.endRefreshing()
 
                 } else if let Collecte = JSON["table"] as? [Any] {
+                    self.clips = []
                     self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
 //                    var tmp = Collection()
@@ -169,7 +201,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     self.refreshControl.endRefreshing()
                 }
         }
-
+        loadinvitation()
     }
     
     func uploadvideo(mp4Path : URL,message: String, clip: Int){
@@ -510,24 +542,18 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                 playerViewController.player!.play()
             }
         }else{
-            let deleteAlert = UIAlertController(title:"請選擇",message: nil, preferredStyle: .alert)
-            deleteAlert.addAction(UIAlertAction(title:"刪除該邀請",style: .default, handler:{ (action) -> Void in
+            let deleteAlert = UIAlertController(title:"確定要刪除邀請嗎？",message: "刪除邀請後無法復原！\n可以再邀請一次", preferredStyle: .alert)
+            deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
                 
                 let invitesInfo = self.invites?[indexPath.row] as? [String: Any]
                 let invitesid = invitesInfo?["id"] as? Int
                 self.deleteInvitation(id: invitesid!)
                 //                SelectVideoUpload_Nine().update()
             }))
-            deleteAlert.addAction(UIAlertAction(title: "更改邀請內容", style: .default, handler: {
-                (action) -> Void in
-                
-            }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
             self.present(deleteAlert, animated: true, completion: nil)
         }
-
-        
     }
 
     func startActivityIndicator() {
