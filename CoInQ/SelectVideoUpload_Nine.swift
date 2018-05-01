@@ -18,7 +18,7 @@ import SwiftyJSON
 class SelectVideoUpload_Nine : UIViewController{
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    var videoPreview = UIView.init(frame: CGRect(x: 225,y: 294,width: 465,height: 257))
+    var videoPreview = UIView.init(frame: CGRect(x: 225,y: 264,width: 465,height: 257))
     @IBOutlet weak var RecordButton: UIButton!
 //    @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var recNine: UIButton!
@@ -130,7 +130,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videonine_path", 9)
                             switch (existone){
                             case 1:
-                                self.previewVideo(video!, "videothree_path", self.videoPreview,self.recNine, self.delNine)
+                                self.previewVideo(video!, "videonine_path", self.videoPreview,self.recNine, self.delNine)
                                 break
                             case 2:
                                 self.startActivityIndicator()
@@ -259,8 +259,6 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     func isVideoLoaded() -> Bool {
-        update()
-        loadCollectionVideo()
         isURLempty = true
         nullstoryboard = [String]()
         emptystoryboards = [String]()
@@ -418,7 +416,9 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     @IBAction func checkALLvideoLoaded(_ sender: AnyObject) {
-        
+        mergeClips = []
+        update()
+        loadCollectionVideo()
         if isVideoLoaded() {
             
             mergeVideo(mergeClips)
