@@ -41,8 +41,12 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
             print("Get row \(indexPath.row) error")
             return cell
         }
-        cell.videoname.text = finalvideo["videoname"] as? String
-        cell.videolength.text = finalvideo["videolength"] as? String
+        let videoname = finalvideo["videoname"] as? String
+        cell.videoname.text = "影片名稱：".appending(videoname!)
+        let videolength = finalvideo["videolength"] as? String
+        cell.videolength.text = "影片長度：".appending(videolength!)
+        let timestamp = finalvideo["timestamp"] as? String
+        cell.timestamp.text = timestamp
         let finalvideoURL = finalvideo["finalvideopath"] as? String
         //影片縮圖
         let videoURL = URL(string: finalvideoURL!)
@@ -146,7 +150,6 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         Alamofire.request("http://140.122.76.201/CoInQ/v1/getFinalVideo.php", method: .post, parameters: parameters).responseJSON
             {
                 response in
-                print(response)
                 guard response.result.isSuccess else {
                     let errorMessage = response.result.error?.localizedDescription
                     print("\(errorMessage!)")
@@ -165,6 +168,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
                 } else if let FinalVideo = JSON["table"] as? [Any] {
                     self.FinalVideoArray = FinalVideo
 //                    print(self.FinalVideoArray)
+                    self.FinalVideoArray?.reverse()
                     self.VideoTableView.reloadData()
                 }
         }

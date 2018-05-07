@@ -354,8 +354,14 @@ class SelectVideoUpload_Nine : UIViewController{
             }
         }else if session.status == AVAssetExportSessionStatus.failed{
             let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+//            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+            let defaultAction = UIAlertAction(title: "再合併一次", style: .default, handler:{
+                (action) -> Void in
+                self.mergeVideo(self.mergeClips)
+                
+            })
             alertController.addAction(defaultAction)
+            alertController.addAction(UIAlertAction(title:"取消", style: .cancel, handler: self.switchPage))
             self.present(alertController, animated: true, completion: nil)
             self.StopActivityIndicator()
         }

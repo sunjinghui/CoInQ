@@ -263,7 +263,7 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = DataArray?.count
         if num == nil || num == 0 {
-            let text = "\(google_username)\n\(google_useremail)\n暫時沒有影片共創邀請"
+            let text = "您暫時沒有影片共創邀請" //    \(google_username)
             googleSignInEmail.text = text
             self.view.addSubview(googleSignInEmail)
             return 0
@@ -324,17 +324,17 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
-//        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: {
-//        (action) -> Void in
-//            let videourl = URL(string:"http://140.122.76.201/CoInQ/upload/108096475922049632836/500/trim.610783D8-6E3F-44E1-BCC9-66B15BC4048F.MOV")
-//            let player = AVPlayer(url: videourl!)
-//            let playervc = AVPlayerViewController()
-//            playervc.delegate = self
-//            playervc.player = player
-//            self.present(playervc,animated: true){
-//                playervc.player!.play()
-//            }
-//    }))
+        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: {
+        (action) -> Void in
+            let videourl = URL(string:"http://140.122.76.201/CoInQ/upload/108096475922049632836/500/trim.610783D8-6E3F-44E1-BCC9-66B15BC4048F.MOV")
+            let player = AVPlayer(url: videourl!)
+            let playervc = AVPlayerViewController()
+            playervc.delegate = self
+            playervc.player = player
+            self.present(playervc,animated: true){
+                playervc.player!.play()
+            }
+    }))
         alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

@@ -63,7 +63,6 @@ class SelectVideoUpload_One_Two : UIViewController{
         let deleteAlert = UIAlertController(title:"確定要清空故事版1的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
             self.deleteVideoPath(sb: 1, self.previewOne,self.recAudio,self.deletVideopath, self)
-            self.showSBimage(self.previewOne, #imageLiteral(resourceName: "sb1img.png"))
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -74,7 +73,6 @@ class SelectVideoUpload_One_Two : UIViewController{
         let deleteAlert = UIAlertController(title:"確定要清空故事版2的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
             self.deleteVideoPath(sb: 2, self.previewTwo,self.recAudioTwo,self.delTwo, self)
-            self.showSBimage(self.previewTwo, #imageLiteral(resourceName: "sb2img.png"))
         }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
@@ -258,8 +256,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
-                                self.showSBimage(self.previewTwo, #imageLiteral(resourceName: "sb2img.png"))
-
+//                                self.showSBimage(self.previewTwo, #imageLiteral(resourceName: "sb2img.png"))
+                                break
                             default: break
                             }
                         case 2:
@@ -268,8 +266,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                             let url = URL(string: videourl!)
                             self.donloadVideo(url: url!,self.stopActivityIndicator(_:),1)
                         case 3:
-                            self.showSBimage(self.previewOne, #imageLiteral(resourceName: "sb1img.png"))
-
+//                            self.showSBimage(self.previewOne, #imageLiteral(resourceName: "sb1img.png"))
+                            
                             switch (existtwo){
                             case 1:
                                 self.previewVideo(video!, "videotwo_path", self.previewTwo,self.recAudioTwo, self.delTwo)
@@ -280,8 +278,8 @@ class SelectVideoUpload_One_Two : UIViewController{
                                 let url = URL(string: videourl!)
                                 self.donloadVideo(url: url!,self.stopActivityIndicator(_:),2)
                             case 3:
-                                self.showSBimage(self.previewTwo, #imageLiteral(resourceName: "sb2img.png"))
-
+//                                self.showSBimage(self.previewTwo, #imageLiteral(resourceName: "sb2img.png"))
+                                break
                             default: break
                             }
                             

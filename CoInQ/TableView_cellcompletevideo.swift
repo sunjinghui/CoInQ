@@ -11,10 +11,9 @@ import UIKit
 class TableView_cellcompletevideo: UITableViewCell {
 
     @IBOutlet weak var thumbnail: UIImageView!
-    @IBOutlet weak var downloadbt: UIButton!
     @IBOutlet weak var videoname: UILabel!
     @IBOutlet weak var videolength: UILabel!
-    
+    @IBOutlet weak var timestamp: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

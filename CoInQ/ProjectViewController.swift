@@ -165,7 +165,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         let coachMarks = [
             ["rect": NSValue(cgRect: coachmark1), "caption": "即將開始創作影片嘍！\n\n\n\n\n\n這個頁面用來管理製作中的影片專案\n製作影片的過程中您可以請別人提供他的影片\n\n\n\n\n", "position": 2],
             ["rect": NSValue(cgRect: coachmark2), "caption": "完成的成果影片會呈現在這一頁\n\n\n\n\n\n\n\n", "position": 2],
-            ["rect": NSValue(cgRect: coachmark3), "caption": "製作影片的過程中您可以請別人提供他的影片\n你→→→🧒🏻✉️\n\n\n這個頁面則列出別人請你提供影片的邀請\n🧒🏻→→→你✉️\n\n","position": 2],
+            ["rect": NSValue(cgRect: coachmark3), "caption": "製作影片的過程中您可以請別人提供他的影片\n\n\n\n這個頁面則列出別人請你提供影片的邀請\n\n\n","position": 2],
             ["rect": NSValue(cgRect: coachmark4), "caption": "開始之前來看看要經歷哪些步驟吧！","position": 5, "showArrow": true]
         ]
         coachMarksView = MPCoachMarks(frame: (tabBarController?.view.bounds)! , coachMarks: coachMarks)

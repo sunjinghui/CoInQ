@@ -48,7 +48,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadinvitation), name: NSNotification.Name("CoStage"), object: nil)
 
-        load()
+        loaddata()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,10 +60,10 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func load(){
-        loadinvitation()
-        loaddata()
-    }
+//    func load(){
+//        loadinvitation()
+//        loaddata()
+//    }
     
     func coachmarks(){
         let coachmark1 = CGRect(x: 50, y: 880, width: 130, height: 130)
@@ -166,7 +166,6 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     self.refreshControl.endRefreshing()
 
                 } else if let Collecte = JSON["table"] as? [Any] {
-                    self.clips = []
                     self.clips = Collecte
 //                    var collect = self.clips?[0] as? [String: Any]
 //                    var tmp = Collection()
