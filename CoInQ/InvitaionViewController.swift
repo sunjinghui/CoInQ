@@ -27,6 +27,7 @@ class InvitaionViewController : UIViewController{
     var id = [Int]()
     var videoid = [Int]()
     var googleid_FROM = [String]()
+    var videofilename = [String]()
     var loadingCamera = false
     
     override func viewDidLoad() {
@@ -68,6 +69,7 @@ class InvitaionViewController : UIViewController{
                     self.videoname = []
                     self.id = []
                     self.googleid_FROM = []
+                    self.videofilename = []
                     
                     for each in self.DataArray!{
                         let array = each as? [String: Any]
@@ -77,19 +79,23 @@ class InvitaionViewController : UIViewController{
                         let id = array?["id"] as? Int
                         let videoid = array?["videoid"] as? Int
                         let googleid_FROM = array?["google_userid_FROM"] as? String
+                        let videofilename = array?["videofilename"] as? String
                         self.ownerName.append(ownerName!)
                         self.context.append(context!)
                         self.videoname.append(videoname!)
                         self.id.append(id!)
                         self.videoid.append(videoid!)
                         self.googleid_FROM.append(googleid_FROM!)
+                        if videofilename == nil{
+                            self.videofilename.append("null")
+                        }else{
+                            self.videofilename.append(videofilename!)
+                        }
                     }
-                    
                     self.tableview.reloadData()
                     self.refreshControl.endRefreshing()
                 }
         }
-        
     }
     
     func deleteData(id: Int){
@@ -311,6 +317,7 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        getCooperateInfo()
 
         let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
@@ -324,17 +331,20 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
-        alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: {
-        (action) -> Void in
-            let videourl = URL(string:"http://140.122.76.201/CoInQ/upload/108096475922049632836/500/trim.610783D8-6E3F-44E1-BCC9-66B15BC4048F.MOV")
-            let player = AVPlayer(url: videourl!)
-            let playervc = AVPlayerViewController()
-            playervc.delegate = self
-            playervc.player = player
-            self.present(playervc,animated: true){
-                playervc.player!.play()
-            }
-    }))
+        if videofilename[indexPath.row] != "null"{
+            let urls = "http://140.122.76.201/CoInQ/upload/".appending(self.googleid_FROM[indexPath.row]).appending("/").appending(String(self.videoid[indexPath.row])).appending("/").appending(videofilename[indexPath.row])
+            let videourl = URL(string: urls)
+            alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: {
+                (action) -> Void in
+                let player = AVPlayer(url: videourl!)
+                let playervc = AVPlayerViewController()
+                playervc.delegate = self
+                playervc.player = player
+                self.present(playervc,animated: true){
+                    playervc.player!.play()
+                }
+            }))
+        }
         alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
