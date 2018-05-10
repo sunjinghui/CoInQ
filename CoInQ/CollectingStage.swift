@@ -87,6 +87,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     @IBAction func backtoStage(_ sender: Any){
         dismiss(animated: true, completion: nil)
         self.SaveClipOrder()
+        NotificationCenter.default.post(name: NSNotification.Name("CoClipDownload"), object: nil)
     }
     
     @IBAction func EditClipOrder(_ sender: UIBarButtonItem) {
@@ -556,7 +557,6 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
     }
 
     func startActivityIndicator() {
-        print("startAcIn")
         let screenSize: CGRect = UIScreen.main.bounds
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))

@@ -105,7 +105,6 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
         }else{
             email = self.data[indexPath.row]
         }
-        print(email.description)
         let StartVideoTask = UIAlertAction(title:"寄送共創邀請", style: .default, handler:{
             (action) -> Void in
             let Invitetext = alertController.textFields?.first?.text

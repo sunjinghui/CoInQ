@@ -61,7 +61,8 @@ class AudioRecorderViewController: UINavigationController {
         @IBOutlet weak var recordButtonContainer: UIView!
         @IBOutlet weak var playButton: UIButton!
         weak var audioRecorderDelegate: AudioRecorderViewControllerDelegate?
-        
+        var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+
         var timeTimer: Timer?
         var milliseconds: Int = 0
         
@@ -264,7 +265,7 @@ class AudioRecorderViewController: UINavigationController {
                 playButton.setImage(#imageLiteral(resourceName: "play"), for: UIControlState())
                 recordButton.isEnabled = true
                 recordButtonContainer.alpha = 1
-
+                timeTimer?.invalidate()
             }
             
             playButton.isEnabled = !recorder.isRecording
@@ -335,24 +336,22 @@ class AudioRecorderViewController: UINavigationController {
             let transform = assetTrack.preferredTransform
             let assetInfo = orientationFromTransform(transform)
             
-            var scaleToFitRatio = UIScreen.main.bounds.width / assetTrack.naturalSize.width
+            var scaleToFitRatio = assetTrack.naturalSize.width / assetTrack.naturalSize.width
             if assetInfo.isPortrait {
-                scaleToFitRatio = UIScreen.main.bounds.width / assetTrack.naturalSize.height
+                scaleToFitRatio = assetTrack.naturalSize.height / assetTrack.naturalSize.height
                 let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
-                instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor),
-                                         at: kCMTimeZero)
+                instruction.setTransform(assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: 0)),at: kCMTimeZero)
             } else {
                 let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
-                var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+                var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: 0))
                 if (assetTrack.naturalSize.width > assetTrack.naturalSize.height){
-                    concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+                    concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: 0))
                 }else{
                     concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: 0))
                 }
                 if assetInfo.orientation == .down {
                     let fixUpsideDown = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
-                    let windowBounds = UIScreen.main.bounds
-                    let yFix = assetTrack.naturalSize.height + windowBounds.height/2
+                    let yFix = assetTrack.naturalSize.height
                     let centerFix = CGAffineTransform(translationX: assetTrack.naturalSize.width, y: yFix)
                     concat = fixUpsideDown.concatenating(centerFix).concatenating(scaleFactor)
                 }
@@ -362,9 +361,32 @@ class AudioRecorderViewController: UINavigationController {
             return instruction
         }
 
+        func startActivityIndicator() {
+            let screenSize: CGRect = UIScreen.main.bounds
+            
+            activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
+            activityIndicator.frame = CGRect(x: 0,y: 0,width: screenSize.width,height: screenSize.height)
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+            
+            // Change background color and alpha channel here
+            activityIndicator.backgroundColor = UIColor.black
+            activityIndicator.clipsToBounds = true
+            activityIndicator.alpha = 0.5
+            
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+        }
+        
+        func stopActivityIndicator() {
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
         
         func merge(_ videourl: URL, _ audiourl: URL){
-            
+            startActivityIndicator()
             let mixComposition : AVMutableComposition = AVMutableComposition()
 //            var mutableCompositionVideoTrack : [AVMutableCompositionTrack] = []
 //            var mutableCompositionAudioTrack : [AVMutableCompositionTrack] = []
@@ -411,7 +433,16 @@ class AudioRecorderViewController: UINavigationController {
             mutableVideoComposition.instructions = [totalVideoCompositionInstruction]
             mutableVideoComposition.frameDuration = CMTimeMake(1, 30)
             
-            mutableVideoComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//            mutableVideoComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
+            let assetTrack = aVideoAsset.tracks(withMediaType: AVMediaTypeVideo)[0]
+            let transform = assetTrack.preferredTransform
+            let assetInfo = orientationFromTransform(transform)
+            if assetInfo.isPortrait{
+                mutableVideoComposition.renderSize = CGSize(width: videoTrack.naturalSize.height, height: videoTrack.naturalSize.width)
+            }else{
+                mutableVideoComposition.renderSize = CGSize(width: videoTrack.naturalSize.width, height: videoTrack.naturalSize.height)
+            }
 
             
             //        playerItem = AVPlayerItem(asset: mixComposition)
@@ -443,7 +474,7 @@ class AudioRecorderViewController: UINavigationController {
                 case AVAssetExportSessionStatus.completed:
                     PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: savePathUrl as URL)}, completionHandler: {saved, error in
                         if saved {
-                            print("success")
+                            self.stopActivityIndicator()
                             let alertController = UIAlertController(title: "儲存完成", message: "新的配音影片已儲存在相簿中", preferredStyle: .alert)
                             let defaultAction = UIAlertAction(title: "確定", style: .default, handler:{ (action) -> Void in
                             (self.audioRecorderDelegate?.audioRecorderViewControllerDismissed(withFileURL: savePathUrl,clip: self.clip!))!
@@ -455,7 +486,7 @@ class AudioRecorderViewController: UINavigationController {
                     })
                     
                 case  AVAssetExportSessionStatus.failed:
-                    let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "影片輸出失敗，請重新操作一次", message: nil, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "確定", style: .default, handler: nil)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)

@@ -405,14 +405,11 @@ extension SelectVideoUpload_Seven_Eight : UIImagePickerControllerDelegate {
                 self.startActivityIndicator()
                 let videoURL = avAsset
                 uploadVideo(mp4Path: videoURL,message: message,clip:7, self.previewSeven,self.recSeven, self.delSeven)
-                loadData()
             } else {
                 message = "故事版8 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
                 uploadVideo(mp4Path: videoURL,message: message,clip:8, self.previewEight,self.recEight, self.delEight)
-                loadData()
-
             }
 
         }

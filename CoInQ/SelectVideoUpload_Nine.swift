@@ -63,6 +63,8 @@ class SelectVideoUpload_Nine : UIViewController{
         videoPreview.isHidden = true
         recNine.isHidden = true
         delNine.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(loadCollectionVideo), name: NSNotification.Name("CoClipDownload"), object: nil)
+
         checknine()
     }
     
@@ -122,7 +124,6 @@ class SelectVideoUpload_Nine : UIViewController{
                     print("JSON formate error")
                     return
                 }
-                // 2.
                 if let videoinfo = JSON["videoURLtable"] as? [Any] {
                     self.array = videoinfo
                     var video = self.array?[0] as? [String: Any]
@@ -161,7 +162,6 @@ class SelectVideoUpload_Nine : UIViewController{
                     print("JSON formate error")
                     return
                 }
-                // 2.
                 let error = JSON["error"] as! Bool
                 if error {
                     self.collectClips = []
@@ -196,13 +196,12 @@ class SelectVideoUpload_Nine : UIViewController{
         var video = videoArray?[0] as? [String: Any]
         let videopath = video?[videonum] as? String
         if videopath == nil {
+//            故事版是空的
             nullstoryboard.append(storyboard)
             emptystoryboards.append(storyboard)
-//            isURLempty = false
         }else{
             let clipVideo = AVAsset(url: URL(string: videopath!)!)
             mergeClips.append(clipVideo)
-            isURLempty = true
         }
     }
     
@@ -212,14 +211,23 @@ class SelectVideoUpload_Nine : UIViewController{
         if collectClips.count != 0 {
             for each in collectClips{
                 let videopath = each
-                let clipVideo = AVAsset(url: URL(string: videopath)!)
-                mergeClips.append(clipVideo)
+                let url = URL(string: videopath)
+                if FileManager.default.fileExists(atPath: (url?.path)!){
+                    let clipVideo = AVAsset(url: URL(string: videopath)!)
+                    mergeClips.append(clipVideo)
+                }else{
+                    isURLempty = false
+                    let alert = UIAlertController(title: "已有人傳回共創影片資料\n請前往故事版4進行確認", message: nil, preferredStyle: .alert)
+                    let checkagainAction = UIAlertAction(title: "OK", style: .default, handler:nil)
+                    alert.addAction(checkagainAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }else{
+//            故事版4是空的
 //            check("videofour_path", "故事版 4")
             nullstoryboard.append("故事版 4")
             emptystoryboards.append("故事版 4")
-            isURLempty = false
         }
     }
     
@@ -272,7 +280,7 @@ class SelectVideoUpload_Nine : UIViewController{
         check("videoeight_path", "故事版 8")
         check("videonine_path", "故事版 9")
         
-        return isURLempty
+        return (mergeClips.count > 1)&&isURLempty
     }
     
     override func didReceiveMemoryWarning() {
@@ -347,13 +355,14 @@ class SelectVideoUpload_Nine : UIViewController{
                     let vsec = (vmilliseconds / 60) % 60
                     let vmin = vmilliseconds / 3600
                     let videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
-                    print("saved")
                     self.uploadFinalvideo(outputURL!, videolength)
                     
                 }
             }
+        }else if session.status == AVAssetExportSessionStatus.exporting{
+            
         }else if session.status == AVAssetExportSessionStatus.failed{
-            let alertController = UIAlertController(title: "合併失敗，請重新操作一次", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "影片輸出失敗，請重新操作一次", message: nil, preferredStyle: .alert)
 //            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
             let defaultAction = UIAlertAction(title: "再合併一次", style: .default, handler:{
                 (action) -> Void in
@@ -442,7 +451,7 @@ class SelectVideoUpload_Nine : UIViewController{
         }else{
             
             //  警告視窗 提醒未上傳的故事版
-            let alertController = UIAlertController(title: "請注意", message: "請選擇以下故事版進行上傳：\n\(printArray)", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "請注意", message: "請選擇以下故事版進行上傳：\(printArray)", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)

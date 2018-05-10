@@ -317,7 +317,7 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        getCooperateInfo()
+//        getCooperateInfo()
 
         let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
