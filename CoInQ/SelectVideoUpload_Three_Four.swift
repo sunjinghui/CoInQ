@@ -27,10 +27,11 @@ class SelectVideoUpload_Three_Four : UIViewController{
     var playerController = AVPlayerViewController()
     
     @IBAction func StageTitleTwo(_ sender: UIButton) {
+        lognote("h2d", google_userid, "\(Index)")
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("蒐集能夠確實回答問題的「資料」  這「資料」也就是「證據」", for: UIControlState())
+            sender.setTitle("「凡事豫則立」，制訂探究計畫，蒐集能夠確實回答問題的「資料」。", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -42,12 +43,14 @@ class SelectVideoUpload_Three_Four : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g3r", google_userid, "\(Index)")
+
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videothree_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 3
+        controller.childViewController.note = "說說看，關於我提出的探究問題，可能的答案是什麼，我運用哪些方法與資源蒐集資料。"
         present(controller, animated: true, completion: nil)
         
     }
@@ -69,7 +72,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     }
     
     @IBAction func ExplainThree(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"心智圖是一個適合用來制定蒐集計畫的好工具。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"找一張紙，寫下相關的知識\n根據這些已經知道的訊息\n預測一下可能的答案\n想一想，可以進行什麼測試?\n要去尋找、紀錄什麼資料?\n列出一張清單吧！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve3",google_userid,"\(Index)")
@@ -77,7 +80,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     }
     
     @IBAction func ExplainFour(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"我們可以邀請夥伴加入蒐集證據的行列。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"根據上一步驟設想的\n研究假設和資料蒐集清單\n一項一項進行拍攝紀錄\n資料蒐集\n上傳保存\n並比對每一筆資料\n\n是不是我想要的?\n能不能用來證明我的研究假設?",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve4",google_userid,"\(Index)")
@@ -239,12 +242,14 @@ class SelectVideoUpload_Three_Four : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = true
             self.loadingCamera = true
+            lognote("v3s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = true
+                lognote("a3s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -287,7 +292,6 @@ class SelectVideoUpload_Three_Four : UIViewController{
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
-                        print("Upload Succes")
                         self.activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)

@@ -21,6 +21,7 @@ class Helper_VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        lognote("ghp", google_userid, "\(Index)")
         HelpfultextView.isHidden = true
     }
     

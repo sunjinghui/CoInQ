@@ -29,18 +29,20 @@ class InvitaionViewController : UIViewController{
     var googleid_FROM = [String]()
     var videofilename = [String]()
     var loadingCamera = false
-    
+    var timer: Timer?
+
     override func viewDidLoad() {
         tableview.tableFooterView = UIView(frame: .zero)
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.getCooperateInfo), for: .valueChanged)
         tableview.addSubview(refreshControl)
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.getCooperateInfo), userInfo: nil, repeats: true)
         getCooperateInfo()
     }
     
     func getCooperateInfo(){
-        
+        timer?.invalidate()
         let parameters: Parameters=["google_userid_TO": google_userid]
         Alamofire.request("http://140.122.76.201/CoInQ/v1/collaboration.php", method: .post, parameters: parameters).responseJSON
             {
@@ -109,7 +111,7 @@ class InvitaionViewController : UIViewController{
                     if error! {
                         let deleteAlert = UIAlertController(title:"提示",message: "影片刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
                         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
-//                        lognote("dcv", google_userid, "\(id)")
+                        lognote("riv", google_userid, "\(Index)")
                         self.present(deleteAlert, animated: true, completion: nil)
                     }else{
                         self.getCooperateInfo()
@@ -303,9 +305,7 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
             let deleteAlert = UIAlertController(title:"確定拒絕影片共創邀請嗎？",message: "拒絕邀請後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
                 let inviteid = self.id[indexPath.row]
-//                lognote("d??", google_userid, "\(videoid!)")
                 self.deleteData(id: inviteid)
-                
                 self.getCooperateInfo()
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
@@ -323,11 +323,13 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
         alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
             (action) -> Void in
             self.loadingCamera = true
+            lognote("fiv", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
+                lognote("fia", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -336,6 +338,7 @@ extension InvitaionViewController : UITableViewDelegate, UITableViewDataSource, 
             let videourl = URL(string: urls)
             alert.addAction(UIAlertAction(title: "觀看他的探究問題",style: .default, handler: {
                 (action) -> Void in
+                lognote("liq", google_userid, "\(self.videoid[indexPath.row])+\(self.googleid_FROM[indexPath.row])")
                 let player = AVPlayer(url: videourl!)
                 let playervc = AVPlayerViewController()
                 playervc.delegate = self

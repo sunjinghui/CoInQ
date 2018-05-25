@@ -36,12 +36,13 @@ class SelectVideoUpload_One_Two : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g1r", google_userid, "\(Index)")
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videoone_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 1
+        controller.childViewController.note = "說說看，我紀錄的自然現象什麼是要大家注意的。"
         present(controller, animated: true, completion: nil)
         
     }
@@ -49,12 +50,13 @@ class SelectVideoUpload_One_Two : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g2r", google_userid, "\(Index)")
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videotwo_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 2
+        controller.childViewController.note = "說說看，我為什麼對這個自然現象感興趣。"
         present(controller, animated: true, completion: nil)
         
     }
@@ -73,7 +75,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         let deleteAlert = UIAlertController(title:"確定要清空故事版2的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
             self.deleteVideoPath(sb: 2, self.previewTwo,self.recAudioTwo,self.delTwo, self)
-        }))
+       }))
         let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
         deleteAlert.addAction(cancelAction)
         self.present(deleteAlert, animated: true, completion: nil)
@@ -82,10 +84,11 @@ class SelectVideoUpload_One_Two : UIViewController{
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBAction func StageTitleOne(_ sender: UIButton) {
+        lognote("h1d", google_userid, "\(Index)")
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("科學探究皆從一個問題開始", for: UIControlState())
+            sender.setTitle("「創新始於好奇」，科學探究要從一個問題開始。", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -94,7 +97,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     @IBAction func ExplainOne(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"將我想要探究的自然現象記錄下來吧！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"將我想要探究的自然現象\n記錄下來吧！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:nil)
         myAlert.addAction(action)
         lognote("ve1",google_userid,"\(Index)")
@@ -102,7 +105,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     }
     
     @IBAction func ExplainTwo(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著用「為什麼」或「如何」來表示我的探究問題吧！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"面對鏡頭\n描述剛剛紀錄的自然現象\n並提出心中的疑問！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:nil)
         myAlert.addAction(action)
         lognote("ve2",google_userid,"\(Index)")
@@ -171,12 +174,14 @@ class SelectVideoUpload_One_Two : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = true
             self.loadingCamera = true
+            lognote("v1s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = true
+                lognote("a1s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -191,12 +196,14 @@ class SelectVideoUpload_One_Two : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = false
             self.loadingCamera = true
+            lognote("v2s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = false
+                lognote("a2s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -488,6 +495,7 @@ class SelectVideoUpload_One_Two : UIViewController{
                     }
                     recbtn.isHidden = true
                     delbtn.isHidden = true
+                    lognote("d\(sb)v", google_userid, "\(Index)")
                 }
         }
     }
@@ -622,6 +630,7 @@ extension SelectVideoUpload_One_Two : UIImagePickerControllerDelegate {
 }
 
 extension SelectVideoUpload_One_Two: AudioRecorderViewControllerDelegate {
+    
     func audioRecorderViewControllerDismissed(withFileURL fileURL: URL?,clip: Int) {
         dismiss(animated: true, completion: nil)
         if clip == 1 {

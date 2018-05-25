@@ -23,6 +23,7 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var searchbar : UISearchBar!
     
     @IBAction func backtoStage(_ sender: Any){
+        lognote("bvt", google_userid, "\(Index)")
         dismiss(animated: true, completion: nil)
     }
     
@@ -37,7 +38,8 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(getUserInfo), for: UIControlEvents.valueChanged)
         tableview.addSubview(refreshControl)
-        
+        lognote("gsp", google_userid, "\(Index)")
+
         getUserInfo()
         
 //        for vc in (self.navigationController?.viewControllers ?? []) {
@@ -109,6 +111,8 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
             (action) -> Void in
             let Invitetext = alertController.textFields?.first?.text
             if !(Invitetext?.isEmpty)! {
+                lognote("ivu", google_userid, "\(Index)+\(String(describing: Invitetext))")
+
                 //UPLOAD VideoTask
                 let parameters: Parameters=[
                     "google_userid_FROM": google_userid,
@@ -183,6 +187,7 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
             view.endEditing(true)
             tableview.reloadData()
         }else{
+            lognote("sru", google_userid, "\(Index)+\(searchText)")
             isSearching = true
             filteredata = data.filter({ (country) -> Bool in
                 let countryText : NSString = country as NSString

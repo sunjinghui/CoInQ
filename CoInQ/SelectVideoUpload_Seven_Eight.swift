@@ -31,14 +31,15 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBAction func StageTitleFour(_ sender: UIButton) {
+        lognote("h4d", google_userid, "\(Index)")
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("最終的解釋應該是科學的、有邏輯的！", for: UIControlState())
+            sender.setTitle("最終的解釋要是科學的、有邏輯的，不能自相矛盾、不講道理。", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
-            sender.setTitle("評估解釋", for: UIControlState())
+            sender.setTitle("形成解釋", for: UIControlState())
         }
     }
     
@@ -46,12 +47,14 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g7r", google_userid, "\(Index)")
+
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videoseven_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 7
+        controller.childViewController.note = "說說看，我發現科學家的研究方法與結果有哪些特別的地方。"
         present(controller, animated: true, completion: nil)
         
     }
@@ -60,12 +63,14 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g8r", google_userid, "\(Index)")
+
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videoeight_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 8
+        controller.childViewController.note = "說說看，我修改了哪些內容才讓我的解釋變得科學、有邏輯。"
         present(controller, animated: true, completion: nil)
         
     }
@@ -91,8 +96,6 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        previewSeven.isHidden = true
-        previewEight.isHidden = true
         recSeven.isHidden = true
         recEight.isHidden = true
         delSeven.isHidden = true
@@ -223,7 +226,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     }
     
     @IBAction func ExplainSeven(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"仔細觀察與紀錄\n科學家使用的科學方法與研究結果吧！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"仔細觀察與記錄\n科學家使用的科學方法與研究結果。\n可以善用iPad螢幕錄製的功能！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve7",google_userid,"\(Index)")
@@ -231,7 +234,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     }
     
     @IBAction func ExplainEight(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試試看加入科學家提出的科學術語，\n讓解釋看起來更專業！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試試看加入科學家提出的科學術語\n重新表達分析證據後的結果\n讓解釋看起來更專業！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve8",google_userid,"\(Index)")
@@ -289,12 +292,14 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = true
             self.loadingCamera = true
+            lognote("v7s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = true
+                lognote("a7s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -310,12 +315,14 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = false
             self.loadingCamera = true
+            lognote("v8s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = false
+                lognote("a8s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -352,7 +359,6 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
-//                        print("Upload Succes")
                         self.activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
@@ -365,7 +371,6 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         self.present(alert , animated: true , completion: nil)
                         lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
-                        print("Upload Failed")
                         self.activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:"上傳失敗，請重新上傳", preferredStyle: .alert)
@@ -421,11 +426,11 @@ extension SelectVideoUpload_Seven_Eight: AudioRecorderViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         if clip == 7 {
             self.startActivityIndicator()
-            let message = "故事版5 影片已匯入成功！"
+            let message = "故事版7 影片已匯入成功！"
             self.uploadVideo(mp4Path: fileURL!, message: message, clip: 7, self.previewSeven, self.recSeven, self.delSeven)
         }else if clip == 8 {
             self.startActivityIndicator()
-            let message = "故事版6 影片已匯入成功！"
+            let message = "故事版8 影片已匯入成功！"
             self.uploadVideo(mp4Path: fileURL!, message: message, clip: 8, self.previewEight, self.recEight, self.delEight)
         }
         

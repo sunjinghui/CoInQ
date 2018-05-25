@@ -25,6 +25,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
 //    fileprivate let viewModel = ProfileViewModel()
     var clips: [Any]?
     var invites: [Any]?
+    var loadingCamera = false
     var coachMarksView = MPCoachMarks()
 
     override func viewDidLoad() {
@@ -97,6 +98,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
             editButtom.title = "完成"
         case false:
             editButtom.title = "調整資料順序"
+            lognote("ovd", google_userid, "\(Index)")
             self.SaveClipOrder()
         }
     }
@@ -240,7 +242,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
                         self.loaddata()
-//                        lognote("u\(clip)s", google_userid, "\(Index)")
+                        lognote("u4s", google_userid, "\(Index)")
                     }else{
                         print("Upload Failed")
                         self.activityIndicator.stopAnimating()
@@ -249,7 +251,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
-//                        lognote("u\(clip)f", google_userid, "\(Index)")
+                        lognote("u4f", google_userid, "\(Index)")
                     }
                 }
                 //上传进度
@@ -337,17 +339,52 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         present(mediaUI, animated: true, completion: nil)
         return true
     }
-    
+    func startCameraFromViewController(_ viewController: UIViewController, withDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate) -> Bool {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) == false {
+            return false
+        }
+        
+        let cameraController = UIImagePickerController()
+        cameraController.allowsEditing = true
+        cameraController.sourceType = .camera
+        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
+        cameraController.cameraCaptureMode = .video
+        cameraController.videoQuality = .typeHigh
+        cameraController.allowsEditing = true
+        cameraController.delegate = delegate
+        cameraController.videoMaximumDuration = 30.0
+        
+        present(cameraController, animated: true, completion: nil)
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func Addclips(_ sender: AnyObject) {
-        if savedPhotosAvailable() {
-            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-        }
+        let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
+            (action) -> Void in
+            self.loadingCamera = true
+            lognote("v4s", google_userid, "\(Index)")
+            _ = self.startCameraFromViewController(self, withDelegate: self)
+        }))
+        alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
+            (action) -> Void in
+            if self.savedPhotosAvailable() {
+                lognote("a4s", google_userid, "\(Index)")
+                _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
     }
+//        if savedPhotosAvailable() {
+//            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
+//        }
+    
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -441,8 +478,8 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                     
                     let clipInfo = self.clips?[indexPath.row] as? [String: Any]
                     let clipid = clipInfo?["id"] as? Int
-    //                let videoname = clipInfo?["videoname"] as? String
-    //                lognote("dcc", google_userid, "\(videoid!)\(videoname ?? "nil")")
+                    let info = clipInfo?["info"] as? String
+                    lognote("d4v", google_userid, "\(Index)\(String(describing: info))")
                     self.deleteData(id: clipid!)
                     //                SelectVideoUpload_Nine().update()
                 }))
@@ -489,7 +526,6 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         Alamofire.request("http://140.122.76.201/CoInQ/v1/deleteclips.php", method: .post, parameters: ["id":id]).responseJSON
             {
                 response in
-                //                print("DDDelete ID\(id) \(response)")
                 if let result = response.result.value {
                     let jsonData = result as! NSDictionary
                     let error = jsonData.value(forKey: "error") as? Bool
@@ -499,7 +535,6 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                         self.present(deleteAlert, animated: true, completion: nil)
                         self.loadinvitation()
                     }else{
-                        //                        lognote("dcf", google_userid, "\(id)")
                         self.loadinvitation()
                     }
                     
@@ -547,8 +582,9 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                 
                 let invitesInfo = self.invites?[indexPath.row] as? [String: Any]
                 let invitesid = invitesInfo?["id"] as? Int
+                let invitation = invitesInfo?["context"] as? String
                 self.deleteInvitation(id: invitesid!)
-                //                SelectVideoUpload_Nine().update()
+                lognote("div", google_userid, "\(Index)+\(String(describing: invitation))")
             }))
             let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
             deleteAlert.addAction(cancelAction)
@@ -586,10 +622,14 @@ extension CollectingStage : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismiss(animated: true, completion: nil)
-        
+
         if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
             var message = ""
+            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(avAsset.path) && loadingCamera {
+                UISaveVideoAtPathToSavedPhotosAlbum(avAsset.path, self, nil, nil)
+                loadingCamera = false
+            }
                 message = "影片已匯入成功！"
                 self.startActivityIndicator()
             let videoURL = avAsset

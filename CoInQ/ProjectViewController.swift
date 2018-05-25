@@ -91,6 +91,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         //                    }
                 }
                 SelectVideoUpload_Nine().update()
+                lognote("ctn", google_userid, VideoName!)
                 self.reload()
             }else{
                 let errorAlert = UIAlertController(title:"請注意",message: "不能沒有探究影片名稱", preferredStyle: .alert)
@@ -114,14 +115,13 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
 
         if editingStyle == .delete {
-
+            let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
+            let videoid = videoInfo?["id"] as? Int
+            lognote("tdv", google_userid, "\(videoid!)")
+            
             let deleteAlert = UIAlertController(title:"確定要刪除影片任務嗎？",message: "刪除影片任務後無法復原！", preferredStyle: .alert)
             deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-                
-                let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
-                let videoid = videoInfo?["id"] as? Int
-                let videoname = videoInfo?["videoname"] as? String
-                lognote("dtf", google_userid, "\(videoid!)\(videoname ?? "nil")")
+//                let videoname = videoInfo?["videoname"] as? String
                 self.deleteData(id: videoid!)
 //                SelectVideoUpload_Nine().update()
             }))
@@ -164,8 +164,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 
         let coachMarks = [
             ["rect": NSValue(cgRect: coachmark1), "caption": "即將開始創作影片嘍！\n\n\n\n\n\n這個頁面用來管理製作中的影片專案\n製作影片的過程中您可以請別人提供他的影片\n\n\n\n\n", "position": 2],
-            ["rect": NSValue(cgRect: coachmark2), "caption": "完成的成果影片會呈現在這一頁\n\n\n\n\n\n\n\n", "position": 2],
-            ["rect": NSValue(cgRect: coachmark3), "caption": "製作影片的過程中您可以請別人提供他的影片\n\n\n\n這個頁面則列出別人請你提供影片的邀請\n\n\n","position": 2],
+            ["rect": NSValue(cgRect: coachmark2), "caption": "完成的成果影片會呈現在這一頁\n\n\n\n\n\n\n\n\n\n", "position": 2],
+            ["rect": NSValue(cgRect: coachmark3), "caption": "製作影片的過程中\n您可以請別人提供他的影片\n\n這個頁面則列出\n別人請你提供影片的邀請\n\n\n\n\n\n","position": 2],
             ["rect": NSValue(cgRect: coachmark4), "caption": "開始之前來看看要經歷哪些步驟吧！","position": 5, "showArrow": true]
         ]
         coachMarksView = MPCoachMarks(frame: (tabBarController?.view.bounds)! , coachMarks: coachMarks)
@@ -235,6 +235,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         let deleteAlert = UIAlertController(title:"提示",message: "影片任務刪除失敗，請確認網路連線並重新刪除", preferredStyle: .alert)
                         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:nil))
                         self.present(deleteAlert, animated: true, completion: nil)
+                        lognote("dtf", google_userid, "\(id)")
                         self.reload()
                     }else{
                         lognote("dvt", google_userid, "\(id)")
@@ -311,6 +312,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
                         }
                         
                 SelectVideoUpload_Nine().update()
+                print(VideoName!)
                 lognote("nvt", google_userid, VideoName!)
                 self.reload()
 

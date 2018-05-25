@@ -31,14 +31,15 @@ class SelectVideoUpload_Five_Six : UIViewController{
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBAction func StageTitleThree(_ sender: UIButton) {
+        lognote("h3d", google_userid, "\(Index)")
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("分析「證據」以便得出可能的解釋", for: UIControlState())
+            sender.setTitle("篩選過的「資料」作為 「證據」，分析「證據」來得出可能的解釋。", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
-            sender.setTitle("形成解釋", for: UIControlState())
+            sender.setTitle("分析證據", for: UIControlState())
         }
     }
     
@@ -46,12 +47,14 @@ class SelectVideoUpload_Five_Six : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g5r", google_userid, "\(Index)")
+
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videofive_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 5
+        controller.childViewController.note = "說說看，我運用哪些策略來分類證據，和這樣分類的原因。"
         present(controller, animated: true, completion: nil)
         
     }
@@ -59,12 +62,14 @@ class SelectVideoUpload_Five_Six : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g6r", google_userid, "\(Index)")
+
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videosix_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 6
+        controller.childViewController.note = "解釋文字、圖表或影片來呈現我認為可能的原因。"
         present(controller, animated: true, completion: nil)
         
     }
@@ -90,7 +95,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
     }
     
     @IBAction func ExplainFive(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"便條紙是一個適合用來\n分類的小工具喔！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"在清單中的每一筆影片證據後面\n寫下其中包含的多個詳細資訊。\n在這麼多資訊中找出它們的關聯\n用不同的顏色標記\n或把同一類的圈起來、框起來。\n拍下你的分類過程!",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve5",google_userid,"\(Index)")
@@ -98,7 +103,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
     }
     
     @IBAction func ExplainSix(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"文字、圖表、聲音、影片\n都是適合呈現可能原因的方式。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"可以用文字、圖表、聲音、影片\n呈現分析證據的結果。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve6",google_userid,"\(Index)")
@@ -288,12 +293,14 @@ class SelectVideoUpload_Five_Six : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = true
             self.loadingCamera = true
+            lognote("v5s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = true
+                lognote("a5s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -309,12 +316,14 @@ class SelectVideoUpload_Five_Six : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = false
             self.loadingCamera = true
+            lognote("v6s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = false
+                lognote("a6s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))

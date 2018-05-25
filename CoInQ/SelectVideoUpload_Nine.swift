@@ -69,6 +69,7 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     @IBAction func StageTitleFive(_ sender: UIButton) {
+        lognote("h5d", google_userid, "\(Index)")
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -84,12 +85,14 @@ class SelectVideoUpload_Nine : UIViewController{
         
         let controller = AudioRecorderViewController()
         controller.audioRecorderDelegate = self
-        
+        lognote("g9r", google_userid, "\(Index)")
+
         let video = videoArray?[0] as? [String: Any]
         let videourl = video?["videonine_path"] as? String
         let url = URL(string: videourl!)
         controller.childViewController.videourl = url
         controller.childViewController.clip = 9
+        controller.childViewController.note = "說說看，當他人對於我的解釋有所懷疑時，我是如何回應的。"
         present(controller, animated: true, completion: nil)
     }
     
@@ -289,7 +292,7 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     @IBAction func ExplainNine(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著將鏡頭轉換成自拍模式\n對著鏡頭說幾句話吧！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著將鏡頭轉換成自拍模式\n對著鏡頭回答頁面上的問題吧！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve9",google_userid,"\(Index)")
@@ -362,12 +365,12 @@ class SelectVideoUpload_Nine : UIViewController{
         }else if session.status == AVAssetExportSessionStatus.exporting{
             
         }else if session.status == AVAssetExportSessionStatus.failed{
+            lognote("mvf", google_userid, "\(Index)")
             let alertController = UIAlertController(title: "影片輸出失敗，請重新操作一次", message: nil, preferredStyle: .alert)
 //            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
             let defaultAction = UIAlertAction(title: "再合併一次", style: .default, handler:{
                 (action) -> Void in
                 self.mergeVideo(self.mergeClips)
-                
             })
             alertController.addAction(defaultAction)
             alertController.addAction(UIAlertAction(title:"取消", style: .cancel, handler: self.switchPage))
@@ -384,12 +387,14 @@ class SelectVideoUpload_Nine : UIViewController{
             (action) -> Void in
             self.loadingAssetOne = true
             self.loadingCamera = true
+            lognote("v9s", google_userid, "\(Index)")
             _ = self.startCameraFromViewController(self, withDelegate: self)
         }))
         alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
             (action) -> Void in
             if self.savedPhotosAvailable() {
                 self.loadingAssetOne = true
+                lognote("a9s", google_userid, "\(Index)")
                 _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
             }
         }))
@@ -437,7 +442,8 @@ class SelectVideoUpload_Nine : UIViewController{
         if isVideoLoaded() {
             
             mergeVideo(mergeClips)
-            
+            lognote("mvt", google_userid, "\(Index)")
+
             //新增VC
 //            let recordNavigationController = storyboard?.instantiateViewController(withIdentifier: "RecordNavigationController") as! RecordNavigationController
 //            present(recordNavigationController, animated: true, completion: nil)
@@ -455,7 +461,7 @@ class SelectVideoUpload_Nine : UIViewController{
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
-            lognote("sbe", google_userid, "id\(Index)\(emptystoryboard)")
+            lognote("sbe", google_userid, "\(Index)+\(emptystoryboard)")
         }
         /*if isURLempty("RecordOne") || isURLempty("RecordTwo") {
             UserDefaults.standard.removeObject(forKey: "RecordOne")
@@ -512,7 +518,6 @@ class SelectVideoUpload_Nine : UIViewController{
                         self.present(alert , animated: true , completion: nil)
                         lognote("u\(clip)s", google_userid, "\(Index)")
                     }else{
-                        print("Upload Failed")
                         self.activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:"上傳失敗，請重新上傳", preferredStyle: .alert)
@@ -663,7 +668,6 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
-        lognote("mvt", google_userid, "videoid:\(Index)")
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
@@ -696,7 +700,6 @@ class SelectVideoUpload_Nine : UIViewController{
                         self.StopActivityIndicator()
                         lognote("ufs", google_userid, "\(Index)")
                     }else{
-                        print("Upload Failed")
                         lognote("uff", google_userid, "\(Index)")
                         let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: nil)
