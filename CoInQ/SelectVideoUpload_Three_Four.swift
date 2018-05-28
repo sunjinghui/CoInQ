@@ -20,8 +20,11 @@ class SelectVideoUpload_Three_Four : UIViewController{
     var isClicked = true
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var previewThree = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
+    var previewFour = UIView.init(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
     @IBOutlet weak var recThree: UIButton!
     @IBOutlet weak var delThree: UIButton!
+    @IBOutlet weak var recFour: UIButton!
+    @IBOutlet weak var delFour: UIButton!
     
     var player: AVPlayer!
     var playerController = AVPlayerViewController()
@@ -51,6 +54,19 @@ class SelectVideoUpload_Three_Four : UIViewController{
         present(controller, animated: true, completion: nil)
         
     }
+    @IBAction func recFour(_ sender: Any) {
+        
+        let controller = AudioRecorderViewController()
+        controller.audioRecorderDelegate = self
+        
+        let video = videoArray?[0] as? [String: Any]
+        let videourl = video?["videofour_path"] as? String
+        let url = URL(string: videourl!)
+        controller.childViewController.videourl = url
+        controller.childViewController.clip = 4
+        present(controller, animated: true, completion: nil)
+        
+    }
     
     @IBAction func delThree(_ sender: Any) {
         let deleteAlert = UIAlertController(title:"確定要清空故事版3的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
@@ -61,12 +77,21 @@ class SelectVideoUpload_Three_Four : UIViewController{
         deleteAlert.addAction(cancelAction)
         self.present(deleteAlert, animated: true, completion: nil)
     }
-    
-    @IBAction func Cooperation(_ sender: Any){
-        let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationController") as! TableNavigationController
-        present(navigationtableview, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(navigationtableview, animated: true)
+    @IBAction func delFour(_ sender: Any) {
+        let deleteAlert = UIAlertController(title:"確定要清空故事版3的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
+            SelectVideoUpload_One_Two().deleteVideoPath(sb: 4,self.previewFour,self.recFour,self.delFour,self)
+        }))
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
+        deleteAlert.addAction(cancelAction)
+        self.present(deleteAlert, animated: true, completion: nil)
     }
+    
+//    @IBAction func Cooperation(_ sender: Any){
+//        let navigationtableview = storyboard?.instantiateViewController(withIdentifier: "TableNavigationController") as! TableNavigationController
+//        present(navigationtableview, animated: true, completion: nil)
+////        self.navigationController?.pushViewController(navigationtableview, animated: true)
+//    }
     
     @IBAction func ExplainThree(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"心智圖是一個適合用來制定蒐集計畫的好工具。",preferredStyle: .alert)
@@ -78,7 +103,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     
     @IBAction func ExplainFour(_ sender: Any) {
         let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"我們可以邀請夥伴加入蒐集證據的行列。",preferredStyle: .alert)
-        let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
+        let action = UIAlertAction(title:"知道了",style: .default, handler: nil)
         myAlert.addAction(action)
         lognote("ve4",google_userid,"\(Index)")
         self.present(myAlert, animated: true, completion: nil)
@@ -86,9 +111,10 @@ class SelectVideoUpload_Three_Four : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        previewThree.isHidden = true
         recThree.isHidden = true
+        recFour.isHidden = true
         delThree.isHidden = true
+        delFour.isHidden = true
         check()
     }
     
@@ -118,20 +144,44 @@ class SelectVideoUpload_Three_Four : UIViewController{
                     let video = videoArray?[0] as? [String: Any]
                     if !(video?.isEmpty)! {
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videothree_path", 3)
-
-                            switch (existone){
+                        let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videofour_path", 4)
+                        switch (existone){
+                        case 1:
+                            self.previewVideo(video!, "videothree_path", self.previewThree,self.recThree, self.delThree)
+                            switch (existtwo){
                             case 1:
-                                self.previewVideo(video!, "videothree_path", self.previewThree,self.recThree, self.delThree)
-                                break
+                                self.previewVideo(video!, "videofour_path", self.previewFour, self.recFour, self.delFour)
                             case 2:
                                 self.startActivityIndicator()
-                                let videourl = video?["videothree_path"] as? String
+                                let videourl = video?["videofour_path"] as? String
                                 let url = URL(string: videourl!)
-                                SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),3)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),4)
                             case 3:
                                 break
                             default: break
                             }
+                        case 2:
+                            self.startActivityIndicator()
+                            let videourl = video?["videothree_path"] as? String
+                            let url = URL(string: videourl!)
+                            SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),3)
+                        case 3:
+                            
+                            switch (existtwo){
+                            case 1:
+                                self.previewVideo(video!, "videofour_path", self.previewFour,self.recFour, self.delFour)
+                            case 2:
+                                self.startActivityIndicator()
+                                let videourl = video?["videofour_path"] as? String
+                                let url = URL(string: videourl!)
+                                SelectVideoUpload_One_Two().donloadVideo(url: url!,self.stopActivityIndicator(_:),4)
+                            case 3:
+                                break
+                            default: break
+                            }
+                            
+                        default: break
+                        }
                     }
                     
                 }
@@ -252,12 +302,25 @@ class SelectVideoUpload_Three_Four : UIViewController{
         self.present(alert, animated: true, completion: nil)
         
     }
-//    @IBAction func loadAssetFour(_ sender: AnyObject) {
-//        if savedPhotosAvailable() {
-//            loadingAssetOne = false
-//            _ = startMediaBrowserFromViewController(self, usingDelegate: self)
-//        }
-//    }
+    @IBAction func loadAssetFour(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "請選擇影片途徑", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "開啟相機進行錄影", style: .default, handler: {
+            (action) -> Void in
+            self.loadingAssetOne = false
+            self.loadingCamera = true
+            _ = self.startCameraFromViewController(self, withDelegate: self)
+        }))
+        alert.addAction(UIAlertAction(title: "打開相簿選擇影片", style: .default, handler: {
+            (action) -> Void in
+            if self.savedPhotosAvailable() {
+                self.loadingAssetOne = false
+                _ = self.startMediaBrowserFromViewController(self, usingDelegate: self)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "取消",style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     func uploadVideo(mp4Path : URL , message : String, clip: Int,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
         
@@ -287,7 +350,6 @@ class SelectVideoUpload_Three_Four : UIViewController{
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
-                        print("Upload Succes")
                         self.activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
                         let alert = UIAlertController(title:"提示",message:message, preferredStyle: .alert)
@@ -351,13 +413,13 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
                 uploadVideo(mp4Path: videoURL,message: message,clip:3, self.previewThree, self.recThree, self.delThree)
 //                loaddata()
             }
-//            else {
-//                message = "故事版4 影片已匯入成功！"
-//                self.startActivityIndicator()
-//                let videoURL = avAsset
-//                uploadVideo(mp4Path: videoURL,message: message,clip:4,VC: self,check: self.previewThree)
+            else {
+                message = "故事版4 影片已匯入成功！"
+                self.startActivityIndicator()
+                let videoURL = avAsset
+                uploadVideo(mp4Path: videoURL,message: message,clip:4, self.previewThree, self.recThree, self.delThree)
 //                loaddata()
-//            }
+            }
             
         }
     }
@@ -370,6 +432,10 @@ extension SelectVideoUpload_Three_Four: AudioRecorderViewControllerDelegate {
             self.startActivityIndicator()
             let message = "故事版3 影片已匯入成功！"
             uploadVideo(mp4Path: fileURL!,message: message,clip:3, self.previewThree, self.recThree, self.delThree)
+        }else if clip == 4 {
+            self.startActivityIndicator()
+            let message = "故事版4 影片已匯入成功！"
+            self.uploadVideo(mp4Path: fileURL!, message: message, clip: 4, self.previewFour, self.recFour, self.delFour)
         }
     }
 }
