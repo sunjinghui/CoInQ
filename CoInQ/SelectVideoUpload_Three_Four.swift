@@ -78,7 +78,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
         self.present(deleteAlert, animated: true, completion: nil)
     }
     @IBAction func delFour(_ sender: Any) {
-        let deleteAlert = UIAlertController(title:"確定要清空故事版3的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
+        let deleteAlert = UIAlertController(title:"確定要清空故事版4的影片嗎？",message: "刪除影片後無法復原！", preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
             SelectVideoUpload_One_Two().deleteVideoPath(sb: 4,self.previewFour,self.recFour,self.delFour,self)
         }))
