@@ -13,6 +13,7 @@ import Alamofire
 import SwiftyJSON
 import Photos
 import AVKit
+import MPCoachMarks
 
     var videoArray: [Any]?
 
@@ -26,7 +27,8 @@ class SelectVideoUpload_One_Two : UIViewController{
     var playerController = AVPlayerViewController()
     var previewOne = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
     var previewTwo = UIView.init(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
-    
+    var coachMarksView = MPCoachMarks()
+
     @IBOutlet weak var recAudio: UIButton!
     @IBOutlet weak var recAudioTwo: UIButton!
     @IBOutlet weak var deletVideopath: UIButton!
@@ -88,7 +90,7 @@ class SelectVideoUpload_One_Two : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("「創新始於好奇」，科學探究要從一個問題開始。", for: UIControlState())
+            sender.setTitle("「創新始於好奇」，科學探究要從一個問題開始", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -221,6 +223,41 @@ class SelectVideoUpload_One_Two : UIViewController{
         delTwo.isHidden = true
         deletVideopath.isHidden = true
         load()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        let coachMarksShown: Bool = UserDefaults.standard.bool(forKey: "MPCoachMarksShown_Storyboard")
+        if coachMarksShown == false {
+            UserDefaults.standard.set(true, forKey: "MPCoachMarksShown_Storyboard")
+            UserDefaults.standard.synchronize()
+            coachmarks()
+        }
+    }
+    
+    func coachmarks(){
+        let coachmark1 = CGRect(x: 5, y: 150, width: 150, height: 150)//故事版圖案
+        let coachmark2 = CGRect(x: 205 , y: 170, width: 465, height: 80)//引導文字
+        let coachmark3 = CGRect(x: 140, y: 198, width: 50, height: 50)//小提示
+        let coachmark4 = CGRect(x: 55, y: 280, width: 150, height: 150)//上傳影片
+        let coachmark5 = CGRect(x: 10, y: 72, width: 768, height: 78)
+        let coachmark6 = CGRect(x: 700, y: 5, width: 50, height: 50)
+        
+        let coachMarks = [
+            ["rect": NSValue(cgRect: coachmark1), "caption": "影片專案中分為5個階段\n\n共有9個故事版\n\n\n\n\n\n\n\n\n", "position": 4,"shape":1],
+        ["rect": NSValue(cgRect: coachmark2), "caption": "每個故事版會引導你進行探究\n\n請耐心閱讀並動動腦\n試著回答這些問題\n\n\n\n\n\n\n\n\n\n\n", "position": 0],
+        ["rect": NSValue(cgRect: coachmark3), "caption": "看完引導卻仍然不知道該怎麼製作影片\n\n可以點這個【提示】按鈕！\n\n\n\n\n\n\n\n\n\n\n","position": 4,"shape":1],
+        ["rect": NSValue(cgRect: coachmark4), "caption": "點這裡可以選擇拍攝影片\n\n或者在相簿中挑選影片\n\n\n\n\n*** 注意 ***\n\n播放影片頁面中\n上方的影片時間軸會有黑色框框\n\n按著右邊的箭頭\n框框會變成黃色\n就可以剪輯影片的長短了！！！\n\n\n\n\n","position": 4],
+        ["rect": NSValue(cgRect: coachmark5), "caption": "你仍然可以在這裡回顧探究的步驟！","position": 0, "showArrow": true],
+        ["rect": NSValue(cgRect: coachmark6), "caption": "或者這裡！","position": 5, "showArrow": true]
+        ]
+        coachMarksView = MPCoachMarks(frame: (tabBarController?.view.bounds)! , coachMarks: coachMarks)
+        coachMarksView.enableContinueLabel = false
+        coachMarksView.maxLblWidth = 400
+        coachMarksView.enableSkipButton = false
+//        coachMarksView.skipButtonText = "跳過"
+        tabBarController?.view.addSubview(coachMarksView)
+        //        var coachMarksView = MPCoachMarks(frame: view.bounds, coachMarks: coachMarks)
+        //        view.addSubview(coachMarksView)
+        coachMarksView.start()
     }
     
     func load(){

@@ -72,7 +72,7 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
         let coachmark3 = CGRect(x: 630, y: 25, width: 130, height: 40)
         
         let coachMarks = [
-            ["rect": NSValue(cgRect: coachmark1), "caption": "這裡可以邀請其他人傳送他的影片過來", "position": 2,"alignment":1, "showArrow": true],
+            ["rect": NSValue(cgRect: coachmark1), "caption": "這裡可以邀請其他人傳送他的影片過來\n\n問問你朋友的帳號然後邀請他！\n\n\n", "position": 2,"alignment":1, "showArrow": true],
             ["rect": NSValue(cgRect: coachmark2), "caption": "這裡可以拍攝或選擇影片上傳", "position": 2,"alignment": 2, "showArrow": true],
             ["rect": NSValue(cgRect: coachmark3), "caption": "蒐集完資料後可以進行順序排列\n或刪除該影片","position": 5, "showArrow": true]
         ]
@@ -194,11 +194,11 @@ class CollectingStage :  UIViewController, UITableViewDelegate, UITableViewDataS
                             self.stopActivityIndicator()
 
                         }
-//                    if (self.clips?.count)! <= 1 {
-//                        self.navigationItem.rightBarButtonItem = nil
-//                    }else{
-//                        self.navigationItem.rightBarButtonItem = self.editButtom
-//                    }
+                    if (self.clips?.count)! <= 1 {
+                        self.navigationItem.rightBarButtonItem?.isEnabled = false
+                    }else{
+                        self.navigationItem.rightBarButtonItem?.isEnabled = true
+                    }
                     self.tableview.reloadData()
                     self.refreshControl.endRefreshing()
                 }

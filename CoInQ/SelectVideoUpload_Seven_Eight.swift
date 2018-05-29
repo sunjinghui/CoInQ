@@ -35,7 +35,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("最終的解釋要是科學的、有邏輯的，不能自相矛盾、不講道理。", for: UIControlState())
+            sender.setTitle("最終的解釋要是科學的、有邏輯的，不能自相矛盾、不講道理", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)

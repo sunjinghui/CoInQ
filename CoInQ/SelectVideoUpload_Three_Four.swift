@@ -31,7 +31,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("「凡事豫則立」，制訂探究計畫，蒐集能夠確實回答問題的「資料」。", for: UIControlState())
+            sender.setTitle("「凡事豫則立」，制訂探究計畫，蒐集能夠確實回答問題的「資料」", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)

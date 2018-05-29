@@ -35,7 +35,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("篩選過的「資料」作為 「證據」，分析「證據」來得出可能的解釋。", for: UIControlState())
+            sender.setTitle("篩選過的「資料」作為 「證據」，分析「證據」來得出可能的解釋", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)

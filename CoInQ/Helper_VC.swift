@@ -52,7 +52,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "科學探究皆從\n一個問題開始。"
+        Helpfultext.text = "「創新始於好奇」\n科學探究要從\n一個問題開始"
         stageone.setImage(#imageLiteral(resourceName: "circle1_1"), for: UIControlState())
         lognote("hdp",google_userid,"\(Index)")
     }
@@ -62,7 +62,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
          HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "蒐集能夠確實回答問題的「資料」\n這「資料」也就是 「證據」。"
+        Helpfultext.text = "「凡事豫則立」\n制訂探究計畫\n蒐集能夠確實回答問題的「資料」"
         stagetwo.setImage(#imageLiteral(resourceName: "circle2_1"), for: UIControlState())
         lognote("hcd",google_userid,"\(Index)")
     }
@@ -72,7 +72,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "分析「證據」以便得出可能的解釋。"
+        Helpfultext.text = "篩選過的「資料」作為 「證據」\n分析「證據」來得出可能的解釋"
         stagethree.setImage(#imageLiteral(resourceName: "circle3_1"), for: UIControlState())
         lognote("hme",google_userid,"\(Index)")
     }
@@ -82,7 +82,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "最終的解釋應該是\n科學的、有邏輯的。"
+        Helpfultext.text = "最終的解釋應該是\n科學的、有邏輯的\n不能自相矛盾、不講道理"
         stagefour.setImage(#imageLiteral(resourceName: "circle4_1"), for: UIControlState())
         lognote("hee",google_userid,"\(Index)")
     }
