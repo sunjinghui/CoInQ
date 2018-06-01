@@ -48,6 +48,8 @@
 	<string>Record</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>請允許使用此iPad mini的麥克風裝置進行錄音</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>請允許存取此iPad mini的相簿資料</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>請允許存取此iPad mini的相簿資料</string>
 	<key>UILaunchStoryboardName</key>
