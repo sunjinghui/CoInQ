@@ -417,7 +417,7 @@ extension SelectVideoUpload_Three_Four : UIImagePickerControllerDelegate {
                 message = "故事版4 影片已匯入成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
-                uploadVideo(mp4Path: videoURL,message: message,clip:4, self.previewThree, self.recThree, self.delThree)
+                uploadVideo(mp4Path: videoURL,message: message,clip:4, self.previewFour, self.recFour, self.delFour)
 //                loaddata()
             }
             
