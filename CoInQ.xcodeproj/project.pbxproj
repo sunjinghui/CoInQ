@@ -331,7 +331,7 @@
 				TargetAttributes = {
 					A5458D221EA3ED8E00B1E26A = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = NUBGY3D8C4;
+						DevelopmentTeam = X89SJ5JU5E;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -665,8 +665,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = NUBGY3D8C4;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X89SJ5JU5E;
 				INFOPLIST_FILE = CoInQ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -723,7 +725,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self13.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self4.CoInQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -741,8 +743,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoInQ/CoInQ.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = NUBGY3D8C4;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X89SJ5JU5E;
 				INFOPLIST_FILE = CoInQ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -799,7 +803,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self13.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self4.CoInQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
