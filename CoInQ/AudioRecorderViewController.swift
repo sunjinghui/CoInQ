@@ -184,7 +184,7 @@ class AudioRecorderViewController: UINavigationController {
             let myAlert: UIAlertController = UIAlertController(title:"小提示",message: self.note ,preferredStyle: .alert)
             let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:nil)
             myAlert.addAction(action)
-            lognote("ae\(String(describing: clip))",google_userid,"\(Index)")
+            lognote("ae\(String(describing: self.clip))",google_userid,"\(Index)")
             self.present(myAlert, animated: true, completion: nil)
         }
         
@@ -446,7 +446,7 @@ class AudioRecorderViewController: UINavigationController {
             mutableVideoComposition.frameDuration = CMTimeMake(1, 30)
             
 //            mutableVideoComposition.renderSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
+//            let instruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
             let assetTrack = aVideoAsset.tracks(withMediaType: AVMediaTypeVideo)[0]
             let transform = assetTrack.preferredTransform
             let assetInfo = orientationFromTransform(transform)

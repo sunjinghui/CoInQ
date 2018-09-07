@@ -347,7 +347,7 @@ class SelectVideoUpload_Nine : UIViewController{
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
             let outputURL = session.outputURL
-            //            print("export")
+                        print("completed")
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
                     let outputVideo = AVAsset(url: outputURL!)
@@ -362,21 +362,20 @@ class SelectVideoUpload_Nine : UIViewController{
                     
                 }
             }
-        }else if session.status == AVAssetExportSessionStatus.exporting{
-            
         }else if session.status == AVAssetExportSessionStatus.failed{
+            print(session.error)
             lognote("mvf", google_userid, "\(Index)")
             let alertController = UIAlertController(title: "影片輸出失敗，請重新操作一次", message: nil, preferredStyle: .alert)
 //            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
             let defaultAction = UIAlertAction(title: "再合併一次", style: .default, handler:{
                 (action) -> Void in
-                self.mergeVideo(self.mergeClips)
+//                self.mergeVideo(self.mergeClips)
             })
             alertController.addAction(defaultAction)
             alertController.addAction(UIAlertAction(title:"取消", style: .cancel, handler: self.switchPage))
             self.present(alertController, animated: true, completion: nil)
             self.StopActivityIndicator()
-        }
+        }else{print(session.status)}
 
         mergeClips = []
     }
@@ -440,8 +439,8 @@ class SelectVideoUpload_Nine : UIViewController{
         update()
         loadCollectionVideo()
         if isVideoLoaded() {
-            
-            mergeVideo(mergeClips)
+            let     uniqueID = NSUUID().uuidString
+            mergeVideo(mergeClips,uniqueID)
             lognote("mvt", google_userid, "\(Index)")
 
             //新增VC
@@ -537,7 +536,7 @@ class SelectVideoUpload_Nine : UIViewController{
         })
     }
 
-    func mergeVideo(_ mAssetsList: [AVAsset]) {
+    func mergeVideo(_ mAssetsList: [AVAsset],_ MergedVideoID: String) {
         startActivityIndicator()
         let mainComposition = AVMutableVideoComposition()
         var startDuration:CMTime = kCMTimeZero
@@ -552,11 +551,11 @@ class SelectVideoUpload_Nine : UIViewController{
             endDuration = CMTimeAdd(startDuration,currentAsset.duration)
 
             let currentTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-            let currentAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+//            let currentAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
                 try currentTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero,
                                                                  currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: startDuration)
-                try currentAudioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeAudio)[0], at: startDuration)
+//                try currentAudioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeAudio)[0], at: startDuration)
                 
                 //Creates Instruction for current video asset.
                 let currentInstruction:AVMutableVideoCompositionLayerInstruction = videoCompositionInstructionForTrack(currentTrack, asset: currentAsset)
@@ -595,11 +594,11 @@ class SelectVideoUpload_Nine : UIViewController{
         
         // 4 - Get path
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        let date = dateFormatter.string(from: Date())
-        let savePath = (documentDirectory as NSString).appendingPathComponent("mergeVideo-\(date).mov")
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = .long
+//        dateFormatter.timeStyle = .short
+//        let date = dateFormatter.string(from: Date())
+        let savePath = (documentDirectory as NSString).appendingPathComponent("\(MergedVideoID).mov")
         let url = URL(fileURLWithPath: savePath)
         
         // 5 - Create Exporter
