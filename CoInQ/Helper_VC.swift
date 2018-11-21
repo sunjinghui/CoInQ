@@ -62,7 +62,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
          HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "「凡事豫則立」\n制訂探究計畫\n蒐集能夠確實回答問題的「資料」"
+        Helpfultext.text = "「凡事豫則立」\n制訂探究計畫\n蒐集能夠確實\n回答問題的「資料」"
         stagetwo.setImage(#imageLiteral(resourceName: "circle2_1"), for: UIControlState())
         lognote("hcd",google_userid,"\(Index)")
     }
@@ -82,7 +82,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "最終的解釋應該是\n科學的、有邏輯的\n不能自相矛盾、不講道理"
+        Helpfultext.text = "最終的解釋應該是\n科學的、有邏輯的\n不能自相矛盾\n不講道理"
         stagefour.setImage(#imageLiteral(resourceName: "circle4_1"), for: UIControlState())
         lognote("hee",google_userid,"\(Index)")
     }
@@ -92,7 +92,7 @@ class Helper_VC: UIViewController {
         if HelpfultextView.isHidden == true {
             HelpfultextView.isHidden = false
         }
-        Helpfultext.text = "與他人分享我的解釋\n會激發更多新想法與新問題。"
+        Helpfultext.text = "與他人分享我的解釋\n會激發更多新想法與新問題"
         stagefive.setImage(#imageLiteral(resourceName: "circle5_1"), for: UIControlState())
         lognote("hsr",google_userid,"\(Index)")
     }

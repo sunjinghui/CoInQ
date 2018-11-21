@@ -146,10 +146,10 @@ class AudioRecorderViewController: UINavigationController {
             cleanup()
             let alertController = UIAlertController(title: "請注意", message: "不會保存配音內容\n你將返回上一頁", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title:"取消",style: .cancel, handler: { (action) -> Void in
-                lognote("b\(String(describing: self.clip))d", google_userid, "\(Index)")
+                lognote("b\(self.clip ?? 000)d", google_userid, "\(Index)")
             })
             let defaultAction = UIAlertAction(title: "確定", style: .default, handler: { (action) -> Void in
-                lognote("b\(String(describing: self.clip))t", google_userid, "\(Index)")
+                lognote("b\(self.clip ?? 000)t", google_userid, "\(Index)")
                 self.audioRecorderDelegate?.audioRecorderViewControllerDismissed(withFileURL: nil,clip: 0)
             })
             alertController.addAction(defaultAction)
@@ -184,12 +184,12 @@ class AudioRecorderViewController: UINavigationController {
             let myAlert: UIAlertController = UIAlertController(title:"小提示",message: self.note ,preferredStyle: .alert)
             let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:nil)
             myAlert.addAction(action)
-            lognote("ae\(String(describing: self.clip))",google_userid,"\(Index)")
+            lognote("ae\(clip ?? 000)",google_userid,"\(Index)")
             self.present(myAlert, animated: true, completion: nil)
         }
         
         @IBAction func toggleRecord(_ sender: AnyObject) {
-            lognote("ra\(String(describing: clip))", google_userid, "\(Index)")
+            lognote("ra\(clip ?? 000)", google_userid, "\(Index)")
             timeTimer?.invalidate()
 
             if recorder.isRecording {
@@ -239,7 +239,7 @@ class AudioRecorderViewController: UINavigationController {
         }
         
         @IBAction func play(_ sender: AnyObject) {
-            lognote("pr\(String(describing: clip))", google_userid, "\(Index)")
+            lognote("pr\(clip ?? 000)", google_userid, "\(Index)")
 
             if let player = player {
                 player.stop()
@@ -469,7 +469,7 @@ class AudioRecorderViewController: UINavigationController {
 //            let savePathUrl : URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
             // 4 - Get path
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let filename = UUID().uuidString + ".mov"
+            let filename = UUID().uuidString + ".MOV"
             let savePath = (documentDirectory as NSString).appendingPathComponent(filename)
             deleteFile(URL(string: savePath)!)
             let savePathUrl = URL(fileURLWithPath: savePath)
@@ -489,7 +489,7 @@ class AudioRecorderViewController: UINavigationController {
                             self.stopActivityIndicator()
                             let alertController = UIAlertController(title: "儲存完成", message: "新的配音影片已儲存在相簿中", preferredStyle: .alert)
                             let defaultAction = UIAlertAction(title: "確定", style: .default, handler:{ (action) -> Void in
-                                lognote("c\(String(describing: self.clip))r", google_userid, "\(Index)")
+                                lognote("c\(self.clip ?? 000)r", google_userid, "\(Index)")
                                 (self.audioRecorderDelegate?.audioRecorderViewControllerDismissed(withFileURL: savePathUrl,clip: self.clip!))!
                             })
                             alertController.addAction(defaultAction)

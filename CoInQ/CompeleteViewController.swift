@@ -17,6 +17,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     @IBOutlet weak var TableEmpty: UILabel!
     
     var FinalVideoArray: [Any]?
+    var refreshControl: UIRefreshControl!
 //    var finalvideoURL: String?
     
     // Table View Data Source
@@ -141,6 +142,9 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         VideoTableView.tableFooterView = UIView(frame: .zero)
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+        VideoTableView.addSubview(refreshControl)
         NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: NSNotification.Name("CSCL"), object: nil)
         loadData()
     }
@@ -164,12 +168,15 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
                 if error {
                     self.FinalVideoArray = []
                     self.VideoTableView.reloadData()
-                    
+                    self.refreshControl.endRefreshing()
+
                 } else if let FinalVideo = JSON["table"] as? [Any] {
                     self.FinalVideoArray = FinalVideo
 //                    print(self.FinalVideoArray)
                     self.FinalVideoArray?.reverse()
                     self.VideoTableView.reloadData()
+                    self.refreshControl.endRefreshing()
+
                 }
         }
         

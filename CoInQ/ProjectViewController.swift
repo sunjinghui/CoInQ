@@ -137,7 +137,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
 //        Index = indexPath.row
         let videoInfo = self.videoInfoArray?[indexPath.row] as? [String: Any]
         let videoid = videoInfo?["id"] as? Int
-        lognote("evt", google_userid, "\(String(describing: videoid))")
+        lognote("evt", google_userid, "\(videoid!)")
         self.performSegue(withIdentifier: "startvideotask", sender: self)
     }
     

@@ -18,8 +18,8 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     var loadingAssetOne = false
     var loadingCamera = false
     var isClicked = true
-    var previewSeven = UIView.init(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
-    var previewEight = UIView.init(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
+    var previewSeven = VideoPreviewButton(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
+    var previewEight = VideoPreviewButton(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
 
     @IBOutlet weak var recSeven: UIButton!
     @IBOutlet weak var recEight: UIButton!
@@ -132,10 +132,10 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         let existtwo = SelectVideoUpload_One_Two().checkVideoExist(video!, "videoeight_path", 8)
                         switch (existone){
                         case 1:
-                            self.previewVideo(video!, "videoseven_path", self.previewSeven,self.recSeven, self.delSeven)
+                            self.showthumbnail(video!, "videoseven_path", self.previewSeven,self.recSeven, self.delSeven)
                             switch (existtwo){
                             case 1:
-                                self.previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
+                                self.showthumbnail(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String
@@ -154,7 +154,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                             
                             switch (existtwo){
                             case 1:
-                                self.previewVideo(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
+                                self.showthumbnail(video!, "videoeight_path", self.previewEight,self.recEight, self.delEight)
                             case 2:
                                 self.startActivityIndicator()
                                 let videourl = video?["videoeight_path"] as? String
@@ -174,18 +174,35 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         }
     }
     
-    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
+    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: VideoPreviewButton,_ recbtn: UIButton,_ delbtn: UIButton){
         let videourl = videoinfo[videopath] as? String
         let url = URL(string: videourl!)
-        self.player = AVPlayer(url: url!)
-        self.playerController = AVPlayerViewController()
-        self.playerController.player = self.player
-        self.playerController.view.frame = preview.frame
-        self.addChildViewController(self.playerController)
-        self.view.addSubview(self.playerController.view)
-        preview.isHidden = false
+        let asset = AVURLAsset(url: url!, options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        imgGenerator.appliesPreferredTrackTransform = false
+        
+        do {
+            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
+            check.setImage(thumbnail, for: .normal)
+            check.addTarget(self, action: #selector(self.playPreviewVideo), for: .touchUpInside)
+            check.videopath = videourl
+        } catch let error {
+            print("*** Error generating thumbnail: \(error)")
+        }
+        
+        self.view.addSubview(check)
         recbtn.isHidden = false
         delbtn.isHidden = false
+    }
+    
+    func playPreviewVideo(_ sender: VideoPreviewButton!){
+        let Player = AVPlayer(url: URL(string: sender.videopath!)!)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = Player
+        self.present(playerViewController,animated: true){
+            playerViewController.player!.play()
+        }
     }
     
     func startActivityIndicator() {

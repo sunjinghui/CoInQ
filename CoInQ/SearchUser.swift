@@ -94,7 +94,8 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        lognote("sru", google_userid, "\(Index)")
+
         let alertController = UIAlertController(title:"影片共創邀請",message: nil, preferredStyle: .alert)
         
         alertController.addTextField(configurationHandler: {(textField) -> Void in
@@ -187,7 +188,6 @@ class SearchUser : UIViewController, UITableViewDelegate, UITableViewDataSource,
             view.endEditing(true)
             tableview.reloadData()
         }else{
-            lognote("sru", google_userid, "\(Index)+\(searchText)")
             isSearching = true
             filteredata = data.filter({ (country) -> Bool in
                 let countryText : NSString = country as NSString

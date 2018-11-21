@@ -18,7 +18,7 @@ import SwiftyJSON
 class SelectVideoUpload_Nine : UIViewController{
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    var videoPreview = UIView.init(frame: CGRect(x: 225,y: 264,width: 465,height: 257))
+    var videoPreview = VideoPreviewButton(frame: CGRect(x: 225,y: 264,width: 465,height: 257))
     @IBOutlet weak var RecordButton: UIButton!
 //    @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var recNine: UIButton!
@@ -60,7 +60,7 @@ class SelectVideoUpload_Nine : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         RecordButton.layer.cornerRadius = 8
-        videoPreview.isHidden = true
+//        videoPreview.isHidden = true
         recNine.isHidden = true
         delNine.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(loadCollectionVideo), name: NSNotification.Name("CoClipDownload"), object: nil)
@@ -134,7 +134,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videonine_path", 9)
                             switch (existone){
                             case 1:
-                                self.previewVideo(video!, "videonine_path", self.videoPreview,self.recNine, self.delNine)
+                                self.showthumbnail(video!, "videonine_path", self.videoPreview,self.recNine, self.delNine)
                                 break
                             case 2:
                                 self.startActivityIndicator()
@@ -181,18 +181,35 @@ class SelectVideoUpload_Nine : UIViewController{
         }
     }
     
-    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
+    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: VideoPreviewButton,_ recbtn: UIButton,_ delbtn: UIButton){
         let videourl = videoinfo[videopath] as? String
         let url = URL(string: videourl!)
-        self.player = AVPlayer(url: url!)
-        self.playerController = AVPlayerViewController()
-        self.playerController.player = self.player
-        self.playerController.view.frame = preview.frame
-        self.addChildViewController(self.playerController)
-        self.view.addSubview(self.playerController.view)
-        preview.isHidden = false
+        let asset = AVURLAsset(url: url!, options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        imgGenerator.appliesPreferredTrackTransform = false
+        
+        do {
+            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
+            check.setImage(thumbnail, for: .normal)
+            check.addTarget(self, action: #selector(self.playPreviewVideo), for: .touchUpInside)
+            check.videopath = videourl
+        } catch let error {
+            print("*** Error generating thumbnail: \(error)")
+        }
+        
+        self.view.addSubview(check)
         recbtn.isHidden = false
         delbtn.isHidden = false
+    }
+    
+    func playPreviewVideo(_ sender: VideoPreviewButton!){
+        let Player = AVPlayer(url: URL(string: sender.videopath!)!)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = Player
+        self.present(playerViewController,animated: true){
+            playerViewController.player!.play()
+        }
     }
     
     func check(_ videonum: String,_ storyboard: String){
@@ -347,7 +364,6 @@ class SelectVideoUpload_Nine : UIViewController{
     func exportDidFinish(_ session: AVAssetExportSession) {
         if session.status == AVAssetExportSessionStatus.completed {
             let outputURL = session.outputURL
-                        print("completed")
             PHPhotoLibrary.shared().performChanges({PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputURL!)}) { saved, error in
                 if saved {
                     let outputVideo = AVAsset(url: outputURL!)
@@ -359,11 +375,10 @@ class SelectVideoUpload_Nine : UIViewController{
                     let vmin = vmilliseconds / 3600
                     let videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
                     self.uploadFinalvideo(outputURL!, videolength)
-                    
                 }
             }
         }else if session.status == AVAssetExportSessionStatus.failed{
-            print(session.error)
+            print(session.error as Any)
             lognote("mvf", google_userid, "\(Index)")
             let alertController = UIAlertController(title: "影片輸出失敗，請重新操作一次", message: nil, preferredStyle: .alert)
 //            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
@@ -503,15 +518,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            self.player = AVPlayer(url: mp4Path)
-                            self.playerController = AVPlayerViewController()
-                            self.playerController.player = self.player
-                            self.playerController.view.frame = check.frame
-                            self.addChildViewController(self.playerController)
-                            self.view.addSubview(self.playerController.view)
-                            check.isHidden = false
-                            recbtn.isHidden = false
-                            self.delNine.isHidden = false
+                            self.loadData()
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)
@@ -551,11 +558,11 @@ class SelectVideoUpload_Nine : UIViewController{
             endDuration = CMTimeAdd(startDuration,currentAsset.duration)
 
             let currentTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-//            let currentAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
+            let currentAudioTrack = mixComposition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: 0)
             do {
                 try currentTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero,
                                                                  currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeVideo)[0], at: startDuration)
-//                try currentAudioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeAudio)[0], at: startDuration)
+                try currentAudioTrack.insertTimeRange(CMTimeRangeMake(kCMTimeZero, currentAsset.duration), of: currentAsset.tracks(withMediaType: AVMediaTypeAudio)[0], at: startDuration)
                 
                 //Creates Instruction for current video asset.
                 let currentInstruction:AVMutableVideoCompositionLayerInstruction = videoCompositionInstructionForTrack(currentTrack, asset: currentAsset)
@@ -598,7 +605,7 @@ class SelectVideoUpload_Nine : UIViewController{
 //        dateFormatter.dateStyle = .long
 //        dateFormatter.timeStyle = .short
 //        let date = dateFormatter.string(from: Date())
-        let savePath = (documentDirectory as NSString).appendingPathComponent("\(MergedVideoID).mov")
+        let savePath = (documentDirectory as NSString).appendingPathComponent("\(MergedVideoID).MOV")
         let url = URL(fileURLWithPath: savePath)
         
         // 5 - Create Exporter
@@ -647,9 +654,9 @@ class SelectVideoUpload_Nine : UIViewController{
                                      at: kCMTimeZero)
         } else {
             let scaleFactor = CGAffineTransform(scaleX: scaleToFitRatio, y: scaleToFitRatio)
-            var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+            var concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) ))
             if (assetTrack.naturalSize.width > assetTrack.naturalSize.height){
-                concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) - 75))
+                concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: (UIScreen.main.bounds.width/2) ))
             }else{
                 concat = assetTrack.preferredTransform.concatenating(scaleFactor).concatenating(CGAffineTransform(translationX: 0, y: 0))
             }
@@ -667,6 +674,11 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
+        let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的\n科學探究影片！\n你可以在「已完成」中\n找到你的傑作。", message: nil, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+        self.StopActivityIndicator()
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
@@ -692,11 +704,7 @@ class SelectVideoUpload_Nine : UIViewController{
                     //须导入 swiftyJSON 第三方框架，否则报错
                     let success = JSON(result)["success"].int ?? -1
                     if success == 1 {
-                        let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的\n科學探究影片！\n你可以在「已完成」中\n找到你的傑作。", message: nil, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil)
-                        self.StopActivityIndicator()
+
                         lognote("ufs", google_userid, "\(Index)")
                     }else{
                         lognote("uff", google_userid, "\(Index)")
@@ -718,6 +726,7 @@ class SelectVideoUpload_Nine : UIViewController{
                 self.present(alert , animated: true , completion: nil)
             }
         })
+        
     }
     
     func switchPage(action: UIAlertAction){
@@ -728,6 +737,7 @@ class SelectVideoUpload_Nine : UIViewController{
             if vc is CSCL {
                 _ = self.navigationController?.popToViewController(vc, animated: true)
                 NotificationCenter.default.post(name: NSNotification.Name("CSCL"), object: nil)
+                tabBarController?.selectedIndex = 1 
                 break
             }
         }
