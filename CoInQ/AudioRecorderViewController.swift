@@ -110,7 +110,7 @@ class AudioRecorderViewController: UINavigationController {
             let imageview = UIImageView(frame: videoFrame)
             let asset = AVURLAsset(url: videourl!, options: nil)
             let imgGenerator = AVAssetImageGenerator(asset: asset)
-//            imgGenerator.appliesPreferredTrackTransform = false
+            imgGenerator.appliesPreferredTrackTransform = true
     
             do {
                 let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)

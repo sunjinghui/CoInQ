@@ -43,7 +43,7 @@ class TableViewCell_clip: UITableViewCell {
         let videourl = URL(string: videopath)
         let asset = AVURLAsset(url: videourl!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
-        imgGenerator.appliesPreferredTrackTransform = false
+        imgGenerator.appliesPreferredTrackTransform = true
 
         do {
             let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)

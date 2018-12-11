@@ -186,7 +186,7 @@ class SelectVideoUpload_Nine : UIViewController{
         let url = URL(string: videourl!)
         let asset = AVURLAsset(url: url!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
-        imgGenerator.appliesPreferredTrackTransform = false
+        imgGenerator.appliesPreferredTrackTransform = true
         
         do {
             let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
@@ -337,7 +337,6 @@ class SelectVideoUpload_Nine : UIViewController{
         cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
         cameraController.cameraCaptureMode = .video
         cameraController.videoQuality = .typeHigh
-        cameraController.allowsEditing = true
         cameraController.delegate = delegate
         cameraController.videoMaximumDuration = 30.0
         
@@ -374,20 +373,21 @@ class SelectVideoUpload_Nine : UIViewController{
                     let vsec = (vmilliseconds / 60) % 60
                     let vmin = vmilliseconds / 3600
                     let videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
-                    self.uploadFinalvideo(outputURL!, videolength)
+                    self.uploadFinalvideo(outputURL!)
+                    self.CreatFinalVideo(outputURL!, videolength)
                 }
             }
         }else if session.status == AVAssetExportSessionStatus.failed{
             print(session.error as Any)
             lognote("mvf", google_userid, "\(Index)")
             let alertController = UIAlertController(title: "影片輸出失敗，請重新操作一次", message: nil, preferredStyle: .alert)
-//            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
-            let defaultAction = UIAlertAction(title: "再合併一次", style: .default, handler:{
-                (action) -> Void in
+            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+//            let defaultAction = UIAlertAction(title: "確定", style: .default, handler:{
+//                (action) -> Void in
 //                self.mergeVideo(self.mergeClips)
-            })
+//            })
             alertController.addAction(defaultAction)
-            alertController.addAction(UIAlertAction(title:"取消", style: .cancel, handler: self.switchPage))
+//            alertController.addAction(UIAlertAction(title:"取消", style: .cancel, handler: self.switchPage))
             self.present(alertController, animated: true, completion: nil)
             self.StopActivityIndicator()
         }else{print(session.status)}
@@ -533,10 +533,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
-                //上传进度
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    //                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+                
             case .failure(let encodingError):
                 print(encodingError)
             }
@@ -673,7 +670,7 @@ class SelectVideoUpload_Nine : UIViewController{
         return instruction
     }
     
-    func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
+    func uploadFinalvideo(_ mp4Path: URL){
         let alertController = UIAlertController(title: "恭喜你順利完成一支精彩的\n科學探究影片！\n你可以在「已完成」中\n找到你的傑作。", message: nil, preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
         alertController.addAction(defaultAction)
@@ -686,8 +683,8 @@ class SelectVideoUpload_Nine : UIViewController{
                 multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
                 multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
                 multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
-                multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
-                multipartFormData.append(videolength.data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videolength")
+//                multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
+//                multipartFormData.append(videolength.data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videolength")
                 //                for (key, val) in parameters {
                 //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
                 //                }
@@ -715,9 +712,9 @@ class SelectVideoUpload_Nine : UIViewController{
                     }
                 }
                 //上传进度
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+//                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+//                    print("Upload Progress: \(progress.fractionCompleted)")
+//                }
             case .failure(let encodingError):
                 print(encodingError)
                 let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
@@ -727,6 +724,20 @@ class SelectVideoUpload_Nine : UIViewController{
             }
         })
         
+    }
+    
+    func CreatFinalVideo(_ mp4Path: URL,_ videolength: String){
+        let parameters: Parameters=[
+            "videoid":    Index,
+            "google_userid" : google_userid,
+            "videopath":mp4Path,
+            "videolength": videolength
+        ]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadFinalVideo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+        }
     }
     
     func switchPage(action: UIAlertAction){

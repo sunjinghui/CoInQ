@@ -178,10 +178,7 @@ class InvitaionViewController : UIViewController{
 //                        lognote("u\(clip)f", google_FROM, "\(Index)")
                     }
                 }
-                //上传进度
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+               
             case .failure(let encodingError):
                 print(encodingError)
             }
@@ -225,7 +222,6 @@ class InvitaionViewController : UIViewController{
         cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
         cameraController.cameraCaptureMode = .video
         cameraController.videoQuality = .typeHigh
-        cameraController.allowsEditing = true
         cameraController.delegate = delegate
         cameraController.videoMaximumDuration = 30.0
         

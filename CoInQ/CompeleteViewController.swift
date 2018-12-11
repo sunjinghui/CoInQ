@@ -53,7 +53,7 @@ class CompeleteViewController : UIViewController , UITableViewDelegate, UITableV
         let videoURL = URL(string: finalvideoURL!)
         let asset = AVURLAsset(url: videoURL!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
-        imgGenerator.appliesPreferredTrackTransform = false
+        imgGenerator.appliesPreferredTrackTransform = true
         
         do {
             let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)

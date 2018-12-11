@@ -196,7 +196,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
         let url = URL(string: videourl!)
         let asset = AVURLAsset(url: url!, options: nil)
         let imgGenerator = AVAssetImageGenerator(asset: asset)
-        imgGenerator.appliesPreferredTrackTransform = false
+        imgGenerator.appliesPreferredTrackTransform = true
         
         do {
             let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
@@ -280,7 +280,6 @@ class SelectVideoUpload_Five_Six : UIViewController{
         cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
         cameraController.cameraCaptureMode = .video
         cameraController.videoQuality = .typeHigh
-        cameraController.allowsEditing = true
         cameraController.delegate = delegate
         cameraController.videoMaximumDuration = 30.0
         
@@ -400,10 +399,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
                         lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
-                //上传进度
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    //                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+                
             case .failure(let encodingError):
                 print(encodingError)
             }
