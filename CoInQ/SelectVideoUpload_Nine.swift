@@ -18,7 +18,7 @@ import SwiftyJSON
 class SelectVideoUpload_Nine : UIViewController{
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    var videoPreview = UIView.init(frame: CGRect(x: 225,y: 264,width: 465,height: 257))
+    var videoPreview = VideoPreviewButton(frame: CGRect(x: 225,y: 264,width: 465,height: 257))
     @IBOutlet weak var RecordButton: UIButton!
 //    @IBOutlet weak var videoPreview: UIView!
     @IBOutlet weak var recNine: UIButton!
@@ -131,7 +131,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         let existone = SelectVideoUpload_One_Two().checkVideoExist(video!, "videonine_path", 9)
                             switch (existone){
                             case 1:
-                                self.previewVideo(video!, "videonine_path", self.videoPreview,self.recNine, self.delNine)
+                                self.showthumbnail(video!, "videonine_path", self.videoPreview,self.recNine, self.delNine)
                                 break
                             case 2:
                                 self.startActivityIndicator()
@@ -178,18 +178,35 @@ class SelectVideoUpload_Nine : UIViewController{
         }
     }
     
-    func previewVideo(_ videoinfo: [String: Any],_ videopath: String,_ preview: UIView,_ recbtn: UIButton,_ delbtn: UIButton){
+    func showthumbnail(_ videoinfo: [String: Any],_ videopath: String,_ check: VideoPreviewButton,_ recbtn: UIButton,_ delbtn: UIButton){
         let videourl = videoinfo[videopath] as? String
         let url = URL(string: videourl!)
-        self.player = AVPlayer(url: url!)
-        self.playerController = AVPlayerViewController()
-        self.playerController.player = self.player
-        self.playerController.view.frame = preview.frame
-        self.addChildViewController(self.playerController)
-        self.view.addSubview(self.playerController.view)
-        preview.isHidden = false
+        let asset = AVURLAsset(url: url!, options: nil)
+        let imgGenerator = AVAssetImageGenerator(asset: asset)
+        imgGenerator.appliesPreferredTrackTransform = true
+        
+        do {
+            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let thumbnail = UIImage(cgImage: cgImage)
+            check.setImage(thumbnail, for: .normal)
+            check.addTarget(self, action: #selector(self.playPreviewVideo), for: .touchUpInside)
+            check.videopath = videourl
+        } catch let error {
+            print("*** Error generating thumbnail: \(error)")
+        }
+        
+        self.view.addSubview(check)
         recbtn.isHidden = false
         delbtn.isHidden = false
+    }
+    
+    func playPreviewVideo(_ sender: VideoPreviewButton!){
+        let Player = AVPlayer(url: URL(string: sender.videopath!)!)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = Player
+        self.present(playerViewController,animated: true){
+            playerViewController.player!.play()
+        }
     }
     
     func check(_ videonum: String,_ storyboard: String){
@@ -356,22 +373,22 @@ class SelectVideoUpload_Nine : UIViewController{
                     let vsec = (vmilliseconds / 60) % 60
                     let vmin = vmilliseconds / 3600
                     let videolength = NSString(format: "%02d:%02d.%02d", vmin, vsec, vmilli) as String
-                    self.uploadFinalvideo(outputURL!, videolength)
-                    
+                    self.uploadFinalvideo(outputURL!)
+                    self.CreatFinalVideo(outputURL!, videolength)
                 }
             }
         }else if session.status == AVAssetExportSessionStatus.exporting{
             
         }else if session.status == AVAssetExportSessionStatus.failed{
             let alertController = UIAlertController(title: "影片輸出失敗，請重新操作一次", message: nil, preferredStyle: .alert)
-//            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
-            let defaultAction = UIAlertAction(title: "再合併一次", style: .default, handler:{
-                (action) -> Void in
-                self.mergeVideo(self.mergeClips)
-                
-            })
+            let defaultAction = UIAlertAction(title: "確定", style: .default, handler: self.switchPage)
+//            let defaultAction = UIAlertAction(title: "再合併一次", style: .default, handler:{
+//                (action) -> Void in
+//                self.mergeVideo(self.mergeClips)
+//
+//            })
             alertController.addAction(defaultAction)
-            alertController.addAction(UIAlertAction(title:"取消", style: .cancel, handler: self.switchPage))
+//            alertController.addAction(UIAlertAction(title:"取消", style: .cancel, handler: self.switchPage))
             self.present(alertController, animated: true, completion: nil)
             self.StopActivityIndicator()
         }
@@ -663,17 +680,17 @@ class SelectVideoUpload_Nine : UIViewController{
         return instruction
     }
     
-    func uploadFinalvideo(_ mp4Path: URL,_ videolength: String){
+    func uploadFinalvideo(_ mp4Path: URL){
         lognote("mvt", google_userid, "videoid:\(Index)")
         Alamofire.upload(
             //同样采用post表单上传
             multipartFormData: { multipartFormData in
                 
                 multipartFormData.append(mp4Path, withName: "file")//, fileName: "123456.mp4", mimeType: "video/mp4")
-                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videoid")
-                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "google_userid")
-                multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
-                multipartFormData.append(videolength.data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videolength")
+                multipartFormData.append("\(Index)".data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "vid")
+                multipartFormData.append(google_userid.data(using: String.Encoding.utf8, allowLossyConversion: false)!, withName: "googleuser")
+//                multipartFormData.append((mp4Path.absoluteString.data(using: String.Encoding.utf8, allowLossyConversion: false)!),withName: "videopath")
+//                multipartFormData.append(videolength.data(using: String.Encoding.utf8, allowLossyConversion: false)!,withName: "videolength")
                 //                for (key, val) in parameters {
                 //                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
                 //                }
@@ -705,10 +722,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         self.present(alert , animated: true , completion: nil)
                     }
                 }
-                //上传进度
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+                
             case .failure(let encodingError):
                 print(encodingError)
                 let alert = UIAlertController(title:"提示",message:"上傳失敗，請檢察網路是否已連線並重新上傳", preferredStyle: .alert)
@@ -717,6 +731,20 @@ class SelectVideoUpload_Nine : UIViewController{
                 self.present(alert , animated: true , completion: nil)
             }
         })
+    }
+    
+    func CreatFinalVideo(_ mp4Path: URL,_ videolength: String){
+        let parameters: Parameters=[
+            "videoid":    Index,
+            "google_userid" : google_userid,
+            "videopath":mp4Path,
+            "videolength": videolength
+        ]
+        Alamofire.request("http://140.122.76.201/CoInQ/v1/uploadFinalVideo.php", method: .post, parameters: parameters).responseJSON
+            {
+                response in
+                
+        }
     }
     
     func switchPage(action: UIAlertAction){
