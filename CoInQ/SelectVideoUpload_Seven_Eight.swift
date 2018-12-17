@@ -91,8 +91,6 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        previewSeven.isHidden = true
-        previewEight.isHidden = true
         recSeven.isHidden = true
         recEight.isHidden = true
         delSeven.isHidden = true
@@ -392,10 +390,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
                         lognote("u\(clip)f", google_userid, "\(Index)")
                     }
                 }
-                //上传进度
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                    //                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+                
             case .failure(let encodingError):
                 print(encodingError)
             }

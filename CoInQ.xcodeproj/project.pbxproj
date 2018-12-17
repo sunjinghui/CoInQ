@@ -725,7 +725,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ.control;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "ipad mini2 single";
@@ -803,7 +803,7 @@
 					"\"SystemConfiguration\"",
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.CoInQ.control;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "ipad mini2 single";

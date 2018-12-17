@@ -60,7 +60,6 @@ class SelectVideoUpload_Nine : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         RecordButton.layer.cornerRadius = 8
-        videoPreview.isHidden = true
         recNine.isHidden = true
         delNine.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(loadCollectionVideo), name: NSNotification.Name("CoClipDownload"), object: nil)
@@ -516,15 +515,7 @@ class SelectVideoUpload_Nine : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            self.player = AVPlayer(url: mp4Path)
-                            self.playerController = AVPlayerViewController()
-                            self.playerController.player = self.player
-                            self.playerController.view.frame = check.frame
-                            self.addChildViewController(self.playerController)
-                            self.view.addSubview(self.playerController.view)
-                            check.isHidden = false
-                            recbtn.isHidden = false
-                            self.delNine.isHidden = false
+                            self.loadData()
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)

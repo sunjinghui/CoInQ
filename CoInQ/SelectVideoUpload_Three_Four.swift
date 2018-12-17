@@ -20,7 +20,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     var isClicked = true
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var previewThree = VideoPreviewButton(frame: CGRect(x: 225,y: 274,width: 465,height: 257))
-    var previewFour = VideoPreviewButton(frame: CGRect(x: 225,y: 675,width: 465,height: 257))
+    var previewFour = VideoPreviewButton(frame: CGRect(x: 225,y: 685,width: 465,height: 257))
     @IBOutlet weak var recThree: UIButton!
     @IBOutlet weak var delThree: UIButton!
     @IBOutlet weak var recFour: UIButton!
@@ -373,15 +373,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
                         let action2 = UIAlertAction(title: "OK", style: .default, handler: {
                             (action) -> Void in
                             SelectVideoUpload_Nine().update()
-                            self.player = AVPlayer(url: mp4Path)
-                            self.playerController = AVPlayerViewController()
-                            self.playerController.player = self.player
-                            self.playerController.view.frame = preview.frame
-                            self.addChildViewController(self.playerController)
-                            self.view.addSubview(self.playerController.view)
-                            preview.isHidden = false
-                            recbtn.isHidden = false
-                            delbtn.isHidden = false
+                            self.loaddata()
                         })
                         alert.addAction(action2)
                         self.present(alert , animated: true , completion: nil)

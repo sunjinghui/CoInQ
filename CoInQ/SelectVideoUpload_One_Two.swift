@@ -214,8 +214,7 @@ class SelectVideoUpload_One_Two : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        previewOne.isHidden = true
-//        previewTwo.isHidden = true
+
         recAudio.isHidden = true
         recAudioTwo.isHidden = true
         delTwo.isHidden = true
@@ -605,9 +604,9 @@ class SelectVideoUpload_One_Two : UIViewController{
                     }
                 }
                 //上传进度
-                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+//                upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
 //                    print("Upload Progress: \(progress.fractionCompleted)")
-                }
+//                }
             case .failure(let encodingError):
                 print(encodingError)
             }
