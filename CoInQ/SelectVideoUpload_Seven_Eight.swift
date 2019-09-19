@@ -35,7 +35,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("最終的解釋要是科學的、有邏輯的，不能自相矛盾、不講道理", for: UIControlState())
+            sender.setTitle("提出科學的、有邏輯的，不自相矛盾的解釋", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -243,7 +243,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     }
     
     @IBAction func ExplainSeven(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"仔細觀察與記錄\n科學家使用的科學方法與研究結果。\n可以善用iPad螢幕錄製的功能！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"使用iPad螢幕錄製功能\n記錄科學家使用的科學方法與研究結果。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve7",google_userid,"\(Index)")
@@ -251,7 +251,7 @@ class SelectVideoUpload_Seven_Eight : UIViewController{
     }
     
     @IBAction func ExplainEight(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試試看加入科學家提出的科學術語\n重新表達分析證據後的結果\n讓解釋看起來更專業！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著加入科學家見解與科學術語\n重新表達你的探究結果！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve8",google_userid,"\(Index)")

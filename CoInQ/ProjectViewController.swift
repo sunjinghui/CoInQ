@@ -163,15 +163,17 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         let coachmark4 = CGRect(x: 700, y: 40, width: 50, height: 50)
 
         let coachMarks = [
-            ["rect": NSValue(cgRect: coachmark1), "caption": "即將開始創作影片嘍！\n\n\n\n這個頁面用來管理製作中的影片專案\n製作影片的過程中\n您可以請別人提供他的影片\n\n\n\n\n\n\n\n", "position": 2],
+            ["rect": NSValue(cgRect: coachmark1), "caption": "這個頁面用來管理製作中的影片專案\n\n製作影片的過程中\n可以請朋友們傳送他們拍的視頻片段給你\n\n最後合併所有的片段\n成果影片就完成了！\n\n\n\n\n\n\n", "position": 2],
             ["rect": NSValue(cgRect: coachmark2), "caption": "完成的成果影片會呈現在這一頁\n\n\n\n\n\n\n\n\n\n", "position": 2],
-            ["rect": NSValue(cgRect: coachmark3), "caption": "製作影片的過程中\n您可以請別人提供他的影片\n\n這個頁面則列出\n別人請你提供影片的邀請\n\n\n\n\n\n","position": 2],
-            ["rect": NSValue(cgRect: coachmark4), "caption": "開始之前來看看要經歷哪些步驟吧！","position": 5, "showArrow": true]
+            ["rect": NSValue(cgRect: coachmark3), "caption": "而你的朋友們也會請你提供給他們影片片段\n這裡是傳送基地！\n\n\n\n\n\n\n","position": 2],
+            ["rect": NSValue(cgRect: coachmark4), "caption": "開始之前\n來看看要經歷哪些探究步驟吧！","position": 5, "showArrow": true]
         ]
         coachMarksView = MPCoachMarks(frame: (tabBarController?.view.bounds)! , coachMarks: coachMarks)
-        coachMarksView.enableContinueLabel = false
-        coachMarksView.maxLblWidth = 350
-        coachMarksView.skipButtonText = "跳過"
+        coachMarksView.enableContinueLabel = true
+        coachMarksView.continueLabelText = "點擊螢幕以繼續"
+        coachMarksView.enableSkipButton = false
+        coachMarksView.maxLblWidth = 550
+//        coachMarksView.skipButtonText = "跳過"
         tabBarController?.view.addSubview(coachMarksView)
 //        var coachMarksView = MPCoachMarks(frame: view.bounds, coachMarks: coachMarks)
 //        view.addSubview(coachMarksView)
@@ -182,8 +184,8 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
         let coachmark5 = CGRect(x: (UIScreen.main.bounds.size.width / 10)-63 , y: (UIScreen.main.bounds.size.height / 7)-10,width:80,height:80)
         let coachmark6 = CGRect(x: (UIScreen.main.bounds.size.width - 690), y: (UIScreen.main.bounds.size.height / 10),width:650,height: 150)
         let coachMarks = [
-            ["rect": NSValue(cgRect: coachmark5),"caption": "這裡可以修改專案名稱","position": 4,"shape":1,"showArrow":true],
-            ["rect": NSValue(cgRect: coachmark6),"caption": "將專案區塊往左滑←--會出現刪除按鈕\n即可刪除此專案","position": 5,"shape":2]
+            ["rect": NSValue(cgRect: coachmark5),"caption": "可修改專案名稱","position": 4,"shape":1,"showArrow":true],
+            ["rect": NSValue(cgRect: coachmark6),"caption": "往左滑←--  即可刪除專案","position": 5,"shape":2]
         ]
         coachMarksView = MPCoachMarks(frame: view.bounds, coachMarks: coachMarks)
         coachMarksView.enableContinueLabel = false
@@ -321,7 +323,7 @@ class ProjectViewController : UIViewController, UITextFieldDelegate, UITableView
             }else{
                 let errorAlert = UIAlertController(title:"請注意",message: "不能沒有探究影片名稱", preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title:"OK",style: .cancel, handler:{ (action) -> Void in self.present(alertController, animated: true, completion: nil)}))
-                self.present(errorAlert, animated: true, completion: nil)
+                    self.present(errorAlert, animated: true, completion: nil)
             }
 
         })

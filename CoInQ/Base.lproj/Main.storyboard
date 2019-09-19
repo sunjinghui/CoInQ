@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="4WP-cY-Vrq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="4WP-cY-Vrq">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +16,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oFg-lG-R6p">
-                        <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -26,7 +25,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A7A-0P-BmA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-703" y="65"/>
+            <point key="canvasLocation" x="-549.21875" y="38.0859375"/>
         </scene>
         <!--GoogleSignIn-->
         <scene sceneID="XDt-nA-sFw">
@@ -45,7 +44,7 @@
                                 <color key="backgroundColor" red="1" green="0.80415630299999996" blue="0.51296342419999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NTNUCSCL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0v-DV-ux4">
-                                <rect key="frame" x="279" y="403" width="210" height="48"/>
+                                <rect key="frame" x="279" y="409" width="210" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -69,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOx-t7-2ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="155" y="65"/>
+            <point key="canvasLocation" x="121.09375" y="38.0859375"/>
         </scene>
         <!--首頁-->
         <scene sceneID="uo2-hY-aKG">
@@ -78,7 +77,7 @@
                     <navigationItem key="navigationItem" title="CSCL" prompt="" id="ugl-HK-TaK">
                         <barButtonItem key="leftBarButtonItem" id="P9l-3u-g9e">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="PXd-0D-W1f">
-                                <rect key="frame" x="20" y="34" width="76" height="44"/>
+                                <rect key="frame" x="20" y="37" width="76" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="logout">
                                     <attributedString key="attributedTitle"/>
@@ -109,7 +108,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XL-7m-Bnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="65"/>
+            <point key="canvasLocation" x="778.125" y="38.0859375"/>
         </scene>
         <!--invitation-->
         <scene sceneID="VVS-4t-Pq6">
@@ -206,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2j-rr-LOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2165" y="963"/>
+            <point key="canvasLocation" x="1691.40625" y="564.2578125"/>
         </scene>
         <!--HelperVC-->
         <scene sceneID="gVt-XZ-Oy7">
@@ -221,13 +220,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="2-3" translatesAutoresizingMaskIntoConstraints="NO" id="0OP-lH-RBA">
-                                <rect key="frame" x="553" y="561" width="87" height="78"/>
+                                <rect key="frame" x="553" y="562" width="87" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="Wdd-G5-JTg"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPv-4h-l4M">
-                                <rect key="frame" x="299" y="146" width="170" height="170"/>
+                                <rect key="frame" x="299" y="152" width="170" height="170"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="170" id="AcQ-uc-brq"/>
                                     <constraint firstAttribute="width" constant="170" id="Xav-mu-mYT"/>
@@ -250,7 +249,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8D-8W-3Ij">
-                                <rect key="frame" x="62" y="364" width="170" height="170"/>
+                                <rect key="frame" x="62" y="370" width="170" height="165"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="wgh-EV-1eB"/>
                                 </constraints>
@@ -260,7 +259,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PHz-fL-vv7">
-                                <rect key="frame" x="553" y="364" width="170" height="170"/>
+                                <rect key="frame" x="553" y="370" width="170" height="165"/>
                                 <state key="normal" image="circle2"/>
                                 <connections>
                                     <action selector="StageTwo:" destination="xJN-wX-mDc" eventType="touchUpInside" id="SHM-cq-NmN"/>
@@ -274,7 +273,7 @@
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="1-2" translatesAutoresizingMaskIntoConstraints="NO" id="q36-Xt-tzY">
-                                <rect key="frame" x="502" y="275" width="74" height="81"/>
+                                <rect key="frame" x="502" y="281" width="74" height="81"/>
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="3-4" translatesAutoresizingMaskIntoConstraints="NO" id="JoJ-Hq-1C6">
                                 <rect key="frame" x="348" y="698" width="72" height="90"/>
@@ -283,16 +282,16 @@
                                 </constraints>
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="4-5" translatesAutoresizingMaskIntoConstraints="NO" id="sOh-zr-HW0">
-                                <rect key="frame" x="135" y="561" width="87" height="77"/>
+                                <rect key="frame" x="135" y="562" width="87" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="77" id="T5Y-9C-Qu3"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFC-oI-ZrO">
-                                <rect key="frame" x="264" y="373" width="240" height="266"/>
+                                <rect key="frame" x="264" y="379" width="240" height="260"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieS-n0-oVL">
-                                        <rect key="frame" x="5" y="5" width="230" height="256"/>
+                                        <rect key="frame" x="5" y="5" width="230" height="250"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
@@ -308,7 +307,7 @@
                                 </constraints>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="circle6" translatesAutoresizingMaskIntoConstraints="NO" id="9fb-6j-emR">
-                                <rect key="frame" x="184" y="275" width="75" height="81"/>
+                                <rect key="frame" x="184" y="281" width="75" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="81" id="k8d-hx-tTK"/>
                                 </constraints>
@@ -362,7 +361,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGr-am-eAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="-1486"/>
+            <point key="canvasLocation" x="765.625" y="-870.703125"/>
         </scene>
         <!--project-->
         <scene sceneID="tne-QT-ifu">
@@ -461,7 +460,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2091" y="-1466"/>
+            <point key="canvasLocation" x="1633.59375" y="-858.984375"/>
         </scene>
         <!--蒐集資料-->
         <scene sceneID="Jvh-is-3H0">
@@ -479,13 +478,9 @@
                                 <rect key="frame" x="0.0" y="145" width="768" height="408"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-e8-GuU">
-                                <rect key="frame" x="215" y="187" width="480" height="98"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="你需要什麼資料或證據來回答你的問題呢？" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-e8-GuU">
+                                <rect key="frame" x="215" y="187" width="480" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">哪些知識有可能與這個「自然現象」相關呢？
-對於這個探究問題，我覺得可能的解釋/答案是什麼？
-要蒐集哪些資料才能幫助我解釋這個可能的答案呢？
-</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -555,10 +550,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JR4-A3-zPW">
-                                <rect key="frame" x="218" y="589" width="501" height="147"/>
+                                <rect key="frame" x="218" y="589" width="501" height="113"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我們可以邀請夥伴加入蒐集資料的行列， 不過從不同管道蒐集來的每一筆資料，都可以用來回答我的科學探究問題嗎？
-如何篩選出 「有效的」資料作為我預設結果的證據呢？</string>
+                                <string key="text">應該如何蒐集這些資料或證據呢？
+尋找夥伴合作收集更多資料。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -574,7 +569,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgb-U7-RBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4084" y="-643"/>
+            <point key="canvasLocation" x="3190.625" y="-376.7578125"/>
         </scene>
         <!--分享與回饋-->
         <scene sceneID="dwN-rl-SHP">
@@ -639,9 +634,9 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42X-fW-R2N">
                                 <rect key="frame" x="202" y="180" width="534" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">當我向同學分享我的解釋時，同學們提供給我什麼建議呢？
-我經過這一次的探究所提出的解釋能夠回答哪些問題呢？
-還有哪些問題等待著我們繼續深入研究呢？</string>
+                                <string key="text">你如何向同學解釋你的研究和發現呢？
+如果再做一次，你想修正或補強什麼呢？
+還有哪些問題可以再深入研究呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -670,7 +665,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wz2-av-m13" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6083" y="-2007"/>
+            <point key="canvasLocation" x="4752.34375" y="-1175.9765625"/>
         </scene>
         <!--決定問題-->
         <scene sceneID="H6J-SY-YZh">
@@ -685,7 +680,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nh-8C-zpx">
-                                <rect key="frame" x="0.0" y="72" width="768" height="78"/>
+                                <rect key="frame" x="0.0" y="78" width="768" height="78"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="78" id="hik-Bl-mX8"/>
                                 </constraints>
@@ -698,10 +693,10 @@
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="sb2" translatesAutoresizingMaskIntoConstraints="NO" id="HJw-Ka-ouC">
-                                <rect key="frame" x="0.0" y="555" width="768" height="408"/>
+                                <rect key="frame" x="0.0" y="554" width="768" height="408"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csP-1p-vxz" userLabel="U2">
-                                <rect key="frame" x="65" y="715" width="123" height="127"/>
+                                <rect key="frame" x="65" y="714" width="123" height="127"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="if_note_upload_66841"/>
                                 <connections>
@@ -709,7 +704,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEY-tr-RIH" userLabel="D2">
-                                <rect key="frame" x="138" y="865" width="50" height="65"/>
+                                <rect key="frame" x="138" y="864" width="50" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="HSi-xB-us4"/>
                                     <constraint firstAttribute="width" constant="50" id="cUP-zP-VF8"/>
@@ -719,24 +714,24 @@
                                     <action selector="delTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="RLt-DT-wiR"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="對於這樣的「自然現象」，我想知道什麼？ 試著用「為什麼」、「如何」或「如果…會不會…」 來描述心中的疑問吧！" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGe-v5-A4J">
-                                <rect key="frame" x="225" y="600" width="465" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="試著用「為什麼」、「如何」或「如果…會不會…」、 「應該」提出可研究的問題或假設。" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGe-v5-A4J">
+                                <rect key="frame" x="213.5" y="599" width="476.5" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtW-iQ-c0W">
-                                <rect key="frame" x="50" y="865" width="73" height="70"/>
+                                <rect key="frame" x="50" y="864" width="73" height="70"/>
                                 <state key="normal" title="Button" image="record"/>
                                 <connections>
                                     <action selector="AudioRecordTwo:" destination="cak-fm-8ax" eventType="touchUpInside" id="PKL-wl-TbT"/>
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="sb1" translatesAutoresizingMaskIntoConstraints="NO" id="IB2-JG-hW0">
-                                <rect key="frame" x="0.0" y="145" width="768" height="408"/>
+                                <rect key="frame" x="0.0" y="144" width="768" height="408"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-6i-8VW">
-                                <rect key="frame" x="50" y="450" width="73" height="70"/>
+                                <rect key="frame" x="50" y="449" width="73" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="73" id="CuU-Z7-fd0"/>
                                 </constraints>
@@ -746,7 +741,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agc-4j-FI3" userLabel="i1">
-                                <rect key="frame" x="149" y="205" width="32" height="32"/>
+                                <rect key="frame" x="137.5" y="199" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="8mJ-MM-k2M"/>
                                 </constraints>
@@ -756,16 +751,15 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVZ-zs-rh6">
-                                <rect key="frame" x="225" y="185" width="465" height="72"/>
-                                <string key="text">是什麼「自然現象」引起了我的好奇心？
-這個「自然現象」有哪些特別的地方？
-</string>
+                                <rect key="frame" x="213.5" y="191" width="476.5" height="48"/>
+                                <string key="text">什麼「現象」讓你好奇？
+你猜想為何會產生這現象呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyw-nz-16W" userLabel="U1">
-                                <rect key="frame" x="65" y="300" width="123" height="123"/>
+                                <rect key="frame" x="65" y="294" width="123" height="128"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="if_note_upload_66841"/>
                                 <connections>
@@ -773,7 +767,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-Yv-cVT" userLabel="D1">
-                                <rect key="frame" x="140" y="450" width="50" height="65"/>
+                                <rect key="frame" x="140" y="449" width="50" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="BVZ-H6-Lhm"/>
                                     <constraint firstAttribute="width" constant="50" id="fLw-Gx-4BJ"/>
@@ -784,7 +778,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSj-zm-NDu" userLabel="i2">
-                                <rect key="frame" x="149" y="618" width="32" height="36"/>
+                                <rect key="frame" x="137.5" y="617" width="55" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="eRV-iY-cda"/>
                                 </constraints>
@@ -845,7 +839,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEm-Y0-m0J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4098" y="-2007"/>
+            <point key="canvasLocation" x="3201.5625" y="-1175.9765625"/>
         </scene>
         <!--形成解釋-->
         <scene sceneID="Ys9-vt-b9g">
@@ -876,9 +870,11 @@
                                     <action selector="loadAssetFive:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="Kgy-K7-JUI"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我擁有的每一筆證據，傳達著什麼資訊呢？ 它們之間有關聯嗎？ 有沒有相同之處、相異之處或者可以分類呢？" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zan-W7-aRF">
-                                <rect key="frame" x="230" y="181" width="439" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zan-W7-aRF">
+                                <rect key="frame" x="230" y="181" width="490" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">這些證據透露著什麼意思呢？與你的問題有什麼關係？ 證據彼此相同、相異或關連嗎？
+可以分類或有什麼樣式嗎？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -910,11 +906,9 @@
                                     <action selector="StageTitleThree:" destination="Zp0-cT-Pqa" eventType="touchUpInside" id="Dhl-o9-oNz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zY-ap-vjs">
-                                <rect key="frame" x="225" y="591" width="490" height="77"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="什麼可能原因造成證據間有相同、相異的關係或類型 ？" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zY-ap-vjs">
+                                <rect key="frame" x="225" y="591" width="494" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">想一想，可能是什麼原因造成證據間有這樣的共同點？
-又可能是什麼原因造成證據之間的差異呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -973,7 +967,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBU-zb-EtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5095" y="-2007"/>
+            <point key="canvasLocation" x="3980.46875" y="-1175.9765625"/>
         </scene>
         <!--評估解釋-->
         <scene sceneID="a3M-t8-zvl">
@@ -1002,8 +996,8 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zo-hM-EeH">
                                 <rect key="frame" x="224" y="179" width="461" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">有沒有科學家跟我探究一樣的問題呢？
-科學家運用了什麼方法來研究？
+                                <string key="text">有科學家與你探究相同問題嗎？
+科學家用什麼方法來研究呢？
 科學家的研究得到了什麼結果呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -1050,9 +1044,8 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8w-qd-jHB">
                                 <rect key="frame" x="204" y="589" width="531" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">我所提出的解釋與科學家的理論有哪些一樣的地方？
-又有哪些不一樣的地方？
-我的解釋可以怎麼修改，才能更科學、有邏輯呢？</string>
+                                <string key="text">你的解釋與科學家的看法有哪些一樣？哪些不一樣呢？ 
+對於你的問題，如何綜合你的與科學家的解釋，提出合 邏輯的結論呢？</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1105,14 +1098,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6On-Ah-l4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5095" y="-643"/>
+            <point key="canvasLocation" x="3980.46875" y="-376.7578125"/>
         </scene>
         <!--Table Navigation Controller-->
         <scene sceneID="IUx-pL-r8s">
             <objects>
                 <navigationController storyboardIdentifier="TableNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nQi-Mm-Oxe" customClass="TableNavigationController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v1n-Wu-7cd">
-                        <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1121,7 +1114,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2p-Xm-AIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4102" y="577"/>
+            <point key="canvasLocation" x="3204.6875" y="338.0859375"/>
         </scene>
         <!--Collecting Stage-->
         <scene sceneID="Uza-n0-nC9">
@@ -1136,10 +1129,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7dI-nk-LlK">
-                                <rect key="frame" x="0.0" y="64" width="768" height="815"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="809"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未有探究資料 請按右下角按鈕選擇影片上傳" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33t-U6-lpW">
-                                        <rect key="frame" x="129" y="326" width="511" height="130"/>
+                                        <rect key="frame" x="128.5" y="326" width="511" height="130"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="cgr-8k-fDY"/>
                                             <constraint firstAttribute="width" constant="511" id="fWJ-BH-Bci"/>
@@ -1207,7 +1200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LoM-HQ-MeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5086" y="577"/>
+            <point key="canvasLocation" x="3973.4375" y="338.0859375"/>
         </scene>
         <!--VideoTaskViewController-->
         <scene sceneID="Xkl-xi-azd">
@@ -1216,7 +1209,7 @@
                     <navigationItem key="navigationItem" title="探究影片專案" id="uaq-yQ-SbL">
                         <barButtonItem key="leftBarButtonItem" id="HWk-oG-fKR">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="2rA-Kr-We4">
-                                <rect key="frame" x="20" y="7" width="170" height="30"/>
+                                <rect key="frame" x="20" y="10" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -1253,7 +1246,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1WT-Ev-fji" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3109" y="-1466"/>
+            <point key="canvasLocation" x="2428.90625" y="-858.984375"/>
         </scene>
         <!--complete-->
         <scene sceneID="woU-3q-heJ">
@@ -1344,14 +1337,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rKz-rV-wTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3062" y="166"/>
+            <point key="canvasLocation" x="2392.1875" y="97.265625"/>
         </scene>
         <!--Table Navigation Controller-->
         <scene sceneID="a95-Cj-902">
             <objects>
                 <navigationController storyboardIdentifier="TableNavigationControllerS" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Man-FD-giH" customClass="TableNavigationController" customModule="CoInQ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R2Y-aq-0XY">
-                        <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1360,7 +1353,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpG-Qv-49x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4084" y="1781"/>
+            <point key="canvasLocation" x="3190.625" y="1043.5546875"/>
         </scene>
         <!--Search users-->
         <scene sceneID="cjw-cj-RJY">
@@ -1423,7 +1416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9G-RF-i7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5095" y="1781"/>
+            <point key="canvasLocation" x="3980.46875" y="1043.5546875"/>
         </scene>
     </scenes>
     <resources>
@@ -1467,7 +1460,7 @@
         <image name="title" width="512" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WK5-UN-69f"/>
+        <segue reference="XDF-B6-lWb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

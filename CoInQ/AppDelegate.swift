@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import  Google
+import  GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
@@ -18,11 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        if configureError != nil {
-            print("We have an error!", configureError!)
-        }
+//        var configureError: NSError?
+//        GGLContext.sharedInstance().configureWithError(&configureError)
+//        if configureError != nil {
+//            print("We have an error!", configureError!)
+//        }
         
         //GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().clientID = "127294015481-2pej4eqorfhleo7avajvfkanpeqjbf6k.apps.googleusercontent.com"

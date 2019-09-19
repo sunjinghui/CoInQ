@@ -32,7 +32,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("「凡事豫則立」，制訂探究計畫，蒐集能夠確實回答問題的「資料」", for: UIControlState())
+            sender.setTitle("設計實驗，蒐集「證據」", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -73,7 +73,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     }
     
     @IBAction func ExplainThree(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"找一張紙，寫下相關的知識\n根據這些已經知道的訊息\n預測一下可能的答案\n想一想，可以進行什麼測試?\n要去尋找、紀錄什麼資料?\n列出一張清單吧！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"想一想，可以尋找、測量、記錄什麼資料?\n列出一張清單吧！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve3",google_userid,"\(Index)")
@@ -81,7 +81,7 @@ class SelectVideoUpload_Three_Four : UIViewController{
     }
     
     @IBAction func ExplainFour(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"根據上一步驟設想的\n研究假設和資料蒐集清單\n一項一項進行拍攝紀錄\n資料蒐集\n上傳保存\n並比對每一筆資料\n\n是不是我想要的?\n能不能用來證明我的研究假設?",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"根據資料蒐集清單\n一項一項拍攝記錄\n蒐集夥伴紀錄的影片\n上傳保存\n並評估每一筆資料\n\n是不是你需要且可靠的",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve4",google_userid,"\(Index)")
