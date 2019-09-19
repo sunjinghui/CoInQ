@@ -1,6 +1,0 @@
-framework module MPCoachMarks {
-  umbrella header "MPCoachMarks-umbrella.h"
-
-  export *
-  module * { export * }
-}
