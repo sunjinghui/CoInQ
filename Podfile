@@ -1,7 +1,7 @@
 platform :ios, '10.3'
 target "CoInQ" do
 use_frameworks!
-pod 'GoogleSignIn'
+pod 'Google/SignIn'
 pod 'Alamofire', '~> 4.4'
 pod 'SwiftyJSON'
 pod 'MPCoachMarks'

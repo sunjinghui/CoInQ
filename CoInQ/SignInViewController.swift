@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import  GoogleSignIn
-
 
 var google_userid = ""
 var google_useremail = ""

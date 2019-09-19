@@ -73,7 +73,7 @@ class SelectVideoUpload_Nine : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("與他人分享結果，激發多新想法與新問題", for: UIControlState())
+            sender.setTitle("與他人分享我的解釋會激發更多新想法與新問題", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -309,7 +309,7 @@ class SelectVideoUpload_Nine : UIViewController{
     }
     
     @IBAction func ExplainNine(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著將鏡頭轉換成自拍模式\n對著鏡頭提出你的探究結論和省思回饋！",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"試著將鏡頭轉換成自拍模式\n對著鏡頭回答頁面上的問題吧！",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve9",google_userid,"\(Index)")

@@ -219,7 +219,7 @@ class InvitaionViewController : UIViewController{
         let cameraController = UIImagePickerController()
         cameraController.allowsEditing = true
         cameraController.sourceType = .camera
-        cameraController.mediaTypes = [kUTTypeMovie as NSString as String] //kUTTypeMPEG4 kUTTypeMovie
+        cameraController.mediaTypes = [kUTTypeMovie as NSString as String]
         cameraController.cameraCaptureMode = .video
         cameraController.videoQuality = .typeHigh
         cameraController.delegate = delegate
@@ -354,7 +354,7 @@ extension InvitaionViewController : UIImagePickerControllerDelegate {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         dismiss(animated: true, completion: nil)
         
-        if mediaType == kUTTypeMPEG4 {
+        if mediaType == kUTTypeMovie {
             let avAsset = info[UIImagePickerControllerMediaURL] as! URL
 
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(avAsset.path) &&  loadingCamera {
@@ -362,7 +362,7 @@ extension InvitaionViewController : UIImagePickerControllerDelegate {
                 loadingCamera = false
             }
             var message = ""
-                message = "共創影片已傳遞成功！"
+                message = "共創影片影片已傳遞成功！"
                 self.startActivityIndicator()
                 let videoURL = avAsset
                 uploadVideo(mp4Path: videoURL,message: message)

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import  GoogleSignIn
 
 class CSCL: UITabBarController{    
     
@@ -20,14 +19,9 @@ class CSCL: UITabBarController{
         }
         
         GIDSignIn.sharedInstance().signOut()
-        let deleteAlert = UIAlertController(title:"確定要登出CoInQ嗎？",message: "可以進行新一輪的探究喔！", preferredStyle: .alert)
-        deleteAlert.addAction(UIAlertAction(title:"確定",style: .default, handler:{ (action) -> Void in
-            SignInViewController().log("lgo",google_userid)
-            self.navigationController?.popViewController(animated: true)
-        }))
-        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler: nil)
-        deleteAlert.addAction(cancelAction)
-        self.present(deleteAlert, animated: true, completion: nil)
+        SignInViewController().log("lgo",google_userid)
+        self.navigationController?.popViewController(animated: true)
+        
     }
 
     

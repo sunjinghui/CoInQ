@@ -35,7 +35,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
         if isClicked {
             isClicked = false
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-            sender.setTitle("分析「證據」，試著解讀", for: UIControlState())
+            sender.setTitle("篩選過的「資料」作為 「證據」，分析「證據」來得出可能的解釋", for: UIControlState())
         }else{
             isClicked = true
             sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
@@ -95,7 +95,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
     }
     
     @IBAction func ExplainFive(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"在每一筆影片證據後面\n寫下其包含的訊息（線索）。\n用顏色標記、區隔\n或把同類的框起來。\n拍下你的分析過程!",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"在清單中的每一筆影片證據後面\n寫下其中包含的多個詳細資訊。\n在這麼多資訊中找出它們的關聯\n用不同的顏色標記\n或把同一類的圈起來、框起來。\n拍下你的分類過程!",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve5",google_userid,"\(Index)")
@@ -103,7 +103,7 @@ class SelectVideoUpload_Five_Six : UIViewController{
     }
     
     @IBAction func ExplainSix(_ sender: Any) {
-        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"可以用文字、圖表、聲音、影片\n呈現證據的分析結果。",preferredStyle: .alert)
+        let myAlert: UIAlertController = UIAlertController(title:"小提示",message:"可以用文字、圖表、聲音、影片\n呈現分析證據的結果。",preferredStyle: .alert)
         let action = UIAlertAction(title:"知道了",style: UIAlertActionStyle.default,handler:{action in print("done")})
         myAlert.addAction(action)
         lognote("ve6",google_userid,"\(Index)")
